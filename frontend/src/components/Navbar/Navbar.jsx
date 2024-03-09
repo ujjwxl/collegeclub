@@ -12,22 +12,22 @@ const Navbar = () => {
     <div className='navbar'>
       <div className="navbar-logo">
         <img src={collegeClubLogo} alt="" className='navbar-brand-logo'/>
-        <h2>COLLEGE </h2> <br/>
-        <h2>CLUB</h2>
+        <h2>COLLEGE<br/><span>CLUB</span></h2>
       </div>
+
       <div className='navbar-links'>
         <Link to=""> Products</Link>
         <Link to="">College</Link>
         <Link to="">Course</Link>
         <Link to="">Career</Link>
-        <Link to="">Help</Link>
+        <Link to="">Help?</Link>
       </div>
+
       <div className='navbar-right'>
         <Link to="">Onboarding</Link>
         <Link to=""><img src={menu} alt='' className='navbar-bell'></img></Link>
         <Link to=""><img src={bell} alt='' className='navbar-bell'></img></Link>
         <Link to=""><img src={signout} alt='' className='navbar-bell'></img></Link>
-        
       </div>
     </div>
   )

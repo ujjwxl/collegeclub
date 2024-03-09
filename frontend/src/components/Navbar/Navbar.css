@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
 .navbar {
     background-color: #240655;
     display: flex;
     align-items: center;
+    justify-content: space-around;
 }
 
 .navbar-logo {
@@ -11,6 +14,14 @@
 .navbar-logo h2 {
     margin: auto 0 auto 0;
     color: white;
+    font-family: "K2D", sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    letter-spacing: 4px;
+}
+
+.navbar-logo span {
+    margin-left: 18px;
 }
 
 .navbar-brand-logo {
@@ -25,6 +36,26 @@
     width: 30px;
     height: 30px;
 }
-/* .navbar-links{
+
+.navbar-links {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.navbar-links a {
+    font-family: "K2D", sans-serif;
+    color: white;
     text-decoration: none;
-} */
+    margin-right: 50px;
+}
+
+.navbar-right {
+    display: flex;
+}
+
+.navbar-right a {
+    text-decoration: none;
+    font-family: "K2D", sans-serif;
+    color: white;
+    margin-right: 10px;
+}       
