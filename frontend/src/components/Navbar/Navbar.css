@@ -46,7 +46,8 @@
     font-family: "K2D", sans-serif;
     color: white;
     text-decoration: none;
-    margin-right: 50px;
+    margin-right: 25px;
+    margin-left: 25px;
 }
 
 .navbar-right {

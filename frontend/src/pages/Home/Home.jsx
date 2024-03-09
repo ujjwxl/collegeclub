@@ -9,6 +9,9 @@ export const Home = () => {
       <Navbar/>
       <div>
         <img src={home1} alt="" className='home1-img'></img>
+        <div className="home-hero-overlay">
+          <h1>collegeclub changes your college <br/> experience forever</h1>
+        </div>
       </div>
     </>
   )
