@@ -29,7 +29,7 @@
     height: 40px;
     object-fit: contain;
     padding: 5px 0;
-    margin-right: 5px;
+    margin-right: 2px;
 }
 
 .navbar-bell{
@@ -51,6 +51,7 @@
 
 .navbar-right {
     display: flex;
+    align-items: center;
 }
 
 .navbar-right a {
