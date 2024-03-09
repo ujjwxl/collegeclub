@@ -1,0 +1,20 @@
+.navbar {
+    background-color: #240655;
+}
+
+.navbar-logo {
+    display: flex;
+}
+
+.navbar-logo h2 {
+    margin: auto 0 auto 0;
+    color: white;
+}
+
+.navbar-brand-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    padding: 5px 0;
+    margin-right: 5px;
+}
