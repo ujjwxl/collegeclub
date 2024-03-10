@@ -43,6 +43,15 @@ export const Home = () => {
         <div className='home-two-overlay'>
           <h2 className='home-two-h2'>TRENDING ENTRANCE EXAMS</h2>
           <p className='home-two-p'>Get information and updates on competitive exams, dates, online classes<br></br> and preparation tips.</p>
+          <div class="circle-row">
+            <div class="circle">CLAT</div>
+            <div class="circle">JEE</div>
+            <div class="circle">NEET</div>
+            <div class="circle">CAT</div>
+            <div class="circle">NIFT</div>
+            <div class="circle">ICAR</div>
+            {/* <div class="circle">CUET</div> */}
+        </div>
         </div>
       </div>
 
