@@ -103,6 +103,7 @@
     background: -webkit-linear-gradient(45deg, #84FFFF, #00B8D4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 0px;
     font-family: "K2D", sans-serif;
     letter-spacing: 5px;

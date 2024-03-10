@@ -1,6 +1,7 @@
 import React from 'react'
 import './Home.css'
 import Navbar from '../../components/Navbar/Navbar'
+import Categories from '../../components/Navbar/Home/Categories';
 import home1 from '../../assets/home-1.jpg';
 import home2 from '../../assets/home-2.jpg';
 import searchIcon from '../../assets/search-icon.png'
@@ -36,14 +37,17 @@ export const Home = () => {
 
         </div>
       </div>
+
       <div>
-      <img src={home2} alt="" className='home2-img'></img>
+        <img src={home2} alt="" className='home2-img'></img>
         <div className='home-two-overlay'>
           <h2 className='home-two-h2'>TRENDING ENTRANCE EXAMS</h2>
           <p className='home-two-p'>Get information and updates on competitive exams, dates, online classes<br></br> and preparation tips.</p>
         </div>
       </div>
 
+
+      <Categories/>
     </>
   )
 }
