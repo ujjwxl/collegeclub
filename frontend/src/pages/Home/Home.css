@@ -157,3 +157,55 @@
     font-family: "Comfortaa", sans-serif;
     font-size: 1.5rem;
 }
+
+.home-four-h2{
+    background: -webkit-linear-gradient(45deg, #bfffff, #019bb3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0px;
+    font-family: "K2D", sans-serif;
+    letter-spacing: 5px;
+}
+.home-four-p{
+    margin-top: 5px;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+.home-four-desc{
+    font-size: 70px;
+    margin-left: 5%;
+    margin-top: 100px;
+    text-align: left;
+}
+.home-four-desc span{
+    margin-left: 3%;
+    margin-top: 20px;
+    font-size: 90px;
+    font-weight: bold;
+    letter-spacing: 35px;
+    background: -webkit-linear-gradient(45deg, #bfffff, #019bb3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.home-four-btn {
+    background-color: #240655;
+    border-radius: 20px;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: absolute;
+    left: 15%;
+    bottom: 15%;
+    transition: background-color 0.3s ease;
+}
+
+.home-four-btn:hover {
+    background-color: #0c7d92;
+}
