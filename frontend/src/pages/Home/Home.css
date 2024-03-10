@@ -21,3 +21,57 @@
     font-family: "Comfortaa", sans-serif;
     font-size: 1.5rem;
 }
+
+.home-hero-container {
+    display: flex;
+    margin-top: 5%;
+}
+
+.home-hero-left {
+    /* background-color: red; */
+    padding: 20px;
+}
+
+.home-hero-left h1 {
+    background: linear-gradient(45deg, #84FFFF, #00B8D4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3.2rem;
+}
+
+.home-hero-left h3:first-of-type {
+    letter-spacing: 5px;
+}
+
+.home-hero-left input {
+    width: 60%;
+    height: 50px;
+    background-color: #84FFFF;
+    border: none;
+    padding: 0 30px;
+    border-radius: 25px;
+    font-family: "Comfortaa", sans-serif;
+    font-size: 1.1rem;
+}
+
+.home-hero-left input::placeholder {
+    color: #240655;
+    font-weight: bold;
+}
+
+.home-hero-left-search {
+    position: relative;
+    /* background-color: red; */
+}
+
+.home-hero-left img {
+    position: absolute;
+    width: 32px;
+    right: 20%;
+    top: 8px;
+}
+
+.home-hero-right {
+    background-color: blue;
+}
