@@ -32,7 +32,8 @@
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 10px;
     /* background-color: red; */
-    margin-left: 20px;
+    margin-left: 40px;
+    margin-top: 8%;
 }
 
 .category-circle {
@@ -53,14 +54,14 @@
     margin: 0;
     padding: 0;
     font-size: 1rem;
-    top: 20px;
-    width: 48px;
+    top: 27px;
+    width: 55px;
   } 
   
   .category-circle h2 {
     position: absolute;
     margin: 0;
     padding: 0;
-    font-size: 1rem;
-    bottom: 20px;
+    font-size: 1.2rem;
+    bottom: 27px;
   } 

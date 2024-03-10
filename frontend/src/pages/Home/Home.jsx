@@ -6,6 +6,7 @@ import home1 from '../../assets/home-1.jpg';
 import home2 from '../../assets/home-2.jpg';
 import home4 from '../../assets/home-4.jpg';
 import searchIcon from '../../assets/search-icon.png'
+import CollegePartner from '../../components/Navbar/Home/CollegePartner';
 
 export const Home = () => {
   return (
@@ -52,20 +53,22 @@ export const Home = () => {
             <div class="circle">NIFT</div>
             <div class="circle">ICAR</div>
             {/* <div class="circle">CUET</div> */}
-        </div>
+          </div>
         </div>
       </div>
 
 
-      <Categories/>
+      <Categories />
       <div>
-      <img src={home4} alt="" className='home4-img'></img>
-      <div className='home-four-overlay'>
+        <img src={home4} alt="" className='home4-img'></img>
+        <div className='home-four-overlay'>
           <h2 className='home-four-h2'>TRENDING ENTRANCE EXAMS</h2>
           <p className='home-four-p'>Get information and updates on competitive exams, dates, online classes<br></br> and preparation tips.</p>
-          
+
         </div>
       </div>
+
+      <CollegePartner/>
     </>
   )
 }
