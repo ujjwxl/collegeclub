@@ -1,15 +1,14 @@
 import React from 'react'
-import homeFiveImage from '../../../assets/home-five.jpg'
+import homeOneImage from '../../../assets/home-1.jpg'
 import './CollegePartner.css'
 
 const CollegePartner = () => {
     return (
         <div>
-            <img src={homeFiveImage} alt="" className='home1-img'></img>
+            <img src={homeOneImage} alt="" className='home1-img'></img>
             <div className="home-five-overlay">
-                <h2>CHOOSE YOUR FUTURE</h2>
-                <p>collegeclub helps collegians achieve their dream and goal</p>
-
+                <h2>COLLEGE PARTNER</h2>
+                <h2>UPDATING SOON</h2>
             </div>
         </div>
     )

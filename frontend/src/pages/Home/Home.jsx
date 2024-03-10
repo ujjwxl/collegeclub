@@ -7,6 +7,7 @@ import home2 from '../../assets/home-2.jpg';
 import home4 from '../../assets/home-4.jpg';
 import searchIcon from '../../assets/search-icon.png'
 import CollegePartner from '../../components/Navbar/Home/CollegePartner';
+import CompanyPartner from '../../components/Navbar/Home/CompanyPartner';
 
 export const Home = () => {
   return (
@@ -70,6 +71,7 @@ export const Home = () => {
       </div>
 
       <CollegePartner/>
+      <CompanyPartner/>
     </>
   )
 }
