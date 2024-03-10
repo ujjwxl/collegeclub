@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar/Navbar'
 import Categories from '../../components/Navbar/Home/Categories';
 import home1 from '../../assets/home-1.jpg';
 import home2 from '../../assets/home-2.jpg';
+import home4 from '../../assets/home-4.jpg';
 import searchIcon from '../../assets/search-icon.png'
 
 export const Home = () => {
@@ -57,6 +58,14 @@ export const Home = () => {
 
 
       <Categories/>
+      <div>
+      <img src={home4} alt="" className='home4-img'></img>
+      <div className='home-four-overlay'>
+          <h2 className='home-four-h2'>TRENDING ENTRANCE EXAMS</h2>
+          <p className='home-four-p'>Get information and updates on competitive exams, dates, online classes<br></br> and preparation tips.</p>
+          
+        </div>
+      </div>
     </>
   )
 }
