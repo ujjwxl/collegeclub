@@ -1,5 +1,5 @@
 import React from 'react'
-import homeOneImage from '../../../assets/home-1.jpg'
+import homeOneImage from '../../assets/home-1.jpg'
 import './CollegePartner.css'
 
 const CollegePartner = () => {
