@@ -67,7 +67,7 @@
     cursor: pointer;
     position: absolute;
     left: 15%;
-    bottom: 15%;
+    /* margin-bottom: 0%; */
     transition: background-color 0.3s ease;
 }
 

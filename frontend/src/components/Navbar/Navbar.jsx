@@ -1,19 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import collegeClubLogo from '../../assets/collegeclub-logo.png'
-import bell from '../../assets/bell.png'
+import notification from '../../assets/notification.png'
 import signout from '../../assets/close.png'
-import menu from '../../assets/menu.png'
+import compare from '../../assets/compare.png'
+import menu from '../../assets/navbar-menu.png'
 
 import './Navbar.css'
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen]= useState('false');
+  
   return (
     <div className='navbar'>
       <div className="navbar-logo">
         <img src={collegeClubLogo} alt="" className='navbar-brand-logo'/>
         <h2>COLLEGE<br/><span>CLUB</span></h2>
       </div>
+      <img src={menu} alt='menu' className='navbar-menu-icon' onClick={handleToggleMenu}/> 
 
       <div className='navbar-links'>
         <Link to=""> Products</Link>
@@ -26,8 +30,8 @@ const Navbar = () => {
 
       <div className='navbar-right'>
         <Link to="">Onboarding</Link>
-        <Link to=""><img src={menu} alt='' className='navbar-bell'></img></Link>
-        <Link to=""><img src={bell} alt='' className='navbar-bell'></img></Link>
+        <Link to=""><img src={compare} alt='' className='navbar-bell'></img></Link>
+        <Link to=""><img src={notification} alt='' className='navbar-bell'></img></Link>
         <Link to=""><img src={signout} alt='' className='navbar-bell'></img></Link>
       </div>
     </div>

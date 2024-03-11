@@ -1,67 +1,95 @@
-@import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 
 .navbar {
-    background-color: #240655;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    position: fixed;
-    width: 100%;
-    z-index: 5;
+  background-color: #240655;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  width: 100%;
+  z-index: 5;
 }
 
 .navbar-logo {
-    display: flex;
+  display: flex;
 }
 
 .navbar-logo h2 {
-    margin: auto 0 auto 0;
-    margin-left: 10px;
-    color: white;
-    font-family: "K2D", sans-serif;
-    font-weight: bold;
-    font-size: 1rem;
-    letter-spacing: 4px;
+  margin: auto 0 auto 0;
+  margin-left: 10px;
+  color: white;
+  font-family: "K2D", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 4px;
 }
 
 .navbar-logo span {
-    margin-left: 18px;
+  margin-left: 18px;
 }
 
 .navbar-brand-logo {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    padding: 5px 0;
-    margin-right: 2px;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  padding: 5px 0;
+  margin-right: 2px;
 }
 
-.navbar-bell{
-    width: 30px;
-    height: 30px;
+.navbar-bell {
+  width: 30px;
+  height: 30px;
 }
 
 .navbar-links {
-    display: flex;
-    justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .navbar-links a {
-    font-family: "K2D", sans-serif;
-    color: white;
-    text-decoration: none;
-    margin-right: 25px;
-    margin-left: 25px;
+  font-family: "K2D", sans-serif;
+  color: white;
+  text-decoration: none;
+  margin-right: 25px;
+  margin-left: 25px;
 }
 
 .navbar-right {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-right a {
-    text-decoration: none;
-    font-family: "K2D", sans-serif;
-    color: white;
-    margin-right: 10px;
-}       
+  text-decoration: none;
+  font-family: "K2D", sans-serif;
+  color: white;
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 780px) {
+  .navbar-links,
+  .navbar-right {
+    display: none;
+  }
+
+  .navbar-menu-icon {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-right: 50px;
+  }
+  .navbar{
+    justify-content: space-between;
+  }
+  .navbar-logo{
+    margin-left: 30px;
+  }
+}
+
+@media only screen and (min-width: 780px) {
+  .navbar-menu-icon {
+    display: none;
+    width: 30px;
+    height: 30px;
+  }
+}
