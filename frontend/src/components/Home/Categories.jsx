@@ -68,7 +68,7 @@ const Categories = () => {
         <p>collegeclub helps collegians achieve their dream and goal</p>
 
         {isMobile ? (
-          <Slider {...settings} >
+          <Slider {...settings} className='home-category-slider'>
             <div class="category-circle">
               <img src={technologyIcon} alt="" />
               <h2>Science and technology</h2>
