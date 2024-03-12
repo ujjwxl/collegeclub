@@ -7,33 +7,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Exams = () => {
 
-  // const settings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 6,
-  //   slidesToScroll: 1,
-  // };
-
-  // const settings = {
-  //   slidesToShow: 6,
-  //   slidesToScroll: 1,
-  //   infinite: true,
-  //   speed: 500,
-  //   dots: false,
-  //   arrows: true,
-  //   responsive: [
-  //     {
-  //       breakpoint: 768,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //         initialSlide: 1,
-  //       },
-  //     },
-  //   ],
-  // };
-
   const settings = {
     slidesToShow: 6,
     slidesToScroll: 1,
