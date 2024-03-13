@@ -24,3 +24,9 @@
     -webkit-text-fill-color: transparent;
     font-size: 3rem;
 }
+@media only screen and (max-width: 768px) {
+    .home-six-overlay{
+        top: 502vh;
+        height: 101vh;
+    }
+}

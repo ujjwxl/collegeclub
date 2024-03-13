@@ -15,7 +15,7 @@ const Landing = () => {
           <h3>find colleges and universities by course, city and state</h3>
 
           <div className="home-hero-section-search">
-            <input type="text" placeholder='search college, university, course...' />
+            <input type="text" placeholder='search...' />
             <img src={searchIcon} alt="" />
           </div>
 

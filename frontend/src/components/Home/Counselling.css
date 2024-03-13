@@ -76,6 +76,10 @@
 }
 
 @media only screen and (max-width: 768px) {
+    .home-four-overlay{
+        top: 301vh;
+        height: 101vh;
+    }
     .home-four-h2 {
         font-size: 2rem;
     }

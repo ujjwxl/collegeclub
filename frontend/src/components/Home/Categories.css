@@ -68,16 +68,20 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .home-three-overlay {
+    top: 200vh;
+    height: 101vh;
+  }
   .home-category-slider {
     width: 95%;
     margin-left: 10px;
   }
 
-  .category-circle {
+  /* .category-circle {
     position: relative;
     display: flex;
     flex-direction: column;
-  }
+  } */
 
   .category-circle img {
     position: absolute;
@@ -87,5 +91,6 @@
 
   .category-circle h2 {
     position: absolute;
+    margin-left: 20%;
   }
 }
