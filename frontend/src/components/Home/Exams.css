@@ -21,6 +21,7 @@
     box-sizing: border-box;
     font-family: "Comfortaa", sans-serif;
     font-size: 1.5rem;
+    overflow: hidden;
 }
 
 .home-two-h2{
