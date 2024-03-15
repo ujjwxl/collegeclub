@@ -7,6 +7,7 @@ import CompanyPartner from '../../components/Home/CompanyPartner'
 import Landing from '../../components/Home/Landing'
 import Exams from '../../components/Home/Exams'
 import Counselling from '../../components/Home/Counselling'
+import Footer from '../../components/Home/Footer'
 
 export const Home = () => {
   return (
@@ -18,6 +19,7 @@ export const Home = () => {
       <Counselling/>
       <CollegePartner/>
       <CompanyPartner/>
+      <Footer/>
     </>
   )
 }
