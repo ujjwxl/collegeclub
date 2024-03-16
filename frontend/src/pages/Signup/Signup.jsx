@@ -3,6 +3,7 @@ import backgroundImage from '../../assets/home-1.jpg'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Home/Footer'
 import './Signup.css'
+import { Link } from 'react-router-dom'
 
 const Signup = () => {
     return (
@@ -44,7 +45,7 @@ const Signup = () => {
 
                             <button>Create Account</button>
 
-                            <p className='already-have-account'>Already have an account? Login from here</p>
+                            <p className='already-have-account'>Already have an account? <Link to={'/login'}>Login</Link> from here</p>
                         </div>
                     </form>
 

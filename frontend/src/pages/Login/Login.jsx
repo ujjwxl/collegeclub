@@ -31,7 +31,7 @@ const Login = () => {
               <a href="#">Forgot Password?</a>
             </div>
             <button className="login-btn">Login</button>
-            <p className="no-account">No account? <Link>Create one!</Link></p>
+            <p className="no-account">No account? <Link to={'/register'}>Create one!</Link></p>
             <Link className="terms">Privacy Policy</Link><span> | </span><Link className="terms">Terms</Link>
           </div>
         </div>

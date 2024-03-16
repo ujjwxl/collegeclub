@@ -53,7 +53,7 @@ const Navbar = () => {
       </div>
 
       <div className='navbar-right'>
-        <Link to="">Onboarding</Link>
+        <Link to="/register">Onboarding</Link>
         <Link to=""><img src={compare} alt='' className='navbar-bell'></img></Link>
         <Link to=""><img src={notification} alt='' className='navbar-bell'></img></Link>
         <Link to=""><img src={signout} alt='' className='navbar-bell'></img></Link>
