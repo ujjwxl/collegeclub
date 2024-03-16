@@ -65,8 +65,9 @@
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
-    position: absolute;
-    left: 15%;
+    position: absolute; 
+    left: 6%;
+    bottom: 8%;
     /* margin-bottom: 0%; */
     transition: background-color 0.3s ease;
 }
