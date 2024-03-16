@@ -35,6 +35,21 @@
     height: 20px;
 }
 
+.footer-social-links {
+  display: flex;
+  justify-content: space-between;
+  width: 52%;
+}
+
+.footer-social-links img {
+  width: 20px;
+  object-fit: contain;
+}
+
+.footer-social-links img:last-of-type {
+  margin-top: 6px;
+}
+
 @media only screen and (min-width: 768px) {
   .footer-column {
     flex: 1;
