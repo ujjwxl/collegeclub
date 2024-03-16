@@ -5,7 +5,6 @@
 .home1-img{
     height: 100vh;
     width: 100%;
-    
 }
 
 .signup-overlay {
@@ -21,4 +20,118 @@
     box-sizing: border-box;
     font-family: "Comfortaa", sans-serif;
     font-size: 1.5rem;
+}
+
+.signup-form {
+    font-family: "Comfortaa", sans-serif;
+    background-color: #270652;
+    width: 80%;
+    margin: 7% auto;
+    border-radius: 20px;
+}
+
+.signup-form h2 {
+    text-align: left;
+    font-size: 1.4rem;
+    margin-left: 15%;
+}
+
+.signup-form-container {
+    display: flex;
+}
+
+.signup-form-container input {
+    display: block;
+    width: 60%;
+    padding: 0.6rem 0.75rem;
+    height: 25px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #270652;
+    border-color: rgba(255, 255, 255, .1);
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    display: block;
+    font-family: "Comfortaa", sans-serif;
+    /* margin: 0 auto 0 auto; */
+    margin-left: 15%;
+}
+
+.signup-form-container input::placeholder {
+    font-family: "Comfortaa", sans-serif;
+}
+
+.signup-form-container input:focus {
+    background-color: #CFE2FF;
+    transition: 0.5s;
+    color: black;
+}
+
+.signup-form-container select {
+    display: block;
+    width: 63.5%;
+    transition-duration: .5s;
+    border-style: solid;
+    padding: 0.6rem 0.75rem;
+    height: 44px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #270652;
+    border-color: rgba(255, 255, 255, .1);
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    /* margin: 0 auto 0 auto; */
+    margin-left: 15%;
+}
+
+.signup-form-container button {
+    background-image: linear-gradient(to right, #eb3349 0, #f45c43 51%, #eb3349 100%);
+    text-align: center;
+    color: #fff;
+    width: 30%;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: "Comfortaa", sans-serif;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.checkbox-label input {
+    margin-right: 5px;
+    width: 5%;
+    scale: 0.6;
+}
+
+.checkbox-label p {
+    margin: 0;
+    margin-top: 15px;
+    margin-left: -10px;
+    text-align: left;
+}
+
+.already-have-account {
+    font-size: 14px;
+    text-align: left;
+    margin-left: 15%;
+    margin-bottom: 30px;
+}
+
+.signup-form-left {
+    width: 50%;
+    /* background-color: blue; */
+}
+
+.signup-form-right {
+    width: 50%;
+    margin-top: 105px;
+    /* background-color: green; */
 }
