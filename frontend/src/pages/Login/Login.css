@@ -55,6 +55,7 @@
 .input-container input {
   padding: 12px;
   background-color: rgba(36, 6, 85, 1);
+  color: #ccc;
   border-radius: 9px;
   border: 1px solid rgb(59, 37, 95);
   font-size: 16px;
@@ -66,10 +67,12 @@
 }
 .input-container input:hover {
   background-color: #cfe2ff;
+  color: black;
 }
 .input-container input:focus {
   background-color: #cfe2ff;
   outline: none;
+  color:  black;
 }
 
 .remember-forgot {
