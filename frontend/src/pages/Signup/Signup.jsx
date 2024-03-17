@@ -8,25 +8,25 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase.js";
 
 const Signup = () => {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-const handleSubmit= (e) => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed up
-      const user = userCredential.user;
-      console.log(user);
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(error);
-      // ..
-    });
-}
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(error);
+      });
+  }
+  
   return (
     <div>
       <Navbar />

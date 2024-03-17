@@ -9,16 +9,18 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase.js";
 
 const Login = () => {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const handleLogin = (e) => {
     e.preventDefault();
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
         console.log(user);
+        alert('login success')
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -26,6 +28,7 @@ const Login = () => {
         console.log(error);
       });
   };
+
   return (
     <div>
       <Navbar />
@@ -40,10 +43,10 @@ const Login = () => {
             </p>
             <form onSubmit={handleLogin}>
               <div className="input-container">
-                <input type="email" id="username" placeholder="Email id" onChange={e=>setEmail(e.target.value)}/>
+                <input type="email" id="username" placeholder="Email id" onChange={e => setEmail(e.target.value)} />
               </div>
               <div className="input-container">
-                <input type="password" id="password" placeholder="Password" onChange={e=>setPassword(e.target.value)}/>
+                <input type="password" id="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
               </div>
               <div className="remember-forgot">
                 <div className="checkbox-comp">

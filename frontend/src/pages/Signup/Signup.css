@@ -135,3 +135,23 @@
     margin-top: 105px;
     /* background-color: green; */
 }
+
+@media only screen and (max-width: 768px) {
+    .signup-form-container {
+        display: block;
+        margin-top: 40%;
+        padding: 0;
+    }
+
+    .signup-form-container input {
+        width: 150%;
+    }
+
+    .signup-form-container select {
+        width: 166%;
+    }
+
+    .signup-form-container button {
+        width: 100%;
+    }
+}
