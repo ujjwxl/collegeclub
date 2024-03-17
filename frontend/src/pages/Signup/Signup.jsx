@@ -5,28 +5,81 @@ import Footer from "../../components/Home/Footer";
 import "./Signup.css";
 import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase.js";
+import { collection, addDoc } from 'firebase/firestore';
+import { auth, db } from "../../firebase.js";
+// import { doc, setDoc } from "firebase/firestore"; 
 
 const Signup = () => {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [accountType, setAccountType] = useState('');
+  const [organizationName, setOrganizationName] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
+  const [subDomain, setSubDomain] = useState('');
+  const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleTypeChange = (event) => {
+    setAccountType(event.target.value);
+  };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   // if(password != confirmPassword) alert('The passwords do not match!');
+  //   createUserWithEmailAndPassword(auth, email, password)
+  //     .then((userCredential) => {
+  //       const user = userCredential.user;
+  //       console.log(user);
+  //       console.log(user.uid);
+  //     })
+  //     .catch((error) => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       console.log(error);
+  //     });
+  // }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(error);
+    // Check if password matches confirmPassword
+    if (password !== confirmPassword) {
+      alert('The passwords do not match!');
+      return;
+    }
+
+    try {
+      // Create user in Firebase Authentication
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const userId = user.uid;
+
+      // Create document in Firestore
+      const docRef = await addDoc(collection(db, 'users'), {
+        accountType,
+        organizationName,
+        fullName,
+        contactNumber,
+        subDomain,
+        userName,
+        email,
+        userId,
       });
+
+      console.log('Document written with ID: ', docRef.id);
+      alert('User created successfully')
+
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(error);
+      alert(errorMessage);
+    }
   }
-  
+
   return (
     <div>
       <Navbar />
@@ -38,7 +91,7 @@ const Signup = () => {
             <div className="signup-form-left">
               <h2>Signup</h2>
               <h2>for New Account</h2>
-              <select name="type">
+              <select name="type" value={accountType} onChange={handleTypeChange}>
                 <option value="" disabled selected>
                   Select account type
                 </option>
@@ -51,52 +104,58 @@ const Signup = () => {
                 type="text"
                 name="organization"
                 placeholder="Enter organization name"
+                onChange={(e) => setOrganizationName(e.target.value)}
               />{" "}
               <br />
               <input
                 type="text"
-                name="organization"
-                placeholder="Enter organization name"
+                name="fullname"
+                placeholder="Your Full Name"
+                onChange={(e) => setFullName(e.target.value)}
               />{" "}
               <br />
               <input
                 type="text"
-                name="organization"
-                placeholder="Enter organization name"
+                name="phone"
+                placeholder="Contact Number"
+                onChange={(e) => setContactNumber(e.target.value)}
               />{" "}
               <br />
               <input
                 type="text"
-                name="organization"
-                placeholder="Enter organization name"
+                name="subdomain"
+                placeholder="Select subdomain"
+                onChange={(e) => setSubDomain(e.target.value)}
               />
             </div>
 
             <div className="signup-form-right">
               <input
                 type="text"
-                name="organization"
-                placeholder="Enter organization name"
-              />{" "}
-              <br />
-              <input
-                type="text"
-                name="organization"
-                placeholder="Enter organization name"
+                name="username"
+                placeholder="Choose a username"
+                onChange={(e) => setUserName(e.target.value)}
               />{" "}
               <br />
               <input
                 type="email"
-                name="organization"
-                placeholder="Email"
+                name="email"
+                placeholder="Email Address"
                 onChange={(e) => setEmail(e.target.value)}
               />{" "}
               <br />
               <input
                 type="password"
-                name="organization"
-                placeholder="Password"
+                name="password"
+                placeholder="Enter password"
                 onChange={(e) => setPassword(e.target.value)}
+              />{" "}
+              <br />
+              <input
+                type="password"
+                name="cpassword"
+                placeholder="Confirm password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <label class="checkbox-label">
                 <input type="checkbox" name="agreeToTerms" />
