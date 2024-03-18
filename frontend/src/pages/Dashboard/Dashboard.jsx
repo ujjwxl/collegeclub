@@ -1,9 +1,12 @@
 import React from 'react'
+import DashboardMenu from '../../components/Dashboard/DashboardMenu'
+import DashboardBox from '../../components/Dashboard/DashboardBox'
 
 const Dashboard = () => {
   return (
     <div>
-      <h1>This is the dashboard</h1>
+      <DashboardMenu/>
+      <DashboardBox/>
     </div>
   )
 }

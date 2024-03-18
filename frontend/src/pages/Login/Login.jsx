@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar.jsx";
 import Footer from "../../components/Home/Footer.jsx";
@@ -9,6 +10,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase.js";
 
 const Login = () => {
+
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +23,9 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        alert('login success')
+        // alert('login success')
+        navigate('/dashboard')
+
       })
       .catch((error) => {
         const errorCode = error.code;
