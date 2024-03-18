@@ -1,1 +1,18 @@
-/* this is dashboard box csss */
+/* this is dashboard box css */
+
+.dashboard-box {
+    /* background-color: blue; */
+    background-color: #240655;
+    height: 90%;
+    width: 45%;
+    margin-top: 2%;
+    margin-left: 2%;
+    border-radius: 20px;
+    margin-right: auto;
+}
+
+@media only screen and (max-width: 1024px) {
+    .dashboard-box {
+        width: 60%;
+    }
+}

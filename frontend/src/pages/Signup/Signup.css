@@ -137,6 +137,14 @@
 }
 
 @media only screen and (max-width: 768px) {
+    .signup-overlay {
+        height: 161vh;
+    }
+
+    .signup-page-image {
+        height: 160vh;
+    }
+
     .signup-form-container {
         display: block;
         margin-top: 40%;

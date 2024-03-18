@@ -83,7 +83,7 @@ const Signup = () => {
   return (
     <div>
       <Navbar />
-      <img src={backgroundImage} alt="" className="home1-img" />
+      <img src={backgroundImage} alt="" className="home1-img signup-page-image" />
 
       <div className="signup-overlay">
         <div className="signup-form">

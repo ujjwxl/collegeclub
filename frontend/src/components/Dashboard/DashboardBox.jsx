@@ -1,9 +1,11 @@
 import React from 'react'
+import './DashboardBox.css'
 
 const DashboardBox = () => {
   return (
-    <div>
-      <h1>This is the dashboard box</h1>
+    <div className='dashboard-box'>
+      <h2>You have signed up successfully!</h2>
+      <h3>Continue to payment to verify the account</h3>
     </div>
   )
 }
