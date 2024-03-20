@@ -1,4 +1,5 @@
 // import bcrypt from "bcryptjs";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from 'firebase/firestore';
 // import { auth, db } from "../../firebase.js";
@@ -58,5 +59,24 @@ export const registerUser = async (req, res) => {
     const errorMessage = error.message;
     console.log(errorMessage)
     res.status(500).json({ message: error.message });
+  }
+};
+
+
+export const loginUser = async (req, res) => {
+  const {
+    email,
+    password,
+  } = req.body;
+
+
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    console.log("User logged in:", user.uid);
+    res.status(200).json({ message: "Login successful" });
+  } catch (error) {
+    console.error("Login failed:", error.message);
+    res.status(400).json({ message: "Invalid email or password" });
   }
 };

@@ -8,6 +8,7 @@ import backgroundImage from "../../assets/home-1.jpg";
 import logo from "../../assets/collegeclub-logo.png";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase.js";
+import axios from "axios";
 
 const Login = () => {
 
@@ -16,23 +17,41 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async(e) => {
     e.preventDefault();
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        // alert('login success')
-        navigate('/dashboard')
+    // signInWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     const user = userCredential.user;
+    //     console.log(user);
+    //     // alert('login success')
+    //     navigate('/dashboard')
 
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     console.log(error);
+    //   });
+    try {
+      await axios.post('http://localhost:5000/auth/login', {
+        email,
+        password
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(error);
-      });
-  };
+        .then(res => {
+          if (res.status == 200) {
+            alert("Signin successfully!")
+          }
+        })
+        .catch(e => {
+          alert("Please check your signin details!")
+          console.log(e);
+        })
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
     <div>
