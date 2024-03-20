@@ -53,7 +53,7 @@ export const registerUser = async (req, res) => {
     });
 
     console.log("Document written with ID: ", docRef.id);
-    res.status(200).json(newUser);
+    res.status(200).json(docRef);
   } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;

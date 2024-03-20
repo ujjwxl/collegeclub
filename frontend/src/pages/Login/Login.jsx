@@ -17,7 +17,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async(e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     // signInWithEmailAndPassword(auth, email, password)
@@ -40,7 +40,8 @@ const Login = () => {
       })
         .then(res => {
           if (res.status == 200) {
-            alert("Signin successfully!")
+            // alert("Signin successfully!");
+            navigate('/dashboard');
           }
         })
         .catch(e => {
