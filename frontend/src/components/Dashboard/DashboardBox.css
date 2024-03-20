@@ -11,6 +11,13 @@
     margin-right: auto;
 }
 
+.dashboard-box-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+}
+
 @media only screen and (max-width: 1024px) {
     .dashboard-box {
         width: 60%;
