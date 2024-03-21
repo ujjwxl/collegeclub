@@ -41,6 +41,8 @@ const Login = () => {
         .then(res => {
           if (res.status == 200) {
             // alert("Signin successfully!");
+            const userId = res.data.uid;
+            sessionStorage.setItem('id', userId);
             navigate('/dashboard');
           }
         })

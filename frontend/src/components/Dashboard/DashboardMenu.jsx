@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import defaultImage from "../../assets/test-dp.jpg";
 import testIcon from "../../assets/business-icon.png";
 import dashboardIcon from "../../assets/dashboard.png";
@@ -9,17 +10,43 @@ import logoutIcon from "../../assets/close.png";
 import "./DashboardMenu.css";
 
 const DashboardMenu = () => {
+
+  const [userData, setUserData] = useState(null);
+
+  const userId = sessionStorage.getItem('id');
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (!userId) {
+        return;
+      }
+
+      // http://localhost:5000/auth/user?userId=${userId}
+
+      try {
+        const response = await axios.get(`http://localhost:5000/auth/user/${userId}`);
+        setUserData(response.data);
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [userId]);
+
+  console.log(userData);
+
   return (
     <div className="dashboard-menu">
       <div className="dashboard-menu-top">
         <img src={defaultImage} alt="" />
         <div className="dashboard-menu-top-right">
           <h2>
-            NIFT, PATNA <span>✅</span>
+            {userData && userData.organizationName}<span>✅</span>
           </h2>
-          <h3>Vijay Prakash</h3>
-          <h4>testingcollege@collegeclub.io</h4>
-          <h3>COLLEGE</h3>
+          <h3>{userData && userData.fullName}</h3>
+          <h4>{userData && userData.email}</h4>
+          <h3>{userData && userData.accountType}</h3>
         </div>
       </div>
 
