@@ -50,6 +50,8 @@ app.post("/paymentverification",async(req,res) => {
     //  await Payment.create({
     //      razorpay_ordcer_id,razorpay_payment_id,razorpay_signature 
     //  })
+     console.log(razorpay_order_id)
+     console.log(razorpay_payment_id)
      res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`)
     }
     else{
