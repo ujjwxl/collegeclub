@@ -77,7 +77,7 @@ const DashboardBox = ()=> {
       description: "Onboading Fee",
       image:"https://avatars.githubusercontent.com/u/96648429?s=96&v=4",
       order_id: order.id,
-      callback_url:"http://localhost:5000/paymentverification",
+      callback_url:`http://localhost:5000/paymentverification?userid=${userId}`,
       prefill:{
         name: userData.fullname,
         email: userData.email,

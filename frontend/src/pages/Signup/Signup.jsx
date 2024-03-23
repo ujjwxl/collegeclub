@@ -127,9 +127,9 @@ const Signup = () => {
                 <option value="" disabled selected>
                   Select account type
                 </option>
-                <option value="college">College</option>
-                <option value="company">Company</option>
-                <option value="ccAmbassador">CC Ambassador</option>
+                <option value="College">College</option>
+                <option value="Company">Company</option>
+                <option value="CC-Ambassador">CC Ambassador</option>
               </select>{" "}
               <br />
               <input
