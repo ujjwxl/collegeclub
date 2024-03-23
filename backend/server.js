@@ -2,6 +2,8 @@ import express from 'express'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import razorpay from 'razorpay'
+import crypto from 'crypto'
 import AuthRoute from './routes/AuthRoute.js'
 
 dotenv.config();
@@ -15,6 +17,49 @@ app.listen(process.env.PORT,()=>{
     console.log("Listening")
 })
 
+//razorpay code
+
+const instance = new razorpay({
+    key_id: process.env.KEY,
+    key_secret: process.env.SECRET
+})
+
+app.post('/checkout', async (req,res) => {
+    
+    const options = {
+        // amount: Number(req.body.amount * 100)
+        amount: 500000,
+        currency: "INR",
+    };
+
+    const order = await instance.orders.create(options);
+    console.log(order);
+    res.status(200).json({
+        success: true, order
+    })
+})
+
+app.post("/paymentverification",async(req,res) => {
+
+    const { razorpay_order_id,razorpay_payment_id,razorpay_signature } = req.body;
+    const body = razorpay_order_id + "|" +razorpay_payment_id;
+    const expectedsgnature = crypto.createHmac('sha256',process.env.SECRET).update(body.toString()).digest('hex')
+    const isauth = expectedsgnature === razorpay_signature;
+
+    if(isauth){
+    //  await Payment.create({
+    //      razorpay_ordcer_id,razorpay_payment_id,razorpay_signature 
+    //  })
+     res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`)
+    }
+    else{
+     res.status(400).json({success:false});
+    }
+ })
+
+app.get("/api/getkey",(req,res)=>{
+    return res.status(200).json({key:process.env.KEY})
+})
 
 app.use('/auth',AuthRoute)
 // app.use('/todo',ToDoRoute)

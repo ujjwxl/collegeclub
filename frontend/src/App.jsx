@@ -5,6 +5,7 @@ import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import './App.css'
 import Dashboard from './pages/Dashboard/Dashboard';
+import PaymentSuccess from './components/Dashboard/PaymentSuccess';
 
 function App() {
   
@@ -17,6 +18,7 @@ function App() {
         <Route path="/register" element={<Signup />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/dashboard" element={<Dashboard/>}></Route>
+        <Route path='/paymentsuccess' element={<PaymentSuccess/>}/>
         </Routes>
       </Router>
     </>
