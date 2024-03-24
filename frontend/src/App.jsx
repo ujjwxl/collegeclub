@@ -6,6 +6,7 @@ import Signup from './pages/Signup/Signup';
 import './App.css'
 import Dashboard from './pages/Dashboard/Dashboard';
 import PaymentSuccess from './components/Dashboard/PaymentSuccess';
+import College from './pages/College/College';
 
 function App() {
   
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/dashboard" element={<Dashboard/>}></Route>
         <Route path='/paymentsuccess' element={<PaymentSuccess/>}/>
+        <Route path='/colleges' element={<College/>}/>
         </Routes>
       </Router>
     </>
