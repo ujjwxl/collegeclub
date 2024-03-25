@@ -19,21 +19,50 @@
     background-color: #240655;
     width: 90%;
     margin: 2% auto 2% auto;
-
 }
 
 .colleges-display-box-filter {
     /* margin-left: auto; */
     width: 20%;
-    background-color: red;
+    /* background-color: red; */
+    background-color: #4527a0;
+    /* border: 2px solid white; */
 }
 
 .colleges-display-box-list {
     /* margin-right: auto; */
     width: 80%;
-    background-color: blue;
+    /* background-color: blue; */
     overflow-y: auto;
     
+}
+
+.colleges-display-box-item {
+    /* background-color: green; */
+    display: flex;
+    margin: 1% 20px;
+    margin-bottom: 1%;
+    /* background-color: #7d3c98; */
+    background-color: #4527a0;
+    padding: 0 20px;
+    border-radius: 20px;
+}
+
+.colleges-display-box-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    margin: auto 0 auto 0;
+}
+
+.colleges-display-box-item-details {
+    width: 50%;
+    /* background-color: red; */
+}
+
+.colleges-display-box-item-details-two {
+    width: 50%;
+    /* background-color: green; */
 }
 
 @media only screen and (max-width: 768px) {

@@ -159,3 +159,28 @@ export const getUserDetails = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getColleges = async (req, res) => {
+
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("accountType", "==", "College"));
+    const querySnapshot = await getDocs(q);
+
+    const userData = [];
+    querySnapshot.forEach((doc) => {
+      userData.push(doc.data());
+    });
+
+    if (userData.length === 0) {
+      return res.status(404).json({ message: "No users found" });
+    }
+
+    res.status(200).json(userData);
+  } catch (error) {
+    console.error("Error getting user details:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
