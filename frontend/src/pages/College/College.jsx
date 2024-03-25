@@ -10,7 +10,45 @@ const College = () => {
     <Navbar/>
     <img src={backgroundImage} alt=""  className='home1-img'/>
     <div className='colleges-overlay colleges-container'>
-      <h1>Hello</h1>
+      <div className="colleges-display-box">
+        <div className="colleges-display-box-filter">
+          <h3>Filters</h3>
+        </div>
+
+        <div className="colleges-display-box-list">
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+          <h3>Featured Colleges</h3>
+        </div>
+      </div>
     </div>
     <Footer/>
     </>

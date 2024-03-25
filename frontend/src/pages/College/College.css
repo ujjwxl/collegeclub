@@ -14,6 +14,28 @@
     font-family: "Comfortaa", sans-serif;
 }
 
+.colleges-display-box {
+    display: flex;
+    background-color: #240655;
+    width: 90%;
+    margin: 2% auto 2% auto;
+
+}
+
+.colleges-display-box-filter {
+    /* margin-left: auto; */
+    width: 20%;
+    background-color: red;
+}
+
+.colleges-display-box-list {
+    /* margin-right: auto; */
+    width: 80%;
+    background-color: blue;
+    overflow-y: auto;
+    
+}
+
 @media only screen and (max-width: 768px) {
     
 }
