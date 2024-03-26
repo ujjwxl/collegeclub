@@ -1,0 +1,52 @@
+
+.profile-form {
+    background-color: #240655;
+    height: 95%;
+    margin: 0 auto 0 auto;
+    margin-top: 2%;
+    width: 75%;
+    padding: 0 50px;
+    border-radius: 20px;
+}
+
+.profile-form h2 {
+    color: #FE6952;
+}
+
+.form-input-flex-two {
+    display: flex;
+}
+
+.form-input-group {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-top: 10px;
+    font-size: 14px;
+    /* background-color: red; */
+    margin: 10px 5px;
+}
+
+.form-input-group label {
+    color: #CCCCCC;
+}
+
+.form-input-group input {
+    width: 90%;
+    padding: 0.6rem 0.75rem;
+    height: 15px;
+    font-size: 14px;
+    color: white;
+    background-color: #240655;
+    border-color: rgba(255, 255, 255, .1);
+    /* background-clip: padding-box; */
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-family: "Comfortaa", sans-serif;
+    margin-top: 5px;
+}
+
+.form-input-group input:focus {
+    background-color: #CFE2FF;
+    color: black;
+}

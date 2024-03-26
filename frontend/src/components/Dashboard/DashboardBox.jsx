@@ -1,9 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from 'axios';  
+import { Link } from 'react-router-dom'
+import axios from 'axios';
 import "./DashboardBox.css";
 
-const DashboardBox = ()=> {
+const DashboardBox = () => {
 
   const [userData, setUserData] = useState(null);
 
@@ -34,7 +35,7 @@ const DashboardBox = ()=> {
   //   const {data:{order}} = await axios.post("http://localhost:5000/checkout")
 
   //   console.log(window);
-    
+
   //   const options ={
   //     key, 
   //     amount: 5000,
@@ -62,32 +63,32 @@ const DashboardBox = ()=> {
 
   // }
 
-  const checkoutHandler = async(amount) => {
-    const {data:{key}} = await axios.get("http://localhost:5000/api/getkey")
+  const checkoutHandler = async (amount) => {
+    const { data: { key } } = await axios.get("http://localhost:5000/api/getkey")
     // const {data:{order}} = await axios.post("http://localhost:5000/checkout",{amount})
-    const {data:{order}} = await axios.post("http://localhost:5000/checkout")
+    const { data: { order } } = await axios.post("http://localhost:5000/checkout")
 
     console.log(window);
-    
-    const options ={
-      key, 
+
+    const options = {
+      key,
       amount: 5000,
-      currency:"INR",
+      currency: "INR",
       name: userData.fullname,
       description: "Onboading Fee",
-      image:"https://avatars.githubusercontent.com/u/96648429?s=96&v=4",
+      image: "https://avatars.githubusercontent.com/u/96648429?s=96&v=4",
       order_id: order.id,
-      callback_url:`http://localhost:5000/paymentverification?userid=${userId}`,
-      prefill:{
+      callback_url: `http://localhost:5000/paymentverification?userid=${userId}`,
+      prefill: {
         name: userData.fullname,
         email: userData.email,
         contact: userData.contactNumber
       },
-      notes:{
-        "address":"razorapy official"
+      notes: {
+        "address": "razorapy official"
       },
-      theme:{
-        "color":"#3399cc"
+      theme: {
+        "color": "#3399cc"
       }
     };
     // const razor = new window.Razorpay(options);
@@ -100,8 +101,22 @@ const DashboardBox = ()=> {
     <div className="dashboard-box">
       <div className="dashboard-box-container">
         <h2>You have signed up successfully!</h2>
-        <h3>Continue to payment to verify the account</h3>
-        <button onClick={checkoutHandler}>Continue to Payment</button>
+        {/* <h3>Continue to payment to verify the account</h3>
+        <button onClick={checkoutHandler}>Continue to Payment</button> */}
+        
+          {userData && userData.paymentStatus ? (
+            <>
+              <h3>You have paid successfully</h3>
+              <p>Complete the form to onboard successfully</p>
+              <Link><button>Complete application form</button></Link>
+            </>
+          ) : (
+            <>
+              <h3>Continue to payment to verify the account</h3>
+              <button onClick={checkoutHandler}>Continue to Payment</button>
+            </>
+          )}
+        
       </div>
     </div>
   );

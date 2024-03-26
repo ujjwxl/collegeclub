@@ -7,6 +7,7 @@ import './App.css'
 import Dashboard from './pages/Dashboard/Dashboard';
 import PaymentSuccess from './components/Dashboard/PaymentSuccess';
 import College from './pages/College/College';
+import ProfileForm from './pages/Forms/ProfileForm';
 
 function App() {
   
@@ -21,6 +22,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard/>}></Route>
         <Route path='/paymentsuccess' element={<PaymentSuccess/>}/>
         <Route path='/colleges' element={<College/>}/>
+        <Route path='/form/profile' element={<ProfileForm/>}/>
         </Routes>
       </Router>
     </>
