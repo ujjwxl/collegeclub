@@ -8,14 +8,41 @@ const DetailsFormComponent = () => {
     const [selectedCourses, setSelectedCourses] = useState([]);
     const courses = ['Engineering', 'Medical', 'Management', 'Sciences', 'Agriculture', 'Law', 'Acting'];
 
-    const [groupCount, setGroupCount] = useState(1);
+    const [coursesCount, setCoursesCount] = useState(1);
+    const [departmentsCount, setDepartmentsCount] = useState(1);
+    const [newsCount, setNewsCount] = useState(1);
+    const [rankingCount, setRankingCount] = useState(1);
 
-    const handleAddButtonClick = () => {
-        setGroupCount(groupCount + 1);
+    const handleAddCourse = () => {
+        setCoursesCount(coursesCount + 1);
     };
 
-    const handleRemoveButtonClick = () => {
-        setGroupCount(groupCount - 1);
+    const handleRemoveCourse = () => {
+        setCoursesCount(coursesCount - 1);
+    }
+
+    const handleAddDepartment = () => {
+        setDepartmentsCount(departmentsCount + 1);
+    }
+
+    const handleRemoveDepartment = () => {
+        setDepartmentsCount(departmentsCount - 1);
+    }
+
+    const handleAddNews = () => {
+        setNewsCount(newsCount + 1);
+    }
+
+    const handleRemoveNews = () => {
+        setNewsCount(newsCount - 1);
+    }
+
+    const handleAddRanking = () => {
+        setRankingCount(rankingCount + 1);
+    }
+
+    const handleRemoveRanking = () => {
+        setRankingCount(rankingCount - 1);
     }
 
     const toggleDropdown = () => {
@@ -120,7 +147,7 @@ const DetailsFormComponent = () => {
                 </div>
             </div> */}
 
-            {[...Array(groupCount)].map((_, index) => (
+            {[...Array(coursesCount)].map((_, index) => (
                 <div className="form-input-flex-two" key={index}>
                     <div className="form-input-group">
                         <label htmlFor="collegename">Course Name*</label>
@@ -147,11 +174,101 @@ const DetailsFormComponent = () => {
                         <input type="text" placeholder='YES/NO' />
                     </div>
 
-                    <button onClick={handleRemoveButtonClick}>Remove</button>
+                    <button onClick={handleRemoveCourse}>Remove</button>
                 </div>
             ))}
 
-            <button onClick={handleAddButtonClick}>ADD</button>
+            <button onClick={handleAddCourse}>ADD</button>
+            <hr />
+
+
+            <h3>Departments</h3>
+            {[...Array(departmentsCount)].map((_, index) => (
+                <div className="form-input-flex-two" key={index}>
+                    <div className="form-input-group">
+                        <label htmlFor="collegename">Department Name*</label>
+                        <input type="text" placeholder='eg: Name' />
+                    </div>
+
+                    <div className="form-input-group">
+                        <label htmlFor="collegename">Description*</label>
+                        <input type="text" placeholder='eg: Details' />
+                    </div>
+
+                    <div className="form-input-group">
+                        <label htmlFor="collegename">Placement %*</label>
+                        <input type="text" placeholder='Years' />
+                    </div>
+
+                    <button onClick={handleRemoveDepartment}>Remove</button>
+                </div>
+            ))}
+
+            <button onClick={handleAddDepartment}>ADD</button>
+            <hr />
+
+            <h3>News</h3>
+            {[...Array(newsCount)].map((_, index) => (
+                <div className="form-input-flex-two" key={index}>
+                    <div className="form-input-group">
+                        <label htmlFor="collegename">News Title*</label>
+                        <input type="text" placeholder='Add news title' />
+                    </div>
+
+                    <div className="form-input-group">
+                        <label htmlFor="collegename">Ref. Link*</label>
+                        <input type="text" placeholder='Add a reference link' />
+                    </div>
+
+                    <button onClick={handleRemoveNews}>Remove</button>
+                </div>
+            ))}
+
+            <button onClick={handleAddNews}>ADD</button>
+            <hr />
+
+            <h3>Ranking</h3>
+            {[...Array(rankingCount)].map((_, index) => (
+                <div className="form-input-flex-two" key={index}>
+                    <div className="form-input-group">
+                        <label htmlFor="collegename">Agency Name*</label>
+                        <input type="text" placeholder='Add agency name' />
+                    </div>
+
+                    <div className="form-input-group">
+                        <label htmlFor="collegename">Rank*</label>
+                        <input type="text" placeholder='Enter the rank' />
+                    </div>
+
+                    <div className="form-input-group">
+                        <label htmlFor="collegename">Year*</label>
+                        <input type="text" placeholder='Add year' />
+                    </div>
+
+                    <button onClick={handleRemoveRanking}>Remove</button>
+                </div>
+            ))}
+
+            <button onClick={handleAddRanking}>ADD</button>
+            <hr />
+
+            <h3>Other Details</h3>
+            <div className="form-input-flex-two">
+                <div className="form-input-group">
+                    <label htmlFor="collegename">Overall placement*</label>
+                    <input type="text" placeholder='Add agency name' />
+                </div>
+
+                <div className="form-input-group">
+                    <label htmlFor="collegename">Promo/Documentary Video*</label>
+                    <input type="text" placeholder='Enter the rank' />
+                </div>
+
+                <div className="form-input-group">
+                    <label htmlFor="collegename">Scholarship offered?*</label>
+                    <input type="text" placeholder='Add year' />
+                </div>
+            </div>
         </div>
     )
 }
