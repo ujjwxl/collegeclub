@@ -108,7 +108,7 @@ const DashboardBox = () => {
             <>
               <h3>You have paid successfully</h3>
               <p>Complete the form to onboard successfully</p>
-              <Link><button>Complete application form</button></Link>
+              <Link to={'/form/profile'}><button>Complete application form</button></Link>
             </>
           ) : (
             <>

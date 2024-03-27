@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import PaymentSuccess from './components/Dashboard/PaymentSuccess';
 import College from './pages/College/College';
 import ProfileForm from './pages/Forms/ProfileForm';
+import DetailsForm from './pages/Forms/DetailsForm';
 
 function App() {
   
@@ -23,6 +24,7 @@ function App() {
         <Route path='/paymentsuccess' element={<PaymentSuccess/>}/>
         <Route path='/colleges' element={<College/>}/>
         <Route path='/form/profile' element={<ProfileForm/>}/>
+        <Route path='/form/details' element={<DetailsForm/>}/>
         </Routes>
       </Router>
     </>

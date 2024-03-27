@@ -1,0 +1,88 @@
+
+.details-form {
+    background-color: #240655;
+    height: 95%;
+    margin: 0 auto 0 auto;
+    margin-top: 2%;
+    width: 75%;
+    padding: 0 50px;
+    border-radius: 20px;
+    overflow-y: scroll;
+}
+
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown {
+  /* display: inline-block; */
+  position: relative;
+  /* background-color: red; */
+}
+
+.dropdown-header {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: black;
+  font-size: 14px;
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  /* z-index: 1000; */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  color: black;
+  overflow-y: scroll;
+  height: 200px;
+}
+
+.dropdown-content div {
+  padding: 10px;
+  background-color: #F1F1F1;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dropdown-content div:hover {
+  background-color: #240655;
+  color: white;
+  transition: 0.1s;
+}
+
+.dropdown-selected-items {
+    background-color: white;
+    padding: 5px;
+    display: flex;
+    color: black;
+}
+
+.dropdown-selected-item {
+    display: flex;
+    background-color: #240655;
+    font-size: 14px;
+    color: white;
+    margin: 0 5px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+textarea {
+    width: 99.5%;
+    font-family: "Comfortaa", sans-serif;
+    font-size: 16px;
+    border-radius: 5px;
+    /* background-color: #F1F1F1; */
+    background-color: #240655;
+    color: white;
+}

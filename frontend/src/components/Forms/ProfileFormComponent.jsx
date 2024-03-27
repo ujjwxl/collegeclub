@@ -121,7 +121,7 @@ const ProfileFormComponent = () => {
                     </div>
                 </div>
 
-                
+                <button type='submit' className='form-submit-button'>Save and Continue</button>
 
             </form>
         </div>
