@@ -269,6 +269,9 @@ const DetailsFormComponent = () => {
                     <input type="text" placeholder='Add year' />
                 </div>
             </div>
+            <hr />
+
+            <button className='form-submit-button'>Save and Continue</button>
         </div>
     )
 }

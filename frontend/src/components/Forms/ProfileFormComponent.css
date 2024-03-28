@@ -63,3 +63,25 @@
     border-radius: 8px;
     font-family: "Comfortaa", sans-serif;   
 }
+
+@media only screen and (max-width: 768px) {
+
+    .profile-form {
+        width: 75%;
+        padding: 0 30px;
+    }
+
+    .form-input-flex-two {
+        display: block;
+    }
+
+    .form-input-group {
+        display: block;
+        /* background-color: red; */
+        width: 100%;
+    }
+
+    .form-input-group input {
+        width: 90%;
+    }
+}
