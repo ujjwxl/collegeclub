@@ -10,6 +10,10 @@
     overflow-y: scroll;
 }
 
+.details-form h2 {
+  color: #FE6952;
+}
+
 .dropdown-container {
   position: relative;
 }

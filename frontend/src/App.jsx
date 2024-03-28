@@ -9,6 +9,7 @@ import PaymentSuccess from './components/Dashboard/PaymentSuccess';
 import College from './pages/College/College';
 import ProfileForm from './pages/Forms/ProfileForm';
 import DetailsForm from './pages/Forms/DetailsForm';
+import UploadsForm from './pages/Forms/UploadsForm';
 
 function App() {
   
@@ -25,6 +26,7 @@ function App() {
         <Route path='/colleges' element={<College/>}/>
         <Route path='/form/profile' element={<ProfileForm/>}/>
         <Route path='/form/details' element={<DetailsForm/>}/>
+        <Route path='/form/uploads' element={<UploadsForm/>}/>
         </Routes>
       </Router>
     </>
