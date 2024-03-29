@@ -1,7 +1,7 @@
 // import bcrypt from "bcryptjs";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc} from "firebase/firestore";
 // import { auth, db } from "../../firebase.js";
 import { auth, db } from "../firebase.js";
 import { doc, getDoc } from "firebase/firestore";
@@ -182,5 +182,68 @@ export const getColleges = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const completeProfileForm = async (req, res) => {
+  const { userId } = req.params;
+  const {
+    universityFullName,
+    universityShortName,
+    foundedYear,
+    approvedBy,
+    rankedBy,
+    contactNumber,
+    email,
+    website,
+    fullAddress,
+    pinCode,
+    country,
+    state,
+    district,
+    alternateContact,
+    alternateNumber,
+    referralCode
+  } = req.body;
+
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    querySnapshot.forEach(async (doc) => {
+      const docRef = doc.ref;
+
+      await updateDoc(docRef, {
+        organizationName: universityFullName,
+        universityShortName,
+        foundedYear,
+        approvedBy,
+        rankedBy,
+        contactNumber,
+        email,
+        website,
+        fullAddress,
+        pinCode,
+        country,
+        state,
+        district,
+        alternateContact,
+        alternateNumber,
+        referralCode
+      });
+
+      console.log('Profile form updated successfully');
+    });
+
+    res.status(200).json({ message: "Profile form updated successfully" });
+  } catch (error) {
+    console.error("Error updating user profile:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
+
 
 
