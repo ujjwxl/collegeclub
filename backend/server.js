@@ -4,10 +4,13 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import razorpay from 'razorpay'
 import crypto from 'crypto'
+import multer from 'multer';
 import AuthRoute from './routes/AuthRoute.js'
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { query, where, getDocs } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { db } from './firebase.js'
+import { format } from 'path'
 
 dotenv.config();
 
@@ -89,6 +92,62 @@ app.post("/paymentverification",async(req,res) => {
 app.get("/api/getkey",(req,res)=>{
     return res.status(200).json({key:process.env.KEY})
 })
+
+
+const storage = getStorage();
+const upload = multer({ storage: multer.memoryStorage() });
+
+app.post("/upload/profile/:userId", upload.single("filename"), async (req, res) => {
+
+    const { userId } = req.params;
+
+    try {
+        const dateTime = giveCurrentDateTime();
+
+        const storageRef = ref(storage, `files/${req.file.originalname + "       " + dateTime}`);
+
+        const metadata = {
+            contentType: req.file.mimetype,
+        };
+
+        const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
+
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        console.log('File successfully uploaded.');
+
+        const usersCollectionRef = collection(db, "users");
+        const q = query(usersCollectionRef, where("userId", "==", userId));
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach(async (doc) => {
+            const docRef = doc.ref;
+
+            await updateDoc(docRef, { 
+                profilePicture: downloadURL
+            });
+            
+            console.log('Profile picture updated successfully');
+        });
+
+        return res.send({
+            message: 'file uploaded to firebase storage',
+            name: req.file.originalname,
+            type: req.file.mimetype,
+            downloadURL: downloadURL
+        })
+    } catch (error) {
+        return res.status(400).send(error.message)
+    }
+});
+
+const giveCurrentDateTime = () => {
+    const today = new Date();
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const dateTime = date + ' ' + time;
+    return dateTime;
+}
 
 app.use('/auth',AuthRoute)
 // app.use('/todo',ToDoRoute)

@@ -97,7 +97,7 @@ const College = () => {
           <div className="colleges-display-box-list">
             {collegeData && collegeData.map((college, index) => (
               <div className="colleges-display-box-item" key={index}>
-                <img src={defaultImage} alt="" />
+                <img src={college.profilePicture ? college.profilePicture : defaultImage} alt="" />
                 <div className="colleges-display-box-item-details">
                   <h3>{college.organizationName}</h3>
                   {/* <h3>Birla Institute of Technology, Mesra</h3> */}
