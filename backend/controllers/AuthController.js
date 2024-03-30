@@ -201,7 +201,7 @@ export const completeProfileForm = async (req, res) => {
     district,
     alternateContact,
     alternateNumber,
-    referralCode
+    referralCode,
   } = req.body;
 
   try {
@@ -232,7 +232,8 @@ export const completeProfileForm = async (req, res) => {
         district,
         alternateContact,
         alternateNumber,
-        referralCode
+        referralCode,
+        profileFormFilled: true
       });
 
       console.log('Profile form updated successfully');

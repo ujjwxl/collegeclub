@@ -174,11 +174,11 @@ const DetailsFormComponent = () => {
                         <input type="text" placeholder='YES/NO' />
                     </div>
 
-                    <button onClick={handleRemoveCourse}>Remove</button>
+                    <button className='form-remove-button' onClick={handleRemoveCourse}>Remove</button>
                 </div>
             ))}
 
-            <button onClick={handleAddCourse}>ADD</button>
+            <button className='form-remove-button form-add-button' onClick={handleAddCourse}>ADD</button>
             <hr />
 
 
@@ -200,11 +200,11 @@ const DetailsFormComponent = () => {
                         <input type="text" placeholder='Years' />
                     </div>
 
-                    <button onClick={handleRemoveDepartment}>Remove</button>
+                    <button className='form-remove-button' onClick={handleRemoveDepartment}>Remove</button>
                 </div>
             ))}
 
-            <button onClick={handleAddDepartment}>ADD</button>
+            <button className='form-remove-button form-add-button' onClick={handleAddDepartment}>ADD</button>
             <hr />
 
             <h3>News</h3>
@@ -220,11 +220,11 @@ const DetailsFormComponent = () => {
                         <input type="text" placeholder='Add a reference link' />
                     </div>
 
-                    <button onClick={handleRemoveNews}>Remove</button>
+                    <button className='form-remove-button' onClick={handleRemoveNews}>Remove</button>
                 </div>
             ))}
 
-            <button onClick={handleAddNews}>ADD</button>
+            <button className='form-remove-button form-add-button' onClick={handleAddNews}>ADD</button>
             <hr />
 
             <h3>Ranking</h3>
@@ -245,11 +245,11 @@ const DetailsFormComponent = () => {
                         <input type="text" placeholder='Add year' />
                     </div>
 
-                    <button onClick={handleRemoveRanking}>Remove</button>
+                    <button className='form-remove-button' onClick={handleRemoveRanking}>Remove</button>
                 </div>
             ))}
 
-            <button onClick={handleAddRanking}>ADD</button>
+            <button className='form-remove-button form-add-button' onClick={handleAddRanking}>ADD</button>
             <hr />
 
             <h3>Other Details</h3>

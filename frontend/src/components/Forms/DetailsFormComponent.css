@@ -71,6 +71,26 @@
     color: black;
 }
 
+.form-remove-button {
+    background-image: linear-gradient(to right, #eb3349 0, #f45c43 51%, #eb3349 100%);
+    text-align: center;
+    color: #fff;
+    width: 10%;
+    height: 40px;
+    margin-top: 28px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: "Comfortaa", sans-serif;  
+}
+
+.form-add-button {
+  width: 7%;
+  height: 30px;
+  margin-top: 0;
+  margin-left: 5px;
+}
+
 .dropdown-selected-item {
     display: flex;
     background-color: #240655;

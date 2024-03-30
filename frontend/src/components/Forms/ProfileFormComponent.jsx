@@ -186,7 +186,7 @@ const ProfileFormComponent = () => {
                     </div>
                 </div>
 
-                <button type='submit' onClick={handleSubmit} className='form-submit-button'>Save and Continue</button>
+                <button type='submit' className='form-submit-button'>Save and Continue</button>
 
             </form>
         </div>
