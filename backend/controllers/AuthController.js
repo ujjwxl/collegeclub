@@ -246,5 +246,55 @@ export const completeProfileForm = async (req, res) => {
   }
 };
 
+export const completeDetailsForm = async (req, res) => {
+  const { userId } = req.params;
 
+  const {
+    selectedCourses,
+    aboutCollege,
+    admissionProcess,
+    courses,
+    departments,
+    news,
+    rankings,
+    overallPlacement,
+    promo,
+    scholarship
+  } = req.body;
+
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    querySnapshot.forEach(async (doc) => {
+      const docRef = doc.ref;
+
+      await updateDoc(docRef, {
+        selectedCourses,
+        aboutCollege,
+        admissionProcess,
+        courses,
+        departments,
+        news,
+        rankings,
+        overallPlacement,
+        promo,
+        scholarship,
+        detailsFormFilled: true
+      });
+
+      console.log('Details form updated successfully');
+    });
+
+    res.status(200).json({ message: "Details form updated successfully" });
+  } catch (error) {
+    console.error("Error updating user details:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
 
