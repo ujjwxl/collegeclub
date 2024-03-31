@@ -158,8 +158,17 @@ const UploadsFormComponent = () => {
         setRankingReference(event.target.files[0]);
     };
 
+    // const handleImageChange = (event) => {
+    //     setSelectedImages([...selectedImages, ...event.target.files]);
+    // };
+
     const handleImageChange = (event) => {
-        setSelectedImages([...selectedImages, ...event.target.files]);
+        const files = event.target.files;
+        const newSelectedImages = [...selectedImages];
+        for (let i = 0; i < files.length; i++) {
+            newSelectedImages.push(files[i]);
+        }
+        setSelectedImages(newSelectedImages);
     };
 
     const userId = sessionStorage.getItem('id');
@@ -175,6 +184,41 @@ const UploadsFormComponent = () => {
             })
             .catch((error) => {
                 console.error('Error uploading file:', error);
+            });
+    };
+
+    // const handleGalleryUpload = (files, endpoint) => {
+
+    //     const userId = sessionStorage.getItem('id');
+
+    //     const formData = new FormData();
+    //     for (let i = 0; i < files.length; i++) {
+    //         formData.append("filename", files[i]);
+    //     }
+            
+    //     axios.post(`http://localhost:5000/upload/${endpoint}/${userId}`, formData)
+    //         .then((response) => {
+    //             alert('File uploaded successfully');
+    //             console.log('File uploaded successfully');
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error uploading file:', error);
+    //         });
+    // };
+
+    const handleGalleryUpload = () => {
+        const formData = new FormData();
+        selectedImages.forEach((image) => {
+            formData.append('images', image);
+        });
+    
+        axios.post(`http://localhost:5000/upload/images/${userId}`, formData)
+            .then((response) => {
+                alert('Images uploaded successfully');
+                console.log('Images uploaded successfully');
+            })
+            .catch((error) => {
+                console.error('Error uploading images:', error);
             });
     };
 
@@ -229,7 +273,8 @@ const UploadsFormComponent = () => {
                     <label htmlFor="gallery">Select upto 5 JPEG/JPG images*</label>
                     <div className='form-file-input-group'>
                         <input type='file' id="gallery" multiple onChange={handleImageChange} />
-                        <button type='button' onClick={() => handleFileUpload(selectedImages, "images")}>Upload images</button>
+                        {/* <button type='button' onClick={() => handleGalleryUpload(selectedImages, "images")}>Upload images</button> */}
+                        <button type='button' onClick={handleGalleryUpload}>Upload images</button>
                     </div>
                 </div>
                 <hr />
