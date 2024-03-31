@@ -259,7 +259,9 @@ export const completeDetailsForm = async (req, res) => {
     rankings,
     overallPlacement,
     promo,
-    scholarship
+    scholarship, 
+    selectedInstituteType, 
+    studyMode
   } = req.body;
 
   try {
@@ -285,6 +287,8 @@ export const completeDetailsForm = async (req, res) => {
         overallPlacement,
         promo,
         scholarship,
+        instituteType:selectedInstituteType,
+        studyMode,
         detailsFormFilled: true
       });
 

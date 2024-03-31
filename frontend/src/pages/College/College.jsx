@@ -75,7 +75,7 @@ const College = () => {
           <div className="colleges-display-box-filter">
             <h3>Filters</h3>
             <h4>Institute Type</h4>
-            {['Government', 'State', 'Deemed', 'Private', 'Autonomous'].map(type => (
+            {['Central', 'State', 'Deemed', 'Private', 'Autonomous'].map(type => (
               <label key={type}>
                 <input
                   type="checkbox"
