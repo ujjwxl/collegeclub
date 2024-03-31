@@ -141,6 +141,187 @@ app.post("/upload/profile/:userId", upload.single("filename"), async (req, res) 
     }
 });
 
+
+app.post("/upload/banner/:userId", upload.single("filename"), async (req, res) => {
+
+    const { userId } = req.params;
+
+    try {
+        const dateTime = giveCurrentDateTime();
+
+        const storageRef = ref(storage, `files/${req.file.originalname + "       " + dateTime}`);
+
+        const metadata = {
+            contentType: req.file.mimetype,
+        };
+
+        const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
+
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        console.log('Banner image successfully uploaded.');
+
+        const usersCollectionRef = collection(db, "users");
+        const q = query(usersCollectionRef, where("userId", "==", userId));
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach(async (doc) => {
+            const docRef = doc.ref;
+
+            await updateDoc(docRef, { 
+                bannerImage: downloadURL
+            });
+            
+            console.log('Banner image URL updated successfully');
+        });
+
+        return res.send({
+            message: 'Banner image uploaded to firebase storage',
+            name: req.file.originalname,
+            type: req.file.mimetype,
+            downloadURL: downloadURL
+        })
+    } catch (error) {
+        return res.status(400).send(error.message)
+    }
+});
+
+
+app.post("/upload/authorization/:userId", upload.single("filename"), async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const dateTime = giveCurrentDateTime();
+
+        const storageRef = ref(storage, `files/${req.file.originalname + "       " + dateTime}`);
+
+        const metadata = {
+            contentType: req.file.mimetype,
+        };
+
+        const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
+
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        console.log('Authorization letter successfully uploaded.');
+
+        const usersCollectionRef = collection(db, "users");
+        const q = query(usersCollectionRef, where("userId", "==", userId));
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach(async (doc) => {
+            const docRef = doc.ref;
+
+            await updateDoc(docRef, { 
+                authorizationLetter: downloadURL
+            });
+            
+            console.log('Authorization letter URL updated successfully');
+        });
+
+        return res.send({
+            message: 'Authorization letter uploaded to firebase storage',
+            name: req.file.originalname,
+            type: req.file.mimetype,
+            downloadURL: downloadURL
+        })
+    } catch (error) {
+        return res.status(400).send(error.message)
+    }
+});
+
+app.post("/upload/ranking/:userId", upload.single("filename"), async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const dateTime = giveCurrentDateTime();
+
+        const storageRef = ref(storage, `files/${req.file.originalname + "       " + dateTime}`);
+
+        const metadata = {
+            contentType: req.file.mimetype,
+        };
+
+        const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
+
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        console.log('Ranking reference document successfully uploaded.');
+
+        const usersCollectionRef = collection(db, "users");
+        const q = query(usersCollectionRef, where("userId", "==", userId));
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach(async (doc) => {
+            const docRef = doc.ref;
+
+            await updateDoc(docRef, { 
+                rankingReference: downloadURL
+            });
+            
+            console.log('Ranking reference document URL updated successfully');
+        });
+
+        return res.send({
+            message: 'Ranking reference document uploaded to Firebase storage',
+            name: req.file.originalname,
+            type: req.file.mimetype,
+            downloadURL: downloadURL
+        })
+    } catch (error) {
+        return res.status(400).send(error.message)
+    }
+});
+
+
+app.post("/upload/images/:userId", upload.array("images", 5), async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const images = req.files;
+        const imageUrls = [];
+
+        // Upload each image to Firebase Storage
+        for (const image of images) {
+            const dateTime = giveCurrentDateTime();
+            const storageRef = ref(storage, `images/${image.originalname + "       " + dateTime}`);
+            const metadata = {
+                contentType: image.mimetype,
+            };
+
+            const snapshot = await uploadBytesResumable(storageRef, image.buffer, metadata);
+            const downloadURL = await getDownloadURL(snapshot.ref);
+
+            imageUrls.push(downloadURL);
+        }
+
+        console.log('Images successfully uploaded.');
+
+        // Update the user document with the image URLs
+        const usersCollectionRef = collection(db, "users");
+        const q = query(usersCollectionRef, where("userId", "==", userId));
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach(async (doc) => {
+            const docRef = doc.ref;
+
+            await updateDoc(docRef, { 
+                galleryImages: imageUrls
+            });
+            
+            console.log('Image URLs updated successfully');
+        });
+
+        return res.send({
+            message: 'Images uploaded to Firebase storage',
+            imageUrls: imageUrls
+        })
+    } catch (error) {
+        return res.status(400).send(error.message)
+    }
+});
+
+
 const giveCurrentDateTime = () => {
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
