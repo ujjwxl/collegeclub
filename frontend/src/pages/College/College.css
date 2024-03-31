@@ -27,6 +27,7 @@
     /* background-color: red; */
     background-color: #4527a0;
     /* border: 2px solid white; */
+    overflow-y: scroll;
 }
 
 .colleges-display-box-list {
