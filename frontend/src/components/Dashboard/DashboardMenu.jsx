@@ -39,7 +39,7 @@ const DashboardMenu = () => {
   return (
     <div className="dashboard-menu">
       <div className="dashboard-menu-top">
-        <img src={defaultImage} alt="" />
+        <img src={userData && userData.profilePicture ? userData.profilePicture : defaultImage} alt="" />
         <div className="dashboard-menu-top-right">
           <h2>
             {userData && userData.organizationName}<span>✅</span>

@@ -46,24 +46,22 @@ const College = () => {
 
           <div className="colleges-display-box-filter">
             <h3>Filters</h3>
-            <ul>
-              <li>
-                <label>
-                  <input
-                    type="checkbox"
-                  />
-                  Engineering
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input
-                    type="checkbox"
-                  />
-                  Science
-                </label>
-              </li>
-            </ul>
+            <h4>Institute Type</h4>
+            <label htmlFor="">
+              <input type="checkbox" /> Central/Union
+            </label> <br />
+            <label htmlFor="">
+              <input type="checkbox" /> State
+            </label> <br />
+            <label htmlFor="">
+              <input type="checkbox" /> Deemed 
+            </label>
+            <label htmlFor="">
+              <input type="checkbox" /> State
+            </label>
+            <label htmlFor="">
+              <input type="checkbox" /> Autonomous
+            </label>
           </div>
 
           {/* <div className="colleges-display-box-list">
