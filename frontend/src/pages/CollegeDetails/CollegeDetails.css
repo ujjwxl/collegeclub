@@ -1,4 +1,34 @@
 
 .college-details-page {
     background-color: #240655;
+    height: 90%;
+    margin: 30px auto 0 auto;
+    width: 95%;
+    overflow-y: scroll;
+}
+
+.college-details-page-header {
+    display: flex;
+    /* background-color: red; */
+    background-color: #4527a0;
+    padding: 20px;
+}
+
+.college-details-page-header img {
+    height: 100px;
+    width: 100px;
+}
+
+.college-details-page-header h2 {
+    margin: auto 0 auto 0;
+    margin-left: 10px;
+}
+
+.admission-process {
+    white-space: pre;
+}
+
+.college-details-page-gallery img {
+    width: 400px;
+    height: 300px;
 }
