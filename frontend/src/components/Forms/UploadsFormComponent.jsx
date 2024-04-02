@@ -195,7 +195,7 @@ const UploadsFormComponent = () => {
     //     for (let i = 0; i < files.length; i++) {
     //         formData.append("filename", files[i]);
     //     }
-            
+
     //     axios.post(`http://localhost:5000/upload/${endpoint}/${userId}`, formData)
     //         .then((response) => {
     //             alert('File uploaded successfully');
@@ -211,7 +211,7 @@ const UploadsFormComponent = () => {
         selectedImages.forEach((image) => {
             formData.append('images', image);
         });
-    
+
         axios.post(`http://localhost:5000/upload/images/${userId}`, formData)
             .then((response) => {
                 alert('Images uploaded successfully');
@@ -250,24 +250,27 @@ const UploadsFormComponent = () => {
                 </div>
                 <hr />
 
-                {/* Authorization Letter */}
-                <div className="form-input-group">
-                    <label htmlFor="authLetter">Authorization Letter*</label>
-                    <div className='form-file-input-group'>
-                        <input type='file' id="authLetter" onChange={handleAuthorizationLetterChange} />
-                        <button type='button' onClick={() => handleFileUpload(authorizationLetter, "authorization")}>Upload</button>
+                <div className="form-input-flex-two">
+                    {/* Authorization Letter */}
+                    <div className="form-input-group">
+                        <label htmlFor="authLetter">Authorization Letter*</label>
+                        <div className='form-file-input-group'>
+                            <input type='file' id="authLetter" onChange={handleAuthorizationLetterChange} />
+                            <button type='button' onClick={() => handleFileUpload(authorizationLetter, "authorization")}>Upload</button>
+                        </div>
+                    </div>
+
+                    {/* Ranking reference document */}
+                    <div className="form-input-group">
+                        <label htmlFor="rankingRef">Ranking reference document*</label>
+                        <div className='form-file-input-group'>
+                            <input type='file' id="rankingRef" onChange={handleRankingReferenceChange} />
+                            <button type='button' onClick={() => handleFileUpload(rankingReference, "ranking")}>Upload</button>
+                        </div>
                     </div>
                 </div>
-
-                {/* Ranking reference document */}
-                <div className="form-input-group">
-                    <label htmlFor="rankingRef">Ranking reference document*</label>
-                    <div className='form-file-input-group'>
-                        <input type='file' id="rankingRef" onChange={handleRankingReferenceChange} />
-                        <button type='button' onClick={() => handleFileUpload(rankingReference, "ranking")}>Upload</button>
-                    </div>
-                </div>
-
+                <hr />
+                
                 {/* Upload images */}
                 <div className="form-input-group">
                     <label htmlFor="gallery">Select upto 5 JPEG/JPG images*</label>

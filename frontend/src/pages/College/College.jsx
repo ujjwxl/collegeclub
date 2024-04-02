@@ -1,4 +1,5 @@
 import React, { useState, useEffect, cloneElement } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Home/Footer'
 import backgroundImage from '../../assets/home-1.jpg'
@@ -15,6 +16,8 @@ const College = () => {
     studyMode: [],
     state: []
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,6 +55,10 @@ const College = () => {
       );
     })
     : [];
+
+  const openCollegeDetails = (collegeId) => {
+    navigate(`/college/${collegeId}`);
+  }
 
   return (
     <>
@@ -207,7 +214,7 @@ const College = () => {
 
           <div className="colleges-display-box-list">
             {collegeData && filteredColleges.map((college, index) => (
-              <div className="colleges-display-box-item" key={index}>
+              <div className="colleges-display-box-item" key={index} onClick={() => openCollegeDetails(college.userId)}>
                 <img src={college.profilePicture ? college.profilePicture : defaultImage} alt="" />
                 <div className="colleges-display-box-item-details">
                   <h3>{college.organizationName}</h3>
