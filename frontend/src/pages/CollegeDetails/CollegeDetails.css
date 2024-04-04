@@ -1,34 +1,98 @@
-
 .college-details-page {
-    background-color: #240655;
-    height: 90%;
-    margin: 30px auto 0 auto;
-    width: 95%;
-    overflow-y: scroll;
+  background-color: #240655;
+  height: 90%;
+  margin: 30px auto 0 auto;
+  width: 95%;
+  overflow-y: scroll;
 }
 
 .college-details-page-header {
-    display: flex;
-    /* background-color: red; */
-    background-color: #4527a0;
-    padding: 20px;
+  display: flex;
+  /* background-color: red; */
+  background-color: #4527a0;
+  padding: 20px;
 }
 
 .college-details-page-header img {
-    height: 100px;
-    width: 100px;
+  height: 100px;
+  width: 100px;
 }
 
 .college-details-page-header h2 {
-    margin: auto 0 auto 0;
-    margin-left: 10px;
+  margin: auto 0 auto 0;
+  margin-left: 10px;
+  font-size: 28px;
 }
 
 .admission-process {
-    white-space: pre;
+  white-space: pre;
+}
+.college-details-page-gallery {
+  /* margin-left: 25px; */
+}
+.college-details-page-gallery h3 {
+  margin-left: 0px;
+}
+.college-details-page-gallery img {
+  width: 400px;
+  height: 300px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
 }
 
-.college-details-page-gallery img {
-    width: 400px;
-    height: 300px;
+.college-details-page h3 {
+  margin-left: 20px;
+  font-size: 25px;
+}
+.college-details-page h4 {
+  margin-left: 30px;
+  margin-right: 5px;
+  /* word-spacing: 2px; */
+}
+.college-details-page li{
+  margin-left: 35px;
+}
+.college-details-page h5{
+  margin-left: 30px;
+}
+
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+.modal-content {
+  margin: 5% auto;
+  padding: 10px;
+  background: #fefefe;
+  border: 1px solid #888;
+  height: 80%;
+  width: 80%;
+}
+
+.modal-content img{
+    width: 98%;
+    height: 100%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
