@@ -106,6 +106,7 @@ const CollegeDetails = () => {
       <img src={backgroundImage} alt="" className='details-form-background-image' />
       <div className='dashboard-overlay dashboard-container details-form-overlay'>
         <div className="college-details-page">
+
           <div className="college-details-page-header">
             <img src={collegeData && collegeData.profilePicture} alt="" />
             <h2>{collegeData && collegeData.organizationName}</h2>
@@ -124,9 +125,12 @@ const CollegeDetails = () => {
           ))}
           <hr />
 
-          <h3>Admission Process</h3>
-          <h4 className='admission-process'>{collegeData && collegeData.admissionProcess}</h4>
-          <hr />
+          <div className="admission-process">
+            <h3>Admission Process</h3>
+            <h4>{collegeData && collegeData.admissionProcess}</h4>
+            <hr />
+          </div>
+
 
           <h3>Courses</h3>
           {collegeData && collegeData.courses.map((course, index) => (
@@ -134,8 +138,8 @@ const CollegeDetails = () => {
               <h4>{course.courseName}</h4>
               <h5>Duration: {course.duration} years</h5>
               <h5>Minimum Qualification: {course.minQualification}</h5>
-              <h5>Fee: {course.fee}</h5> 
-              <h5>Distance: {course.distance}</h5>             
+              <h5>Fee: {course.fee}</h5>
+              <h5>Distance: {course.distance}</h5>
             </div>
           ))}
           <hr />
@@ -145,7 +149,7 @@ const CollegeDetails = () => {
             <div key={index}>
               <h4>{department.departmentName}</h4>
               <h5>{department.description}</h5>
-              <h5>Placement Percentage: {department.placementPercentage}</h5>            
+              <h5>Placement Percentage: {department.placementPercentage}</h5>
             </div>
           ))}
           <hr />
@@ -155,12 +159,12 @@ const CollegeDetails = () => {
             <div key={index}>
               <h4>Agency: {ranking.agencyName}</h4>
               <h5>Rank: {ranking.rank}</h5>
-              <h5>Year: {ranking.year}</h5>            
+              <h5>Year: {ranking.year}</h5>
             </div>
           ))}
           <hr />
 
-          
+
           <h3>Scholarship Provided: {collegeData && collegeData.scholarship}</h3>
           <hr />
 
@@ -176,11 +180,11 @@ const CollegeDetails = () => {
           <div className="college-details-page-gallery">
             <h3>Gallery</h3>
             {collegeData && collegeData.galleryImages.map((image, index) => (
-              <img 
-                key={index} 
-                src={image} 
-                alt="" 
-                onClick={() => handleImageClick(image)} 
+              <img
+                key={index}
+                src={image}
+                alt=""
+                onClick={() => handleImageClick(image)}
               />
             ))}
           </div>
