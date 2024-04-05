@@ -11,6 +11,7 @@ import ProfileForm from './pages/Forms/ProfileForm';
 import DetailsForm from './pages/Forms/DetailsForm';
 import UploadsForm from './pages/Forms/UploadsForm';
 import CollegeDetails from './pages/CollegeDetails/CollegeDetails';
+import SlotBooking from './pages/SlotBooking/SlotBooking';
 
 function App() {
   
@@ -29,6 +30,7 @@ function App() {
         <Route path='/form/details' element={<DetailsForm/>}/>
         <Route path='/form/uploads' element={<UploadsForm/>}/>
         <Route path='/college/:collegeId' element={<CollegeDetails/>}/>
+        <Route path='/slot' element={<SlotBooking/>}/>
         </Routes>
       </Router>
     </>

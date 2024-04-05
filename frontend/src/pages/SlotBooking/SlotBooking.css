@@ -1,0 +1,34 @@
+.slot-background-image {
+  width: 100%;
+  height: 100vh;
+}
+.slot-form-overlay {
+  height: 99vh;
+}
+.slot-details-page {
+  background-color: #240655;
+  height: 85%;
+  margin: 30px auto 0 auto;
+  width: 95%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.slot-details {
+  padding: 15px 30px;
+}
+.slot-details h2{
+  font-size: 35px;
+}
+.form-group label{
+    font-size: 19px;
+}
+.form-group{
+    margin-bottom: 10px;
+}
+.form-group input{
+    margin-left: 10px;
+}
+.form-group select{
+    margin-left: 10px;
+}
