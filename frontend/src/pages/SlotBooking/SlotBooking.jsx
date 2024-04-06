@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import backgroundImage from "../../assets/home-1.jpg";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Home/Footer";
@@ -19,14 +20,32 @@ function SlotBooking() {
     slotOptions.push(`${hour}:00 - ${hour + 1}:00`);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Booking details:", name, contactNumber, queryType, selectedDate, selectedSlot);
-    setName('');
-    setContactNumber('');
-    setQueryType('');
-    setSelectedDate(null);
-    setSelectedSlot('');
+
+    // console.log("Booking details:", name, contactNumber, queryType, selectedDate, selectedSlot);
+
+    try {
+      await axios.post('http://localhost:5000/slot/book', {
+        name,
+        contactNumber,
+        queryType,
+        selectedDate,
+        selectedSlot
+      })
+        .then(res => {
+          if (res.status == 200) {
+            alert("Slot booked successfully!")
+          }
+        })
+        .catch(e => {
+          alert("Please fill all the required fields!")
+          console.log(e);
+        })
+    }
+    catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -98,7 +117,7 @@ function SlotBooking() {
                   ))}
                 </select>
               </div>
-              
+
               <button type="submit" className="form-submit-button">Book Slot</button>
             </form>
 

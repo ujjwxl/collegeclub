@@ -6,6 +6,7 @@ import razorpay from 'razorpay'
 import crypto from 'crypto'
 import multer from 'multer';
 import AuthRoute from './routes/AuthRoute.js'
+import SlotRoute from './routes/SlotRoute.js'
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { query, where, getDocs } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
@@ -331,4 +332,5 @@ const giveCurrentDateTime = () => {
 }
 
 app.use('/auth',AuthRoute)
+app.use('/slot',SlotRoute)
 // app.use('/todo',ToDoRoute)
