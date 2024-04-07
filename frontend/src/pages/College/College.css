@@ -60,7 +60,30 @@
     width: 50%;
     /* background-color: red; */
 }
+.list-college-details-page{
+    margin-left: 10px;
+}
+.list-college-name{
+    margin-top: 6%;
+}
+.list-college-name h3{
+    margin: 0;
+    
+}
+.list-college-details{
+    display: flex;
+    margin-top: 5px;
+    font-size: 14px;
 
+}
+.list-college-details h4{
+    margin: 0;
+    margin-left: 5px;
+} 
+.list-college-details img{
+    height: 15px;
+    width: 15px;
+}
 .colleges-display-box-item-details-two {
     width: 50%;
     /* background-color: green; */

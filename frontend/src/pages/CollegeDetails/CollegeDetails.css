@@ -27,7 +27,7 @@
   padding: 20px;
 }
 
-.college-details-page-header img {
+.college-logo  {
   height: 100px;
   width: 100px;
 }
@@ -37,18 +37,29 @@
 
 .college-name {
   display: flex;
-  margin: auto 0 auto 0;
+  margin-top: 20px;
 }
 .college-name h2 {
   margin: auto 0 auto 0;
   margin-left: 10px;
   font-size: 28px;
 }
-
+.college-details{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+.college-details img{
+  height: 18px;
+  width: 18px;
+}
 .college-details h4 {
   margin: 0;
-  margin-left: 10px;
-
+  margin-left: 5px;
+  margin-right: 20px;
 }
 
 .admission-process {
@@ -129,7 +140,7 @@
     white-space: wrap;
   }
 
-  .college-details-page-header img {
+  .college-logo  {
     width: 80px;
     height: 80px;
   }
