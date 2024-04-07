@@ -5,7 +5,21 @@
   width: 95%;
   overflow-y: scroll;
 }
+.college-details-page h4 {
+  margin-left: 30px;
+  margin-right: 5px;
+}
+.college-details-page h3 {
+  margin-left: 20px;
+  font-size: 25px;
+}
 
+.college-details-page li {
+  margin-left: 35px;
+}
+.college-details-page h5 {
+  margin-left: 30px;
+}
 .college-details-page-header {
   display: flex;
   /* background-color: red; */
@@ -17,20 +31,30 @@
   height: 100px;
   width: 100px;
 }
+.college-details-page-header-details{
+  /* background-color: rgb(70, 79, 76); */
+}
 
-.college-details-page-header h2 {
+.college-name {
+  display: flex;
+  margin: auto 0 auto 0;
+}
+.college-name h2 {
   margin: auto 0 auto 0;
   margin-left: 10px;
   font-size: 28px;
+}
+
+.college-details h4 {
+  margin: 0;
+  margin-left: 10px;
+
 }
 
 .admission-process {
   white-space: pre;
 }
 
-.college-details-page-gallery {
-  /* margin-left: 25px; */
-}
 .college-details-page-gallery h3 {
   margin-left: 0px;
 }
@@ -40,22 +64,6 @@
   margin-left: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
-}
-
-.college-details-page h3 {
-  margin-left: 20px;
-  font-size: 25px;
-}
-.college-details-page h4 {
-  margin-left: 30px;
-  margin-right: 5px;
-  /* word-spacing: 2px; */
-}
-.college-details-page li{
-  margin-left: 35px;
-}
-.college-details-page h5{
-  margin-left: 30px;
 }
 
 .modal {
@@ -79,9 +87,9 @@
   width: 80%;
 }
 
-.modal-content img{
-    width: 98%;
-    height: 100%;
+.modal-content img {
+  width: 98%;
+  height: 100%;
 }
 
 .close {
@@ -117,7 +125,6 @@
 }
 
 @media only screen and (max-width: 768px) {
-
   .admission-process {
     white-space: wrap;
   }

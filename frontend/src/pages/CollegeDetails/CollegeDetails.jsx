@@ -55,7 +55,6 @@
 //               <img src={collegeData && collegeData.galleryImages[4]} alt="" />
 //             </div>
 
-
 //           </div>
 //         </div>
 //         <Footer />
@@ -82,10 +81,12 @@ const CollegeDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/auth/user/${collegeId}`);
+        const response = await axios.get(
+          `http://localhost:5000/auth/user/${collegeId}`
+        );
         setCollegeData(response.data);
       } catch (error) {
-        console.error('Error fetching college data:', error.message);
+        console.error("Error fetching college data:", error.message);
       }
     };
 
@@ -103,14 +104,24 @@ const CollegeDetails = () => {
   return (
     <div>
       <Navbar />
-      <img src={backgroundImage} alt="" className='details-form-background-image' />
-      <div className='dashboard-overlay dashboard-container details-form-overlay'>
+      <img
+        src={backgroundImage}
+        alt=""
+        className="details-form-background-image"
+      />
+      <div className="dashboard-overlay dashboard-container details-form-overlay">
         <div className="college-details-page">
-
           <div className="college-details-page-header">
             <img src={collegeData && collegeData.profilePicture} alt="" />
-            <h2>{collegeData && collegeData.organizationName}</h2>
-            <h2>({collegeData && collegeData.instituteType} University)</h2>
+            <div className="college-details-page-header-details">
+              <div className="college-name">
+                <h2>{collegeData && collegeData.organizationName}</h2>
+                <h2>({collegeData && collegeData.instituteType} University)</h2>
+              </div>
+              <div className="college-details">
+                <h4>{collegeData && collegeData.district}</h4>
+              </div>
+            </div>
           </div>
 
           <div className="college-page-navigation-bar">
@@ -132,11 +143,12 @@ const CollegeDetails = () => {
           </div>
 
           <h3>Courses Offered</h3>
-          {collegeData && collegeData.selectedCourses.map((course, index) => (
-            <div key={index}>
-              <li>{course}</li>
-            </div>
-          ))}
+          {collegeData &&
+            collegeData.selectedCourses.map((course, index) => (
+              <div key={index}>
+                <li>{course}</li>
+              </div>
+            ))}
           <hr />
 
           <div id="admission-process">
@@ -147,62 +159,69 @@ const CollegeDetails = () => {
             </div>
           </div>
 
-
           <h3>Courses</h3>
-          {collegeData && collegeData.courses.map((course, index) => (
-            <div key={index}>
-              <h4>{course.courseName}</h4>
-              <h5>Duration: {course.duration} years</h5>
-              <h5>Minimum Qualification: {course.minQualification}</h5>
-              <h5>Fee: {course.fee}</h5>
-              <h5>Distance: {course.distance}</h5>
-            </div>
-          ))}
+          {collegeData &&
+            collegeData.courses.map((course, index) => (
+              <div key={index}>
+                <h4>{course.courseName}</h4>
+                <h5>Duration: {course.duration} years</h5>
+                <h5>Minimum Qualification: {course.minQualification}</h5>
+                <h5>Fee: {course.fee}</h5>
+                <h5>Distance: {course.distance}</h5>
+              </div>
+            ))}
           <hr />
 
           <h3>Departments</h3>
-          {collegeData && collegeData.departments.map((department, index) => (
-            <div key={index}>
-              <h4>{department.departmentName}</h4>
-              <h5>{department.description}</h5>
-              <h5>Placement Percentage: {department.placementPercentage}</h5>
-            </div>
-          ))}
+          {collegeData &&
+            collegeData.departments.map((department, index) => (
+              <div key={index}>
+                <h4>{department.departmentName}</h4>
+                <h5>{department.description}</h5>
+                <h5>Placement Percentage: {department.placementPercentage}</h5>
+              </div>
+            ))}
           <hr />
 
           <h3>Rankings</h3>
-          {collegeData && collegeData.rankings.map((ranking, index) => (
-            <div key={index}>
-              <h4>Agency: {ranking.agencyName}</h4>
-              <h5>Rank: {ranking.rank}</h5>
-              <h5>Year: {ranking.year}</h5>
-            </div>
-          ))}
+          {collegeData &&
+            collegeData.rankings.map((ranking, index) => (
+              <div key={index}>
+                <h4>Agency: {ranking.agencyName}</h4>
+                <h5>Rank: {ranking.rank}</h5>
+                <h5>Year: {ranking.year}</h5>
+              </div>
+            ))}
           <hr />
 
-
-          <h3>Scholarship Provided: {collegeData && collegeData.scholarship}</h3>
+          <h3>
+            Scholarship Provided: {collegeData && collegeData.scholarship}
+          </h3>
           <hr />
 
           <h3>News</h3>
-          {collegeData && collegeData.news.map((news, index) => (
-            <div key={index}>
-              <h4>Agency: {news.newsTitle}</h4>
-              <a href={news.refLink} target="_blank">Link</a>
-            </div>
-          ))}
+          {collegeData &&
+            collegeData.news.map((news, index) => (
+              <div key={index}>
+                <h4>Agency: {news.newsTitle}</h4>
+                <a href={news.refLink} target="_blank">
+                  Link
+                </a>
+              </div>
+            ))}
           <hr />
 
           <div className="college-details-page-gallery">
             <h3>Gallery</h3>
-            {collegeData && collegeData.galleryImages.map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt=""
-                onClick={() => handleImageClick(image)}
-              />
-            ))}
+            {collegeData &&
+              collegeData.galleryImages.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt=""
+                  onClick={() => handleImageClick(image)}
+                />
+              ))}
           </div>
         </div>
       </div>
@@ -211,7 +230,9 @@ const CollegeDetails = () => {
       {selectedImage && (
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={closeModal}>&times;</span>
+            <span className="close" onClick={closeModal}>
+              &times;
+            </span>
             <img src={selectedImage} alt="Enlarged" />
           </div>
         </div>
