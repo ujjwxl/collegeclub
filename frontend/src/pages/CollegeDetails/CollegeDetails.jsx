@@ -65,7 +65,7 @@
 // }
 
 // export default CollegeDetails
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import backgroundImage from '../../assets/home-1.jpg';
@@ -113,9 +113,23 @@ const CollegeDetails = () => {
             <h2>({collegeData && collegeData.instituteType} University)</h2>
           </div>
 
-          <h3>About College</h3>
-          <h4>{collegeData && collegeData.aboutCollege}</h4>
-          <hr />
+          <div className="college-page-navigation-bar">
+            <div className="college-page-navigation-bar-content">
+              <a href='#about-college'>About</a>
+              <a href='#admission-process'>Admission</a>
+              <a>Courses</a>
+              <a>Departments</a>
+              <a>Ranking</a>
+              <a>News</a>
+              <a>Gallery</a>
+            </div>
+          </div>
+
+          <div id='about-college'>
+            <h3>About College</h3>
+            <h4>{collegeData && collegeData.aboutCollege}</h4>
+            <hr />
+          </div>
 
           <h3>Courses Offered</h3>
           {collegeData && collegeData.selectedCourses.map((course, index) => (
@@ -125,10 +139,12 @@ const CollegeDetails = () => {
           ))}
           <hr />
 
-          <div className="admission-process">
-            <h3>Admission Process</h3>
-            <h4>{collegeData && collegeData.admissionProcess}</h4>
-            <hr />
+          <div id="admission-process">
+            <div className="admission-process">
+              <h3>Admission Process</h3>
+              <h4>{collegeData && collegeData.admissionProcess}</h4>
+              <hr />
+            </div>
           </div>
 
 
