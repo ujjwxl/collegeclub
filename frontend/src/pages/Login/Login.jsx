@@ -19,20 +19,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    // signInWithEmailAndPassword(auth, email, password)
-    //   .then((userCredential) => {
-    //     const user = userCredential.user;
-    //     console.log(user);
-    //     // alert('login success')
-    //     navigate('/dashboard')
-
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     console.log(error);
-    //   });
+    
     try {
       await axios.post('http://localhost:5000/auth/login', {
         email,
@@ -41,8 +28,11 @@ const Login = () => {
         .then(res => {
           if (res.status == 200) {
             // alert("Signin successfully!");
-            const userId = res.data.uid;
+            console.log(res.data)
+            const userId = res.data.userId;
+            const accountType = res.data.accountType;
             sessionStorage.setItem('id', userId);
+            sessionStorage.setItem('type', accountType);
             navigate('/dashboard');
           }
         })

@@ -5,8 +5,12 @@ import Footer from '../../components/Home/Footer'
 import DashboardMenu from '../../components/Dashboard/DashboardMenu'
 import ProfileFormComponent from '../../components/Forms/ProfileFormComponent'
 import './ProfileForm.css'  
+import CompanyProfileComponent from '../../components/Forms/CompanyProfileComponent'
 
 const ProfileForm = () => {
+
+    const type = sessionStorage.getItem('type');
+
     return (
         <div>
             <>
@@ -15,7 +19,9 @@ const ProfileForm = () => {
                 <img src={backgroundImage} alt="" className='form-background-image' />
                 <div className='dashboard-overlay dashboard-container form-overlay'>
                     {/* <DashboardMenu /> */}
-                    <ProfileFormComponent/>
+                    {type === 'College' ? <ProfileFormComponent/> : null}
+                    {type == 'Company' ? <CompanyProfileComponent/> : null}
+                    {/* <CompanyProfileComponent/> */}
                 </div>
                 <Footer />
             </>
