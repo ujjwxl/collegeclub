@@ -4,8 +4,12 @@ import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Home/Footer'
 import DetailsFormComponent from '../../components/Forms/DetailsFormComponent'
 import './DetailsForm.css'
+import CompanyDetailsComponent from '../../components/Forms/CompanyDetailsComponent'
 
 const DetailsForm = () => {
+
+    const type = sessionStorage.getItem('type');
+
     return (
         <div>
             <>
@@ -14,7 +18,9 @@ const DetailsForm = () => {
                 <img src={backgroundImage} alt="" className='details-form-background-image' />
                 <div className='dashboard-overlay dashboard-container details-form-overlay'>
                     {/* <DashboardMenu /> */}
-                    <DetailsFormComponent/>
+                    {/* <DetailsFormComponent/> */}
+                    {type === 'College' ? <DetailsFormComponent/> : null}
+                    {type === 'Company' ? <CompanyDetailsComponent/> : null}
                 </div>
                 <Footer />
             </>

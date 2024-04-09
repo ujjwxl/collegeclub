@@ -465,7 +465,7 @@ const DetailsFormComponent = () => {
           </div>
         </div>
         <div className="form-input-flex-two">
-          <div className="form-input-group">
+          <div className="form-input-group form-select">
             <label htmlFor="collegename">Institute Type</label>
             <select
               value={selectedInstituteType}
