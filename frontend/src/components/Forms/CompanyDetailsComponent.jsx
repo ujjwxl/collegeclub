@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -27,21 +27,15 @@ const CompanyDetailsComponent = () => {
 
             await axios
                 .post(`http://localhost:5000/auth/detailsform/${userId}`, {
-                    selectedCourses,
-                    aboutCollege,
-                    admissionProcess,
-                    courses: coursesData,
-                    departments: departmentsData,
+                    aboutCompany,
+                    companyMission,
                     news: newsData,
-                    rankings: rankingsData,
-                    overallPlacement,
+                    registrationNumber,
                     promo,
-                    scholarship,
-                    selectedInstituteType,
-                    studyMode
+                    industryType
                 })
                 .then((res) => {
-                    if (res.status == 200) {
+                    if (res.status === 200) {
                         alert("Details form sent successfully!");
                     }
                 })
@@ -81,7 +75,7 @@ const CompanyDetailsComponent = () => {
 
                 <h3>Why join us? (Mission and Vision)</h3>
                 <textarea
-                    onChange={(e) => setMission(e.target.value)}
+                    onChange={(e) => setCompanyMission(e.target.value)}
                     name=""
                     id=""
                     cols="30"
@@ -94,7 +88,6 @@ const CompanyDetailsComponent = () => {
                     <div className="form-input-flex-two" key={index}>
                         <div className="form-input-group">
                             <label htmlFor="collegename">News Title*</label>
-                            {/* <input type="text" placeholder='Add news title' /> */}
                             <input
                                 type="text"
                                 name={`newsTitle${index}`}
@@ -104,7 +97,6 @@ const CompanyDetailsComponent = () => {
 
                         <div className="form-input-group">
                             <label htmlFor="collegename">Ref. Link*</label>
-                            {/* <input type="text" placeholder='Add a reference link' /> */}
                             <input
                                 type="text"
                                 name={`refLink${index}`}
@@ -171,4 +163,4 @@ const CompanyDetailsComponent = () => {
     )
 }
 
-export default CompanyDetailsComponent
+export default CompanyDetailsComponent;

@@ -133,6 +133,70 @@ export const getColleges = async (req, res) => {
   }
 };
 
+// export const completeProfileForm = async (req, res) => {
+//   const { userId } = req.params;
+//   const {
+//     universityFullName,
+//     universityShortName,
+//     foundedYear,
+//     approvedBy,
+//     rankedBy,
+//     contactNumber,
+//     email,
+//     website,
+//     fullAddress,
+//     pinCode,
+//     country,
+//     state,
+//     district,
+//     alternateContact,
+//     alternateNumber,
+//     referralCode,
+//   } = req.body;
+
+//   try {
+//     const usersCollectionRef = collection(db, "users");
+//     const q = query(usersCollectionRef, where("userId", "==", userId));
+//     const querySnapshot = await getDocs(q);
+
+//     if (querySnapshot.empty) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+
+//     querySnapshot.forEach(async (doc) => {
+//       const docRef = doc.ref;
+
+//       await updateDoc(docRef, {
+//         organizationName: universityFullName,
+//         universityShortName,
+//         foundedYear,
+//         approvedBy,
+//         rankedBy,
+//         contactNumber,
+//         email,
+//         website,
+//         fullAddress,
+//         pinCode,
+//         country,
+//         state,
+//         district,
+//         alternateContact,
+//         alternateNumber,
+//         referralCode,
+//         profileFormFilled: true
+//       });
+
+//       console.log('Profile form updated successfully');
+//     });
+
+//     res.status(200).json({ message: "Profile form updated successfully" });
+//   } catch (error) {
+//     console.error("Error updating user profile:", error.message);
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+// backend/controller.js
+
 export const completeProfileForm = async (req, res) => {
   const { userId } = req.params;
   const {
@@ -152,6 +216,7 @@ export const completeProfileForm = async (req, res) => {
     alternateContact,
     alternateNumber,
     referralCode,
+    companyName,
   } = req.body;
 
   try {
@@ -166,27 +231,46 @@ export const completeProfileForm = async (req, res) => {
     querySnapshot.forEach(async (doc) => {
       const docRef = doc.ref;
 
-      await updateDoc(docRef, {
-        organizationName: universityFullName,
-        universityShortName,
-        foundedYear,
-        approvedBy,
-        rankedBy,
-        contactNumber,
-        email,
-        website,
-        fullAddress,
-        pinCode,
-        country,
-        state,
-        district,
-        alternateContact,
-        alternateNumber,
-        referralCode,
-        profileFormFilled: true
-      });
-
-      console.log('Profile form updated successfully');
+      if (companyName) { // If companyName exists, it's a company profile
+        await updateDoc(docRef, {
+          companyName,
+          foundedYear,
+          contactNumber,
+          email,
+          website,
+          fullAddress,
+          pinCode,
+          country,
+          state,
+          district,
+          alternateContact,
+          alternateNumber,
+          referralCode,
+          profileFormFilled: true
+        });
+        console.log('Company profile form updated successfully');
+      } else { // Otherwise, it's a college profile
+        await updateDoc(docRef, {
+          universityFullName,
+          universityShortName,
+          foundedYear,
+          approvedBy,
+          rankedBy,
+          contactNumber,
+          email,
+          website,
+          fullAddress,
+          pinCode,
+          country,
+          state,
+          district,
+          alternateContact,
+          alternateNumber,
+          referralCode,
+          profileFormFilled: true
+        });
+        console.log('College profile form updated successfully');
+      }
     });
 
     res.status(200).json({ message: "Profile form updated successfully" });
@@ -195,6 +279,62 @@ export const completeProfileForm = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// export const completeDetailsForm = async (req, res) => {
+//   const { userId } = req.params;
+
+//   const {
+//     selectedCourses,
+//     aboutCollege,
+//     admissionProcess,
+//     courses,
+//     departments,
+//     news,
+//     rankings,
+//     overallPlacement,
+//     promo,
+//     scholarship, 
+//     selectedInstituteType, 
+//     studyMode
+//   } = req.body;
+
+//   try {
+//     const usersCollectionRef = collection(db, "users");
+//     const q = query(usersCollectionRef, where("userId", "==", userId));
+//     const querySnapshot = await getDocs(q);
+
+//     if (querySnapshot.empty) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+
+//     querySnapshot.forEach(async (doc) => {
+//       const docRef = doc.ref;
+
+//       await updateDoc(docRef, {
+//         selectedCourses,
+//         aboutCollege,
+//         admissionProcess,
+//         courses,
+//         departments,
+//         news,
+//         rankings,
+//         overallPlacement,
+//         promo,
+//         scholarship,
+//         instituteType:selectedInstituteType,
+//         studyMode,
+//         detailsFormFilled: true
+//       });
+
+//       console.log('Details form updated successfully');
+//     });
+
+//     res.status(200).json({ message: "Details form updated successfully" });
+//   } catch (error) {
+//     console.error("Error updating user details:", error.message);
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 
 export const completeDetailsForm = async (req, res) => {
   const { userId } = req.params;
@@ -211,7 +351,11 @@ export const completeDetailsForm = async (req, res) => {
     promo,
     scholarship, 
     selectedInstituteType, 
-    studyMode
+    studyMode,
+    aboutCompany, // New fields for company details
+    companyMission,
+    registrationNumber,
+    industryType
   } = req.body;
 
   try {
@@ -226,23 +370,35 @@ export const completeDetailsForm = async (req, res) => {
     querySnapshot.forEach(async (doc) => {
       const docRef = doc.ref;
 
-      await updateDoc(docRef, {
-        selectedCourses,
-        aboutCollege,
-        admissionProcess,
-        courses,
-        departments,
-        news,
-        rankings,
-        overallPlacement,
-        promo,
-        scholarship,
-        instituteType:selectedInstituteType,
-        studyMode,
-        detailsFormFilled: true
-      });
-
-      console.log('Details form updated successfully');
+      if (aboutCompany) { // If aboutCompany exists, it's a company profile
+        await updateDoc(docRef, {
+          aboutCompany,
+          companyMission,
+          news,
+          registrationNumber,
+          promo,
+          industryType,
+          detailsFormFilled: true
+        });
+        console.log('Company details form updated successfully');
+      } else { // Otherwise, it's a college profile
+        await updateDoc(docRef, {
+          selectedCourses,
+          aboutCollege,
+          admissionProcess,
+          courses,
+          departments,
+          news,
+          rankings,
+          overallPlacement,
+          promo,
+          scholarship,
+          instituteType:selectedInstituteType,
+          studyMode,
+          detailsFormFilled: true
+        });
+        console.log('College details form updated successfully');
+      }
     });
 
     res.status(200).json({ message: "Details form updated successfully" });
@@ -251,4 +407,3 @@ export const completeDetailsForm = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
