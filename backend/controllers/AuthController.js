@@ -1,5 +1,5 @@
 // import bcrypt from "bcryptjs";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc, updateDoc} from "firebase/firestore";
 // import { auth, db } from "../../firebase.js";
@@ -20,18 +20,6 @@ export const registerUser = async (req, res) => {
     password,
   } = req.body;
 
-  //   createUserWithEmailAndPassword(auth, email, password)
-  //     .then((userCredential) => {
-  //       const user = userCredential.user;
-  //       console.log(user);
-  //       console.log(user.uid);
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       console.log(error);
-  //     });
-
   try {
     // Create user in Firebase Authentication
     const userCredential = await createUserWithEmailAndPassword(
@@ -41,6 +29,8 @@ export const registerUser = async (req, res) => {
     );
     const user = userCredential.user;
     const userId = user.uid;
+
+    await sendEmailVerification(user);
 
     // Create document in Firestore
     const docRef = await addDoc(collection(db, "users"), {
