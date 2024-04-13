@@ -57,6 +57,7 @@
 .navbar-right {
   display: flex;
   align-items: center;
+  /* background-color: red; */
 }
 
 .navbar-right a {
@@ -64,6 +65,13 @@
   font-family: "K2D", sans-serif;
   color: white;
   margin-right: 10px;
+}
+
+.navbar-profile-picture {
+  width: 40px;
+  height: 40px;
+  padding: 5px 0 5px 0;
+  margin-left: 20px;
 }
 
 @media only screen and (max-width: 780px) {
@@ -115,6 +123,13 @@
     flex-direction: column;
     text-align: center;
     font-size: 1.5rem;
+    /* background-color: red; */
+  }
+
+  .navbar-profile-picture {
+    width: 60px;
+    height: 60px;
+    margin-left: 0;
   }
   
   .navbar-right-mobile a {
