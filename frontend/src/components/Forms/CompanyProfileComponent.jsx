@@ -8,6 +8,7 @@ const CompanyProfileComponent = () => {
 
     const [companyName, setCompanyName] = useState('');
     const [foundedYear, setFoundedYear] = useState('');
+    const [headquarter, setHeadquater] = useState('');
     const [contactNumber, setContactNumber] = useState('');
     const [email, setEmail] = useState('');
     const [website, setWebsite] = useState('');
@@ -34,6 +35,7 @@ const CompanyProfileComponent = () => {
           await axios.post(`http://localhost:5000/auth/companyprofileform/${userId}`, {
             companyName,
             foundedYear,
+            headquarter,
             contactNumber,
             email,
             website,
@@ -81,6 +83,11 @@ const CompanyProfileComponent = () => {
                     <div className="form-input-group">
                         <label htmlFor="collegename">Founded year*</label>
                         <input type="text" placeholder='Enter the founded year' onChange={(e) => setFoundedYear(e.target.value)} required />
+                    </div>
+
+                    <div className="form-input-group">
+                        <label htmlFor="collegename">Headquarter*</label>
+                        <input type="text" placeholder='Enter the headquarter' onChange={(e) => setHeadquater(e.target.value)} required />
                     </div>
                 </div>
 

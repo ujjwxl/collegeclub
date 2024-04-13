@@ -201,6 +201,7 @@ export const completeCompanyProfileForm = async (req,res) => {
   const {
     companyName,
     foundedYear,
+    headquarter,
     contactNumber,
     email,
     website,
@@ -230,6 +231,7 @@ export const completeCompanyProfileForm = async (req,res) => {
       await updateDoc(docRef, {
         organizationName: companyName,
         foundedYear,
+        headquarter,
         contactNumber,
         email,
         website,
