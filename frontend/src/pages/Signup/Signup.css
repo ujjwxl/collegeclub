@@ -136,6 +136,13 @@
     /* background-color: green; */
 }
 
+.phone-input{
+    /* width: 74%; */
+    margin-left: 5%;
+}
+.phone-input input{
+    margin-left: 20px;
+}
 @media only screen and (max-width: 768px) {
     .signup-overlay {
         height: 161vh;

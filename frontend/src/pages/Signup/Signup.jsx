@@ -5,22 +5,24 @@ import Footer from "../../components/Home/Footer";
 import "./Signup.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 // import { createUserWithEmailAndPassword } from "firebase/auth";
 // import { collection, addDoc } from 'firebase/firestore';
 // import { auth, db } from "../../firebase.js";
-// import { doc, setDoc } from "firebase/firestore"; 
+// import { doc, setDoc } from "firebase/firestore";
 
 const Signup = () => {
-
-  const [accountType, setAccountType] = useState('');
-  const [organizationName, setOrganizationName] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
-  const [subDomain, setSubDomain] = useState('');
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [accountType, setAccountType] = useState("");
+  const [organizationName, setOrganizationName] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [subDomain, setSubDomain] = useState("");
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  
 
   const handleTypeChange = (event) => {
     setAccountType(event.target.value);
@@ -84,38 +86,42 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password != confirmPassword) alert('The passwords do not match!')
+    if (password != confirmPassword) alert("The passwords do not match!");
 
     try {
-      await axios.post('http://localhost:5000/auth/register', {
-        accountType,
-        organizationName,
-        fullName,
-        contactNumber,
-        subDomain,
-        userName,
-        email,
-        password
-      })
-        .then(res => {
+      await axios
+        .post("http://localhost:5000/auth/register", {
+          accountType,
+          organizationName,
+          fullName,
+          contactNumber,
+          subDomain,
+          userName,
+          email,
+          password,
+        })
+        .then((res) => {
           if (res.status == 200) {
-            alert("Account created successfully!")
+            alert("Account created successfully!");
           }
         })
-        .catch(e => {
-          alert("Please check your signup details!")
+        .catch((e) => {
+          alert("Please check your signup details!");
           console.log(e);
-        })
-    }
-    catch (e) {
+        });
+    } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   return (
     <div>
       <Navbar />
-      <img src={backgroundImage} alt="" className="home1-img signup-page-image" />
+      <img
+        src={backgroundImage}
+        alt=""
+        className="home1-img signup-page-image"
+      />
 
       <div className="signup-overlay">
         <div className="signup-form">
@@ -123,7 +129,11 @@ const Signup = () => {
             <div className="signup-form-left">
               <h2>Signup</h2>
               <h2>for New Account</h2>
-              <select name="type" value={accountType} onChange={handleTypeChange}>
+              <select
+                name="type"
+                value={accountType}
+                onChange={handleTypeChange}
+              >
                 <option value="" disabled selected>
                   Select account type
                 </option>
@@ -146,12 +156,19 @@ const Signup = () => {
                 onChange={(e) => setFullName(e.target.value)}
               />{" "}
               <br />
-              <input
+              {/* <input
                 type="text"
                 name="phone"
                 placeholder="Contact Number"
                 onChange={(e) => setContactNumber(e.target.value)}
-              />{" "}
+              />{" "} */}
+              <PhoneInput
+                placeholder="Enter phone number"
+                defaultCountry="IN"
+                value={contactNumber}
+                onChange={setContactNumber}
+                className="phone-input"
+              />
               <br />
               <input
                 type="text"
