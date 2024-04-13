@@ -31,7 +31,7 @@ const CompanyProfileComponent = () => {
         e.preventDefault();
     
         try {
-          await axios.post(`http://localhost:5000/auth/profileform/${userId}`, {
+          await axios.post(`http://localhost:5000/auth/companyprofileform/${userId}`, {
             companyName,
             foundedYear,
             contactNumber,

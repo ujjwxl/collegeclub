@@ -26,7 +26,7 @@ const CompanyDetailsComponent = () => {
             }
 
             await axios
-                .post(`http://localhost:5000/auth/detailsform/${userId}`, {
+                .post(`http://localhost:5000/auth/companydetailsform/${userId}`, {
                     aboutCompany,
                     companyMission,
                     news: newsData,
