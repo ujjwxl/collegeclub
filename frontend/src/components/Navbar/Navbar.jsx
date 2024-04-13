@@ -38,8 +38,6 @@ const Navbar = () => {
     setIsMenuOpen(prevState => !prevState);
   }
 
-  console.log(userData)
-
   return (
     <div className='navbar'>
       <div className="navbar-logo">
