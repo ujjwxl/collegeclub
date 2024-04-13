@@ -1,7 +1,10 @@
 // import bcrypt from "bcryptjs";
-import { signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc, updateDoc} from "firebase/firestore";
+import { collection, addDoc, updateDoc } from "firebase/firestore";
 // import { auth, db } from "../../firebase.js";
 import { auth, db } from "../firebase.js";
 import { doc, getDoc } from "firebase/firestore";
@@ -42,7 +45,7 @@ export const registerUser = async (req, res) => {
       userName,
       email,
       userId,
-      paymentStatus: false
+      paymentStatus: false,
     });
 
     console.log("Document written with ID: ", docRef.id);
@@ -111,7 +114,6 @@ export const getUserDetails = async (req, res) => {
 };
 
 export const getColleges = async (req, res) => {
-
   try {
     const usersCollectionRef = collection(db, "users");
     const q = query(usersCollectionRef, where("accountType", "==", "College"));
@@ -183,10 +185,10 @@ export const completeProfileForm = async (req, res) => {
         alternateContact,
         alternateNumber,
         referralCode,
-        profileFormFilled: true
+        profileFormFilled: true,
       });
 
-      console.log('Profile form updated successfully');
+      console.log("Profile form updated successfully");
     });
 
     res.status(200).json({ message: "Profile form updated successfully" });
@@ -196,7 +198,7 @@ export const completeProfileForm = async (req, res) => {
   }
 };
 
-export const completeCompanyProfileForm = async (req,res) => {
+export const completeCompanyProfileForm = async (req, res) => {
   const { userId } = req.params;
   const {
     companyName,
@@ -215,7 +217,6 @@ export const completeCompanyProfileForm = async (req,res) => {
     referralCode,
   } = req.body;
 
-  
   try {
     const usersCollectionRef = collection(db, "users");
     const q = query(usersCollectionRef, where("userId", "==", userId));
@@ -243,10 +244,10 @@ export const completeCompanyProfileForm = async (req,res) => {
         alternateContact,
         alternateNumber,
         referralCode,
-        profileFormFilled: true
+        profileFormFilled: true,
       });
 
-      console.log('Company profile form updated successfully');
+      console.log("Company profile form updated successfully");
     });
 
     res.status(200).json({ message: "Company form updated successfully" });
@@ -254,7 +255,68 @@ export const completeCompanyProfileForm = async (req,res) => {
     console.error("Error updating user profile:", error.message);
     res.status(500).json({ message: error.message });
   }
-}
+};
+
+export const completeAmbassadorProfileForm = async (req, res) => {
+  const { userId } = req.params;
+  const {
+    name,
+    gender,
+    dob,
+    contactNumber,
+    email,
+    fullAddress,
+    pinCode,
+    country,
+    state,
+    district,
+    collegeName,
+    collegePincode,
+    collegeCountry,
+    collegeState,
+    collegeDistrict,
+  } = req.body;
+
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    querySnapshot.forEach(async (doc) => {
+      const docRef = doc.ref;
+
+      await updateDoc(docRef, {
+        organizationName: name,
+        gender,
+        dob,
+        contactNumber,
+        email,
+        fullAddress,
+        pinCode,
+        country,
+        state,
+        district,
+        collegeName,
+        collegePincode,
+        collegeCountry,
+        collegeState,
+        collegeDistrict,
+        profileFormFilled: true,
+      });
+
+      console.log("Ambassador profile form updated successfully");
+    });
+
+    res.status(200).json({ message: "Ambassador form updated successfully" });
+  } catch (error) {
+    console.error("Error updating user profile:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // export const completeProfileForm = async (req, res) => {
 //   const { userId } = req.params;
@@ -352,9 +414,9 @@ export const completeDetailsForm = async (req, res) => {
     rankings,
     overallPlacement,
     promo,
-    scholarship, 
-    selectedInstituteType, 
-    studyMode
+    scholarship,
+    selectedInstituteType,
+    studyMode,
   } = req.body;
 
   try {
@@ -380,12 +442,12 @@ export const completeDetailsForm = async (req, res) => {
         overallPlacement,
         promo,
         scholarship,
-        instituteType:selectedInstituteType,
+        instituteType: selectedInstituteType,
         studyMode,
-        detailsFormFilled: true
+        detailsFormFilled: true,
       });
 
-      console.log('Details form updated successfully');
+      console.log("Details form updated successfully");
     });
 
     res.status(200).json({ message: "Details form updated successfully" });
@@ -395,7 +457,7 @@ export const completeDetailsForm = async (req, res) => {
   }
 };
 
-export const completeCompanyDetailsFormm = async (req,res) => {
+export const completeCompanyDetailsForm = async (req, res) => {
   const { userId } = req.params;
 
   const {
@@ -404,7 +466,7 @@ export const completeCompanyDetailsFormm = async (req,res) => {
     news,
     registrationNumber,
     promo,
-    industryType
+    industryType,
   } = req.body;
 
   try {
@@ -426,18 +488,20 @@ export const completeCompanyDetailsFormm = async (req,res) => {
         registrationNumber,
         promo,
         industryType,
-        detailsFormFilled: true
+        detailsFormFilled: true,
       });
 
-      console.log('Company details form updated successfully');
+      console.log("Company details form updated successfully");
     });
 
-    res.status(200).json({ message: "Company details form updated successfully" });
+    res
+      .status(200)
+      .json({ message: "Company details form updated successfully" });
   } catch (error) {
     console.error("Error updating user details:", error.message);
     res.status(500).json({ message: error.message });
   }
-}
+};
 
 // export const completeDetailsForm = async (req, res) => {
 //   const { userId } = req.params;
@@ -452,8 +516,8 @@ export const completeCompanyDetailsFormm = async (req,res) => {
 //     rankings,
 //     overallPlacement,
 //     promo,
-//     scholarship, 
-//     selectedInstituteType, 
+//     scholarship,
+//     selectedInstituteType,
 //     studyMode,
 //     aboutCompany, // New fields for company details
 //     companyMission,

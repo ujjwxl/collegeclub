@@ -6,6 +6,7 @@ import DashboardMenu from '../../components/Dashboard/DashboardMenu'
 import ProfileFormComponent from '../../components/Forms/ProfileFormComponent'
 import './ProfileForm.css'  
 import CompanyProfileComponent from '../../components/Forms/CompanyProfileComponent'
+import AmbassadorProfileComponent from '../../components/Forms/AmbassadorProfileComponent'
 
 const ProfileForm = () => {
 
@@ -21,6 +22,7 @@ const ProfileForm = () => {
                     {/* <DashboardMenu /> */}
                     {type === 'College' ? <ProfileFormComponent/> : null}
                     {type == 'Company' ? <CompanyProfileComponent/> : null}
+                    {type == 'CC-Ambassador' ? <AmbassadorProfileComponent/> : null}
                     {/* <CompanyProfileComponent/> */}
                 </div>
                 <Footer />
