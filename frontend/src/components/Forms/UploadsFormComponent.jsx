@@ -141,6 +141,7 @@ const UploadsFormComponent = () => {
     const [authorizationLetter, setAuthorizationLetter] = useState(null);
     const [rankingReference, setRankingReference] = useState(null);
     const [selectedImages, setSelectedImages] = useState([]);
+    const [type, setType] = useState(sessionStorage.getItem('type'));
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
@@ -252,22 +253,60 @@ const UploadsFormComponent = () => {
 
                 <div className="form-input-flex-two">
                     {/* Authorization Letter */}
-                    <div className="form-input-group">
+                    {/* <div className="form-input-group">
                         <label htmlFor="authLetter">Authorization Letter*</label>
                         <div className='form-file-input-group'>
                             <input type='file' id="authLetter" onChange={handleAuthorizationLetterChange} />
                             <button type='button' onClick={() => handleFileUpload(authorizationLetter, "authorization")}>Upload</button>
                         </div>
-                    </div>
+                    </div> */}
+                    {type === 'College' && (
+                        <div className="form-input-group">
+                            <label htmlFor="authLetter">Authorization Letter*</label>
+                            <div className='form-file-input-group'>
+                                <input type='file' id="authLetter" onChange={handleAuthorizationLetterChange} />
+                                <button type='button' onClick={() => handleFileUpload(authorizationLetter, "authorization")}>Upload</button>
+                            </div>
+                        </div>
+                    )}
+
+                    {type === 'Company' && (
+                        <div className="form-input-group">
+                            <label htmlFor="registrationCert">Company Registration Certificate*</label>
+                            <div className='form-file-input-group'>
+                                <input type='file' id="registrationCert" onChange={handleAuthorizationLetterChange} />
+                                <button type='button' onClick={() => handleFileUpload(authorizationLetter, "registration")}>Upload</button>
+                            </div>
+                        </div>
+                    )}
 
                     {/* Ranking reference document */}
-                    <div className="form-input-group">
+                    {/* <div className="form-input-group">
                         <label htmlFor="rankingRef">Ranking reference document*</label>
                         <div className='form-file-input-group'>
                             <input type='file' id="rankingRef" onChange={handleRankingReferenceChange} />
                             <button type='button' onClick={() => handleFileUpload(rankingReference, "ranking")}>Upload</button>
                         </div>
-                    </div>
+                    </div> */}
+                    {type === 'College' && (
+                        <div className="form-input-group">
+                            <label htmlFor="rankingRef">Ranking reference document*</label>
+                            <div className='form-file-input-group'>
+                                <input type='file' id="rankingRef" onChange={handleRankingReferenceChange} />
+                                <button type='button' onClick={() => handleFileUpload(rankingReference, "ranking")}>Upload</button>
+                            </div>
+                        </div>
+                    )}
+
+                    {type === 'Company' && (
+                        <div className="form-input-group">
+                            <label htmlFor="panCard">PAN Card*</label>
+                            <div className='form-file-input-group'>
+                                <input type='file' id="panCard" onChange={handleRankingReferenceChange} />
+                                <button type='button' onClick={() => handleFileUpload(rankingReference, "pancard")}>Upload</button>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <hr />
                 

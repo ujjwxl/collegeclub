@@ -273,6 +273,91 @@ app.post("/upload/ranking/:userId", upload.single("filename"), async (req, res) 
         return res.status(400).send(error.message)
     }
 });
+app.post("/upload/pancard/:userId", upload.single("filename"), async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const dateTime = giveCurrentDateTime();
+
+        const storageRef = ref(storage, `files/${req.file.originalname + "       " + dateTime}`);
+
+        const metadata = {
+            contentType: req.file.mimetype,
+        };
+
+        const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
+
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        console.log('PAN card successfully uploaded.');
+
+        const usersCollectionRef = collection(db, "users");
+        const q = query(usersCollectionRef, where("userId", "==", userId));
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach(async (doc) => {
+            const docRef = doc.ref;
+
+            await updateDoc(docRef, { 
+                panCard: downloadURL
+            });
+            
+            console.log('PAN card URL updated successfully');
+        });
+
+        return res.send({
+            message: 'PAN card uploaded to Firebase storage',
+            name: req.file.originalname,
+            type: req.file.mimetype,
+            downloadURL: downloadURL
+        })
+    } catch (error) {
+        return res.status(400).send(error.message)
+    }
+});
+
+app.post("/upload/registration/:userId", upload.single("filename"), async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const dateTime = giveCurrentDateTime();
+
+        const storageRef = ref(storage, `files/${req.file.originalname + "       " + dateTime}`);
+
+        const metadata = {
+            contentType: req.file.mimetype,
+        };
+
+        const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
+
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        console.log('Registration certificate successfully uploaded.');
+
+        const usersCollectionRef = collection(db, "users");
+        const q = query(usersCollectionRef, where("userId", "==", userId));
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach(async (doc) => {
+            const docRef = doc.ref;
+
+            await updateDoc(docRef, { 
+                registrationCertificate: downloadURL
+            });
+            
+            console.log('Registration certificate URL updated successfully');
+        });
+
+        return res.send({
+            message: 'Registration certificate uploaded to Firebase storage',
+            name: req.file.originalname,
+            type: req.file.mimetype,
+            downloadURL: downloadURL
+        })
+    } catch (error) {
+        return res.status(400).send(error.message)
+    }
+});
 
 
 app.post("/upload/images/:userId", upload.array("images", 5), async (req, res) => {

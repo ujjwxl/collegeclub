@@ -10,6 +10,10 @@ import "./College.css";
 
 const College = () => {
   const [collegeData, setCollegeData] = useState(null);
+  const [showAllInstitute, setshowAllInstitute] = useState(false);
+  const [showAllDegree, setshowAllDegree] = useState(false);
+  const [showAllState, setshowAllState] = useState(false);
+
   const [filters, setFilters] = useState({
     instituteType: [],
     degree: [],
@@ -68,29 +72,28 @@ const College = () => {
     navigate(`/college/${collegeId}`);
   };
 
+  const toggleshowAllInstitute = () => {
+    setshowAllInstitute(!showAllInstitute);
+  };
+  const toggleshowAllDegree = () => {
+    setshowAllDegree(!showAllDegree);
+  };
+  const toggleshowAllState = () => {
+    setshowAllState(!showAllState);
+  };
+
   return (
     <>
       <Navbar />
       <img src={backgroundImage} alt="" className="home1-img" />
       <div className="colleges-overlay colleges-container">
         <div className="colleges-display-box">
-          {/* <div className="colleges-display-box-filter">
-            <h3>Filters</h3>
-          </div> */}
-
-          {/* <div className="colleges-display-box-filter">
-            <h3>Filters</h3>
-            <select>
-              <option value="">All Courses</option>
-              <option value="Engineering">Engineering</option>
-              <option value="Science">Science</option>
-            </select>
-          </div> */}
+          
 
           <div className="colleges-display-box-filter">
             <h3>Filters</h3>
             <h4>Institute Type</h4>
-            {["Central", "State", "Deemed", "Private", "Autonomous"].map(
+            {/* {["Central", "State", "Deemed", "Private", "Autonomous"].map(
               (type) => (
                 <label key={type}>
                   <input
@@ -101,42 +104,39 @@ const College = () => {
                   {type} <br />
                 </label>
               )
+            )} */}
+
+            {showAllInstitute
+              ? ["Central", "State", "Deemed", "Private", "Autonomous"].map(
+                  (type) => (
+                    <label key={type}>
+                      <input
+                        type="checkbox"
+                        checked={filters.instituteType.includes(type)}
+                        onChange={() => handleFilterChange("instituteType", type)}
+                      />{" "}
+                      {type} <br />
+                    </label>
+                  )
+                )
+              : ["Central", "State", "Deemed"].map((type) => (
+                  <label key={type}>
+                    <input
+                      type="checkbox"
+                      checked={filters.instituteType.includes(type)}
+                      onChange={() => handleFilterChange("instituteType", type)}
+                    />{" "}
+                    {type} <br />
+                  </label>
+                ))}
+            {/* Show 'Show more' button if there are more options */}
+            {!showAllInstitute && (
+              <a className="showAll" onClick={toggleshowAllInstitute}>Show More...</a>
             )}
-            {/* <label htmlFor="">
-              <input type="checkbox" /> Central/Union
-            </label> <br />
-            <label htmlFor="">
-              <input type="checkbox" /> State
-            </label> <br />
-            <label htmlFor="">
-              <input type="checkbox" /> Deemed
-            </label> <br />
-            <label htmlFor="">
-              <input type="checkbox" /> State
-            </label> <br />
-            <label htmlFor="">
-              <input type="checkbox" /> Autonomous
-            </label> */}
-
-            {/* <h4>Degree</h4>
-            <label htmlFor="">
-              <input type="checkbox" /> Engineering
-            </label> <br />
-            <label htmlFor="">
-              <input type="checkbox" /> Medical
-            </label> <br />
-            <label htmlFor="">
-              <input type="checkbox" /> Management
-            </label> <br />
-            <label htmlFor="">
-              <input type="checkbox" /> Law
-            </label> <br />
-            <label htmlFor="">
-              <input type="checkbox" /> Fashion Technology
-            </label> */}
-
+          
+           
             <h4>Degree</h4>
-            {[
+            {/* {[
               "Engineering",
               "Medical",
               "Management",
@@ -151,16 +151,42 @@ const College = () => {
                 />{" "}
                 {degree} <br />
               </label>
-            ))}
+            ))} */}
+            {showAllDegree
+              ? ["Engineering",
+              "Medical",
+              "Management",
+              "Law",
+              "Fashion Technology",].map(
+                  (degree) => (
+                    <label key={degree}>
+                      <input
+                        type="checkbox"
+                        checked={filters.degree.includes(degree)}
+                        onChange={() => handleFilterChange("degree", degree)}
+                      />{" "}
+                      {degree} <br />
+                    </label>
+                  )
+                )
+              : ["Engineering",
+              "Medical",
+              "Management",].map((degree) => (
+                  <label key={degree}>
+                    <input
+                      type="checkbox"
+                      checked={filters.degree.includes(degree)}
+                      onChange={() => handleFilterChange("degree", degree)}
+                    />{" "}
+                    {degree} <br />
+                  </label>
+                ))}
+            {/* Show 'Show more' button if there are more options */}
+            {!showAllDegree && (
+              <a className="showAll" onClick={toggleshowAllDegree}>Show More...</a>
+            )}
 
-            {/* <h4>Study Mode</h4>
-            <label htmlFor="">
-              <input type="checkbox" /> Regular
-            </label> <br />
-            <label htmlFor="">
-              <input type="checkbox" /> Distance
-            </label> */}
-
+        
             <h4>Study Mode</h4>
             {["Regular", "Distance"].map((mode) => (
               <label key={mode}>
@@ -173,22 +199,43 @@ const College = () => {
               </label>
             ))}
 
-            {/* <h4>State</h4>
-            <label htmlFor="">
-              <input type="checkbox" /> Bihar
-            </label> <br />
-            <label htmlFor="">
-              <input type="checkbox" /> Delhi
-            </label> <br />
-            <label htmlFor="">
-              <input type="checkbox" /> Maharashtra
-            </label> <br />
-            <label htmlFor="">
-              <input type="checkbox" /> Gujarat
-            </label> <br /> */}
+            {/* {showAllMode
+              ? ["Engineering",
+              "Medical",
+              "Management",
+              "Law",
+              "Fashion Technology",].map(
+                  (mode) => (
+                    <label key={mode}>
+                      <input
+                        type="checkbox"
+                        checked={filters.studyMode.includes(mode)}
+                        onChange={() => handleFilterChange("studyMode", mode)}
+                      />{" "}
+                      {mode} <br />
+                    </label>
+                  )
+                )
+              : ["Engineering",
+              "Medical",
+              "Management",].map((mode) => (
+                  <label key={mode}>
+                    <input
+                      type="checkbox"
+                      checked={filters.studyMode.includes(mode)}
+                      onChange={() => handleFilterChange("studyMode", mode)}
+                    />{" "}
+                    {mode} <br />
+                  </label>
+                ))}
+            {!showAllMode && (
+              <a className="showAll" onClick={toggleshowAllMode}>Show More...</a>
+            )} */}
 
+
+          
             <h4>State</h4>
-            {["Bihar", "Delhi", "Maharashtra", "Gujarat"].map((state) => (
+            {/* {["Bihar", "Delhi", "Maharashtra", "Gujarat"].map((state) => (
               <label key={state}>
                 <input
                   type="checkbox"
@@ -197,36 +244,40 @@ const College = () => {
                 />{" "}
                 {state} <br />
               </label>
-            ))}
+            ))} */}
+
+            {showAllState
+              ? ["Bihar", "Delhi", "Maharashtra", "Gujarat",].map(
+                  (state) => (
+                    <label key={state}>
+                      <input
+                        type="checkbox"
+                        checked={filters.state.includes(state)}
+                        onChange={() => handleFilterChange("state", state)}
+                      />{" "}
+                      {state} <br />
+                    </label>
+                  )
+                )
+              : ["Bihar", "Delhi", "Maharashtra"].map((state) => (
+                  <label key={state}>
+                    <input
+                      type="checkbox"
+                      checked={filters.state.includes(state)}
+                      onChange={() => handleFilterChange("state", state)}
+                    />{" "}
+                    {state} <br />
+                  </label>
+                ))}
+            {/* Show 'Show more' button if there are more options */}
+            {!showAllState && (
+              <a className="showAll" onClick={toggleshowAllState}>Show More...</a>
+            )}
           </div>
 
-          {/* <div className="colleges-display-box-list">
-          <div className="colleges-display-box-item">
-            <img src={defaultImage} alt="" />
-            <div className="colleges-display-box-item-details">
-              <h3>Birla Institute of Technology, Mesra</h3>
-              <h3>Birla Institute of Technology, Mesra</h3>
-            </div>
-            <div className="colleges-display-box-item-details-two">
-              <h3>Engineering</h3>
-            </div>
-          </div>
-        </div> */}
+       
 
-          {/* {collegeData && collegeData.map((college, index) => (
-            <div className="colleges-display-box-list" key={index}>
-              <div className="colleges-display-box-item">
-                <img src={defaultImage} alt="" />
-                <div className="colleges-display-box-item-details">
-                  <h3>{college.organizationName}</h3>
-                </div>
-                <div className="colleges-display-box-item-details-two">
-                  <h3>{college.email}</h3>
-                  <h3>{college.contactNumber}</h3>
-                </div>
-              </div>
-            </div>
-          ))} */}
+         
 
           <div className="colleges-display-box-list">
             {collegeData &&

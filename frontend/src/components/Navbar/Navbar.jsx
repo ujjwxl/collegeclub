@@ -7,7 +7,7 @@ import compare from '../../assets/compare.png'
 import menu from '../../assets/navbar-menu.png'
 
 import './Navbar.css'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 const Navbar = () => {
 
@@ -47,7 +47,7 @@ const Navbar = () => {
         <h2>COLLEGE<br /><span>CLUB</span></h2>
       </div>
       <img src={menu} alt='menu' className='navbar-menu-icon' onClick={handleToggleMenu} />
-
+      
       {isMenuOpen && (
         <div className='mobile-menu'>
           <div className='navbar-links-mobile'>

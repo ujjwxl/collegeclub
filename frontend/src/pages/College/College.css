@@ -89,6 +89,14 @@
     /* background-color: green; */
 }
 
+.showAll{
+    color: rgb(1, 0, 30);
+    font-size: 13px;
+    margin-left: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+}
 @media only screen and (max-width: 768px) {
     
 }
