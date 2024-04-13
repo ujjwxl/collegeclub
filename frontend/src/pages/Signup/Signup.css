@@ -30,6 +30,62 @@
     border-radius: 20px;
 }
 
+.signup-otp-form {
+    display: flex;
+    background-color: #270652;
+    height: 85%;
+    margin: 80px auto 0 auto;
+    width: 95%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.signup-otp-form-left {
+    width: 50%;
+    text-align: left;
+}
+
+.signup-otp-form-left-contents {
+    /* background-color: red; */
+    margin: 5% 0 0 5%;
+}
+
+.phone-input-top {
+    margin-left: 0;
+}
+
+.signup-otp-form-left input {
+    width: 60%;
+    padding: 0.6rem 0.75rem;
+    height: 25px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #270652;
+    border-color: rgba(255, 255, 255, .1);
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    display: block;
+    font-family: "Comfortaa", sans-serif;
+}
+
+.signup-otp-form-left button {
+    background-image: linear-gradient(to right, #eb3349 0, #f45c43 51%, #eb3349 100%);
+    text-align: center;
+    margin: 10px 0;
+    color: #fff;
+    width: 20%;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: "Comfortaa", sans-serif;
+}
+
+.signup-otp-form-right {
+    width: 50%;
+}
+
 .signup-form h2 {
     text-align: left;
     font-size: 1.4rem;
@@ -139,9 +195,12 @@
 .PhoneInput {
     width: 60%;
     padding: 0.6rem 0.75rem;
-    margin-left: 15%;
     border: 1px solid #ced4da;
     border-radius: 8px;
+}
+
+.phone-input-bottom {
+    margin-left: 15%;
 }
 
 @media only screen and (max-width: 768px) {
