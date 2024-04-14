@@ -8,6 +8,7 @@
     padding: 0 50px;
     border-radius: 20px;
     overflow-y: scroll;
+    padding-bottom: 8px;
 }
 
 .profile-form h2 {

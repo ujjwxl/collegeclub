@@ -40,10 +40,11 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <div className="navbar-logo">
+      <Link to="/"><div className="navbar-logo">
         <img src={collegeClubLogo} alt="" className='navbar-brand-logo' />
         <h2>COLLEGE<br /><span>CLUB</span></h2>
       </div>
+      </Link>
       <img src={menu} alt='menu' className='navbar-menu-icon' onClick={handleToggleMenu} />
       
       {isMenuOpen && (
@@ -111,7 +112,7 @@ const Navbar = () => {
             <img src={compare} alt='' className='navbar-bell' />
             <img src={notification} alt='' className='navbar-bell' />
             <img src={signout} alt='' className='navbar-bell' />
-            <Link to=''><img src={userData && userData.profilePicture} alt="" className='navbar-profile-picture' /></Link>
+            <Link to='/dashboard'><img src={userData && userData.profilePicture} alt="" className='navbar-profile-picture' /></Link>
           </>
         ) : (
           <>
