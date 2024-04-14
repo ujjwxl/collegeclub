@@ -233,7 +233,7 @@ const UploadsFormComponent = () => {
                 <div className="form-input-flex-two">
                     {/* Logo in Square */}
                     <div className="form-input-group">
-                        <label htmlFor="logo">Logo in Square*</label>
+                        <label htmlFor="logo">Profile picture in Square*</label>
                         <div className='form-file-input-group'>
                             <input type='file' id="logo" onChange={handleFileChange} />
                             <button type='button' onClick={() => handleFileUpload(selectedFile, "profile")}>Upload</button>
@@ -241,13 +241,13 @@ const UploadsFormComponent = () => {
                     </div>
 
                     {/* Banner 16:9 */}
-                    <div className="form-input-group">
+                    {/* <div className="form-input-group">
                         <label htmlFor="banner">Banner 16:9*</label>
                         <div className='form-file-input-group'>
                             <input type='file' id="banner" onChange={handleBannerImageChange} />
                             <button type='button' onClick={() => handleFileUpload(bannerImage, "banner")}>Upload</button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <hr />
 
@@ -280,6 +280,16 @@ const UploadsFormComponent = () => {
                         </div>
                     )}
 
+                    {type === 'CC-Ambassador' && (
+                        <div className="form-input-group">
+                            <label htmlFor="registrationCert">Address Proof*</label>
+                            <div className='form-file-input-group'>
+                                <input type='file' id="registrationCert" onChange={handleAuthorizationLetterChange} />
+                                <button type='button' onClick={() => handleFileUpload(authorizationLetter, "address")}>Upload</button>
+                            </div>
+                        </div>
+                    )}
+
                     {/* Ranking reference document */}
                     {/* <div className="form-input-group">
                         <label htmlFor="rankingRef">Ranking reference document*</label>
@@ -307,9 +317,19 @@ const UploadsFormComponent = () => {
                             </div>
                         </div>
                     )}
+
+                    {type === 'CC-Ambassador' && (
+                        <div className="form-input-group">
+                            <label htmlFor="panCard">PAN Card*</label>
+                            <div className='form-file-input-group'>
+                                <input type='file' id="panCard" onChange={handleRankingReferenceChange} />
+                                <button type='button' onClick={() => handleFileUpload(rankingReference, "pancard")}>Upload</button>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <hr />
-                
+
                 {/* Upload images */}
                 <div className="form-input-group">
                     <label htmlFor="gallery">Select upto 5 JPEG/JPG images*</label>
