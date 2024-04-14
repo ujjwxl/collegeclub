@@ -15,9 +15,20 @@ function SlotBooking() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState('');
 
+  const currentHour = new Date().getHours();
+  const currentDate = new Date().getDate();
+  const selectedDay = selectedDate ? selectedDate.getDate() : currentDate;
+
   const slotOptions = [];
-  for (let hour = 9; hour <= 19; hour++) {
-    slotOptions.push(`${hour}:00 - ${hour + 1}:00`);
+
+  if (selectedDate && selectedDay === currentDate) {
+    for (let hour = currentHour + 1; hour <= 19; hour++) {
+      slotOptions.push(`${hour}:00 - ${hour + 1}:00`);
+    }
+  } else {
+    for (let hour = 9; hour <= 19; hour++){
+      slotOptions.push(`${hour}:00 - ${hour + 1}:00`);
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -81,6 +92,7 @@ function SlotBooking() {
               <div className="form-input-group form-group">
                 <label>Query Type:</label>
                 <select
+                  className="slot-booking-select"
                   value={queryType}
                   onChange={(e) => setQueryType(e.target.value)}
                   required
@@ -105,6 +117,7 @@ function SlotBooking() {
               <div className="form-input-group form-group">
                 <label>Select Slot:</label>
                 <select
+                  className="slot-booking-select"
                   value={selectedSlot}
                   onChange={(e) => setSelectedSlot(e.target.value)}
                   required

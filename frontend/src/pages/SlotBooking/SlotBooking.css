@@ -58,6 +58,11 @@
     margin-top: 5px;
 }
 
+.form-group .slot-booking-select {
+  width: 105%;
+  height: 40px;
+}
+
 .slot-booking-page-right {
   width: 50%;
 }
