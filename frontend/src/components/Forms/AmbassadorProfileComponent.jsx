@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
-
+import './ProfileFormComponent.css'
 
 const AmbassadorProfileComponent = () => {
 
@@ -11,7 +11,7 @@ const AmbassadorProfileComponent = () => {
     const [dob, setDob] = useState('');
     const [contactNumber, setContactNumber] = useState('');
     const [email, setEmail] = useState('');
-    
+
     const [fullAddress, setFullAddress] = useState('');
     const [pinCode, setPinCode] = useState('');
     const [country, setCountry] = useState('');
@@ -27,8 +27,8 @@ const AmbassadorProfileComponent = () => {
     const [collegeCountry, setCollegeCountry] = useState('');
     const [collegeState, setCollegeState] = useState('');
     const [collegeDistrict, setCollegeDistrict] = useState('');
-    
 
+    const [whyJoinUs, setWhyJoinUs] = useState('');
 
     const userId = sessionStorage.getItem('id');
 
@@ -36,40 +36,41 @@ const AmbassadorProfileComponent = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
-          await axios.post(`http://localhost:5000/auth/ambassadorprofileform/${userId}`, {
-            name,
-            gender,
-            dob,
-            contactNumber,
-            email,
-            fullAddress,
-            pinCode,
-            country,
-            state,
-            district,
-            collegeName,
-            collegePincode,
-            collegeCountry,
-            collegeState,
-            collegeDistrict,
-          })
-            .then(res => {
-              if (res.status == 200) {
-                alert("Profile form sent successfully!")
-                navigate('/form/details')
-              }
+            await axios.post(`http://localhost:5000/auth/ambassadorprofileform/${userId}`, {
+                name,
+                gender,
+                dob,
+                contactNumber,
+                email,
+                fullAddress,
+                pinCode,
+                country,
+                state,
+                district,
+                collegeName,
+                collegePincode,
+                collegeCountry,
+                collegeState,
+                collegeDistrict,
+                whyJoinUs
             })
-            .catch(e => {
-              alert("Please fill all the required fields!")
-              console.log(e);
-            })
+                .then(res => {
+                    if (res.status == 200) {
+                        alert("Profile form sent successfully!")
+                        navigate('/form/details')
+                    }
+                })
+                .catch(e => {
+                    alert("Please fill all the required fields!")
+                    console.log(e);
+                })
         }
         catch (e) {
-          console.log(e);
+            console.log(e);
         }
-      }
+    }
 
 
     return (
@@ -89,7 +90,21 @@ const AmbassadorProfileComponent = () => {
 
                     <div className="form-input-group">
                         <label htmlFor="collegename">Gender*</label>
-                        <input type="text" placeholder='Enter your gender' onChange={(e) => setGender(e.target.value)} required />
+                        {/* <input type="text" placeholder='Enter your gender' onChange={(e) => setGender(e.target.value)} required /> */}
+
+
+                        <select
+                            className='ambassador-form-gender-select'
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}
+                        >
+                            <option value="">Select gender</option>
+                            {['Male', 'Female', 'Others'].map((type, index) => (
+                                <option key={index} value={type}>
+                                    {type}
+                                </option>
+                            ))}
+                        </select>
                     </div>
 
                     <div className="form-input-group">
@@ -182,7 +197,17 @@ const AmbassadorProfileComponent = () => {
                     </div>
                 </div>
 
-                <hr/>
+                <hr />
+
+                <h3>Why join us?</h3>
+                <textarea
+                    onChange={(e) => setWhyJoinUs(e.target.value)}
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="10"
+                ></textarea>
+                <hr />
 
                 {/* alternate contact info starts here */}
                 {/* <h3>Alt. Contact Info</h3>
