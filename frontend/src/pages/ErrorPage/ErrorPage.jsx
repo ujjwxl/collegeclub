@@ -6,6 +6,9 @@ import ErrorGif from "../../assets/error-gif.gif";
 function ErrorPage() {
   return (
     <div className="error-page">
+    <div className="err-right">
+        <img src={ErrorGif} alt="Error GIF"></img>
+      </div>
       <div className="err-left">
         <h3>Uh No!!</h3>
         
@@ -14,9 +17,7 @@ function ErrorPage() {
         <h2>Page not found</h2>
         <Link to="/"><button>Go to HomePage</button></Link>
       </div>
-      <div className="err-right">
-        <img src={ErrorGif} alt="Error GIF"></img>
-      </div>
+      
     </div>
   );
 }
