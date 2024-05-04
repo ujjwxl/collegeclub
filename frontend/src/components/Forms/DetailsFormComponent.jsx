@@ -6,6 +6,7 @@ import "./DetailsFormComponent.css";
 const DetailsFormComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCourses, setSelectedCourses] = useState([]);
+  const [selectedFacilities, setSelectedFacilities] = useState([]);
   const courses = [
     "Engineering",
     "Medical",
@@ -100,6 +101,7 @@ const DetailsFormComponent = () => {
       await axios
         .post(`http://localhost:5000/auth/detailsform/${userId}`, {
           selectedCourses,
+          selectedFacilities,
           aboutCollege,
           admissionProcess,
           courses: coursesData,
@@ -123,6 +125,13 @@ const DetailsFormComponent = () => {
         });
     } catch (e) {
       console.log(e);
+    }
+  };
+  const handleFacilityChange = (facility) => {
+    if (selectedFacilities.includes(facility)) {
+      setSelectedFacilities(selectedFacilities.filter((f) => f !== facility));
+    } else {
+      setSelectedFacilities([...selectedFacilities, facility]);
     }
   };
 
@@ -433,6 +442,82 @@ const DetailsFormComponent = () => {
         >
           ADD
         </button>
+        <hr />
+        <h3>Facilities</h3>
+        <div className="facilities-checkboxes">
+          <label>
+            <input
+              type="checkbox"
+              value="Hostel"
+              onChange={() => handleFacilityChange("Hostel")}
+            />
+            Hostel
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value="Cafeteria"
+              onChange={() => handleFacilityChange("Cafeteria")}
+            />
+            Cafeteria
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value="Library"
+              onChange={() => handleFacilityChange("Library")}
+            />
+            Library
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value="Transport"
+              onChange={() => handleFacilityChange("Transport")}
+            />
+            Transport
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value="Banking"
+              onChange={() => handleFacilityChange("Banking")}
+            />
+            Banking
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value="Gymnasium"
+              onChange={() => handleFacilityChange("Gymnasium")}
+            />
+            Gymnasium
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value="Security"
+              onChange={() => handleFacilityChange("Security")}
+            />
+            Security
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value="WiFi"
+              onChange={() => handleFacilityChange("WiFi")}
+            />
+            Wi-Fi
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value="Medical"
+              onChange={() => handleFacilityChange("Medical")}
+            />
+            Medical
+          </label>
+        </div>
         <hr />
 
         <h3>Other Details</h3>

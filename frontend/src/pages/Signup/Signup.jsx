@@ -38,6 +38,8 @@ const Signup = () => {
     }
   }
 
+  
+
   const verifyOTP = async () => {
     try {
       const data = await user.confirm(otp);
@@ -201,7 +203,9 @@ const Signup = () => {
                 placeholder="Enter phone number"
                 defaultCountry="IN"
                 value={contactNumber}
+                maxLength={11}
                 onChange={setContactNumber}
+
               />
 
               <button onClick={sendOTP}>Send OTP</button> <br />

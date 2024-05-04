@@ -116,7 +116,12 @@ textarea {
   height: 35px;
   margin-right: 40px;
 }
-
+.facilities-checkboxes{
+  margin-bottom: 20px;
+}
+.facilities-checkboxes label{
+  margin-left: 10px;
+}
 @media only screen and (max-width: 768px) {
 
   .details-form {

@@ -67,14 +67,14 @@
 }
 
 .college-details-page-gallery h3 {
-  margin-left: 0px;
+  margin-left: 20px;
 }
 .college-details-page-gallery img {
-  width: 400px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   margin-left: 20px;
   margin-bottom: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .modal {
@@ -149,4 +149,42 @@
     width: 320px;
     height: 240px;
   }
+}
+
+
+.table-container {
+  overflow-x: auto;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+
+.college-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.college-table th,
+.college-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.college-table th {
+  background-color: #4527BF;
+  text-align: left;
+}
+.facilities-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.facility-item {
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.facility-item span {
+  display: block;
+  margin-bottom: 5px;
 }

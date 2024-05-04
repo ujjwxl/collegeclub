@@ -408,6 +408,7 @@ export const completeDetailsForm = async (req, res) => {
 
   const {
     selectedCourses,
+    selectedFacilities,
     aboutCollege,
     admissionProcess,
     courses,
@@ -435,6 +436,7 @@ export const completeDetailsForm = async (req, res) => {
 
       await updateDoc(docRef, {
         selectedCourses,
+        selectedFacilities,
         aboutCollege,
         admissionProcess,
         courses,
