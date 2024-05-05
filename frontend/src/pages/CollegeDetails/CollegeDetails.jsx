@@ -13,11 +13,11 @@ import Hostel from "../../assets/hostel.png";
 import Security from "../../assets/security.png";
 import Cafeteria from "../../assets/cafeteria.png";
 import Library from "../../assets/library.png";
-import Transport from  "../../assets/transport.png"
-import Banking from  "../../assets/banking.png"
-import Gymnasium from  "../../assets/gymnasium.png"
-import wifi from  "../../assets/wi-fi.png"
-import Medical from  "../../assets/medical.png";
+import Transport from "../../assets/transport.png"
+import Banking from "../../assets/banking.png"
+import Gymnasium from "../../assets/gymnasium.png"
+import wifi from "../../assets/wi-fi.png"
+import Medical from "../../assets/medical.png";
 import "./CollegeDetails.css";
 
 const CollegeDetails = () => {
@@ -102,11 +102,11 @@ const CollegeDetails = () => {
             <div className="college-page-navigation-bar-content">
               <a href="#about-college">About</a>
               <a href="#admission-process">Admission</a>
-              <a>Courses</a>
-              <a>Departments</a>
-              <a>Ranking</a>
-              <a>News</a>
-              <a>Gallery</a>
+              <a href="#college-courses">Courses</a>
+              <a href="#college-departments">Departments</a>
+              <a href="#college-ranking">Ranking</a>
+              <a href="#college-news">News</a>
+              <a href="#college-gallery">Gallery</a>
             </div>
           </div>
 
@@ -144,35 +144,38 @@ const CollegeDetails = () => {
                 <h5>Distance: {course.distance}</h5>
               </div>
             ))} */}
-          <h3>Courses</h3>
-          {collegeData && collegeData.courses.length > 0 ? (
-            <div className="table-container">
-              <table className="college-table">
-                <thead>
-                  <tr>
-                    <th>Course Name</th>
-                    <th>Duration</th>
-                    <th>Minimum Qualification</th>
-                    <th>Fee</th>
-                    <th>Distance</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {collegeData.courses.map((course, index) => (
-                    <tr key={index}>
-                      <td>{course.courseName}</td>
-                      <td>{course.duration} years</td>
-                      <td>{course.minQualification}</td>
-                      <td>{course.fee}</td>
-                      <td>{course.distance}</td>
+
+          <div id="college-courses">
+            <h3>Courses</h3>
+            {collegeData && collegeData.courses.length > 0 ? (
+              <div className="table-container">
+                <table className="college-table">
+                  <thead>
+                    <tr>
+                      <th>Course Name</th>
+                      <th>Duration</th>
+                      <th>Minimum Qualification</th>
+                      <th>Fee</th>
+                      <th>Distance</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <p>No courses available</p>
-          )}
+                  </thead>
+                  <tbody>
+                    {collegeData.courses.map((course, index) => (
+                      <tr key={index}>
+                        <td>{course.courseName}</td>
+                        <td>{course.duration} years</td>
+                        <td>{course.minQualification}</td>
+                        <td>{course.fee}</td>
+                        <td>{course.distance}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <p>No courses available</p>
+            )}
+          </div>
 
           <hr />
 
@@ -186,31 +189,33 @@ const CollegeDetails = () => {
               </div>
             ))} */}
 
-          <h3>Departments</h3>
-          {collegeData && collegeData.departments.length > 0 ? (
-            <div className="table-container">
-              <table className="college-table">
-                <thead>
-                  <tr>
-                    <th>Department Name</th>
-                    <th>Description</th>
-                    <th>Placement Percentage</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {collegeData.departments.map((department, index) => (
-                    <tr key={index}>
-                      <td>{department.departmentName}</td>
-                      <td>{department.description}</td>
-                      <td>{department.placementPercentage}</td>
+          <div id="college-departments">
+            <h3>Departments</h3>
+            {collegeData && collegeData.departments.length > 0 ? (
+              <div className="table-container">
+                <table className="college-table">
+                  <thead>
+                    <tr>
+                      <th>Department Name</th>
+                      <th>Description</th>
+                      <th>Placement Percentage</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <p>No departments available</p>
-          )}
+                  </thead>
+                  <tbody>
+                    {collegeData.departments.map((department, index) => (
+                      <tr key={index}>
+                        <td>{department.departmentName}</td>
+                        <td>{department.description}</td>
+                        <td>{department.placementPercentage}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <p>No departments available</p>
+            )}
+          </div>
 
           <hr />
 
@@ -223,31 +228,34 @@ const CollegeDetails = () => {
                 <h5>Year: {ranking.year}</h5>
               </div>
             ))} */}
-          <h3>Rankings</h3>
-          {collegeData && collegeData.rankings.length > 0 ? (
-            <div className="table-container">
-              <table className="college-table">
-                <thead>
-                  <tr>
-                    <th>Agency</th>
-                    <th>Rank</th>
-                    <th>Year</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {collegeData.rankings.map((ranking, index) => (
-                    <tr key={index}>
-                      <td>{ranking.agencyName}</td>
-                      <td>{ranking.rank}</td>
-                      <td>{ranking.year}</td>
+
+          <div id="college-ranking">
+            <h3>Rankings</h3>
+            {collegeData && collegeData.rankings.length > 0 ? (
+              <div className="table-container">
+                <table className="college-table">
+                  <thead>
+                    <tr>
+                      <th>Agency</th>
+                      <th>Rank</th>
+                      <th>Year</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <p>No rankings available</p>
-          )}
+                  </thead>
+                  <tbody>
+                    {collegeData.rankings.map((ranking, index) => (
+                      <tr key={index}>
+                        <td>{ranking.agencyName}</td>
+                        <td>{ranking.rank}</td>
+                        <td>{ranking.year}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <p>No rankings available</p>
+            )}
+          </div>
 
           <hr />
 
@@ -266,33 +274,36 @@ const CollegeDetails = () => {
                 </a>
               </div>
             ))} */}
-          <h3>News</h3>
-          {collegeData && collegeData.news.length > 0 ? (
-            <div className="table-container">
-              <table className="college-table">
-                <thead>
-                  <tr>
-                    <th>Agency</th>
-                    <th>Link</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {collegeData.news.map((news, index) => (
-                    <tr key={index}>
-                      <td>{news.newsTitle}</td>
-                      <td>
-                        <a href={news.refLink} target="_blank">
-                          Link
-                        </a>
-                      </td>
+
+          <div id="college-news">
+            <h3>News</h3>
+            {collegeData && collegeData.news.length > 0 ? (
+              <div className="table-container">
+                <table className="college-table">
+                  <thead>
+                    <tr>
+                      <th>Agency</th>
+                      <th>Link</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <p>No news available</p>
-          )}
+                  </thead>
+                  <tbody>
+                    {collegeData.news.map((news, index) => (
+                      <tr key={index}>
+                        <td>{news.newsTitle}</td>
+                        <td>
+                          <a href={news.refLink} target="_blank">
+                            Link
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <p>No news available</p>
+            )}
+          </div>
 
           <hr />
 
@@ -315,7 +326,7 @@ const CollegeDetails = () => {
           </div>
           <hr />
 
-          <div className="college-details-page-gallery">
+          <div id="college-gallery" className="college-details-page-gallery">
             <h3>Gallery</h3>
             {collegeData &&
               collegeData.galleryImages.map((image, index) => (

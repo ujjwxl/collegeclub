@@ -1,5 +1,6 @@
 import React from 'react'
 import homeOneImage from '../../assets/home-1.jpg'
+import collegeClubLogo from '../../assets/collegeclub-logo.png'
 import './CollegePartner.css'
 
 const CollegePartner = () => {
@@ -15,6 +16,8 @@ const CollegePartner = () => {
                         <circle cx="200" cy="200" r="150" fill="none" stroke="black" strokeWidth="2" />
                         {/* Inner circle */}
                         <circle cx="200" cy="200" r="60" fill="none" stroke="black" strokeWidth="2" />
+
+                        <image href={collegeClubLogo} x="175" y="175" width="50" height="50" />
 
                         {/* Logos in outer circle */}
                         <g transform="rotate(-45 200 200)">
