@@ -11,19 +11,19 @@ const Terms = () => {
             <img src={backgroundImage} alt="" className='home1-img' />
             <div className='terms-overlay dashboard-container'>
                 <div className="terms-page-contents">
-                    <h1>Terms & Conditions</h1>
+                    <h2>Terms & Conditions</h2>
                     <hr />
 
-                    <h2>General Product Policy</h2>
+                    <h3>General Product Policy</h3>
                     <h3>COLLEGECLUB.IO</h3>
                     <p>January 1, 2024.</p>
                     <hr />
 
-                    <h2>Acceptance of Terms</h2>
+                    <h3>Acceptance of Terms</h3>
                     <p>By accessing or using the collegeclub.io platform ("CollegeClub"), you agree to comply with and be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must not use the Platform.</p>
                     <hr />
 
-                    <h2>User Accounts</h2>
+                    <h3>User Accounts</h3>
                     <ol>
                         <li>
                             <h3>Student Accounts:</h3>
@@ -44,7 +44,7 @@ const Terms = () => {
                     </ol>
                     <hr />
 
-                    <h2>Content</h2>
+                    <h3>Content</h3>
                     <ol>
                         <li>
                             <h3>User-Generated Content:</h3>
@@ -57,7 +57,7 @@ const Terms = () => {
                     </ol>
                     <hr />
 
-                    <h2>Privacy</h2>
+                    <h3>Privacy</h3>
                     <ol>
                         <li>
                             <h3>Data Collection:</h3>
@@ -70,7 +70,7 @@ const Terms = () => {
                     </ol>
                     <hr />
 
-                    <h2>CC-Ambassador Partnerships</h2>
+                    <h3>CC-Ambassador Partnerships</h3>
                     <ol>
                         <li>
                             <h3>CC-Ambassador Agreement:</h3>
@@ -83,7 +83,7 @@ const Terms = () => {
                     </ol>
                     <hr />
 
-                    <h2>Onboarding Fees</h2>
+                    <h3>Onboarding Fees</h3>
                     <ol>
                         <li>
                             <h3>One-Time Fee:</h3>
@@ -107,7 +107,7 @@ const Terms = () => {
                     </ol>
                     <hr />
 
-                    <h2>Termination</h2>
+                    <h3>Termination</h3>
                     <ol>
                         <li>
                             <h3>Voluntary Termination:</h3>
@@ -119,8 +119,8 @@ const Terms = () => {
                         </li>
                     </ol>
                     <hr />
-                    
-                    <h2>Modifications</h2>
+
+                    <h3>Modifications</h3>
                     <p>CollegeClub may update or modify these terms at any time. Users will be notified of any changes, and continued use of the Platform constitutes acceptance of the modified terms.</p>
                 </div>
             </div>

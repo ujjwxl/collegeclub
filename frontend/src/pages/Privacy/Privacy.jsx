@@ -11,12 +11,12 @@ const Privacy = () => {
             <img src={backgroundImage} alt="" className='home1-img' />
             <div className='privacy-overlay dashboard-container'>
                 <div className="privacy-page-contents">
-                    <h1>Privacy Policy</h1>
+                    <h2>Privacy Policy</h2>
                     <hr />
-                    <h2>Introduction</h2>
+                    <h3>Introduction</h3>
                     <p>Welcome to collegeclub.io. The website "collegeclub.io" is owned by Collegeclub Technologies Pvt. Ltd. ("CollegeClub"). This Privacy Policy explains how we collect, use, disclose, and protect your personal information. By using our Platform, you agree to the terms outlined in this policy.</p>
 
-                    <h2>Information We Collect</h2>
+                    <h3>Information We Collect</h3>
                     <h3>a. User-Provided Information</h3>
                     <p><strong>Student Accounts:</strong> Information provided during account creation, such as name, email address, educational details, and academic interests.</p>
                     <p><strong>College/University Accounts:</strong> Information provided during account creation, including institution details, contact information, and authorized personnel details.</p>
@@ -28,38 +28,38 @@ const Privacy = () => {
                     <p><strong>Cookies:</strong> We use cookies to enhance user experience. Users can control cookie preferences through their browser settings.</p>
                     <hr />
 
-                    <h2>How We Use Your Information</h2>
+                    <h3>How We Use Your Information</h3>
                     <p><strong>Providing Services:</strong> To facilitate communication and collaboration between students, colleges/universities, companies, and CC-Ambassador partners.</p>
                     <p><strong>Improving Services:</strong> To analyze user behavior and feedback for the enhancement of our services.</p>
                     <p><strong>Communication:</strong> To send updates, newsletters, and relevant information.</p>
                     <hr />
 
-                    <h2>Information Sharing</h2>
+                    <h3>Information Sharing</h3>
                     <p><strong>With Your Consent:</strong> We may share your information with third parties if you provide explicit consent.</p>
                     <p><strong>CC-Ambassador Collaboration:</strong> CC-Ambassador partner information may be shared with other stakeholders on the Platform for collaborative opportunities.</p>
                     <hr />
 
-                    <h2>Data Security</h2>
+                    <h3>Data Security</h3>
                     <p>We implement industry-standard security measures to protect your information. However, no method of transmission or storage is entirely secure, and we cannot guarantee absolute security.</p>
                     <hr />
 
-                    <h2>Your Choices</h2>
+                    <h3>Your Choices</h3>
                     <p>You can control the information you provide and update your preferences. You may also opt-out of promotional communications.</p>
                     <hr />
 
-                    <h2>Accessing and Updating Your Information</h2>
+                    <h3>Accessing and Updating Your Information</h3>
                     <p>You can access and update your account information through the Platform. For additional assistance, contact <a href="mailto:support@collegeclub.io">support@collegeclub.io</a>.</p>
                     <hr />
 
-                    <h2>Children's Privacy</h2>
+                    <h3>Children's Privacy</h3>
                     <p>CollegeClub is not intended for individuals under the age of 13. We do not knowingly collect personal information from children.</p>
                     <hr />
 
-                    <h2>Changes to this Privacy Policy</h2>
+                    <h3>Changes to this Privacy Policy</h3>
                     <p>We reserve the right to update this Privacy Policy. We will notify users of any material changes through the Platform or other means.</p>
                     <hr />
                     
-                    <h2>Contact Us</h2>
+                    <h3>Contact Us</h3>
                     <p>If you have questions or concerns about this Privacy Policy, contact us at <a href="mailto:support@collegeclub.io">support@collegeclub.io</a>.</p>
                 </div>
             </div>

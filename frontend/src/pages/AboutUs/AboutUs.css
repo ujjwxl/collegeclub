@@ -18,8 +18,8 @@
 }
 
 .centered-box {
-    overflow-y:auto ;
-  max-width: 60%; 
+  overflow-y: auto;
+  width: 60%;
   padding: 20px;
   text-align: left;
   background-color: #240655;
@@ -29,14 +29,14 @@
   word-spacing: 2px;
   box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
 }
-.centered-box h2{
-    margin: 0;
+.centered-box h2 {
+  margin: 0;
 }
-.centered-box p{
-    color: #bdbdbd;
-    font-size: 16px;
+.centered-box p {
+  color: #bdbdbd;
+  font-size: 16px;
 }
-.centered-box::-webkit-scrollbar {
+/* .centered-box::-webkit-scrollbar {
     width: 10px; 
   }
   
@@ -51,4 +51,4 @@
   
   .centered-box::-webkit-scrollbar-thumb:hover {
     background: #555; 
-  }
+  } */

@@ -15,6 +15,9 @@ import SlotBooking from './pages/SlotBooking/SlotBooking';
 import AboutUs from './pages/AboutUs/AboutUs';
 import Career from './pages/Career/Career';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
+import Mission from './pages/Mission/Mission';
+import Privacy from './pages/Privacy/Privacy';
+import Terms from './pages/Terms/Terms';
 
 function App() {
   
@@ -34,8 +37,11 @@ function App() {
         <Route path='/form/uploads' element={<UploadsForm/>}/>
         <Route path='/college/:collegeId' element={<CollegeDetails/>}/>
         <Route path='/slot' element={<SlotBooking/>}/>
-        <Route path='/about-us' element={<AboutUs/>}/>
+        <Route path='/about' element={<AboutUs/>}/>
+        <Route path='/mission' element={<Mission/>}/>
         <Route path='/career' element={<Career/>}/>
+        <Route path='/privacy' element={<Privacy/>}/>
+        <Route path='/terms' element={<Terms/>}/>
         <Route path="/*" element={<ErrorPage />} />
         </Routes>
       </Router>

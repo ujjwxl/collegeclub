@@ -19,7 +19,7 @@
 
 .career-box {
   overflow-y: auto;
-  max-width: 60%;
+  width: 60%;
   padding: 20px;
   text-align: left;
   background-color: #240655;
@@ -50,7 +50,7 @@
   color: #bdbdbd;
   font-size: 16px;
 }
-.career-box::-webkit-scrollbar {
+/* .career-box::-webkit-scrollbar {
   width: 10px;
 }
 
@@ -65,7 +65,7 @@
 
 .career-box::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
+} */
 
 .accordion{
     overflow-x: hidden;
