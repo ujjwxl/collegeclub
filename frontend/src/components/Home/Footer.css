@@ -18,6 +18,11 @@
   margin-left: 15%;
 }
 
+.footer-column a {
+  text-decoration: none;
+  color: white;
+}
+
 .footer-column h4 {
   margin-bottom: 10px;
 }
