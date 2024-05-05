@@ -8,7 +8,7 @@
     width: 100%;
     /* height: 101%; */
     height: calc(101% - 50px);
-    background-color: rgba(36, 6, 85, 0.7);
+    background-color: rgba(36, 6, 85, 0.5);
     color: white;
     box-sizing: border-box;
     font-family: "Comfortaa", sans-serif;
@@ -19,6 +19,19 @@
     background-color: #240655;
     width: 90%;
     margin: 2% auto 2% auto;
+}
+
+.colleges-display-box h3{
+    margin-left: 10px;
+}
+.colleges-display-box h4{
+    margin-left: 15px;
+}
+.colleges-display-box label{
+    margin-left: 20px;
+}
+.colleges-display-box a{
+    margin-left: 20px;
 }
 
 .colleges-display-box-filter {

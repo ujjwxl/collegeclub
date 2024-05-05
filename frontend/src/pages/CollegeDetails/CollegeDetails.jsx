@@ -58,8 +58,8 @@ const CollegeDetails = () => {
     Gymnasium: Gymnasium,
     WiFi: wifi,
     Medical: Medical,
-    // Add more facilities and their corresponding image URLs as needed
   };
+  
 
   return (
     <div>
@@ -106,6 +106,7 @@ const CollegeDetails = () => {
               <a href="#college-departments">Departments</a>
               <a href="#college-ranking">Ranking</a>
               <a href="#college-news">News</a>
+              <a href="#facilities">Facilities</a>
               <a href="#college-gallery">Gallery</a>
             </div>
           </div>

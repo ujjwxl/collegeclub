@@ -12,6 +12,8 @@ import DetailsForm from './pages/Forms/DetailsForm';
 import UploadsForm from './pages/Forms/UploadsForm';
 import CollegeDetails from './pages/CollegeDetails/CollegeDetails';
 import SlotBooking from './pages/SlotBooking/SlotBooking';
+import AboutUs from './pages/AboutUs/AboutUs';
+import Career from './pages/Career/Career';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
         <Route path='/form/uploads' element={<UploadsForm/>}/>
         <Route path='/college/:collegeId' element={<CollegeDetails/>}/>
         <Route path='/slot' element={<SlotBooking/>}/>
+        <Route path='/about-us' element={<AboutUs/>}/>
+        <Route path='/career' element={<Career/>}/>
         <Route path="/*" element={<ErrorPage />} />
         </Routes>
       </Router>

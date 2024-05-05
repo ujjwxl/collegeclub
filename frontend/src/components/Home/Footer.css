@@ -17,6 +17,10 @@
   margin-bottom: 20px;
   margin-left: 15%;
 }
+.footer-column a{
+  text-decoration: none;
+  color: aliceblue;
+}
 
 .footer-column a {
   text-decoration: none;

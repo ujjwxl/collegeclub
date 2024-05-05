@@ -1,0 +1,54 @@
+.aboutUs {
+  padding-top: 50px;
+}
+
+.aboutUs-overlay {
+  display: flex;
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  width: 100%;
+  /* height: 101%; */
+  height: calc(107.5% - 50px);
+  background-color: rgba(36, 6, 85, 0.5);
+  color: white;
+  box-sizing: border-box;
+  justify-content: center;
+  font-family: "Comfortaa", sans-serif;
+}
+
+.centered-box {
+    overflow-y:auto ;
+  max-width: 60%; 
+  padding: 20px;
+  text-align: left;
+  background-color: #240655;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  word-spacing: 2px;
+  box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
+}
+.centered-box h2{
+    margin: 0;
+}
+.centered-box p{
+    color: #bdbdbd;
+    font-size: 16px;
+}
+.centered-box::-webkit-scrollbar {
+    width: 10px; 
+  }
+  
+  .centered-box::-webkit-scrollbar-track {
+    background: rgba(36, 6, 85, 0.5); 
+  }
+  
+  .centered-box::-webkit-scrollbar-thumb {
+    background: #8e8e8e; 
+    border-radius: 5px; 
+  }
+  
+  .centered-box::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
