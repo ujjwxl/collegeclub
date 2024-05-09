@@ -20,6 +20,7 @@ import Privacy from './pages/Privacy/Privacy';
 import Terms from './pages/Terms/Terms';
 import Contact from './pages/Contact/Contact';
 import Faqs from './pages/FAQs/FAQs';
+import Feedback from './pages/Feedback/Feedback';
 
 function App() {
   
@@ -46,6 +47,7 @@ function App() {
         <Route path='/privacy' element={<Privacy/>}/>
         <Route path='/terms' element={<Terms/>}/>
         <Route path='/faqs' element={<Faqs/>}/>
+        <Route path='/feedback' element={<Feedback/>}/>
         <Route path="/*" element={<ErrorPage />} />
         </Routes>
       </Router>

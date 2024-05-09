@@ -135,6 +135,9 @@ const Faqs = () => {
                             </div>
                         ))}
                     </div>
+
+                    <p>Contact us:</p>
+                    <p>Still have questions? Feel free to reach out to our support team at [support@collegeclub.com]. We're here to help!</p>
                 </div>
             </div>
             <Footer />

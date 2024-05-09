@@ -16,7 +16,7 @@ const Contact = () => {
                     <hr />
                     <p>Have any question related to CollegeClub? Do check our FAQs section or reach us:</p>
                     <Link to={'/faqs'}><button className='form-submit-button'>FAQs</button></Link>
-                    <button className='form-submit-button'>Feedback and suggestion</button>
+                    <Link to={'/feedback'}><button className='form-submit-button'>Feedback and suggestion</button></Link>
                     <hr />
 
                     <p>For Technical Support, Partnership, Grievances or any other enquiry call us via: (7AM to 10PM all days)</p>
