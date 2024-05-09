@@ -21,6 +21,7 @@ import Terms from './pages/Terms/Terms';
 import Contact from './pages/Contact/Contact';
 import Faqs from './pages/FAQs/FAQs';
 import Feedback from './pages/Feedback/Feedback';
+import Courses from './pages/Courses/Courses';
 
 function App() {
   
@@ -35,6 +36,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard/>}></Route>
         <Route path='/paymentsuccess' element={<PaymentSuccess/>}/>
         <Route path='/colleges' element={<College/>}/>
+        <Route path='/courses' element={<Courses/>}/>
         <Route path='/form/profile' element={<ProfileForm/>}/>
         <Route path='/form/details' element={<DetailsForm/>}/>
         <Route path='/form/uploads' element={<UploadsForm/>}/>

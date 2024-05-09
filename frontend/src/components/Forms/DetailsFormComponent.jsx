@@ -7,26 +7,29 @@ const DetailsFormComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [selectedFacilities, setSelectedFacilities] = useState([]);
-  const courses = [
-    "Engineering",
-    "Medical",
-    "Fashion and Technology",
-    "Management",
-    "Commerce and Banking",
-    "Sciences",
-    "Hotel Management",
-    "Information Technology",
-    "Arts and Humanities",
-    "Mass Communication",
-    "Nursing",
-    "Agriculture",
-    "Design",
-    "Law",
-    "Pharmacy",
-    "Dental",
-    "Performing Arts",
-    "Others",
-  ];
+  // const courses = [
+  //   "Engineering",
+  //   "Medical",
+  //   "Fashion and Technology",
+  //   "Management",
+  //   "Commerce and Banking",
+  //   "Sciences",
+  //   "Hotel Management",
+  //   "Information Technology",
+  //   "Arts and Humanities",
+  //   "Mass Communication",
+  //   "Nursing",
+  //   "Agriculture",
+  //   "Design",
+  //   "Law",
+  //   "Pharmacy",
+  //   "Dental",
+  //   "Performing Arts",
+  //   "Others",
+  // ];
+
+  const courses = ['Science and Technology', 'Medical', 'Business and Management', 'Fashion and Design', 'Agriculture', 'Environmental Science', 'Law and Legal', 'Hospitality', 'Journalism', 'Teaching', 'Lifestyle', 'Sports'];
+
   const instituteTypes = [
     "Central",
     "State",
@@ -35,7 +38,7 @@ const DetailsFormComponent = () => {
     "Autonomous",
   ];
 
-  const [studyMode, setStudyMode]= useState("");
+  const [studyMode, setStudyMode] = useState("");
 
   const [coursesCount, setCoursesCount] = useState(1);
   const [departmentsCount, setDepartmentsCount] = useState(1);
@@ -59,12 +62,14 @@ const DetailsFormComponent = () => {
       for (let i = 0; i < coursesCount; i++) {
         const courseName = e.target[`courseName${i}`].value;
         const minQualification = e.target[`minQualification${i}`].value;
+        const courseType = e.target[`courseType${i}`].value;
         const duration = e.target[`duration${i}`].value;
         const fee = e.target[`fee${i}`].value;
         const distance = e.target[`distance${i}`].value;
         coursesData.push({
           courseName,
           minQualification,
+          courseType,
           duration,
           fee,
           distance,
@@ -111,7 +116,7 @@ const DetailsFormComponent = () => {
           overallPlacement,
           promo,
           scholarship,
-          selectedInstituteType, 
+          selectedInstituteType,
           studyMode
         })
         .then((res) => {
@@ -256,6 +261,17 @@ const DetailsFormComponent = () => {
                 placeholder="Add qualification"
               />
             </div>
+
+            <div className="form-input-group">
+              <label htmlFor="collegename">Course Type*</label>
+              {/* <input type="text" placeholder='Add qualification' /> */}
+              <select name={`courseType${index}`} id="" className="college-details-form-course-type-select">
+                {courses.map((course, index) => (
+                  <option key={index} value={course}>{course}</option>
+                ))}
+              </select>
+            </div>
+
 
             <div className="form-input-group">
               <label htmlFor="collegename">Duration*</label>
