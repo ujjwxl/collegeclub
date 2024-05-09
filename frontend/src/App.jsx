@@ -18,6 +18,8 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import Mission from './pages/Mission/Mission';
 import Privacy from './pages/Privacy/Privacy';
 import Terms from './pages/Terms/Terms';
+import Contact from './pages/Contact/Contact';
+import Faqs from './pages/FAQs/FAQs';
 
 function App() {
   
@@ -39,9 +41,11 @@ function App() {
         <Route path='/slot' element={<SlotBooking/>}/>
         <Route path='/about' element={<AboutUs/>}/>
         <Route path='/mission' element={<Mission/>}/>
+        <Route path='/contact' element={<Contact/>}/>
         <Route path='/career' element={<Career/>}/>
         <Route path='/privacy' element={<Privacy/>}/>
         <Route path='/terms' element={<Terms/>}/>
+        <Route path='/faqs' element={<Faqs/>}/>
         <Route path="/*" element={<ErrorPage />} />
         </Routes>
       </Router>
