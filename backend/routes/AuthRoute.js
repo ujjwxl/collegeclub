@@ -1,5 +1,5 @@
 import express from 'express'
-import { registerUser, loginUser, getUserDetails, getColleges, completeProfileForm, completeDetailsForm, completeCompanyProfileForm, completeCompanyDetailsForm, completeAmbassadorProfileForm} from '../controllers/AuthController.js';
+import { registerUser, loginUser, getUserDetails, getColleges, completeProfileForm, completeDetailsForm, completeCompanyProfileForm, completeCompanyDetailsForm, completeAmbassadorProfileForm, saveFeedback} from '../controllers/AuthController.js';
 
 const router = express.Router();
 
@@ -12,6 +12,7 @@ router.post('/detailsform/:userId', completeDetailsForm)
 router.post('/companyprofileform/:userId', completeCompanyProfileForm)
 router.post('/companydetailsform/:userId', completeCompanyDetailsForm)
 router.post('/ambassadorprofileform/:userId', completeAmbassadorProfileForm)
+router.post('/feedbackform', saveFeedback)
 
 // router.post('/login', loginUser)
 export default router
