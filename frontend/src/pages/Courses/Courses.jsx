@@ -1,4 +1,4 @@
-import React, { useState, useEffect, cloneElement } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import location from '../../assets/location.png';
@@ -10,7 +10,26 @@ import "./Courses.css";
 
 const Courses = () => {
 
+    const [selectedCourse, setSelectedCourse] = useState('');
+    const [coursesInfo, setCoursesInfo] = useState([]);
+
     const courses = ['Science and Technology', 'Medical', 'Business and Management', 'Fashion and Design', 'Agriculture', 'Environmental Science', 'Law and Legal', 'Hospitality', 'Journalism', 'Teaching', 'Lifestyle', 'Sports'];
+
+    const fetchCourses = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/auth/coursetype/${selectedCourse}`);
+
+            setCoursesInfo(response.data.courses);
+        } catch (error) {
+            console.error("Error fetching courses:", error.message);
+        }
+    };
+
+    useEffect(() => {
+        if (selectedCourse) {
+            fetchCourses();
+        }
+    }, [selectedCourse]);
 
     return (
         <>
@@ -23,18 +42,52 @@ const Courses = () => {
                         <h3>Course Type</h3>
 
                         {courses.map((course, index) => (
-                            <div className="courses-left-items" key={index}>
+                            <div className="courses-left-items" key={index} onClick={() => setSelectedCourse(course)}>
                                 <h3>{course}</h3>
                             </div>
                         ))}
 
                     </div>
 
-                    <div className="courses-display-box-list">
+                    {/* <div className="courses-display-box-list">
                         <h2>Courses displayed here</h2>
                         <div className="course-tile">
                             <h3>BTech</h3>
                         </div>
+                    </div> */}
+
+                    <div className="courses-display-box-list">
+                        {coursesInfo.map((course, index) => (
+                            <div
+                                className="colleges-display-box-item"
+                                key={index}
+                                onClick={() => openCollegeDetails(course.userId)}
+                            >
+                                <img
+                                    src={
+                                        course.collegeProfilePicture
+                                            ? course.collegeProfilePicture
+                                            : defaultImage
+                                    }
+                                    alt=""
+                                />
+                                <div className="colleges-display-box-item-details">
+                                    <div className="list-college-details-page">
+                                        <div className="list-college-name">
+                                            <h3>{course.collegeName}</h3>
+                                        </div>
+                                        <div className="list-college-details">
+                                            <img src={location}></img>
+                                            <h4>{course && course.district}, {course && course.state}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="colleges-display-box-item-details-two">
+                                    <h3>{`Course Name : ` + course.courseName}</h3>
+                                    <h3>{`Fees : ` + course.fee}</h3>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

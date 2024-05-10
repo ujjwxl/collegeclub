@@ -600,3 +600,76 @@ export const saveFeedback = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// export const getCoursesByType = async (req, res) => {
+//   const { courseType } = req.params;
+
+//   console.log(courseType);
+
+//   try {
+//     const usersCollectionRef = collection(db, "users");
+//     const q = query(usersCollectionRef, where("accountType", "==", "College"));
+//     const querySnapshot = await getDocs(q);
+
+//     const courses = [];
+//     querySnapshot.forEach(doc => {
+//       const college = doc.data();
+//       college.courses.forEach(course => {
+//         if (course.courseType === courseType) {
+//           courses.push({
+//             collegeName: college.organizationName,
+//             courseName: course.courseName,
+//             duration: course.duration,
+//             fee: course.fee,
+//           });
+//         }
+//       });
+//     });
+
+//     res.status(200).json({ courses });
+//   } catch (error) {
+//     console.error("Error fetching courses by type:", error.message);
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
+export const getCoursesByType = async (req, res) => {
+  const { courseType } = req.params;
+
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("accountType", "==", "College"));
+    const querySnapshot = await getDocs(q);
+
+    const courses = [];
+    querySnapshot.forEach(doc => {
+      const college = doc.data();
+      if (college && college.courses) {
+        college.courses.forEach(course => {
+          if (course.courseType === courseType) {
+            courses.push({
+              collegeName: college.organizationName,
+              userId: college.userId,
+              collegeProfilePicture: college.profilePicture,
+              courseName: course.courseName,
+              duration: course.duration,
+              fee: course.fee,
+              distance: course.distance,
+              minQualification: course.minQualification,
+              district: college.district,
+              state: college.state,
+              email: college.email,
+              contactNumber: college.contactNumber
+              // Add other course details you want to include
+            });
+          }
+        });
+      }
+    });
+
+    res.status(200).json({ courses });
+  } catch (error) {
+    console.error("Error fetching courses by type:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
