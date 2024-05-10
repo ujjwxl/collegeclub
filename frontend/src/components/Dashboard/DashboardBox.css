@@ -18,6 +18,18 @@
     padding: 30px 20px;
 }
 
+.dashboard-payment-button {
+    background-image: linear-gradient(to right, #eb3349 0, #f45c43 51%, #eb3349 100%);
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: "Comfortaa", sans-serif;  
+}
+
 @media only screen and (max-width: 1024px) {
     .dashboard-box {
         width: 60%;

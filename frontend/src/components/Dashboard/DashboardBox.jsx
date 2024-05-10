@@ -108,12 +108,12 @@ const DashboardBox = () => {
             <>
               <h3>You have paid successfully</h3>
               <p>Complete the form to onboard successfully</p>
-              <Link to={'/form/profile'}><button>Complete application form</button></Link>
+              <Link to={'/form/profile'}><button className="dashboard-payment-button">Complete application form</button></Link>
             </>
           ) : (
             <>
               <h3>Continue to payment to verify the account</h3>
-              <button onClick={checkoutHandler}>Continue to Payment</button>
+              <button className="dashboard-payment-button" onClick={checkoutHandler}>Continue to Payment</button>
             </>
           )}
         

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import defaultImage from "../../assets/test-dp.jpg";
+import profileIcon from '../../assets/user-icon.png';
+import eventsIcon from '../../assets/event-icon.png';
 import testIcon from "../../assets/business-icon.png";
 import dashboardIcon from "../../assets/dashboard.png";
 import applicationIcon from "../../assets/edit.png";
@@ -53,9 +56,9 @@ const DashboardMenu = () => {
       <hr />
 
       <div className="dashboard-menu-middle">
+        <img src={profileIcon} alt="" />
         <img src={testIcon} alt="" />
-        <img src={testIcon} alt="" />
-        <img src={testIcon} alt="" />
+        <img src={eventsIcon} alt="" />
       </div>
 
       <hr />
@@ -78,11 +81,15 @@ const DashboardMenu = () => {
           <h3>Notifications</h3>
         </div>
         <hr />
+
+        <Link to={'/faqs'}>
         <div className="dashboard-menu-bottom-options">
           <img src={helpIcon} alt="" />
 
           <h3>Help</h3>
         </div>
+        </Link>
+
         <hr />
       </div>
       <div className="logout">
