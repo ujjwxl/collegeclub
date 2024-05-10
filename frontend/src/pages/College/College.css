@@ -60,6 +60,12 @@
     background-color: #4527a0;
     padding: 0 20px;
     border-radius: 20px;
+    height: 25%;
+}
+
+.college-display-box-item-image {
+    /* background-color: blue; */
+    margin: auto 0;
 }
 
 .colleges-display-box-item img {
@@ -72,7 +78,16 @@
 .colleges-display-box-item-details {
     width: 50%;
     /* background-color: red; */
+    margin: auto 0;
+    padding-bottom: 30px;
 }
+
+.colleges-display-box-item-details-two {
+    width: 50%;
+    /* background-color: green; */
+    margin: auto 0;
+}
+
 .list-college-details-page{
     margin-left: 10px;
 }
@@ -96,10 +111,6 @@
 .list-college-details img{
     height: 15px;
     width: 15px;
-}
-.colleges-display-box-item-details-two {
-    width: 50%;
-    /* background-color: green; */
 }
 
 .showAll{

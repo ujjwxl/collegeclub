@@ -43,6 +43,10 @@
     margin-top: 10px;
 }
 
+.course-selected-button {
+    background-image: linear-gradient(to right, #eb3349 0, #f45c43 51%, #eb3349 100%);
+}
+
 .course-tile {
     background-color: #4527A0;
     padding: 10px;

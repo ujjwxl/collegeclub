@@ -42,7 +42,7 @@ const Courses = () => {
                         <h3>Course Type</h3>
 
                         {courses.map((course, index) => (
-                            <div className="courses-left-items" key={index} onClick={() => setSelectedCourse(course)}>
+                            <div className={`courses-left-items ${selectedCourse === course ? 'course-selected-button' : ''}`} key={index} onClick={() => setSelectedCourse(course)}>
                                 <h3>{course}</h3>
                             </div>
                         ))}
@@ -63,14 +63,16 @@ const Courses = () => {
                                 key={index}
                                 onClick={() => openCollegeDetails(course.userId)}
                             >
-                                <img
-                                    src={
-                                        course.collegeProfilePicture
-                                            ? course.collegeProfilePicture
-                                            : defaultImage
-                                    }
-                                    alt=""
-                                />
+                                <div className="college-display-box-item-image">
+                                    <img
+                                        src={
+                                            course.collegeProfilePicture
+                                                ? course.collegeProfilePicture
+                                                : defaultImage
+                                        }
+                                        alt=""
+                                    />
+                                </div>
                                 <div className="colleges-display-box-item-details">
                                     <div className="list-college-details-page">
                                         <div className="list-college-name">

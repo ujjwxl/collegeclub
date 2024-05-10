@@ -1,7 +1,7 @@
 import React, { useState, useEffect, cloneElement } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
-import location from  '../../assets/location.png';
+import location from '../../assets/location.png';
 import Footer from "../../components/Home/Footer";
 import backgroundImage from "../../assets/home-1.jpg";
 import defaultImage from "../../assets/test-dp.jpg";
@@ -52,20 +52,20 @@ const College = () => {
 
   const filteredColleges = collegeData
     ? collegeData.filter((college) => {
-        return (
-          (filters.instituteType.length === 0 ||
-            filters.instituteType.includes(college.instituteType)) &&
-          // (filters.degree.length === 0 || filters.degree.includes(college.degree)) &&
-          (filters.degree.length === 0 ||
-            (Array.isArray(college.selectedCourses) &&
-              college.selectedCourses.some((course) =>
-                filters.degree.includes(course)
-              ))) &&
-          (filters.studyMode.length === 0 ||
-            filters.studyMode.includes(college.studyMode)) &&
-          (filters.state.length === 0 || filters.state.includes(college.state))
-        );
-      })
+      return (
+        (filters.instituteType.length === 0 ||
+          filters.instituteType.includes(college.instituteType)) &&
+        // (filters.degree.length === 0 || filters.degree.includes(college.degree)) &&
+        (filters.degree.length === 0 ||
+          (Array.isArray(college.selectedCourses) &&
+            college.selectedCourses.some((course) =>
+              filters.degree.includes(course)
+            ))) &&
+        (filters.studyMode.length === 0 ||
+          filters.studyMode.includes(college.studyMode)) &&
+        (filters.state.length === 0 || filters.state.includes(college.state))
+      );
+    })
     : [];
 
   const openCollegeDetails = (collegeId) => {
@@ -88,7 +88,7 @@ const College = () => {
       <img src={backgroundImage} alt="" className="home1-img" />
       <div className="colleges-overlay colleges-container">
         <div className="colleges-display-box">
-          
+
 
           <div className="colleges-display-box-filter">
             <h3>Filters</h3>
@@ -108,18 +108,7 @@ const College = () => {
 
             {showAllInstitute
               ? ["Central", "State", "Deemed", "Private", "Autonomous"].map(
-                  (type) => (
-                    <label key={type}>
-                      <input
-                        type="checkbox"
-                        checked={filters.instituteType.includes(type)}
-                        onChange={() => handleFilterChange("instituteType", type)}
-                      />{" "}
-                      {type} <br />
-                    </label>
-                  )
-                )
-              : ["Central", "State", "Deemed"].map((type) => (
+                (type) => (
                   <label key={type}>
                     <input
                       type="checkbox"
@@ -128,13 +117,24 @@ const College = () => {
                     />{" "}
                     {type} <br />
                   </label>
-                ))}
+                )
+              )
+              : ["Central", "State", "Deemed"].map((type) => (
+                <label key={type}>
+                  <input
+                    type="checkbox"
+                    checked={filters.instituteType.includes(type)}
+                    onChange={() => handleFilterChange("instituteType", type)}
+                  />{" "}
+                  {type} <br />
+                </label>
+              ))}
             {/* Show 'Show more' button if there are more options */}
             {!showAllInstitute && (
               <a className="showAll" onClick={toggleshowAllInstitute}>Show More...</a>
             )}
-          
-           
+
+
             <h4>Degree</h4>
             {/* {[
               "Engineering",
@@ -154,10 +154,10 @@ const College = () => {
             ))} */}
             {showAllDegree
               ? ["Engineering",
-              "Medical",
-              "Management",
-              "Law",
-              "Fashion Technology",].map(
+                "Medical",
+                "Management",
+                "Law",
+                "Fashion Technology",].map(
                   (degree) => (
                     <label key={degree}>
                       <input
@@ -170,8 +170,8 @@ const College = () => {
                   )
                 )
               : ["Engineering",
-              "Medical",
-              "Management",].map((degree) => (
+                "Medical",
+                "Management",].map((degree) => (
                   <label key={degree}>
                     <input
                       type="checkbox"
@@ -186,7 +186,7 @@ const College = () => {
               <a className="showAll" onClick={toggleshowAllDegree}>Show More...</a>
             )}
 
-        
+
             <h4>Study Mode</h4>
             {["Regular", "Distance"].map((mode) => (
               <label key={mode}>
@@ -233,7 +233,7 @@ const College = () => {
             )} */}
 
 
-          
+
             <h4>State</h4>
             {/* {["Bihar", "Delhi", "Maharashtra", "Gujarat"].map((state) => (
               <label key={state}>
@@ -248,18 +248,7 @@ const College = () => {
 
             {showAllState
               ? ["Bihar", "Delhi", "Maharashtra", "Gujarat",].map(
-                  (state) => (
-                    <label key={state}>
-                      <input
-                        type="checkbox"
-                        checked={filters.state.includes(state)}
-                        onChange={() => handleFilterChange("state", state)}
-                      />{" "}
-                      {state} <br />
-                    </label>
-                  )
-                )
-              : ["Bihar", "Delhi", "Maharashtra"].map((state) => (
+                (state) => (
                   <label key={state}>
                     <input
                       type="checkbox"
@@ -268,16 +257,27 @@ const College = () => {
                     />{" "}
                     {state} <br />
                   </label>
-                ))}
+                )
+              )
+              : ["Bihar", "Delhi", "Maharashtra"].map((state) => (
+                <label key={state}>
+                  <input
+                    type="checkbox"
+                    checked={filters.state.includes(state)}
+                    onChange={() => handleFilterChange("state", state)}
+                  />{" "}
+                  {state} <br />
+                </label>
+              ))}
             {/* Show 'Show more' button if there are more options */}
             {!showAllState && (
               <a className="showAll" onClick={toggleshowAllState}>Show More...</a>
             )}
           </div>
 
-       
 
-         
+
+
 
           <div className="colleges-display-box-list">
             {collegeData &&
@@ -287,22 +287,24 @@ const College = () => {
                   key={index}
                   onClick={() => openCollegeDetails(college.userId)}
                 >
-                  <img
-                    src={
-                      college.profilePicture
-                        ? college.profilePicture
-                        : defaultImage
-                    }
-                    alt=""
-                  />
+                  <div className="college-display-box-item-image">
+                    <img
+                      src={
+                        college.profilePicture
+                          ? college.profilePicture
+                          : defaultImage
+                      }
+                      alt=""
+                    />
+                  </div>
                   <div className="colleges-display-box-item-details">
                     <div className="list-college-details-page">
                       <div className="list-college-name">
                         <h3>{college.organizationName}</h3>
                       </div>
                       <div className="list-college-details">
-                      <img src={location}></img>
-                <h4>{college && college.district}, {college && college.state}</h4>
+                        <img src={location}></img>
+                        <h4>{college && college.district}, {college && college.state}</h4>
                       </div>
                     </div>
                   </div>
