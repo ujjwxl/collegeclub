@@ -20,40 +20,49 @@ const Skills = () => {
     const courses = [
         {
             courseImage: backgroundImage,
+            category: 'Programming',
             courseName: 'JavaScript',
             courseInstructor: 'Arvind Kumar',
             price: 'Rs 3,099'
         },
         {
             courseImage: backgroundImageThree,
+            category: 'Soft Skills',
             courseName: 'JavaScript',
             courseInstructor: 'Arvind Kumar',
             price: 'Rs 3,099'
         },
         {
             courseImage: backgroundImage,
+            category: 'Programming',
             courseName: 'JavaScript',
             courseInstructor: 'Arvind Kumar',
             price: 'Rs 3,099'
         },
         {
             courseImage: backgroundImageTwo,
+            category: 'Soft Skills',
             courseName: 'JavaScript',
             courseInstructor: 'Arvind Kumar',
             price: 'Rs 3,099'
         },
         {
             courseImage: backgroundImageTwo,
+            category: 'Programming',
             courseName: 'JavaScript',
             courseInstructor: 'Arvind Kumar',
             price: 'Rs 3,099'
         }
     ];
 
+    const filteredCourses = selectedCategory
+        ? courses.filter(course => course.category === selectedCategory)
+        : courses;
+
     const groupCoursesIntoRows = () => {
         const rows = [];
-        for (let i = 0; i < courses.length; i += 3) {
-            rows.push(courses.slice(i, i + 3));
+        for (let i = 0; i < filteredCourses.length; i += 3) {
+            rows.push(filteredCourses.slice(i, i + 3));
         }
         return rows;
     };
@@ -77,7 +86,7 @@ const Skills = () => {
                     </div>
 
                     <div className="skills-display-box-list">
-                        <h1>Courses displayed here</h1>
+                        <h1>Courses</h1>
                         {groupCoursesIntoRows().map((row, rowIndex) => (
                             <div className="skills-cards-row" key={rowIndex}>
                                 {row.map((course, index) => (
