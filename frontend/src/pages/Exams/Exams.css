@@ -1,0 +1,75 @@
+/* style for college page */
+
+.exams-overlay {
+    display: flex;
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    width: 100%;
+    /* height: 101%; */
+    height: calc(101% - 50px);
+    background-color: rgba(36, 6, 85, 0.5);
+    color: white;
+    box-sizing: border-box;
+    font-family: "Comfortaa", sans-serif;
+}
+
+.exams-display-box {
+    display: flex;
+    background-color: #240655;
+    width: 90%;
+    margin: 2% auto 2% auto;
+}
+
+.exams-display-box-filter {
+    width: 20%;
+    background-color: #4527a0;
+    overflow-y: scroll;
+}
+
+.exams-display-box-list {
+    width: 80%;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.exams-display-box-list h1 {
+    background-image: linear-gradient(to right, #fe3a65, #fd6952);
+    -webkit-background-clip: text;
+    background-clip: text;
+    
+    margin-left: 20px;
+    color: transparent;
+}
+
+.exams-display-box-list h2 {
+    color: #38D6E6;
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+.exams-display-box-list p {
+    margin-left: 20px;
+}
+
+.exams-left-items {
+    font-size: 12px;
+    background-color: #240655;
+    padding: 2px;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.exams-selected-button {
+    background-image: linear-gradient(to right, #eb3349 0, #f45c43 51%, #eb3349 100%);
+}
+
+.course-tile {
+    background-color: #4527A0;
+    padding: 10px;
+    margin: 0 20px;
+}

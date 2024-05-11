@@ -22,6 +22,7 @@ import Contact from './pages/Contact/Contact';
 import Faqs from './pages/FAQs/FAQs';
 import Feedback from './pages/Feedback/Feedback';
 import Courses from './pages/Courses/Courses';
+import Exams from './pages/Exams/Exams';
 
 function App() {
   
@@ -37,6 +38,7 @@ function App() {
         <Route path='/paymentsuccess' element={<PaymentSuccess/>}/>
         <Route path='/colleges' element={<College/>}/>
         <Route path='/courses' element={<Courses/>}/>
+        <Route path='/exams' element={<Exams/>}/>
         <Route path='/form/profile' element={<ProfileForm/>}/>
         <Route path='/form/details' element={<DetailsForm/>}/>
         <Route path='/form/uploads' element={<UploadsForm/>}/>

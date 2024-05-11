@@ -52,9 +52,9 @@ const Navbar = () => {
           <div className='navbar-links-mobile'>
             <Link to="/colleges">Colleges</Link>
             <Link to="/courses">Courses</Link>
-            <Link to="">Exams</Link>
+            <Link to="/exams">Exams</Link>
             <Link to="">Skills</Link>
-            <Link to="">Career</Link>
+            <Link to="/career">Career</Link>
             {/* <Link to="">Help?</Link> */}
           </div>
 
@@ -91,9 +91,9 @@ const Navbar = () => {
       <div className='navbar-links'>
         <Link to="/colleges">Colleges</Link>
         <Link to="/courses">Courses</Link>
-        <Link to="">Exams</Link>
+        <Link to="/exams">Exams</Link>
         <Link to="">Skills</Link>
-        <Link to="">Career</Link>
+        <Link to="/career">Career</Link>
         {/* <Link to="">Help?</Link> */}
       </div>
 
