@@ -53,7 +53,7 @@ const Navbar = () => {
             <Link to="/colleges">Colleges</Link>
             <Link to="/courses">Courses</Link>
             <Link to="/exams">Exams</Link>
-            <Link to="">Skills</Link>
+            <Link to="/skills">Skills</Link>
             <Link to="/career">Career</Link>
             {/* <Link to="">Help?</Link> */}
           </div>
@@ -92,7 +92,7 @@ const Navbar = () => {
         <Link to="/colleges">Colleges</Link>
         <Link to="/courses">Courses</Link>
         <Link to="/exams">Exams</Link>
-        <Link to="">Skills</Link>
+        <Link to="/skills">Skills</Link>
         <Link to="/career">Career</Link>
         {/* <Link to="">Help?</Link> */}
       </div>

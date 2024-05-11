@@ -1,0 +1,103 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
+import location from '../../assets/location.png';
+import Footer from "../../components/Home/Footer";
+import backgroundImage from "../../assets/home-1.jpg";
+import backgroundImageTwo from "../../assets/home-2.jpg";
+import backgroundImageThree from "../../assets/test-dp.jpg";
+import defaultImage from "../../assets/test-dp.jpg";
+import axios from "axios";
+import "./Skills.css";
+
+const Skills = () => {
+
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [examDetails, setExamDetails] = useState({});
+
+    const categories = ['Programming', 'Soft Skills'];
+
+    const courses = [
+        {
+            courseImage: backgroundImage,
+            courseName: 'JavaScript',
+            courseInstructor: 'Arvind Kumar',
+            price: 'Rs 3,099'
+        },
+        {
+            courseImage: backgroundImageThree,
+            courseName: 'JavaScript',
+            courseInstructor: 'Arvind Kumar',
+            price: 'Rs 3,099'
+        },
+        {
+            courseImage: backgroundImage,
+            courseName: 'JavaScript',
+            courseInstructor: 'Arvind Kumar',
+            price: 'Rs 3,099'
+        },
+        {
+            courseImage: backgroundImageTwo,
+            courseName: 'JavaScript',
+            courseInstructor: 'Arvind Kumar',
+            price: 'Rs 3,099'
+        },
+        {
+            courseImage: backgroundImageTwo,
+            courseName: 'JavaScript',
+            courseInstructor: 'Arvind Kumar',
+            price: 'Rs 3,099'
+        }
+    ];
+
+    const groupCoursesIntoRows = () => {
+        const rows = [];
+        for (let i = 0; i < courses.length; i += 3) {
+            rows.push(courses.slice(i, i + 3));
+        }
+        return rows;
+    };
+
+    return (
+        <>
+            <Navbar />
+            <img src={backgroundImage} alt="" className="home1-img" />
+            <div className="skills-overlay colleges-container">
+                <div className="skills-display-box">
+
+                    <div className="skills-display-box-filter">
+                        <h3>Select a category</h3>
+
+                        {categories.map((course, index) => (
+                            <div className={`skills-left-items ${selectedCategory === course ? 'skills-selected-button' : ''}`} key={index} onClick={() => setSelectedCategory(course)}>
+                                <h3>{course}</h3>
+                            </div>
+                        ))}
+
+                    </div>
+
+                    <div className="skills-display-box-list">
+                        <h1>Courses displayed here</h1>
+                        {groupCoursesIntoRows().map((row, rowIndex) => (
+                            <div className="skills-cards-row" key={rowIndex}>
+                                {row.map((course, index) => (
+                                    <div className="skills-course-card" key={index}>
+                                        <img src={course.courseImage} alt="" />
+                                        <img className="skill-course-card-image" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="" />
+                                        <p>{course.courseName}</p>
+                                        <p>{course.courseInstructor}</p>
+                                        <p>{course.price}</p>
+                                        <button className="skill-course-card-button">View more</button>
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+            <Footer />
+        </>
+    );
+};
+
+export default Skills;
