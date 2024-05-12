@@ -80,8 +80,8 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <Link to='/register'>Onboarding</Link>
-                <Link to='/login'>Login</Link>
+                <Link to='/register'><button className='navbar-button'>Onboarding</button></Link>
+                <Link to='/login'><button className='navbar-button'>Login</button></Link>
               </>
             )}
           </div>
@@ -116,8 +116,8 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link to='/register'>Onboarding</Link>
-            <Link to='/login'>Login</Link>
+            <Link to='/register'><button className='navbar-button'>Onboarding</button></Link>
+            <Link to='/login'><button className='navbar-button'>Login</button></Link>
           </>
         )}
       </div>

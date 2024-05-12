@@ -79,6 +79,18 @@
   border-radius: 100%;
 }
 
+.navbar-button {
+  background-image: linear-gradient(to right, #eb3349 0, #f45c43 51%, #eb3349 100%);
+  text-align: center;
+  color: #fff;
+  width: auto;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: "Comfortaa", sans-serif;   
+}
+
 @media only screen and (max-width: 780px) {
   .navbar-links,
   .navbar-right {

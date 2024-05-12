@@ -4,6 +4,9 @@ import axios from "axios";
 import defaultImage from "../../assets/test-dp.jpg";
 import profileIcon from '../../assets/user-icon.png';
 import eventsIcon from '../../assets/event-icon.png';
+import createJobIcon from '../../assets/add-job.png';
+import leadsIcon from '../../assets/leads-icon.png';
+import cmsIcon from '../../assets/cms-icon.png';
 import testIcon from "../../assets/business-icon.png";
 import dashboardIcon from "../../assets/dashboard.png";
 import applicationIcon from "../../assets/edit.png";
@@ -56,9 +59,20 @@ const DashboardMenu = () => {
       <hr />
 
       <div className="dashboard-menu-middle">
-        <img src={profileIcon} alt="" />
-        <img src={testIcon} alt="" />
-        <img src={eventsIcon} alt="" />
+        <div className="dashboard-menu-middle-icon">
+          <img src={userData && userData.accountType === 'College' ? cmsIcon : createJobIcon} alt="" />
+          <p>{userData && userData.accountType === 'College' ? 'CMS' : 'Create job'}</p>
+        </div>
+
+        <div className="dashboard-menu-middle-icon">
+          <img src={userData && userData.accountType === 'College' ? leadsIcon : cmsIcon} alt="" />
+          <p>{userData && userData.accountType === 'College' ? 'Leads' : 'Add job'}</p>
+        </div>
+
+        <div className="dashboard-menu-middle-icon">
+          <img src={userData && userData.accountType === 'College' ? eventsIcon : leadsIcon} alt="" />
+          <p>{userData && userData.accountType === 'College' ? 'Events' : 'Applicants'}</p>
+        </div>
       </div>
 
       <hr />
@@ -83,11 +97,11 @@ const DashboardMenu = () => {
         <hr />
 
         <Link to={'/faqs'}>
-        <div className="dashboard-menu-bottom-options">
-          <img src={helpIcon} alt="" />
+          <div className="dashboard-menu-bottom-options">
+            <img src={helpIcon} alt="" />
 
-          <h3>Help</h3>
-        </div>
+            <h3>Help</h3>
+          </div>
         </Link>
 
         <hr />
