@@ -28,8 +28,10 @@
 }
 .CC-logo {
   object-fit: contain;
-  width: 20%;
-  height: 30%;
+  /* width: 20%;
+  height: 30%; */
+  height: 250px;
+  width: 250px;
 }
 
 .login-box {
@@ -37,7 +39,7 @@
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 35%;
+  width: 30%;
   margin-bottom: 20px;
 }
 .header {
@@ -53,20 +55,23 @@
 }
 
 .input-container input {
-  padding: 12px;
+  padding: 0.6rem 0.75rem;
   background-color: rgba(36, 6, 85, 1);
   color: #ccc;
   border-radius: 9px;
-  border: 1px solid rgb(59, 37, 95);
+  border: 1px solid #ced4da;
   font-size: 16px;
   width: 100%;
+  height: 45px;
   box-sizing: border-box;
   margin-top: 20px;
   margin-bottom: 10px;
+  font-family: 'Comfortaa', sans-serif;
   transition: background-color 0.3s;
 }
 .input-container input:hover {
-  background-color: #cfe2ff;
+  background-color: #CFE2FF;
+  transition: 0.5s;
   color: black;
 }
 .input-container input:focus {
@@ -88,7 +93,7 @@
   font-size: 16px;
 }
 .remember-forgot a {
-  font-size: 16px;
+  font-size: 14px;
   text-decoration: none;
   color: #ccc;
 }
@@ -97,8 +102,8 @@
   width: 50%;
   border: none;
   margin-top: 25px;
-  color: #ccc;
-  font-size: 16px;
+  color: white;
+  font-size: 14px;
   background-image: linear-gradient(
     to right,
     #eb3349 0,
@@ -109,6 +114,7 @@
   text-align: center;
   padding: 11px 14px;
   background-color: #ff7f3c;
+  font-family: 'Comfortaa', sans-serif;
   transition: background-image 1s;
 }
 
@@ -124,7 +130,7 @@
 
 .no-account {
   text-align: start;
-  font-size: 16px;
+  font-size: 14px;
   margin-top: 25px;
   margin-bottom: 30px;
 }
@@ -135,7 +141,7 @@
 }
 
 .terms {
-  font-size: 16px;
+  font-size: 14px;
   /* margin-top: 50px; */
   text-decoration: none;
   color: #ccc;
