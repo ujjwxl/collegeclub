@@ -109,9 +109,9 @@ const Navbar = () => {
         {/* <Link to='/register'>Onboarding</Link> */}
         {isLoggedIn ? (
           <>
-            <img src={compare} alt='' className='navbar-bell' />
+            {/* <img src={compare} alt='' className='navbar-bell' />
             <img src={notification} alt='' className='navbar-bell' />
-            <img src={signout} alt='' className='navbar-bell' />
+            <img src={signout} alt='' className='navbar-bell' /> */}
             <Link to='/dashboard'><img src={userData && userData.profilePicture} alt="" className='navbar-profile-picture' /></Link>
           </>
         ) : (

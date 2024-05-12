@@ -41,6 +41,7 @@ function App() {
         <Route path='/courses' element={<Courses/>}/>
         <Route path='/exams' element={<Exams/>}/>
         <Route path='/skills' element={<Skills/>}/>
+        <Route path='/skills/:courseId' element={<Skills/>}/>
         <Route path='/form/profile' element={<ProfileForm/>}/>
         <Route path='/form/details' element={<DetailsForm/>}/>
         <Route path='/form/uploads' element={<UploadsForm/>}/>

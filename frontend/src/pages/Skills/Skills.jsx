@@ -13,6 +13,7 @@ import "./Skills.css";
 const Skills = () => {
 
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedCourse, setSelectedCourse] = useState(null);
     const [examDetails, setExamDetails] = useState({});
 
     const categories = ['Programming', 'Soft Skills'];
@@ -23,35 +24,40 @@ const Skills = () => {
             category: 'Programming',
             courseName: 'JavaScript',
             courseInstructor: 'Arvind Kumar',
-            price: 'Rs 3,099'
+            price: 'Rs 3,099',
+            id: 1
         },
         {
             courseImage: backgroundImageThree,
             category: 'Soft Skills',
             courseName: 'JavaScript',
             courseInstructor: 'Arvind Kumar',
-            price: 'Rs 3,099'
+            price: 'Rs 3,099',
+            id: 2
         },
         {
             courseImage: backgroundImage,
             category: 'Programming',
             courseName: 'JavaScript',
             courseInstructor: 'Arvind Kumar',
-            price: 'Rs 3,099'
+            price: 'Rs 3,099',
+            id: 3
         },
         {
             courseImage: backgroundImageTwo,
             category: 'Soft Skills',
             courseName: 'JavaScript',
             courseInstructor: 'Arvind Kumar',
-            price: 'Rs 3,099'
+            price: 'Rs 3,099',
+            id: 4
         },
         {
             courseImage: backgroundImageTwo,
             category: 'Programming',
             courseName: 'JavaScript',
             courseInstructor: 'Arvind Kumar',
-            price: 'Rs 3,099'
+            price: 'Rs 3,099',
+            id: 5
         }
     ];
 
@@ -67,6 +73,15 @@ const Skills = () => {
         return rows;
     };
 
+    const handleViewMore = (course) => {
+        console.log(course);
+        setSelectedCourse(course);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedCourse(null);
+    };
+
     return (
         <>
             <Navbar />
@@ -76,6 +91,10 @@ const Skills = () => {
 
                     <div className="skills-display-box-filter">
                         <h3>Select a category</h3>
+
+                        <div className={`skills-left-items ${selectedCategory === '' ? 'skills-selected-button' : ''}`} onClick={() => setSelectedCategory('')}>
+                            <h3>All</h3>
+                        </div>
 
                         {categories.map((course, index) => (
                             <div className={`skills-left-items ${selectedCategory === course ? 'skills-selected-button' : ''}`} key={index} onClick={() => setSelectedCategory(course)}>
@@ -96,7 +115,7 @@ const Skills = () => {
                                         <p>{course.courseName}</p>
                                         <p>{course.courseInstructor}</p>
                                         <p>{course.price}</p>
-                                        <button className="skill-course-card-button">View more</button>
+                                        <button className="skill-course-card-button" onClick={() => handleViewMore(course)}>View more</button>
                                     </div>
                                 ))}
                             </div>
@@ -104,6 +123,14 @@ const Skills = () => {
                     </div>
                 </div>
             </div>
+            {selectedCourse && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <p>ID : {selectedCourse.id}</p>
+                        <button className="close-button" onClick={handleCloseModal}>Close</button>
+                    </div>
+                </div>
+            )}
             <Footer />
         </>
     );
