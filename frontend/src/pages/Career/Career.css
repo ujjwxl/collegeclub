@@ -70,9 +70,37 @@
 .accordion{
     overflow-x: hidden;
 }
+
+.accordian-contents {
+  font-family: 'Comfortaa', sans-serif;
+}
+
 .accordion li{
     color: #bdbdbd;
 }
 .accepting{
     font-weight: bolder;
+}
+
+.career-button {
+  margin-bottom: 20px;
+}
+
+.close-button {
+  position: absolute;
+  width: 50px;
+  right: 10px;
+}
+
+.apply-form-select {
+  margin-bottom: 30px;
+}
+
+.apply-job-modal-content {
+  position: relative;
+  background-color: #240655;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-family: 'Comfortaa', sans-serif;
 }

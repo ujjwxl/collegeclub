@@ -673,3 +673,37 @@ export const getCoursesByType = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const submitJobApplication = async (req, res) => {
+  const {
+    name,
+    phoneNumber,
+    email,
+    city,
+    state,
+    position,
+    resumeLink
+  } = req.body;
+
+  try {
+    
+    const docRef = await addDoc(collection(db, "applications"), {
+      name,
+      phoneNumber,
+      email,
+      city,
+      state,
+      position,
+      resumeLink
+    });
+
+    console.log("Document written with ID: ", docRef.id);
+    res.status(200).json(docRef);
+    
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
+    res.status(500).json({ message: error.message });
+  }
+}
