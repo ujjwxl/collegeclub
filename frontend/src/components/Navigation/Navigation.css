@@ -1,0 +1,11 @@
+.navigation {
+    background-color: #fff;
+    height: 100px;
+    width: 100px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: none;
+}
