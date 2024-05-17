@@ -68,20 +68,20 @@ const College = () => {
 
   const filteredColleges = collegeData
     ? collegeData.filter((college) => {
-        return (
-          (filters.instituteType.length === 0 ||
-            filters.instituteType.includes(college.instituteType)) &&
-          // (filters.degree.length === 0 || filters.degree.includes(college.degree)) &&
-          (filters.degree.length === 0 ||
-            (Array.isArray(college.selectedCourses) &&
-              college.selectedCourses.some((course) =>
-                filters.degree.includes(course)
-              ))) &&
-          (filters.studyMode.length === 0 ||
-            filters.studyMode.includes(college.studyMode)) &&
-          (filters.state.length === 0 || filters.state.includes(college.state))
-        );
-      })
+      return (
+        (filters.instituteType.length === 0 ||
+          filters.instituteType.includes(college.instituteType)) &&
+        // (filters.degree.length === 0 || filters.degree.includes(college.degree)) &&
+        (filters.degree.length === 0 ||
+          (Array.isArray(college.selectedCourses) &&
+            college.selectedCourses.some((course) =>
+              filters.degree.includes(course)
+            ))) &&
+        (filters.studyMode.length === 0 ||
+          filters.studyMode.includes(college.studyMode)) &&
+        (filters.state.length === 0 || filters.state.includes(college.state))
+      );
+    })
     : [];
 
   const openCollegeDetails = (collegeId, e) => {
@@ -227,17 +227,17 @@ const College = () => {
             <div className="filter-modal-header">
               <h2>Search Filters</h2>
               <div className="clear-apply">
-              <h3
-                onClick={clearFilters}
-              >
-                Clear
-              </h3>
-              <button
-                className="colleges-filter-modal-btn"
-                onClick={toggleFilterModal}
-              >
-                APPLY
-              </button>
+                <h3
+                  onClick={clearFilters}
+                >
+                  Clear
+                </h3>
+                <button
+                  className="colleges-filter-modal-btn"
+                  onClick={toggleFilterModal}
+                >
+                  APPLY
+                </button>
               </div>
             </div>
             <div className="filter-modal-content">
@@ -293,29 +293,29 @@ const College = () => {
 
             {showAllInstitute
               ? ["Central", "State", "Deemed", "Private", "Autonomous"].map(
-                  (type) => (
-                    <label key={type}>
-                      <input
-                        type="checkbox"
-                        checked={filters.instituteType.includes(type)}
-                        onChange={() =>
-                          handleFilterChange("instituteType", type)
-                        }
-                      />{" "}
-                      {type} <br />
-                    </label>
-                  )
-                )
-              : ["Central", "State", "Deemed"].map((type) => (
+                (type) => (
                   <label key={type}>
                     <input
                       type="checkbox"
                       checked={filters.instituteType.includes(type)}
-                      onChange={() => handleFilterChange("instituteType", type)}
+                      onChange={() =>
+                        handleFilterChange("instituteType", type)
+                      }
                     />{" "}
                     {type} <br />
                   </label>
-                ))}
+                )
+              )
+              : ["Central", "State", "Deemed"].map((type) => (
+                <label key={type}>
+                  <input
+                    type="checkbox"
+                    checked={filters.instituteType.includes(type)}
+                    onChange={() => handleFilterChange("instituteType", type)}
+                  />{" "}
+                  {type} <br />
+                </label>
+              ))}
             {!showAllInstitute && (
               <a className="showAll" onClick={toggleshowAllInstitute}>
                 Show More...
@@ -325,31 +325,31 @@ const College = () => {
             <h4>Degree</h4>
             {showAllDegree
               ? [
-                  "Engineering",
-                  "Medical",
-                  "Management",
-                  "Law",
-                  "Fashion Technology",
-                ].map((degree) => (
-                  <label key={degree}>
-                    <input
-                      type="checkbox"
-                      checked={filters.degree.includes(degree)}
-                      onChange={() => handleFilterChange("degree", degree)}
-                    />{" "}
-                    {degree} <br />
-                  </label>
-                ))
+                "Engineering",
+                "Medical",
+                "Management",
+                "Law",
+                "Fashion Technology",
+              ].map((degree) => (
+                <label key={degree}>
+                  <input
+                    type="checkbox"
+                    checked={filters.degree.includes(degree)}
+                    onChange={() => handleFilterChange("degree", degree)}
+                  />{" "}
+                  {degree} <br />
+                </label>
+              ))
               : ["Engineering", "Medical", "Management"].map((degree) => (
-                  <label key={degree}>
-                    <input
-                      type="checkbox"
-                      checked={filters.degree.includes(degree)}
-                      onChange={() => handleFilterChange("degree", degree)}
-                    />{" "}
-                    {degree} <br />
-                  </label>
-                ))}
+                <label key={degree}>
+                  <input
+                    type="checkbox"
+                    checked={filters.degree.includes(degree)}
+                    onChange={() => handleFilterChange("degree", degree)}
+                  />{" "}
+                  {degree} <br />
+                </label>
+              ))}
             {/* Show 'Show more' button if there are more options */}
             {!showAllDegree && (
               <a className="showAll" onClick={toggleshowAllDegree}>
@@ -371,25 +371,25 @@ const College = () => {
             <h4>State</h4>
             {showAllState
               ? ["Bihar", "Delhi", "Maharashtra", "Gujarat"].map((state) => (
-                  <label key={state}>
-                    <input
-                      type="checkbox"
-                      checked={filters.state.includes(state)}
-                      onChange={() => handleFilterChange("state", state)}
-                    />{" "}
-                    {state} <br />
-                  </label>
-                ))
+                <label key={state}>
+                  <input
+                    type="checkbox"
+                    checked={filters.state.includes(state)}
+                    onChange={() => handleFilterChange("state", state)}
+                  />{" "}
+                  {state} <br />
+                </label>
+              ))
               : ["Bihar", "Delhi", "Maharashtra"].map((state) => (
-                  <label key={state}>
-                    <input
-                      type="checkbox"
-                      checked={filters.state.includes(state)}
-                      onChange={() => handleFilterChange("state", state)}
-                    />{" "}
-                    {state} <br />
-                  </label>
-                ))}
+                <label key={state}>
+                  <input
+                    type="checkbox"
+                    checked={filters.state.includes(state)}
+                    onChange={() => handleFilterChange("state", state)}
+                  />{" "}
+                  {state} <br />
+                </label>
+              ))}
             {/* Show 'Show more' button if there are more options */}
             {!showAllState && (
               <a className="showAll" onClick={toggleshowAllState}>
@@ -399,43 +399,44 @@ const College = () => {
           </div>
 
           <div className="colleges-display-box-list">
-            {collegeData && collegeData.applicationFormCompleted &&
+            {collegeData &&
               filteredColleges.map((college, index) => (
-                <div
-                  className="colleges-display-box-item"
-                  key={index}
-                  onClick={(e) => openCollegeDetails(college.userId, e)}
-                >
-                  <div className="college-display-box-item-image">
-                    <img
-                      src={
-                        college.profilePicture
-                          ? college.profilePicture
-                          : defaultImage
-                      }
-                      alt=""
-                    />
-                  </div>
-                  <div className="colleges-display-box-item-details">
-                    <div className="list-college-details-page">
-                      <div className="list-college-name">
-                        <h3>{college.organizationName}</h3>
-                      </div>
-                      <div className="list-college-details">
-                        <img src={location}></img>
-                        <h4>
-                          {college && college.district},{" "}
-                          {college && college.state}
-                        </h4>
+                college.applicationFormCompleted && (
+                  <div
+                    className="colleges-display-box-item"
+                    key={index}
+                    onClick={(e) => openCollegeDetails(college.userId, e)}
+                  >
+                    <div className="college-display-box-item-image">
+                      <img
+                        src={
+                          college.profilePicture
+                            ? college.profilePicture
+                            : defaultImage
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <div className="colleges-display-box-item-details">
+                      <div className="list-college-details-page">
+                        <div className="list-college-name">
+                          <h3>{college.organizationName}</h3>
+                        </div>
+                        <div className="list-college-details">
+                          <img src={location}></img>
+                          <h4>
+                            {college && college.district}, {college && college.state}
+                          </h4>
+                        </div>
                       </div>
                     </div>
+                    <div className="colleges-display-box-item-details-two">
+                      <Link to="/slot">
+                        <button className="college-button">Enquire Now</button>
+                      </Link>
+                    </div>
                   </div>
-                  <div className="colleges-display-box-item-details-two">
-                    <Link to="/slot">
-                      <button className="college-button">Enquire Now</button>
-                    </Link>
-                  </div>
-                </div>
+                )
               ))}
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./DetailsFormComponent.css";
 
@@ -7,6 +8,8 @@ const DetailsFormComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [selectedFacilities, setSelectedFacilities] = useState([]);
+
+  const navigate = useNavigate();
 
   const courses = ['Science and Technology', 'Medical', 'Business and Management', 'Fashion and Design', 'Agriculture', 'Environmental Science', 'Law and Legal', 'Hospitality', 'Journalism', 'Teaching', 'Lifestyle', 'Sports'];
 
@@ -102,6 +105,7 @@ const DetailsFormComponent = () => {
         .then((res) => {
           if (res.status == 200) {
             alert("Details form sent successfully!");
+            navigate('/form/uploads')
           }
         })
         .catch((e) => {

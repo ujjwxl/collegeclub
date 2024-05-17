@@ -223,7 +223,9 @@ const UploadsFormComponent = () => {
             });
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
         axios.post(`http://localhost:5000/auth/profilecompleted/${userId}`)
             .then((response) => {
                 alert('Application form completed successfully')
