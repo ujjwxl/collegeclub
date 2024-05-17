@@ -7,26 +7,6 @@ const DetailsFormComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [selectedFacilities, setSelectedFacilities] = useState([]);
-  // const courses = [
-  //   "Engineering",
-  //   "Medical",
-  //   "Fashion and Technology",
-  //   "Management",
-  //   "Commerce and Banking",
-  //   "Sciences",
-  //   "Hotel Management",
-  //   "Information Technology",
-  //   "Arts and Humanities",
-  //   "Mass Communication",
-  //   "Nursing",
-  //   "Agriculture",
-  //   "Design",
-  //   "Law",
-  //   "Pharmacy",
-  //   "Dental",
-  //   "Performing Arts",
-  //   "Others",
-  // ];
 
   const courses = ['Science and Technology', 'Medical', 'Business and Management', 'Fashion and Design', 'Agriculture', 'Environmental Science', 'Law and Legal', 'Hospitality', 'Journalism', 'Teaching', 'Lifestyle', 'Sports'];
 
@@ -132,6 +112,7 @@ const DetailsFormComponent = () => {
       console.log(e);
     }
   };
+
   const handleFacilityChange = (facility) => {
     if (selectedFacilities.includes(facility)) {
       setSelectedFacilities(selectedFacilities.filter((f) => f !== facility));
@@ -226,6 +207,7 @@ const DetailsFormComponent = () => {
           id=""
           cols="30"
           rows="10"
+          required
         ></textarea>
         <hr />
 
@@ -236,6 +218,7 @@ const DetailsFormComponent = () => {
           id=""
           cols="30"
           rows="10"
+          required
         ></textarea>
         <hr />
 
@@ -244,28 +227,27 @@ const DetailsFormComponent = () => {
           <div className="form-input-flex-two" key={index}>
             <div className="form-input-group">
               <label htmlFor="collegename">Course Name*</label>
-              {/* <input type="text" placeholder='Enter the course name' /> */}
               <input
                 type="text"
                 name={`courseName${index}`}
                 placeholder="Enter the course name"
+                required
               />
             </div>
 
             <div className="form-input-group">
               <label htmlFor="collegename">Min. Qualification*</label>
-              {/* <input type="text" placeholder='Add qualification' /> */}
               <input
                 type="text"
                 name={`minQualification${index}`}
                 placeholder="Add qualification"
+                required
               />
             </div>
 
             <div className="form-input-group">
               <label htmlFor="collegename">Course Type*</label>
-              {/* <input type="text" placeholder='Add qualification' /> */}
-              <select name={`courseType${index}`} id="" className="college-details-form-course-type-select">
+              <select name={`courseType${index}`} id="" className="college-details-form-course-type-select" required>
                 {courses.map((course, index) => (
                   <option key={index} value={course}>{course}</option>
                 ))}
@@ -275,27 +257,26 @@ const DetailsFormComponent = () => {
 
             <div className="form-input-group">
               <label htmlFor="collegename">Duration*</label>
-              {/* <input type="text" placeholder='Years' /> */}
               <input
                 type="text"
                 name={`duration${index}`}
                 placeholder="Years"
+                required
               />
             </div>
 
             <div className="form-input-group">
               <label htmlFor="collegename">Fee*</label>
-              {/* <input type="text" placeholder='Ex- 1-2L' /> */}
-              <input type="text" name={`fee${index}`} placeholder="Ex- 1-2L" />
+              <input type="text" name={`fee${index}`} placeholder="Ex- 1-2L" required/>
             </div>
 
             <div className="form-input-group">
               <label htmlFor="collegename">Distance*</label>
-              {/* <input type="text" placeholder='YES/NO' /> */}
               <input
                 type="text"
                 name={`distance${index}`}
                 placeholder="YES/NO"
+                required
               />
             </div>
 
@@ -323,31 +304,31 @@ const DetailsFormComponent = () => {
           <div className="form-input-flex-two" key={index}>
             <div className="form-input-group">
               <label htmlFor="collegename">Department Name*</label>
-              {/* <input type="text" placeholder='eg: Name' /> */}
               <input
                 type="text"
                 name={`departmentName${index}`}
                 placeholder="eg: Name"
+                required
               />
             </div>
 
             <div className="form-input-group">
               <label htmlFor="collegename">Description*</label>
-              {/* <input type="text" placeholder='eg: Details' /> */}
               <input
                 type="text"
                 name={`description${index}`}
                 placeholder="eg: Details"
+                required
               />
             </div>
 
             <div className="form-input-group">
               <label htmlFor="collegename">Placement %*</label>
-              {/* <input type="text" placeholder='Years' />    */}
               <input
                 type="text"
                 name={`placementPercentage${index}`}
                 placeholder="Years"
+                required
               />
             </div>
 
@@ -380,16 +361,17 @@ const DetailsFormComponent = () => {
                 type="text"
                 name={`newsTitle${index}`}
                 placeholder="Add news title"
+                required
               />
             </div>
 
             <div className="form-input-group">
               <label htmlFor="collegename">Ref. Link*</label>
-              {/* <input type="text" placeholder='Add a reference link' /> */}
               <input
                 type="text"
                 name={`refLink${index}`}
                 placeholder="Add a reference link"
+                required
               />
             </div>
 
@@ -417,28 +399,27 @@ const DetailsFormComponent = () => {
           <div className="form-input-flex-two" key={index}>
             <div className="form-input-group">
               <label htmlFor="collegename">Agency Name*</label>
-              {/* <input type="text" placeholder='Add agency name' /> */}
               <input
                 type="text"
                 name={`agencyName${index}`}
                 placeholder="Add agency name"
+                required
               />
             </div>
 
             <div className="form-input-group">
               <label htmlFor="collegename">Rank*</label>
-              {/* <input type="text" placeholder='Enter the rank' /> */}
               <input
                 type="text"
                 name={`rank${index}`}
                 placeholder="Enter the rank"
+                required
               />
             </div>
 
             <div className="form-input-group">
               <label htmlFor="collegename">Year*</label>
-              {/* <input type="text" placeholder='Add year' /> */}
-              <input type="text" name={`year${index}`} placeholder="Add year" />
+              <input type="text" name={`year${index}`} placeholder="Add year" required />
             </div>
 
             <button
@@ -458,7 +439,9 @@ const DetailsFormComponent = () => {
         >
           ADD
         </button>
+
         <hr />
+
         <h3>Facilities</h3>
         <div className="facilities-checkboxes">
           <label>
@@ -544,11 +527,12 @@ const DetailsFormComponent = () => {
               type="text"
               onChange={(e) => setOverallPlacement(e.target.value)}
               placeholder="Enter placement %"
+              required
             />
           </div>
 
           <div className="form-input-group">
-            <label htmlFor="collegename">Promo/Documentary Video*</label>
+            <label htmlFor="collegename">Promo/Documentary Video</label>
             <input
               type="text"
               onChange={(e) => setPromo(e.target.value)}
@@ -571,6 +555,7 @@ const DetailsFormComponent = () => {
             <select
               value={selectedInstituteType}
               onChange={(e) => setSelectedInstituteType(e.target.value)}
+              required
             >
               <option value="">Select Institute Type</option>
               {instituteTypes.map((type, index) => (
@@ -581,11 +566,12 @@ const DetailsFormComponent = () => {
             </select>
           </div>
           <div className="form-input-group">
-            <label htmlFor="collegename">Study Mode</label>
+            <label htmlFor="collegename">Study Mode*</label>
             <input
               type="text"
               onChange={(e) => setStudyMode(e.target.value)}
               placeholder="Regular/Distance"
+              required
             />
           </div>
         </div>

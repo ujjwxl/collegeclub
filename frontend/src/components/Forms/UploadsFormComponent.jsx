@@ -223,11 +223,22 @@ const UploadsFormComponent = () => {
             });
     };
 
+    const handleSubmit = () => {
+        axios.post(`http://localhost:5000/auth/profilecompleted/${userId}`)
+            .then((response) => {
+                alert('Application form completed successfully')
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
     return (
         <div className='profile-form'>
             <h2>Uploads</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <h3>Upload relevant documents</h3>
+                <h4>Note: Upload each image separately using the upload button provided</h4>
                 <hr />
 
                 <div className="form-input-flex-two">
@@ -235,7 +246,7 @@ const UploadsFormComponent = () => {
                     <div className="form-input-group">
                         <label htmlFor="logo">Profile picture in Square*</label>
                         <div className='form-file-input-group'>
-                            <input type='file' id="logo" onChange={handleFileChange} />
+                            <input type='file' id="logo" onChange={handleFileChange} required />
                             <button type='button' onClick={() => handleFileUpload(selectedFile, "profile")}>Upload</button>
                         </div>
                     </div>
@@ -264,7 +275,7 @@ const UploadsFormComponent = () => {
                         <div className="form-input-group">
                             <label htmlFor="authLetter">Authorization Letter*</label>
                             <div className='form-file-input-group'>
-                                <input type='file' id="authLetter" onChange={handleAuthorizationLetterChange} />
+                                <input type='file' id="authLetter" onChange={handleAuthorizationLetterChange} required />
                                 <button type='button' onClick={() => handleFileUpload(authorizationLetter, "authorization")}>Upload</button>
                             </div>
                         </div>
@@ -274,7 +285,7 @@ const UploadsFormComponent = () => {
                         <div className="form-input-group">
                             <label htmlFor="registrationCert">Company Registration Certificate*</label>
                             <div className='form-file-input-group'>
-                                <input type='file' id="registrationCert" onChange={handleAuthorizationLetterChange} />
+                                <input type='file' id="registrationCert" onChange={handleAuthorizationLetterChange} required />
                                 <button type='button' onClick={() => handleFileUpload(authorizationLetter, "registration")}>Upload</button>
                             </div>
                         </div>
@@ -284,7 +295,7 @@ const UploadsFormComponent = () => {
                         <div className="form-input-group">
                             <label htmlFor="registrationCert">Address Proof*</label>
                             <div className='form-file-input-group'>
-                                <input type='file' id="registrationCert" onChange={handleAuthorizationLetterChange} />
+                                <input type='file' id="registrationCert" onChange={handleAuthorizationLetterChange} required />
                                 <button type='button' onClick={() => handleFileUpload(authorizationLetter, "address")}>Upload</button>
                             </div>
                         </div>
@@ -302,7 +313,7 @@ const UploadsFormComponent = () => {
                         <div className="form-input-group">
                             <label htmlFor="rankingRef">Ranking reference document*</label>
                             <div className='form-file-input-group'>
-                                <input type='file' id="rankingRef" onChange={handleRankingReferenceChange} />
+                                <input type='file' id="rankingRef" onChange={handleRankingReferenceChange} required />
                                 <button type='button' onClick={() => handleFileUpload(rankingReference, "ranking")}>Upload</button>
                             </div>
                         </div>
@@ -312,7 +323,7 @@ const UploadsFormComponent = () => {
                         <div className="form-input-group">
                             <label htmlFor="panCard">PAN Card*</label>
                             <div className='form-file-input-group'>
-                                <input type='file' id="panCard" onChange={handleRankingReferenceChange} />
+                                <input type='file' id="panCard" onChange={handleRankingReferenceChange} required />
                                 <button type='button' onClick={() => handleFileUpload(rankingReference, "pancard")}>Upload</button>
                             </div>
                         </div>
@@ -322,7 +333,7 @@ const UploadsFormComponent = () => {
                         <div className="form-input-group">
                             <label htmlFor="panCard">PAN Card*</label>
                             <div className='form-file-input-group'>
-                                <input type='file' id="panCard" onChange={handleRankingReferenceChange} />
+                                <input type='file' id="panCard" onChange={handleRankingReferenceChange} required />
                                 <button type='button' onClick={() => handleFileUpload(rankingReference, "pancard")}>Upload</button>
                             </div>
                         </div>
@@ -334,14 +345,14 @@ const UploadsFormComponent = () => {
                 <div className="form-input-group">
                     <label htmlFor="gallery">Select upto 5 JPEG/JPG images*</label>
                     <div className='form-file-input-group'>
-                        <input type='file' id="gallery" multiple onChange={handleImageChange} />
+                        <input type='file' id="gallery" multiple onChange={handleImageChange} required />
                         {/* <button type='button' onClick={() => handleGalleryUpload(selectedImages, "images")}>Upload images</button> */}
                         <button type='button' onClick={handleGalleryUpload}>Upload images</button>
                     </div>
                 </div>
                 <hr />
 
-                <button type='submit' className='form-submit-button'>Save and Continue</button>
+                <button type='submit' className='form-submit-button'>Save and continue</button>
             </form>
         </div>
     );

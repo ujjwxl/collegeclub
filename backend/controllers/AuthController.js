@@ -707,3 +707,35 @@ export const submitJobApplication = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 }
+
+
+export const completeApplicationForm = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    querySnapshot.forEach(async (doc) => {
+      const docRef = doc.ref;
+
+      await updateDoc(docRef, {
+        applicationFormCompleted: true
+      });
+
+      console.log("Application form completed successfully");
+    });
+
+    res
+      .status(200)
+      .json({ message: "Application form completed successfully" });
+  } catch (error) {
+    console.error("Error updating user details:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};

@@ -399,7 +399,7 @@ const College = () => {
           </div>
 
           <div className="colleges-display-box-list">
-            {collegeData &&
+            {collegeData && collegeData.applicationFormCompleted &&
               filteredColleges.map((college, index) => (
                 <div
                   className="colleges-display-box-item"
