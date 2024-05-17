@@ -12,7 +12,7 @@ const CompanyDetailsComponent = () => {
     const [promo, setPromo] = useState("");
     const [industryType, setIndustryType] = useState("");
 
-    const userId = sessionStorage.getItem("id");
+    const userId = localStorage.getItem("id");
 
     const handleSubmit = async (e) => {
         e.preventDefault();

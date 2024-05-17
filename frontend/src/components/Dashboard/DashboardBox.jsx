@@ -8,7 +8,7 @@ const DashboardBox = () => {
 
   const [userData, setUserData] = useState(null);
 
-  const userId = sessionStorage.getItem('id');
+  const userId = localStorage.getItem('id');
 
   useEffect(() => {
     const fetchUserData = async () => {

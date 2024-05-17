@@ -82,7 +82,9 @@ export const loginUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json(userData);
+    const token = await userCredential.user.getIdToken();
+    
+    res.status(200).json({userData, token});
   } catch (error) {
     console.error("Login failed:", error.message);
     res.status(400).json({ message: "Invalid email or password" });

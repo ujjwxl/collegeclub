@@ -8,7 +8,7 @@ import CompanyDetailsComponent from '../../components/Forms/CompanyDetailsCompon
 
 const DetailsForm = () => {
 
-    const type = sessionStorage.getItem('type');
+    const type = localStorage.getItem('type');
 
     return (
         <div>

@@ -16,7 +16,7 @@
 //         setBannerImage(event.target.files[0]);
 //     };
 
-//     const userId = sessionStorage.getItem('id');
+//     const userId = localStorage.getItem('id');
 
 //     const handleFileUpload = (e) => {
 
@@ -141,7 +141,7 @@ const UploadsFormComponent = () => {
     const [authorizationLetter, setAuthorizationLetter] = useState(null);
     const [rankingReference, setRankingReference] = useState(null);
     const [selectedImages, setSelectedImages] = useState([]);
-    const [type, setType] = useState(sessionStorage.getItem('type'));
+    const [type, setType] = useState(localStorage.getItem('type'));
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
@@ -172,7 +172,7 @@ const UploadsFormComponent = () => {
         setSelectedImages(newSelectedImages);
     };
 
-    const userId = sessionStorage.getItem('id');
+    const userId = localStorage.getItem('id');
 
     const handleFileUpload = (file, endpoint) => {
         const formData = new FormData();
@@ -190,7 +190,7 @@ const UploadsFormComponent = () => {
 
     // const handleGalleryUpload = (files, endpoint) => {
 
-    //     const userId = sessionStorage.getItem('id');
+    //     const userId = localStorage.getItem('id');
 
     //     const formData = new FormData();
     //     for (let i = 0; i < files.length; i++) {

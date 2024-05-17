@@ -566,7 +566,7 @@ const Career = () => {
         alert('File uploaded successfully');
         console.log('File uploaded successfully');
         console.log(response);
-        sessionStorage.setItem('resumeLink', response.data.downloadURL)
+        localStorage.setItem('resumeLink', response.data.downloadURL)
       })
       .catch((error) => {
         console.error('Error uploading file:', error);
@@ -576,7 +576,7 @@ const Career = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const resumeLink = sessionStorage.getItem('resumeLink');
+    const resumeLink = localStorage.getItem('resumeLink');
 
     if (!resumeLink) {
       alert('Please upload a resume first');
@@ -596,7 +596,7 @@ const Career = () => {
         .then(res => {
           if (res.status == 200) {
             alert('Applied for job succesfully!');
-            sessionStorage.removeItem('resumeLink');
+            localStorage.removeItem('resumeLink');
           }
         })
         .catch(e => {

@@ -24,7 +24,7 @@ const CompanyProfileComponent = () => {
 
     const [referralCode, setReferralCode] = useState('');
 
-    const userId = sessionStorage.getItem('id');
+    const userId = localStorage.getItem('id');
 
     const navigate = useNavigate();
 

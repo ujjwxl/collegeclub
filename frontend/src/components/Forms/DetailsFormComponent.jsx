@@ -35,7 +35,7 @@ const DetailsFormComponent = () => {
   const [promo, setPromo] = useState("");
   const [scholarship, setScholarship] = useState("");
 
-  const userId = sessionStorage.getItem("id");
+  const userId = localStorage.getItem("id");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

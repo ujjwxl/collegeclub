@@ -10,7 +10,7 @@ import AmbassadorProfileComponent from '../../components/Forms/AmbassadorProfile
 
 const ProfileForm = () => {
 
-    const type = sessionStorage.getItem('type');
+    const type = localStorage.getItem('type');
 
     return (
         <div>

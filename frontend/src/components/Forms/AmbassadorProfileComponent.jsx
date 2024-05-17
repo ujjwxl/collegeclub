@@ -32,7 +32,7 @@ const AmbassadorProfileComponent = () => {
 
   const [whyJoinUs, setWhyJoinUs] = useState("");
 
-  const userId = sessionStorage.getItem("id");
+  const userId = localStorage.getItem("id");
 
   const navigate = useNavigate();
 
