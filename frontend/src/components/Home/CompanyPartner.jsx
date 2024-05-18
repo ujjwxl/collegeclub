@@ -1,6 +1,11 @@
 import React from 'react'
 import homeFiveImage from '../../assets/home-five.jpg'
 import collegeClubLogo from '../../assets/collegeclub-logo.png'
+import BIT from '../../assets/BIT.png'
+import Pilani from '../../assets/Pilani.png'
+import NIT from '../../assets/NIT.png'
+import IIT from '../../assets/IIT.png'
+import Marquee from "react-fast-marquee";
 import './CompanyPartner.css'
 
 const CompanyPartner = () => {
@@ -12,13 +17,31 @@ const CompanyPartner = () => {
                 <div className="circle-logos-container">
                     
 
-                    <div className='home-college-partners-details'>
+                <div className='home-college-partners-details'>
                         <p>CollegeClub: The trusted choice for promotions and admissions among India's premier educational institutions</p>
                         <p>Some of our partners include</p>
+                        <div className='colleges'>
                         <p>BIT Mesra</p>
                         <p>NIT Patna</p>
                         <p>IIT Patna</p>
                         <p>VIT Vellore</p>
+                        </div>
+                        <div className='marquee'>
+                        <Marquee className='marquee' speed={200} pauseOnHover gradient={false}>
+                            <div className='bit'>
+                                <img src={BIT}></img>
+                            </div>
+                            <div className='pilani'>
+                                <img src={Pilani}></img>
+                            </div>
+                            <div className='nit'>
+                                <img src={NIT}></img>
+                            </div>
+                            <div className='iit'>
+                                <img src={IIT}></img>
+                            </div>
+                        </Marquee>
+                        </div>
                     </div>
 
                     <svg width="400" height="400">

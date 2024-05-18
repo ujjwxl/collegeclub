@@ -13,20 +13,45 @@
     box-sizing: border-box;
     font-family: "Comfortaa", sans-serif;
 }
-
+.no-courses-selected{
+    margin-left: 10px;
+}
 .courses-display-box {
     display: flex;
     background-color: #240655;
     width: 90%;
     margin: 2% auto 2% auto;
 }
-
+.courses-title {
+    display: flex;
+    align-items: center;
+    /* padding: 0 20px; */
+    margin: 0 30px;
+    justify-content: space-between;
+  }
+.courses-filter-btn {
+    background-color: #240655;
+    text-align: center;
+    color: #fff;
+    width: 90px;
+    height: 40px;
+    font-size: 17px;
+    border: 3px solid transparent;
+    border-image: linear-gradient(to right, #eb3349 0, #f45c43 51%, #eb3349 100%);
+    border-image-slice: 1;
+    cursor: pointer;
+    font-family: "Comfortaa", sans-serif;
+  }
 .courses-display-box-filter {
     width: 20%;
     background-color: #4527a0;
     overflow-y: scroll;
 }
 
+.courses-head{
+    margin-left: 10px;
+    font-weight: bolder;
+}
 .courses-display-box-list {
     width: 80%;
     overflow-y: auto;
@@ -52,3 +77,49 @@
     padding: 10px;
     margin: 0 20px;
 }
+.filter-modal-content-courses{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.filter-modal-content-right-courses{
+    width: 70%;
+    background-color: #3b208b;
+    /* background-color: #4527a0; */
+}
+
+@media only screen and (max-width: 768px){
+    .courses-overlay{
+        flex-direction: column;
+    }
+    .courses-display-box{
+        border-radius: 10px;
+        height: 100vh;
+        
+    }
+    .courses-display-box-filter {
+        display: none;
+    }
+    .courses-display-box-list{
+        width: 100%;
+
+    }
+    .colleges-display-box-item-details-two{
+        margin-left: 10px;
+    }
+    .courses-left-items{
+        margin-top: 10px;
+        width: 60%;
+    }
+}
+/* @media only screen and (min-width: 768px) and (max-width: 1080px){
+    .courses-left-items{
+        margin-top: 10px;
+        width: 40%;
+    }
+} */
+@media only screen and (min-width: 768px) {
+    .courses-title {
+      display: none;
+    }
+  }

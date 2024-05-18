@@ -25,10 +25,46 @@
     font-family: "K2D", sans-serif;
       letter-spacing: 5px;
 }
+.marquee{
+    display: none;
+  }
+
 @media only screen and (max-width: 768px) {
     .home-six-overlay{
         top: 502vh;
         height: 102.5vh;
     }
+    svg {
+        position: absolute;
+        left: 0;
+        scale: 0.8;
+        /* width: 90%; */
+        margin-right: auto;
+        display: none;
+    }
+    .home-college-partners-details{
+      width: 90%;
+      margin-left: 0px;
+    }
+    .home-college-partners-details p{
+        margin-left: 20px;
+    }
+    .colleges{
+      display: none;
+  }
+  .marquee{
+    display: inline;
+  }
+  .marquee{
+    margin-top: 100px;
+  }
+  .marquee img{
+    height: 120px;
+    width: 120px;
+    margin: 0px 30px;
+  }
+  .iit img{
+    border-radius: 55px;
+  }
     
 }

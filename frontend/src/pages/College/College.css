@@ -46,6 +46,7 @@
   background-color: #4527a0;
   border: none;
   padding: 20px 0px;
+  padding-top: 0;
   z-index: 1000;
 }
 
@@ -57,7 +58,10 @@
     align-items: center;
     justify-content: space-between;
     padding: 0px 20px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    background-color: #3b208b;
+
     border-bottom: 1px solid rgb(113, 113, 113)
 }
 .filter-modal-header h2{
@@ -128,7 +132,9 @@
 .colleges-display-box a {
   margin-left: 20px;
 }
-
+.college-filter-header{
+  background-color: #4527a0;
+}
 .colleges-display-box-filter {
   /* margin-left: auto; */
   width: 20%;
@@ -227,6 +233,9 @@
   font-weight: bold;
   cursor: pointer;
   text-decoration: underline;
+}
+.active-filter {
+  color: red; /* Change color to red when filter is active */
 }
 @media only screen and (max-width: 768px) {
   .colleges-overlay {

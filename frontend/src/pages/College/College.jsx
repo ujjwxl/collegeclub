@@ -50,6 +50,7 @@ const College = () => {
     };
 
     fetchData();
+    setClickedFilter("Degree")
   }, []);
 
   // console.log(collegeData)
@@ -224,7 +225,7 @@ const College = () => {
         </div>
         {isFilterModalOpen && (
           <div className="filter-modal">
-            <div className="filter-modal-header">
+            <div className="filter-modal-header college-filter-header">
               <h2>Search Filters</h2>
               <div className="clear-apply">
                 <h3

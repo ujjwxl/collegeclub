@@ -30,7 +30,7 @@
 .exams-display-box-list {
     width: 80%;
     overflow-y: auto;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     padding: 20px;
 }
 
@@ -72,4 +72,40 @@
     background-color: #4527A0;
     padding: 10px;
     margin: 0 20px;
+}
+.exams-title {
+    display: flex;
+    align-items: center;
+    /* padding: 0 20px; */
+    margin: 0 30px;
+    justify-content: space-between;
+  }
+.exams-title h2{
+    margin-top: 25px;
+    margin-left: 10px;
+    font-size: 28px;
+}
+@media only screen and (max-width: 768px) {
+    .exams-display-box-list{
+        width: 100%;
+    }
+    .exams-overlay{
+        flex-direction: column;
+    }
+    .exams-display-box-filter{
+        display: none;
+    }
+    .exams-display-box{
+        border-radius: 10px;
+        height: 82vh;
+    }
+    .exams-left-items{
+        margin-top: 10px;
+        width: 40%;
+    }
+}
+@media only screen and (min-width: 769px) {
+    .exams-title{
+        display: none;
+    }
 }

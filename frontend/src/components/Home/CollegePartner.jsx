@@ -55,7 +55,7 @@ const CollegePartner = () => {
                         <p>VIT Vellore</p>
                         </div>
                         <div className='marquee'>
-                        <Marquee className='marquee' speed={100} pauseOnHover gradient={false}>
+                        <Marquee className='marquee' speed={200} pauseOnHover gradient={false}>
                             <div className='bit'>
                                 <img src={BIT}></img>
                             </div>
