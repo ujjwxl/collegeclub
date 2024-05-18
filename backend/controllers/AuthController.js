@@ -83,8 +83,8 @@ export const loginUser = async (req, res) => {
     }
 
     const token = await userCredential.user.getIdToken();
-    
-    res.status(200).json({userData, token});
+
+    res.status(200).json({ userData, token });
   } catch (error) {
     console.error("Login failed:", error.message);
     res.status(400).json({ message: "Invalid email or password" });
@@ -644,10 +644,10 @@ export const getCoursesByType = async (req, res) => {
     const querySnapshot = await getDocs(q);
 
     const courses = [];
-    querySnapshot.forEach(doc => {
+    querySnapshot.forEach((doc) => {
       const college = doc.data();
       if (college && college.courses) {
-        college.courses.forEach(course => {
+        college.courses.forEach((course) => {
           if (course.courseType === courseType) {
             courses.push({
               collegeName: college.organizationName,
@@ -661,7 +661,7 @@ export const getCoursesByType = async (req, res) => {
               district: college.district,
               state: college.state,
               email: college.email,
-              contactNumber: college.contactNumber
+              contactNumber: college.contactNumber,
               // Add other course details you want to include
             });
           }
@@ -677,18 +677,10 @@ export const getCoursesByType = async (req, res) => {
 };
 
 export const submitJobApplication = async (req, res) => {
-  const {
-    name,
-    phoneNumber,
-    email,
-    city,
-    state,
-    position,
-    resumeLink
-  } = req.body;
+  const { name, phoneNumber, email, city, state, position, resumeLink } =
+    req.body;
 
   try {
-    
     const docRef = await addDoc(collection(db, "applications"), {
       name,
       phoneNumber,
@@ -696,20 +688,18 @@ export const submitJobApplication = async (req, res) => {
       city,
       state,
       position,
-      resumeLink
+      resumeLink,
     });
 
     console.log("Document written with ID: ", docRef.id);
     res.status(200).json(docRef);
-    
   } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;
     console.log(errorMessage);
     res.status(500).json({ message: error.message });
   }
-}
-
+};
 
 export const completeApplicationForm = async (req, res) => {
   const { userId } = req.params;
@@ -727,7 +717,7 @@ export const completeApplicationForm = async (req, res) => {
       const docRef = doc.ref;
 
       await updateDoc(docRef, {
-        applicationFormCompleted: true
+        applicationFormCompleted: true,
       });
 
       console.log("Application form completed successfully");
@@ -738,6 +728,43 @@ export const completeApplicationForm = async (req, res) => {
       .json({ message: "Application form completed successfully" });
   } catch (error) {
     console.error("Error updating user details:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const createJobListing = async (req, res) => {
+  const { userId } = req.params;
+
+  const {
+    positionName,
+    jobID,
+    jobDescription,
+    numberOfPositions,
+    jobLocation,
+    yearsOfExperience,
+    skills,
+    educationalQualification,
+  } = req.body;
+
+  try {
+    const docRef = await addDoc(collection(db, "jobs"), {
+      positionName,
+      jobID,
+      jobDescription,
+      numberOfPositions,
+      jobLocation,
+      yearsOfExperience,
+      skills,
+      educationalQualification,
+      postedBy: userId
+    });
+
+    console.log("Document written with ID: ", docRef.id);
+    res.status(200).json(docRef);
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
     res.status(500).json({ message: error.message });
   }
 };

@@ -1,0 +1,16 @@
+
+.create-job-box {
+    overflow-y: scroll;
+}
+
+.create-job-container {
+    align-items: baseline;
+}
+
+.create-job-container form {
+    width: 100%;
+}
+
+.create-job-input-flex {
+    width: 100%;
+}

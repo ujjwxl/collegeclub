@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import defaultImage from "../../assets/test-dp.jpg";
 import profileIcon from '../../assets/user-icon.png';
@@ -15,11 +15,13 @@ import helpIcon from "../../assets/help.png";
 import logoutIcon from "../../assets/close.png";
 import "./DashboardMenu.css";
 
-const DashboardMenu = () => {
+const DashboardMenu = ({ onCreateJob, onShowLeads, onDashboardClick }) => {
 
   const [userData, setUserData] = useState(null);
 
   const userId = localStorage.getItem('id');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -42,6 +44,24 @@ const DashboardMenu = () => {
 
   console.log(userData);
 
+  const handleSignOut = () => {
+    localStorage.removeItem('id');
+    localStorage.removeItem('token');
+    navigate('/');
+  }
+
+  const handleMiddleIconClick = () => {
+    if (userData && userData.accountType === 'College') {
+      onShowLeads();
+    } else if(userData && userData.accountType === 'Company') {
+      onCreateJob();
+    }
+  };
+
+  const handleDashboardClick = () => {
+    onDashboardClick();
+  };
+
   return (
     <div className="dashboard-menu">
       <div className="dashboard-menu-top">
@@ -59,7 +79,7 @@ const DashboardMenu = () => {
       <hr />
 
       <div className="dashboard-menu-middle">
-        <div className="dashboard-menu-middle-icon">
+        <div className="dashboard-menu-middle-icon" onClick={handleMiddleIconClick}>
           <img src={userData && userData.accountType === 'College' ? cmsIcon : createJobIcon} alt="" />
           <p>{userData && userData.accountType === 'College' ? 'CMS' : 'Create job'}</p>
         </div>
@@ -78,7 +98,7 @@ const DashboardMenu = () => {
       <hr />
 
       <div className="dashboard-menu-bottom">
-        <div className="dashboard-menu-bottom-options">
+        <div className="dashboard-menu-bottom-options" onClick={handleDashboardClick}>
           <img src={dashboardIcon} alt="" />
           <h3>Dashboard</h3>
         </div>
@@ -106,7 +126,7 @@ const DashboardMenu = () => {
 
         <hr />
       </div>
-      <div className="logout">
+      <div className="logout" onClick={handleSignOut}>
         <img src={logoutIcon} alt="" />
         <h3>Logout</h3>
       </div>
