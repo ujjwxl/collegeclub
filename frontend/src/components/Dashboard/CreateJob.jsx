@@ -8,6 +8,7 @@ const CreateJob = () => {
     const [jobDescription, setJobDescription] = useState('');
     const [numberOfPositions, setNumberOfPositions] = useState('');
     const [jobLocation, setJobLocation] = useState('');
+    const [locationType, setLocationType] = useState('');
     const [yearsOfExperience, setYearsOfExperience] = useState('');
     const [skills, setSkills] = useState('');
     const [educationalQualification, setEducationalQualification] = useState('');
@@ -24,6 +25,7 @@ const CreateJob = () => {
                 jobDescription,
                 numberOfPositions,
                 jobLocation,
+                locationType,
                 yearsOfExperience,
                 skills,
                 educationalQualification
@@ -90,6 +92,16 @@ const CreateJob = () => {
                         <div className="form-input-group">
                             <label htmlFor="collegename">Skills*</label>
                             <input type="text" placeholder='Enter the skills' onChange={(e) => setSkills(e.target.value)} value={skills} required />
+                        </div>
+
+                        <div className="form-input-group form-select apply-form-select">
+                            <label htmlFor="collegename">Location type*</label>
+                            <select value={locationType} onChange={(e) => setLocationType(e.target.value)} required>
+                                <option value="">Select location type*</option>
+                                <option value="on-site">On-Site</option>
+                                <option value="remote">Remote</option>
+                                <option value="hybrid">Hybrid</option>
+                            </select>
                         </div>
 
                         <div className="form-input-group">
