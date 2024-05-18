@@ -12,7 +12,7 @@ const CompanyDetailsComponent = () => {
     const [promo, setPromo] = useState("");
     const [industryType, setIndustryType] = useState("");
 
-    const userId = sessionStorage.getItem("id");
+    const userId = localStorage.getItem("id");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -63,23 +63,25 @@ const CompanyDetailsComponent = () => {
 
                 <hr />
 
-                <h3>About company</h3>
+                <h3>About company*</h3>
                 <textarea
                     onChange={(e) => setAboutCompany(e.target.value)}
                     name=""
                     id=""
                     cols="30"
                     rows="10"
+                    required
                 ></textarea>
                 <hr />
 
-                <h3>Why join us? (Mission and Vision)</h3>
+                <h3>Why join us?*    (Mission and Vision)</h3>
                 <textarea
                     onChange={(e) => setCompanyMission(e.target.value)}
                     name=""
                     id=""
                     cols="30"
                     rows="10"
+                    required
                 ></textarea>
                 <hr />
 
@@ -92,6 +94,7 @@ const CompanyDetailsComponent = () => {
                                 type="text"
                                 name={`newsTitle${index}`}
                                 placeholder="Add news title"
+                                required
                             />
                         </div>
 
@@ -101,6 +104,7 @@ const CompanyDetailsComponent = () => {
                                 type="text"
                                 name={`refLink${index}`}
                                 placeholder="Add a reference link"
+                                required
                             />
                         </div>
 
@@ -131,6 +135,7 @@ const CompanyDetailsComponent = () => {
                             type="text"
                             onChange={(e) => setRegistrationNumber(e.target.value)}
                             placeholder="Enter registration no."
+                            required
                         />
                     </div>
 
@@ -140,6 +145,7 @@ const CompanyDetailsComponent = () => {
                             type="text"
                             onChange={(e) => setPromo(e.target.value)}
                             placeholder="Enter the promo video link"
+                            required
                         />
                     </div>
                 </div>
@@ -149,7 +155,8 @@ const CompanyDetailsComponent = () => {
                         <input
                             type="text"
                             onChange={(e) => setIndustryType(e.target.value)}
-                            placeholder="Enter industry type"
+                            placeholder="Enter industry type*"
+                            required
                         />
                     </div>
                 </div>

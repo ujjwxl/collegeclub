@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
-  const userId = sessionStorage.getItem('id');
+  const userId = localStorage.getItem('id');
   const isLoggedIn = userId != null;
 
 

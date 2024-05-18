@@ -19,7 +19,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    
+
     try {
       await axios.post('http://localhost:5000/auth/login', {
         email,
@@ -27,12 +27,11 @@ const Login = () => {
       })
         .then(res => {
           if (res.status == 200) {
-            // alert("Signin successfully!");
-            console.log(res.data)
-            const userId = res.data.userId;
-            const accountType = res.data.accountType;
-            sessionStorage.setItem('id', userId);
-            sessionStorage.setItem('type', accountType);
+            const { userData, token } = res.data;
+            const { userId, accountType } = userData;
+            localStorage.setItem('id', userId);
+            localStorage.setItem('type', accountType);
+            localStorage.setItem('token', token);
             navigate('/dashboard');
           }
         })

@@ -32,7 +32,7 @@ const AmbassadorProfileComponent = () => {
 
   const [whyJoinUs, setWhyJoinUs] = useState("");
 
-  const userId = sessionStorage.getItem("id");
+  const userId = localStorage.getItem("id");
 
   const navigate = useNavigate();
 
@@ -103,6 +103,7 @@ const AmbassadorProfileComponent = () => {
               className="ambassador-form-gender-select"
               value={gender}
               onChange={(e) => setGender(e.target.value)}
+              required
             >
               <option value="">Select gender</option>
               {["Male", "Female", "Others"].map((type, index) => (
@@ -121,10 +122,10 @@ const AmbassadorProfileComponent = () => {
               dateFormat="yyyy-MM-dd"
               placeholderText="Select Date of Birth"
               required
-               showYearDropdown
-            scrollableYearDropdown
-            maxDate={new Date()}
-            yearDropdownItemNumber={60}
+              showYearDropdown
+              scrollableYearDropdown
+              maxDate={new Date()}
+              yearDropdownItemNumber={60}
             />
           </div>
         </div>
@@ -291,6 +292,7 @@ const AmbassadorProfileComponent = () => {
           id=""
           cols="30"
           rows="10"
+          required
         ></textarea>
         <hr />
 
