@@ -23,33 +23,33 @@ const Signup = () => {
 
   const [phoneNumberModal, setPhoneNumberModal] = useState(true);
   const [user, setUser] = useState(null);
-  const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState("");
 
   const sendOTP = async () => {
     try {
-      console.log(contactNumber)
+      console.log(contactNumber);
       const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
-      const confirmation = await signInWithPhoneNumber(auth, contactNumber, recaptcha);
+      const confirmation = await signInWithPhoneNumber(
+        auth,
+        contactNumber,
+        recaptcha
+      );
       // console.log(confirmation);
       setUser(confirmation);
-    }
-    catch (err) {
+    } catch (err) {
       console.error(err);
     }
-  }
-
-  
+  };
 
   const verifyOTP = async () => {
     try {
       const data = await user.confirm(otp);
-      console.log(data)
+      console.log(data);
       setPhoneNumberModal(false);
-    }
-    catch (err) {
+    } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   const handleTypeChange = (event) => {
     setAccountType(event.target.value);
@@ -89,141 +89,157 @@ const Signup = () => {
   return (
     <div>
       <Navbar />
-      <img
+      {/* <img
         src={backgroundImage}
         alt=""
         className="home1-img signup-page-image"
-      />
+      /> */}
 
-      <div className="signup-overlay">
-        {phoneNumberModal ? (
-          <div className="signup-otp-form">
+      {/* <div className="signup-overlay"> */}
+      {phoneNumberModal ? (
+        <>
+          <img
+            src={backgroundImage}
+            alt=""
+            className="home1-img signup-otp-page-image"
+          />
+          <div className="signup-otp-overlay">
+            <div className="signup-otp-form">
+              <div className="signup-otp-form-left">
+                <div className="signup-otp-form-left-contents">
+                  <h3>Welcome to CollegeClub!</h3>
+                  <h4>Verify your phone number to begin</h4>
+                  <PhoneInput
+                    className="phone-input-top"
+                    placeholder="Enter phone number"
+                    defaultCountry="IN"
+                    value={contactNumber}
+                    maxLength={11}
+                    onChange={setContactNumber}
+                  />
+                  <button onClick={sendOTP}>Send OTP</button> <br />
+                  <div id="recaptcha"></div>
+                  <input
+                    type="text"
+                    className="enterOTP"
+                    placeholder="Enter the OTP"
+                    onChange={(e) => setOtp(e.target.value)}
+                  />
+                  <button onClick={verifyOTP}>Verify</button>
+                </div>
+              </div>
 
-            <div className="signup-otp-form-left">
-              <div className="signup-otp-form-left-contents">
-              <h3>Welcome to CollegeClub!</h3>
-              <h4>Verify your phone number to begin</h4>
-              <PhoneInput
-                className="phone-input-top"
-                placeholder="Enter phone number"
-                defaultCountry="IN"
-                value={contactNumber}
-                maxLength={11}
-                onChange={setContactNumber}
-
-              />
-
-              <button onClick={sendOTP}>Send OTP</button> <br />
-
-              <div id="recaptcha"></div>
-
-              <input type="text" placeholder="Enter the OTP" onChange={(e) => setOtp(e.target.value)} />
-              <button onClick={verifyOTP}>Verify</button>
+              <div className="signup-otp-form-right">
+                <img src={backgroundImage} alt="" />
               </div>
             </div>
-
-
-            <div className="signup-otp-form-right">
-              <img src={backgroundImage} alt="" />
-            </div>
-
           </div>
-        ) : (
-          <div className="signup-form">
-            <form onSubmit={handleSubmit} className="signup-form-container">
-              <div className="signup-form-left">
-                <h2>Signup</h2>
-                <h2>for New Account</h2>
-                <select
-                  name="type"
-                  value={accountType}
-                  onChange={handleTypeChange}
-                >
-                  <option value="" disabled selected>
-                    Select account type
-                  </option>
-                  <option value="College">College</option>
-                  <option value="Company">Company</option>
-                  <option value="CC-Ambassador">CC Ambassador</option>
-                </select>{" "}
-                <br />
-                <input
-                  type="text"
-                  name="organization"
-                  placeholder="Enter organization name"
-                  onChange={(e) => setOrganizationName(e.target.value)}
-                />{" "}
-                <br />
-                <input
-                  type="text"
-                  name="fullname"
-                  placeholder="Your Full Name"
-                  onChange={(e) => setFullName(e.target.value)}
-                />{" "}
-                <br />
-                <PhoneInput
-                  className="phone-input-bottom"
-                  placeholder={contactNumber}
-                  defaultCountry="IN"
-                  value={contactNumber}
-                  onChange={setContactNumber}
-                  disabled
-                />
-                <br />
-                <input
-                  type="text"
-                  name="subdomain"
-                  placeholder="Select subdomain"
-                  onChange={(e) => setSubDomain(e.target.value)}
-                />
-              </div>
+        </>
+      ) : (
+        <>
+          <img
+            src={backgroundImage}
+            alt=""
+            className="home1-img signup-page-image"
+          />
+          <div className="signup-overlay">
+            <div className="signup-form">
+              <form onSubmit={handleSubmit} className="signup-form-container">
+                <div className="signup-form-left">
+                  <h2>Signup</h2>
+                  <h2>for New Account</h2>
+                  <select
+                    name="type"
+                    value={accountType}
+                    onChange={handleTypeChange}
+                  >
+                    <option value="" disabled selected>
+                      Select account type
+                    </option>
+                    <option value="College">College</option>
+                    <option value="Company">Company</option>
+                    <option value="CC-Ambassador">CC Ambassador</option>
+                  </select>{" "}
+                  <br />
+                  <input
+                    type="text"
+                    name="organization"
+                    placeholder="Enter organization name"
+                    onChange={(e) => setOrganizationName(e.target.value)}
+                  />{" "}
+                  <br />
+                  <input
+                    type="text"
+                    name="fullname"
+                    placeholder="Your Full Name"
+                    onChange={(e) => setFullName(e.target.value)}
+                  />{" "}
+                  <br />
+                  <PhoneInput
+                    className="phone-input-bottom"
+                    placeholder={contactNumber}
+                    defaultCountry="IN"
+                    value={contactNumber}
+                    onChange={setContactNumber}
+                    disabled
+                  />
+                  <br />
+                  <input
+                    type="text"
+                    name="subdomain"
+                    placeholder="Select subdomain"
+                    onChange={(e) => setSubDomain(e.target.value)}
+                  />
+                </div>
 
-              <div className="signup-form-right">
-                <input
-                  type="text"
-                  name="username"
-                  placeholder="Choose a username"
-                  onChange={(e) => setUserName(e.target.value)}
-                />{" "}
-                <br />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                  onChange={(e) => setEmail(e.target.value)}
-                />{" "}
-                <br />
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Enter password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />{" "}
-                <br />
-                <input
-                  type="password"
-                  name="cpassword"
-                  placeholder="Confirm password"
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-                <label className="checkbox-label">
-                  <input type="checkbox" name="agreeToTerms" />
-                  <p>
-                    By registering I agree to Terms & Privacy policy of <br /> the
-                    website.
+                <div className="signup-form-right">
+                  <input
+                    type="text"
+                    name="username"
+                    placeholder="Choose a username"
+                    onChange={(e) => setUserName(e.target.value)}
+                  />{" "}
+                  <br />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />{" "}
+                  <br />
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />{" "}
+                  <br />
+                  <input
+                    type="password"
+                    name="cpassword"
+                    placeholder="Confirm password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                  <label className="checkbox-label">
+                    <input type="checkbox" name="agreeToTerms" />
+                    <p>
+                      By registering I agree to Terms & Privacy policy of <br />{" "}
+                      the website.
+                    </p>
+                  </label>{" "}
+                  <br />
+                  <button type="submit">Create Account</button>
+                  <p className="already-have-account">
+                    Already have an account?<br></br> <Link to={"/login"}>Login</Link>{" "}
+                    from here
                   </p>
-                </label>{" "}
-                <br />
-                <button type="submit">Create Account</button>
-                <p className="already-have-account">
-                  Already have an account? <Link to={"/login"}>Login</Link> from
-                  here
-                </p>
-              </div>
-            </form>
+                </div>
+              </form>
+            </div>
           </div>
-        )}
-      </div>
+        </>
+      )}
+      {/* </div> */}
 
       <Footer />
     </div>

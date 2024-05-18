@@ -1,232 +1,334 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 
-
-.home1-img{
-    height: 100vh;
-    width: 100%;
+.home1-img {
+  height: 100vh;
+  width: 100%;
 }
 
 .signup-overlay {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 101%;
-    background-color: rgba(36, 6, 85, 0.5);
-    color: white;
-    text-align: center;
-    /* padding: 20px; */
-    box-sizing: border-box;
-    font-family: "Comfortaa", sans-serif;
-    font-size: 1.5rem;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 101%;
+  background-color: rgba(36, 6, 85, 0.5);
+  color: white;
+  text-align: center;
+  /* padding: 20px; */
+  box-sizing: border-box;
+  font-family: "Comfortaa", sans-serif;
+  font-size: 1.5rem;
+}
+
+.signup-otp-overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 101%;
+  background-color: rgba(36, 6, 85, 0.5);
+  color: white;
+  text-align: center;
+  /* padding: 20px; */
+  box-sizing: border-box;
+  font-family: "Comfortaa", sans-serif;
+  font-size: 1.5rem;
 }
 
 .signup-form {
-    font-family: "Comfortaa", sans-serif;
-    background-color: #270652;
-    width: 80%;
-    margin: 7% auto;
-    border-radius: 20px;
+  font-family: "Comfortaa", sans-serif;
+  background-color: #270652;
+  width: 80%;
+  margin: 7% auto;
+  border-radius: 20px;
 }
 
 .signup-otp-form {
-    display: flex;
-    background-color: #270652;
-    height: 85%;
-    margin: 80px auto 0 auto;
-    width: 95%;
-    overflow: hidden;
-    border-radius: 10px;
+  display: flex;
+  background-color: #270652;
+  height: 85%;
+  margin: 80px auto 0 auto;
+  width: 90%;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
 }
 
 .signup-otp-form-left {
-    width: 50%;
-    text-align: left;
+  width: 50%;
+  text-align: left;
 }
 
 .signup-otp-form-left-contents {
-    /* background-color: red; */
-    margin: 5% 0 0 5%;
+  /* background-color: red; */
+  margin: 5% 0 0 5%;
 }
 
 .phone-input-top {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 .signup-otp-form-left input {
-    width: 60%;
-    padding: 0.6rem 0.75rem;
-    height: 25px;
-    font-size: 14px;
-    color: #fff;
-    background-color: #270652;
-    border-color: rgba(255, 255, 255, .1);
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    display: block;
-    font-family: "Comfortaa", sans-serif;
+  width: 60%;
+  padding: 0.6rem 0.75rem;
+  height: 25px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #270652;
+  border-color: rgba(255, 255, 255, 0.1);
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  display: block;
+  font-family: "Comfortaa", sans-serif;
+  border: none;
+}
+.enterOTP {
+  border: 1px solid #ced4da !important;
 }
 
 .signup-otp-form-left button {
-    background-image: linear-gradient(to right, #eb3349 0, #f45c43 51%, #eb3349 100%);
-    text-align: center;
-    margin: 10px 0;
-    color: #fff;
-    width: 20%;
-    height: 40px;
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-    font-family: "Comfortaa", sans-serif;
+  background-image: linear-gradient(
+    to right,
+    #eb3349 0,
+    #f45c43 51%,
+    #eb3349 100%
+  );
+  text-align: center;
+  margin: 10px 0;
+  color: #fff;
+  width: 20%;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: "Comfortaa", sans-serif;
 }
 
 .signup-otp-form-right {
-    width: 50%;
+  width: 50%;
 }
 
 .signup-form h2 {
-    text-align: left;
-    font-size: 1.4rem;
-    margin-left: 15%;
+  text-align: left;
+  font-size: 1.4rem;
+  margin-left: 15%;
 }
 
 .signup-form-container {
-    display: flex;
+  display: flex;
 }
 
 .signup-form-container input {
-    display: block;
-    width: 60%;
-    padding: 0.6rem 0.75rem;
-    height: 25px;
-    font-size: 14px;
-    color: #fff;
-    background-color: #270652;
-    border-color: rgba(255, 255, 255, .1);
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    display: block;
-    font-family: "Comfortaa", sans-serif;
-    /* margin: 0 auto 0 auto; */
-    margin-left: 15%;
+  display: block;
+  width: 60%;
+  padding: 0.6rem 0.75rem;
+  height: 25px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #270652;
+  border-color: rgba(255, 255, 255, 0.1);
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  display: block;
+  font-family: "Comfortaa", sans-serif;
+  /* margin: 0 auto 0 auto; */
+  margin-left: 15%;
 }
 
 .signup-form-container input::placeholder {
-    font-family: "Comfortaa", sans-serif;
+  font-family: "Comfortaa", sans-serif;
 }
 
 .signup-form-container input:focus {
-    background-color: #CFE2FF;
-    transition: 0.5s;
-    color: black;
+  background-color: #cfe2ff;
+  transition: 0.5s;
+  color: black;
 }
 
 .signup-form-container select {
-    display: block;
-    width: 63.5%;
-    transition-duration: .5s;
-    border-style: solid;
-    padding: 0.6rem 0.75rem;
-    height: 44px;
-    font-size: 14px;
-    color: #fff;
-    background-color: #270652;
-    border-color: rgba(255, 255, 255, .1);
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    /* margin: 0 auto 0 auto; */
-    margin-left: 15%;
+  display: block;
+  width: 63.5%;
+  transition-duration: 0.5s;
+  border-style: solid;
+  padding: 0.6rem 0.75rem;
+  height: 44px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #270652;
+  border-color: rgba(255, 255, 255, 0.1);
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  /* margin: 0 auto 0 auto; */
+  margin-left: 15%;
 }
 
 .signup-form-container button {
-    background-image: linear-gradient(to right, #eb3349 0, #f45c43 51%, #eb3349 100%);
-    text-align: center;
-    color: #fff;
-    width: 30%;
-    height: 40px;
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-    font-family: "Comfortaa", sans-serif;
+  background-image: linear-gradient(
+    to right,
+    #eb3349 0,
+    #f45c43 51%,
+    #eb3349 100%
+  );
+  text-align: center;
+  color: #fff;
+  width: 30%;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: "Comfortaa", sans-serif;
 }
 
 .checkbox-label {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    margin-top: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-top: 20px;
 }
 
 .checkbox-label input {
-    margin-right: 5px;
-    width: 5%;
-    scale: 0.6;
+  margin-right: 5px;
+  width: 5%;
+  scale: 0.6;
 }
 
 .checkbox-label p {
-    margin: 0;
-    margin-top: 15px;
-    margin-left: -10px;
-    text-align: left;
+  margin: 0;
+  margin-top: 15px;
+  margin-left: -10px;
+  text-align: left;
 }
 
 .already-have-account {
-    font-size: 14px;
-    text-align: left;
-    margin-left: 15%;
-    margin-bottom: 30px;
+  font-size: 14px;
+  text-align: left;
+  margin-left: 15%;
+  margin-bottom: 30px;
 }
 
 .signup-form-left {
-    width: 50%;
-    /* background-color: blue; */
+  width: 50%;
+  /* background-color: blue; */
 }
 
 .signup-form-right {
-    width: 50%;
-    margin-top: 105px;
-    /* background-color: green; */
+  width: 50%;
+  margin-top: 105px;
+  /* background-color: green; */
 }
 
 .PhoneInput {
-    width: 60%;
-    padding: 0.6rem 0.75rem;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
+  width: 60%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
 }
 
 .phone-input-bottom {
-    margin-left: 15%;
+  margin-left: 15%;
+}
+.phone-input-bottom input{
+    margin: 0;
+    border: none;
 }
 
 @media only screen and (max-width: 768px) {
-    .signup-overlay {
-        height: 161vh;
-    }
+  .signup-overlay {
+    height: 161vh;
+  }
+  .signup-form{
+    width: 84%;
+  }
 
-    .signup-page-image {
-        height: 160vh;
-    }
+  .signup-otp-page-image {
+    height: 90vh;
+  }
+  .signup-otp-form {
+    height: 75%;
+  }
+  .signup-otp-form-left-contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+    margin-top: 10%;
+  }
+  .signup-otp-form-right {
+    display: none;
+  }
+  .signup-otp-form-left {
+    width: 100%;
+    text-align: center;
+  }
+  .signup-otp-form-left button {
+    width: 30%;
+  }
+  .signup-otp-form-left-contents h4 {
+    font-size: 17px;
+    font-weight: 100;
+  }
+  .signup-page-image {
+    height: 135vh;
+  }
 
-    .signup-form-container {
-        display: block;
-        margin-top: 40%;
-        padding: 0;
-    }
+  .signup-form-container {
+    display: block;
+    margin-top: 20%;
+    padding: 0;
+    padding-left: 20px;
+    padding-bottom: 20px;
+  }
+  .signup-form-left {
+    padding-top: 20px;
+  }
 
-    .signup-form-container input {
-        width: 150%;
-    }
+  .signup-form-container input {
+    width: 150%;
+  }
 
-    .signup-form-container select {
-        width: 166%;
-    }
+  .signup-form-container select {
+    width: 160%;
+  }
 
-    .signup-form-container button {
-        width: 100%;
-    }
+  .signup-form-container option {
+    width: 20px;
+  }
+
+  .signup-form-container button {
+    width: 100%;
+  }
+  .signup-otp-form-left-contents .PhoneInput{
+    width: 60%
+  }
+  .PhoneInput {
+    width: 150%;
+  }
+  .phone-input-bottom input {
+    margin-left: 0;
+    
+  }
+
+  .signup-form-right {
+    margin-top: 30px;
+  }
+  .checkbox-label {
+    width: 200%;
+    display: none;
+  }
+
+  .signup-form-container button {
+    width: 120%;
+    margin-left: 35%;
+  }
+  .already-have-account {
+    font-size: 16px;
+    text-align: left;
+    margin-left: 20%;
+    margin-bottom: 30px;
+    width: 200%;
+  }
 }

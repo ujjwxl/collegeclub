@@ -18,15 +18,17 @@
 }
 
 .home-six-overlay h2 {
-    background: linear-gradient(45deg, #84FFFF, #00B8D4);
+    background: -webkit-linear-gradient(45deg, #bfffff, #019bb3);
     -webkit-background-clip: text;
-    background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 3rem;
+    background-clip: text;
+    font-family: "K2D", sans-serif;
+      letter-spacing: 5px;
 }
 @media only screen and (max-width: 768px) {
     .home-six-overlay{
         top: 502vh;
         height: 102.5vh;
     }
+    
 }

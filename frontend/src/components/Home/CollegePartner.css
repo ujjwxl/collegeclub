@@ -18,11 +18,12 @@
 }
 
 .home-five-overlay h2 {
-    background: linear-gradient(45deg, #84FFFF, #00B8D4);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 3rem;
+  background: -webkit-linear-gradient(45deg, #bfffff, #019bb3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: "K2D", sans-serif;
+    letter-spacing: 5px;
 }
 
 @keyframes rotate-outer {
@@ -88,17 +89,14 @@ svg {
   .circle-logos-container svg g:nth-child(even) image {
     animation-name: rotate-inner;
   }
-  
+  .marquee{
+    display: none;
+  }
 
 @media only screen and (max-width: 768px) {
     .home-five-overlay{
         top: 402vh;
         height: 100vh;
-    }
-
-    .circle-logos-container {
-        /* width: 50%; */
-        display: block;
     }
 
     svg {
@@ -109,4 +107,27 @@ svg {
         margin-right: auto;
         display: none;
     }
+    .home-college-partners-details{
+      width: 90%;
+      margin-left: 20px;
+    }
+    .colleges{
+      display: none;
+  }
+  .marquee{
+    display: inline;
+  }
+  .marquee{
+    margin-top: 80px;
+  }
+  .marquee img{
+    height: 120px;
+    width: 120px;
+    margin: 0px 30px;
+  }
+  .iit img{
+    border-radius: 55px;
+  }
+
+  
 }

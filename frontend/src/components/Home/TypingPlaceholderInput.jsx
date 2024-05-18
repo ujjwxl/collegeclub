@@ -25,7 +25,7 @@ const TypingPlaceholderInput = ({placeholderText}) => {
       setPlaceholder(typingText);
     }, [typingText]);
   
-    return <input type="text" placeholder={`try searching for ${placeholder}`} />;
+    return <input type="text" placeholder={`Try ${placeholder}`} />;
 }
 
 export default TypingPlaceholderInput

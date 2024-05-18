@@ -104,3 +104,12 @@
   color: white;
   font-family: 'Comfortaa', sans-serif;
 }
+
+@media only screen and (max-width: 768px) {
+  .career-box{
+    width: 80%;
+  }
+  .career-overlay{
+    height: 101vh;
+  }
+}
