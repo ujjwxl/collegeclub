@@ -19,6 +19,7 @@
     background-color: #240655;
     width: 90%;
     margin: 2% auto 2% auto;
+    
 }
 
 .skills-display-box-filter {
@@ -30,6 +31,7 @@
 .skills-display-box-list {
     width: 80%;
     overflow-y: auto;
+    padding: 10px;
 }
 
 .skills-left-items {
@@ -64,9 +66,10 @@
     width: 30%;
     height: 400px;
     background-color: #4527A0;
-    padding: 5px;
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 5px;
+    position: relative;
 }
 
 .skills-course-card img {
@@ -74,8 +77,11 @@
     height: 55%;
     display: block;
     max-width: 100%;
+    border-radius: 5px;
 }
-
+.instructor{
+    font-size: 13px;
+}
 .skills-course-card .skill-course-card-image {
     position: absolute;
     height: 70px;
@@ -94,3 +100,84 @@
     font-family: "Comfortaa", sans-serif;
     font-size: 14px;   
 }
+
+.skills-course-card img.skills-course-card-img {
+    transition: transform 0.3s ease-in-out;
+    width: 100%; 
+    height: 55%;
+    display: block;
+    max-width: 100%;
+  }
+  .skills-course-card:hover{
+  box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
+
+  }
+  .skills-course-card:hover img.skills-course-card-img {
+    
+    transform: scale(1.03); 
+  }
+  .skills-title {
+    display: flex;
+    align-items: center;
+    /* padding: 0 20px; */
+    margin: 0 30px;
+    justify-content: space-between;
+  }
+  .skills-title h2{
+    font-size: 30px;
+  }
+  @media only screen and (max-width: 768px) {
+    .skills-overlay{
+        flex-direction: column;
+    height: calc(109% - 50px);
+
+    }
+    .skills-display-box-filter{
+        display: none;
+    }
+    .skills-display-box-list{
+        padding: 20px;
+        width: 100%;
+    }
+    .courses-skills{
+        display: none;
+    }
+    .skills-display-box{
+        border-radius: 10px;
+        height: 80vh;
+    }
+    .skills-left-items{
+        width: 40%;
+    }
+    .skills-course-card{
+        height: 380px;
+    }
+    
+    .skills-cards-row {
+        flex-direction: column;
+        align-items: center; /* Optional: Center cards horizontally */
+        margin-bottom: 20px; /* Adjust spacing between rows if needed */
+      }
+      .skills-course-card {
+        width: 93%; /* Adjust card width as needed */
+        margin-bottom: 20px; /* Adjust spacing between cards if needed */
+      }
+      .skills-course-card h3{
+        font-size: 22px;
+        margin-left: 10px;
+        /* margin-bottom: 5px; */
+      }
+      .skills-course-card p{
+        margin-left: 10px;
+      }
+      .skills-course-card button{
+        margin-left: 10px;
+      }
+    
+  }
+
+  @media only screen and (min-width: 769px) {
+    .skills-title{
+        display: none;
+    }
+  }

@@ -91,6 +91,8 @@
 @media only screen and (max-width: 768px){
     .courses-overlay{
         flex-direction: column;
+    height: calc(108% - 50px);
+
     }
     .courses-display-box{
         border-radius: 10px;

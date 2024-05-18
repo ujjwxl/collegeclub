@@ -91,6 +91,8 @@
     }
     .exams-overlay{
         flex-direction: column;
+    height: calc(109% - 50px);
+
     }
     .exams-display-box-filter{
         display: none;

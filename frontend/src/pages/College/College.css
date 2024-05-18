@@ -240,6 +240,8 @@
 @media only screen and (max-width: 768px) {
   .colleges-overlay {
     flex-direction: column;
+  height: calc(109% - 50px);
+
   }
   .colleges-display-box {
     border-radius: 2%;
