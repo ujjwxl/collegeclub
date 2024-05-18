@@ -15,7 +15,7 @@ import helpIcon from "../../assets/help.png";
 import logoutIcon from "../../assets/close.png";
 import "./DashboardMenu.css";
 
-const DashboardMenu = ({ onCreateJob, onShowLeads, onDashboardClick }) => {
+const DashboardMenu = ({ onCreateJob, onAddJob, onShowLeads, onDashboardClick }) => {
 
   const [userData, setUserData] = useState(null);
 
@@ -50,11 +50,19 @@ const DashboardMenu = ({ onCreateJob, onShowLeads, onDashboardClick }) => {
     navigate('/');
   }
 
-  const handleMiddleIconClick = () => {
+  const handleFirstIconClick = () => {
     if (userData && userData.accountType === 'College') {
       onShowLeads();
     } else if(userData && userData.accountType === 'Company') {
       onCreateJob();
+    }
+  };
+
+  const handleMiddleIconClick = () => {
+    if (userData && userData.accountType === 'College') {
+      onShowLeads();
+    } else if(userData && userData.accountType === 'Company') {
+      onAddJob();
     }
   };
 
@@ -79,12 +87,12 @@ const DashboardMenu = ({ onCreateJob, onShowLeads, onDashboardClick }) => {
       <hr />
 
       <div className="dashboard-menu-middle">
-        <div className="dashboard-menu-middle-icon" onClick={handleMiddleIconClick}>
+        <div className="dashboard-menu-middle-icon" onClick={handleFirstIconClick}>
           <img src={userData && userData.accountType === 'College' ? cmsIcon : createJobIcon} alt="" />
           <p>{userData && userData.accountType === 'College' ? 'CMS' : 'Create job'}</p>
         </div>
 
-        <div className="dashboard-menu-middle-icon">
+        <div className="dashboard-menu-middle-icon" onClick={handleMiddleIconClick}>
           <img src={userData && userData.accountType === 'College' ? leadsIcon : cmsIcon} alt="" />
           <p>{userData && userData.accountType === 'College' ? 'Leads' : 'Add job'}</p>
         </div>

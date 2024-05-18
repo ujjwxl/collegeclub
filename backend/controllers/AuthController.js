@@ -741,6 +741,7 @@ export const createJobListing = async (req, res) => {
     jobDescription,
     numberOfPositions,
     jobLocation,
+    locationType,
     yearsOfExperience,
     skills,
     educationalQualification,
@@ -753,10 +754,11 @@ export const createJobListing = async (req, res) => {
       jobDescription,
       numberOfPositions,
       jobLocation,
+      locationType,
       yearsOfExperience,
       skills,
       educationalQualification,
-      postedBy: userId
+      createdBy: userId
     });
 
     console.log("Document written with ID: ", docRef.id);
@@ -766,5 +768,55 @@ export const createJobListing = async (req, res) => {
     const errorMessage = error.message;
     console.log(errorMessage);
     res.status(500).json({ message: error.message });
+  }
+};
+
+// export const getJobsByUserId = async (req, res) => {
+//   const { userId } = req.params;
+
+//   try {
+//     const q = query(collection(db, "jobs"), where("createdBy", "==", userId));
+//     const querySnapshot = await getDocs(q);
+    
+//     const jobs = [];
+//     querySnapshot.forEach((doc) => {
+//       jobs.push({ id: doc.id, ...doc.data() });
+//     });
+
+//     res.status(200).json(jobs);
+//   } catch (error) {
+//     console.error("Error getting jobs by user ID:", error);
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// };
+
+export const getJobsByUserId = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const q = query(collection(db, "jobs"), where("createdBy", "==", userId));
+    const querySnapshot = await getDocs(q);
+
+    const jobs = [];
+    for (const docRef of querySnapshot.docs) {
+      const jobData = docRef.data();
+
+      // Use collection() for querying collections and doc() for referencing documents
+      const userQ = query(collection(db, "users"), where("userId", "==", jobData.createdBy));
+      const userQuerySnapshot = await getDocs(userQ);
+
+      if (!userQuerySnapshot.empty) {
+        // Since userId should be unique, we can directly access the first document
+        const userData = userQuerySnapshot.docs[0].data();
+        jobs.push({ id: docRef.id, ...jobData, user: userData });
+      } else {
+        jobs.push({ id: docRef.id, ...jobData, user: null });
+      }
+    }
+
+    res.status(200).json(jobs);
+  } catch (error) {
+    console.error("Error getting jobs by user ID:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
