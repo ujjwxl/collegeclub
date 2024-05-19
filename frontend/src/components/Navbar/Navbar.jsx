@@ -94,6 +94,7 @@ const Navbar = () => {
         <Link to="/exams">Exams</Link>
         <Link to="/skills">Skills</Link>
         <Link to="/career">Career</Link>
+        <Link to="/openings">Openings</Link>
         {/* <Link to="">Help?</Link> */}
       </div>
 
