@@ -7,6 +7,8 @@ const CreateJob = () => {
     const [jobID, setJobID] = useState('');
     const [jobDescription, setJobDescription] = useState('');
     const [numberOfPositions, setNumberOfPositions] = useState('');
+    const [jobType, setJobType] = useState('');
+    const [industry, setIndustry] = useState('');
     const [jobLocation, setJobLocation] = useState('');
     const [locationType, setLocationType] = useState('');
     const [yearsOfExperience, setYearsOfExperience] = useState('');
@@ -14,6 +16,38 @@ const CreateJob = () => {
     const [educationalQualification, setEducationalQualification] = useState('');
 
     const userId = localStorage.getItem('id');
+
+    const jobTypes = [
+        { value: "full-time", label: "Full-Time" },
+        { value: "part-time", label: "Part-Time" },
+        { value: "contract", label: "Contract" },
+        { value: "temporary", label: "Temporary" },
+        { value: "freelance", label: "Freelance" },
+        { value: "internship", label: "Internship" },
+        { value: "remote", label: "Remote" },
+    ];
+
+    const industries = [
+        "Technology",
+        "Healthcare",
+        "Finance",
+        "Education",
+        "Manufacturing",
+        "Retail",
+        "Hospitality",
+        "Automotive",
+        "Construction",
+        "Real Estate",
+        "Media and Entertainment",
+        "Telecommunications",
+        "Non-profit",
+        "Government",
+        "Agriculture",
+        "Energy",
+        "Transportation",
+        "Consulting",
+        "Others"
+    ];
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,6 +58,8 @@ const CreateJob = () => {
                 jobID,
                 jobDescription,
                 numberOfPositions,
+                jobType,
+                industry,
                 jobLocation,
                 locationType,
                 yearsOfExperience,
@@ -93,6 +129,34 @@ const CreateJob = () => {
                             <label htmlFor="collegename">Skills*</label>
                             <input type="text" placeholder='Enter the skills' onChange={(e) => setSkills(e.target.value)} value={skills} required />
                         </div>
+
+                        <div className="form-input-group form-select apply-form-select">
+                            <label htmlFor="collegename">Job type*</label>
+                            <select value={jobType} onChange={(e) => setJobType(e.target.value)} required>
+                                <option value="">Select job type*</option>
+                                {jobTypes.map((type) => (
+                                    <option key={type.value} value={type.value}>{type.label}</option>
+                                ))}
+                            </select>
+                        </div>
+
+
+                        <div className="form-input-group form-select apply-form-select">
+                            <label htmlFor="industry">Industry/Field*</label>
+                            <select value={industry} onChange={(e) => setIndustry(e.target.value)} required>
+                                <option value="">Select industry/field*</option>
+                                {industries.map((field) => (
+                                    <option key={field} value={field}>{field}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="form-input-flex-two create-job-input-flex">
+                        {/* <div className="form-input-group">
+                            <label htmlFor="collegename">Skills*</label>
+                            <input type="text" placeholder='Enter the skills' onChange={(e) => setSkills(e.target.value)} value={skills} required />
+                        </div> */}
 
                         <div className="form-input-group form-select apply-form-select">
                             <label htmlFor="collegename">Location type*</label>
