@@ -4,7 +4,7 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
 // import { auth, db } from "../../firebase.js";
 import { auth, db } from "../firebase.js";
 import { doc, getDoc } from "firebase/firestore";
@@ -762,7 +762,8 @@ export const createJobListing = async (req, res) => {
       yearsOfExperience,
       skills,
       educationalQualification,
-      createdBy: userId
+      createdBy: userId,
+      isListed: false
     });
 
     console.log("Document written with ID: ", docRef.id);
@@ -821,6 +822,100 @@ export const getJobsByUserId = async (req, res) => {
     res.status(200).json(jobs);
   } catch (error) {
     console.error("Error getting jobs by user ID:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const getAllJobs = async (req, res) => {
+
+  try {
+    const q = query(collection(db, "jobs"));
+    const querySnapshot = await getDocs(q);
+
+    const jobs = [];
+    for (const docRef of querySnapshot.docs) {
+      const jobData = docRef.data();
+
+      // Use collection() for querying collections and doc() for referencing documents
+      const userQ = query(collection(db, "users"), where("userId", "==", jobData.createdBy));
+      const userQuerySnapshot = await getDocs(userQ);
+
+      if (!userQuerySnapshot.empty) {
+        // Since userId should be unique, we can directly access the first document
+        const userData = userQuerySnapshot.docs[0].data();
+        jobs.push({ id: docRef.id, ...jobData, user: userData });
+      } else {
+        jobs.push({ id: docRef.id, ...jobData, user: null });
+      }
+    }
+
+    res.status(200).json(jobs);
+  } catch (error) {
+    console.error("Error getting jobs by user ID:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const markJobAsListed = async (req, res) => {
+  const { jobId } = req.params;
+
+  try {
+    const jobRef = doc(db, "jobs", jobId);
+    const jobDoc = await getDoc(jobRef);
+
+    if (jobDoc.exists()) {
+      await updateDoc(jobRef, {
+        isListed: true
+      });
+
+      res.status(200).json({ message: "Job status updated successfully" });
+    } else {
+      res.status(404).json({ message: "Job not found" });
+    }
+  } catch (error) {
+    console.error("Error updating job status:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const markJobAsDelisted = async (req, res) => {
+  const { jobId } = req.params;
+
+  try {
+    const jobRef = doc(db, "jobs", jobId);
+    const jobDoc = await getDoc(jobRef);
+
+    if (jobDoc.exists()) {
+      await updateDoc(jobRef, {
+        isListed: false
+      });
+
+      res.status(200).json({ message: "Job status updated successfully" });
+    } else {
+      res.status(404).json({ message: "Job not found" });
+    }
+  } catch (error) {
+    console.error("Error updating job status:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const deleteJob = async (req, res) => {
+  const { jobId } = req.params;
+
+  try {
+    const jobRef = doc(db, "jobs", jobId);
+    const jobDoc = await getDoc(jobRef);
+
+    if (jobDoc.exists()) {
+      // Delete the job document
+      await deleteDoc(jobRef);
+      res.status(200).json({ message: "Job deleted successfully" });
+    } else {
+      res.status(404).json({ message: "Job not found" });
+    }
+  } catch (error) {
+    console.error("Error deleting job:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };

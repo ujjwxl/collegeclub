@@ -18,15 +18,51 @@ const CreateJob = () => {
     }, []);
 
     const handleList = (jobId) => {
-        // Implement list action here
+        try {
+            axios.put(`http://localhost:5000/auth/markjoblisted/${jobId}`)
+                .then(response => {
+                    if (response.status == 200) {
+                        alert('Job listed on the portal!')
+                    }
+                })
+                .catch(error => {
+                    console.error('Error listing the job:', error);
+                });
+        } catch (error) {
+            console.error('Error making the request:', error);
+        }
     };
 
     const handleDelist = (jobId) => {
-        // Implement delist action here
+        try {
+            axios.put(`http://localhost:5000/auth/markjobdelisted/${jobId}`)
+                .then(response => {
+                    if (response.status == 200) {
+                        alert('Job delisted from the portal!')
+                    }
+                })
+                .catch(error => {
+                    console.error('Error delisting the job:', error);
+                });
+        } catch (error) {
+            console.error('Error making the request:', error);
+        }
     };
 
     const handleDelete = (jobId) => {
-        // Implement delete action here
+        try {
+            axios.delete(`http://localhost:5000/auth/deletejob/${jobId}`)
+                .then(response => {
+                    if (response.status == 200) {
+                        alert('Job deleted successfully!')
+                    }
+                })
+                .catch(error => {
+                    console.error('Error deleting the job:', error);
+                });
+        } catch (error) {
+            console.error('Error making the request:', error);
+        }
     };
 
     return (
@@ -51,9 +87,9 @@ const CreateJob = () => {
                                 </div>
                             </div>
                             <div className="button-group">
-                                <button className='form-submit-button' onClick={() => handleList(job.jobID)}>List</button>
-                                <button className='form-submit-button' onClick={() => handleDelist(job.jobID)}>Delist</button>
-                                <button className='form-submit-button' onClick={() => handleDelete(job.jobID)}>Delete</button>
+                                <button className='form-submit-button' onClick={() => handleList(job.id)}>List</button>
+                                <button className='form-submit-button' onClick={() => handleDelist(job.id)}>Delist</button>
+                                <button className='form-submit-button' onClick={() => handleDelete(job.id)}>Delete</button>
                             </div>
                         </div>
                     ))}

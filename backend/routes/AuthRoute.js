@@ -1,5 +1,5 @@
 import express from 'express'
-import { registerUser, loginUser, getUserDetails, getColleges, completeProfileForm, completeDetailsForm, completeCompanyProfileForm, completeCompanyDetailsForm, completeAmbassadorProfileForm, saveFeedback, getCoursesByType, submitJobApplication, completeApplicationForm, createJobListing, getJobsByUserId} from '../controllers/AuthController.js';
+import { registerUser, loginUser, getUserDetails, getColleges, completeProfileForm, completeDetailsForm, completeCompanyProfileForm, completeCompanyDetailsForm, completeAmbassadorProfileForm, saveFeedback, getCoursesByType, submitJobApplication, completeApplicationForm, createJobListing, getJobsByUserId, getAllJobs, markJobAsListed, markJobAsDelisted, deleteJob} from '../controllers/AuthController.js';
 
 const router = express.Router();
 
@@ -18,6 +18,10 @@ router.post('/apply', submitJobApplication)
 router.post('/profilecompleted/:userId', completeApplicationForm)
 router.post('/createjob/:userId', createJobListing)
 router.get('/getjobs/:userId', getJobsByUserId)
+router.get('/getjobs/', getAllJobs)
+router.put('/markjoblisted/:jobId', markJobAsListed)
+router.put('/markjobdelisted/:jobId', markJobAsDelisted)
+router.delete('/deletejob/:jobId', deleteJob)
 
 // router.post('/login', loginUser)
 export default router
