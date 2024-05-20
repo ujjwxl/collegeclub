@@ -232,7 +232,7 @@ const Exams = () => {
         )}
         <div className="exams-display-box">
           <div className="exams-display-box-filter">
-            <h3>All exams</h3>
+            <h3 className="allexams">All exams</h3>
 
             {Object.keys(examsDetails).map((course, index) => (
               <div

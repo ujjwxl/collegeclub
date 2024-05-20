@@ -33,6 +33,12 @@
     .home-six-overlay{
         top: 502vh;
         height: 102.5vh;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .home-six-overlay h2{
+      margin-left: 10px;
+      margin-right: 10px;
     }
     svg {
         position: absolute;
@@ -43,11 +49,8 @@
         display: none;
     }
     .home-college-partners-details{
-      width: 90%;
+      width: 100%;
       margin-left: 0px;
-    }
-    .home-college-partners-details p{
-        margin-left: 20px;
     }
     .colleges{
       display: none;

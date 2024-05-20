@@ -7,6 +7,7 @@ import Footer from "../../components/Home/Footer";
 import backgroundImage from "../../assets/home-1.jpg";
 import defaultImage from "../../assets/test-dp.jpg";
 import { Link } from "react-router-dom";
+import BottomBar from '../../components/BottomBar/BottomBar'
 import axios from "axios";
 import "./College.css";
 
@@ -215,6 +216,7 @@ const College = () => {
   return (
     <>
       <Navbar />
+      <BottomBar/>
       <img src={backgroundImage} alt="" className="home1-img" />
       <div className="colleges-overlay colleges-container">
         <div className="colleges-title">

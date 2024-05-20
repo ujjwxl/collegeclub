@@ -97,8 +97,16 @@ svg {
   .home-five-overlay {
     top: 402vh;
     height: 100vh;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .home-five-overlay h2{
+    margin-left: 10px;
+    margin-right: 10px;
   }
   .circle-logos-container{
+    display: flex;
+    flex-direction: column;
     width: 100%;
   }
   svg {
@@ -110,17 +118,20 @@ svg {
     display: none;
   }
   .home-college-partners-details {
-    width: 90%;
+    width: 100%;
     margin-left: 0px;
   }
   .home-college-partners-details p {
-    margin-left: 20px;
+    margin-top: 0;
+    margin-left: 40px;
+    margin-right: 40px;
   }
   .colleges {
     display: none;
   }
   .marquee {
     display: inline;
+    width: 100%;
   }
   .marquee {
     margin-top: 100px;

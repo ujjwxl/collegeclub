@@ -60,6 +60,10 @@
 }
 
 @media only screen and (min-width: 768px) {
+  /* .footer{
+    padding-bottom: 50px;
+
+  } */
   .footer-column {
     flex: 1;
     margin-bottom: 0;
@@ -69,10 +73,18 @@
     margin-left: 20px;
   }
 }
+@media only screen and (max-width: 768px) {
+  .footer{
+    padding-bottom: 50px;
+
+  }
+}
 
 @media only screen and (min-width: 992px) {
   .footer {
     justify-content: space-between;
+    padding-bottom: 50px ;
+
   }
 
   .footer-column {

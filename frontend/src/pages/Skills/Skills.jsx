@@ -7,6 +7,7 @@ import backgroundImage from "../../assets/home-1.jpg";
 import backgroundImageTwo from "../../assets/home-2.jpg";
 import backgroundImageThree from "../../assets/test-dp.jpg";
 import defaultImage from "../../assets/test-dp.jpg";
+import BottomBar from '../../components/BottomBar/BottomBar'
 import axios from "axios";
 import "./Skills.css";
 
@@ -88,6 +89,7 @@ const Skills = () => {
   return (
     <>
       <Navbar />
+      <BottomBar/>
       <img src={backgroundImage} alt="" className="home1-img" />
       <div className="skills-overlay colleges-container">
         <div className="skills-title">

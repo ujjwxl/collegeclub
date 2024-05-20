@@ -6,6 +6,8 @@ import Footer from "../../components/Home/Footer";
 import backgroundImage from "../../assets/home-1.jpg";
 import defaultImage from "../../assets/test-dp.jpg";
 import axios from "axios";
+import BottomBar from '../../components/BottomBar/BottomBar'
+
 import "./Courses.css";
 
 const Courses = () => {
@@ -53,6 +55,7 @@ const Courses = () => {
   return (
     <>
       <Navbar />
+      <BottomBar/>
       <img src={backgroundImage} alt="" className="home1-img" />
       <div className="courses-overlay colleges-container">
         <div className="courses-title">

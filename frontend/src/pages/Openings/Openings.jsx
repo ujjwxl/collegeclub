@@ -95,6 +95,7 @@ import location from "../../assets/location.png";
 import Footer from "../../components/Home/Footer";
 import backgroundImage from "../../assets/home-1.jpg";
 import defaultImage from "../../assets/test-dp.jpg";
+import BottomBar from '../../components/BottomBar/BottomBar'
 import axios from "axios";
 import "./Openings.css";
 
@@ -138,6 +139,7 @@ const Openings = () => {
     return (
         <>
             <Navbar />
+            <BottomBar/>
             <img src={backgroundImage} alt="" className="home1-img" />
             <div className="openings-overlay colleges-container">
                 <div className="openings-display-box">
