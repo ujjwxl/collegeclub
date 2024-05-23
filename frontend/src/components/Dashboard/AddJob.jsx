@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AddJob.css';
 
-const CreateJob = () => {
+const AddJob = () => {
     const [jobs, setJobs] = useState([]);
+    const [viewMoreModal, setViewMoreModal] = useState(false);
+    const [selectedJob, setSelectedJob] = useState(null);
 
     const userId = localStorage.getItem('id');
 
@@ -21,7 +23,7 @@ const CreateJob = () => {
         try {
             axios.put(`http://localhost:5000/auth/markjoblisted/${jobId}`)
                 .then(response => {
-                    if (response.status == 200) {
+                    if (response.status === 200) {
                         alert('Job listed on the portal!')
                     }
                 })
@@ -37,7 +39,7 @@ const CreateJob = () => {
         try {
             axios.put(`http://localhost:5000/auth/markjobdelisted/${jobId}`)
                 .then(response => {
-                    if (response.status == 200) {
+                    if (response.status === 200) {
                         alert('Job delisted from the portal!')
                     }
                 })
@@ -53,7 +55,7 @@ const CreateJob = () => {
         try {
             axios.delete(`http://localhost:5000/auth/deletejob/${jobId}`)
                 .then(response => {
-                    if (response.status == 200) {
+                    if (response.status === 200) {
                         alert('Job deleted successfully!')
                     }
                 })
@@ -65,13 +67,18 @@ const CreateJob = () => {
         }
     };
 
+    const openModal = (job) => {
+        setSelectedJob(job);
+        setViewMoreModal(true);
+    };
+
     return (
         <div className="dashboard-box create-job-box">
             <div className="dashboard-box-container create-job-container">
                 <h2>Your Jobs</h2>
                 <div className="job-list">
                     {jobs.map(job => (
-                        <div key={job.id} className="job-item">
+                        <div key={job.id} className="job-item" onClick={() => openModal(job)}>
                             <div className="job-content">
                                 <div className="logo-and-details">
                                     <img src={job.user.profilePicture} alt={job.user.organizationName} className="company-logo" />
@@ -95,8 +102,35 @@ const CreateJob = () => {
                     ))}
                 </div>
             </div>
+            {viewMoreModal && (
+                <div className="modal apply-job-modal">
+                    <div className="modal-content apply-job-modal-content">
+                        <button className="close-button form-submit-button" onClick={() => setViewMoreModal(false)}>Close</button>
+                        {selectedJob && (
+                            <div>
+                                <h2>{selectedJob.positionName}</h2>
+                                <div className="job-details">
+                                    <p><strong>Job ID:</strong> {selectedJob.jobID}</p>
+                                    <p><strong>Company Name:</strong> {selectedJob.user.organizationName}</p>
+                                    <p><strong>Industry:</strong> {selectedJob.industry}</p>
+                                    <p><strong>Job Type:</strong> {selectedJob.jobType}</p>
+                                    <p><strong>Location Type:</strong> {selectedJob.locationType}</p>
+                                    <p><strong>Job Description:</strong> {selectedJob.jobDescription}</p>
+                                    <p><strong>Location:</strong> {selectedJob.jobLocation}</p>
+                                    <p><strong>Number of Positions:</strong> {selectedJob.numberOfPositions}</p>
+                                    <p><strong>Years of Experience:</strong> {selectedJob.yearsOfExperience}</p>
+                                    <p><strong>Skills Required:</strong> {selectedJob.skills}</p>
+                                    <p><strong>Posted by:</strong> {selectedJob.createdBy}</p>
+                                    <p><strong>Educational Qualification:</strong> {selectedJob.educationalQualification}</p>
+                                    {/* Add any other job details */}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
-export default CreateJob;
+export default AddJob;
