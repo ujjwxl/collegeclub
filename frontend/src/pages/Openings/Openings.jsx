@@ -308,7 +308,7 @@ const Openings = () => {
                                         </div>
                                     </div>
                                     <div className="button-group">
-                                        <button className='form-submit-button' onClick={() => toggleModal(job)}>Apply</button>
+                                        <button className='form-submit-button' onClick={() => toggleModal(job)}>View more</button>
                                         {/* <button className='form-submit-button' onClick={() => handleDelist(job.jobID)}>Delist</button>
                                         <button className='form-submit-button' onClick={() => handleDelete(job.jobID)}>Delete</button> */}
                                     </div>
@@ -341,7 +341,7 @@ const Openings = () => {
                                     <p><strong>Educational Qualification:</strong> {selectedJob.educationalQualification}</p>
                                     {/* Add any other job details */}
                                 </div>
-                                <button onClick={() => setApplicationModal(true)}>Apply</button>
+                                <button className="form-submit-button" onClick={() => setApplicationModal(true)}>Apply</button>
                             </div>
                         )}
 

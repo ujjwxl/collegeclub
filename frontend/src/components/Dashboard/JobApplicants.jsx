@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import profileImage from '../../assets/profile-placeholder-image.jpg';
-import './AddJob.css';
+import './JobApplicants.css';
 
 const JobApplicants = () => {
     const [applicants, setApplicants] = useState([]);
