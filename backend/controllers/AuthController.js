@@ -763,7 +763,7 @@ export const createJobListing = async (req, res) => {
       skills,
       educationalQualification,
       createdBy: userId,
-      isListed: false
+      isListed: false,
     });
 
     console.log("Document written with ID: ", docRef.id);
@@ -782,7 +782,7 @@ export const createJobListing = async (req, res) => {
 //   try {
 //     const q = query(collection(db, "jobs"), where("createdBy", "==", userId));
 //     const querySnapshot = await getDocs(q);
-    
+
 //     const jobs = [];
 //     querySnapshot.forEach((doc) => {
 //       jobs.push({ id: doc.id, ...doc.data() });
@@ -807,7 +807,10 @@ export const getJobsByUserId = async (req, res) => {
       const jobData = docRef.data();
 
       // Use collection() for querying collections and doc() for referencing documents
-      const userQ = query(collection(db, "users"), where("userId", "==", jobData.createdBy));
+      const userQ = query(
+        collection(db, "users"),
+        where("userId", "==", jobData.createdBy)
+      );
       const userQuerySnapshot = await getDocs(userQ);
 
       if (!userQuerySnapshot.empty) {
@@ -827,7 +830,6 @@ export const getJobsByUserId = async (req, res) => {
 };
 
 export const getAllJobs = async (req, res) => {
-
   try {
     const q = query(collection(db, "jobs"));
     const querySnapshot = await getDocs(q);
@@ -837,7 +839,10 @@ export const getAllJobs = async (req, res) => {
       const jobData = docRef.data();
 
       // Use collection() for querying collections and doc() for referencing documents
-      const userQ = query(collection(db, "users"), where("userId", "==", jobData.createdBy));
+      const userQ = query(
+        collection(db, "users"),
+        where("userId", "==", jobData.createdBy)
+      );
       const userQuerySnapshot = await getDocs(userQ);
 
       if (!userQuerySnapshot.empty) {
@@ -865,7 +870,7 @@ export const markJobAsListed = async (req, res) => {
 
     if (jobDoc.exists()) {
       await updateDoc(jobRef, {
-        isListed: true
+        isListed: true,
       });
 
       res.status(200).json({ message: "Job status updated successfully" });
@@ -887,7 +892,7 @@ export const markJobAsDelisted = async (req, res) => {
 
     if (jobDoc.exists()) {
       await updateDoc(jobRef, {
-        isListed: false
+        isListed: false,
       });
 
       res.status(200).json({ message: "Job status updated successfully" });
@@ -917,5 +922,43 @@ export const deleteJob = async (req, res) => {
   } catch (error) {
     console.error("Error deleting job:", error);
     res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const submitCompanyJobApplication = async (req, res) => {
+  const {
+    jobName,
+    jobId,
+    companyName,
+    companyId,
+    name,
+    phoneNumber,
+    email,
+    city,
+    state,
+    resumeLink,
+  } = req.body;
+
+  try {
+    const docRef = await addDoc(collection(db, "companyapplications"), {
+      jobName,
+      jobId,
+      companyName,
+      companyId,
+      name,
+      phoneNumber,
+      email,
+      city,
+      state,
+      resumeLink,
+    });
+
+    console.log("Document written with ID: ", docRef.id);
+    res.status(200).json(docRef);
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
+    res.status(500).json({ message: error.message });
   }
 };

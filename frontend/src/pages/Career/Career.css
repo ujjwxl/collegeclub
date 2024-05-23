@@ -103,6 +103,7 @@
   border-radius: 10px;
   color: white;
   font-family: 'Comfortaa', sans-serif;
+  overflow-y: scroll;
 }
 
 @media only screen and (max-width: 768px) {
