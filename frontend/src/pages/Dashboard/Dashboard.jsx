@@ -10,6 +10,7 @@ import CreateJob from '../../components/Dashboard/CreateJob'
 import AddJob from '../../components/Dashboard/AddJob'
 import LeadsComponent from '../../components/Dashboard/LeadsComponent'
 import JobApplicants from '../../components/Dashboard/JobApplicants'
+import DashboardNavbar from '../../components/Navbar/DashboardNavbar'
 
 const Dashboard = () => {
 
@@ -55,7 +56,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Navbar onCreateJob={handleCreateJob} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} />
+      <DashboardNavbar onCreateJob={handleCreateJob} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} />
       <img src={backgroundImage} alt="" className='home1-img' />
       <div className='dashboard-overlay dashboard-container'>
         <DashboardMenu onCreateJob={handleCreateJob} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} />

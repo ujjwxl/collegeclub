@@ -20,7 +20,7 @@ import logoutIcon from "../../assets/close.png";
 import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const DashboardNavbar = ({ onCreateJob, onAddJob, onShowLeads, onShowApplicants, onDashboardClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
   const userId = localStorage.getItem("id");
@@ -54,10 +54,35 @@ const Navbar = () => {
     localStorage.removeItem('token');
     navigate('/');
   }
-  
+  const handleFirstIconClick = () => {
+    if (userData && userData.accountType === "College") {
+      onShowLeads();
+    } else if (userData && userData.accountType === "Company") {
+      onCreateJob();
+    }
+    setIsMenuOpen(false);
+  };
+  const handleMiddleIconClick = () => {
+    if (userData && userData.accountType === "College") {
+      onShowLeads();
+    } else if (userData && userData.accountType === "Company") {
+      onAddJob();
+    }
+    setIsMenuOpen(false);
+  };
+
+  const handleThirdIconClick = () => {
+    if (userData && userData.accountType === 'College') {
+      onShowLeads();
+    } else if(userData && userData.accountType === 'Company') {
+      onShowApplicants();
+    }
+    setIsMenuOpen(false);
+
+  };
+
   const handleDashboardClick = () => {
-    // onDashboardClick();
-    navigate('/dashboard');
+    onDashboardClick();
     setIsMenuOpen(false);
   };
 
@@ -104,7 +129,7 @@ const Navbar = () => {
                     <h3>{userData && userData.accountType}</h3>
                   </div>
                 </div>
-                {/* <div className="navbar-menu-middle">
+                <div className="navbar-menu-middle">
                   <div
                     className="navbar-menu-middle-icon"
                     onClick={handleFirstIconClick}
@@ -143,7 +168,7 @@ const Navbar = () => {
                     </p>
                   </div>
 
-                  <div className="navbar-menu-middle-icon">
+                  <div className="navbar-menu-middle-icon" onClick={handleThirdIconClick}>
                     <img
                       src={
                         userData && userData.accountType === "College"
@@ -158,7 +183,7 @@ const Navbar = () => {
                         : "Applicants"}
                     </p>
                   </div>
-                </div> */}
+                </div>
                 <div className="navbar-menu-bottom">
                   <div
                     className="navbar-menu-bottom-options"
@@ -168,7 +193,7 @@ const Navbar = () => {
                     <h3>Dashboard</h3>
                   </div>
                   <hr />
-                  {/* <div className="navbar-menu-bottom-options">
+                  <div className="navbar-menu-bottom-options">
                     <img src={applicationIcon} alt="" />
 
                     <h3>Application</h3>
@@ -189,7 +214,7 @@ const Navbar = () => {
                     </div>
                   </Link>
 
-                  <hr /> */}
+                  <hr />
                 </div>
                 <div className="logout" onClick={handleSignOut}>
                   <img src={logoutIcon} alt="" />
@@ -246,4 +271,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default DashboardNavbar;
