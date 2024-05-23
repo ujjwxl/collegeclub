@@ -115,6 +115,7 @@
 }
 .logout h3 {
   font-size: 17px;
+  color: aliceblue;
   margin: 0;
 }
 
@@ -123,4 +124,7 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .dashboard-menu{
+    display: none;
+  }
 }

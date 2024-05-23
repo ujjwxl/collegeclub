@@ -10,10 +10,14 @@
   left: 0;
   z-index: 5;
 }
-.bottombar img{
+.bottombar img {
+    padding: 10px;
+    border-radius: 10px;
     height: 30px;
     width: 30px;
-}
+    transition: all 0.3s ease; /* Smooth transition for shadow effect */
+    box-shadow: 0px 0px 0px transparent; /* Initially, no shadow */
+  }
 
 .home-bottom{
     height: 25px !important;
@@ -23,5 +27,9 @@
     .bottombar{
         display: flex;
     }
-    
+   
+      
+      .bottombar a.active img {
+        box-shadow: 0px 0px 5px rgba(180, 179, 179, 0.5); /* Apply shadow to the active icon */
+      }
 }

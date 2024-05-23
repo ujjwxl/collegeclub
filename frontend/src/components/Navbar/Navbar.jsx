@@ -1,21 +1,31 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
-import collegeClubLogo from '../../assets/collegeclub-logo.png'
-import notification from '../../assets/notification.png'
-import signout from '../../assets/close.png'
-import compare from '../../assets/compare.png'
-import menu from '../../assets/navbar-menu.png'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import collegeClubLogo from "../../assets/collegeclub-logo.png";
+import notification from "../../assets/notification.png";
+import signout from "../../assets/close.png";
+import compare from "../../assets/compare.png";
+import menu from "../../assets/navbar-menu.png";
+import defaultImage from "../../assets/test-dp.jpg";
+import profileIcon from "../../assets/user-icon.png";
+import eventsIcon from "../../assets/event-icon.png";
+import createJobIcon from "../../assets/add-job.png";
+import leadsIcon from "../../assets/leads-icon.png";
+import cmsIcon from "../../assets/cms-icon.png";
+import testIcon from "../../assets/business-icon.png";
+import dashboardIcon from "../../assets/dashboard.png";
+import applicationIcon from "../../assets/edit.png";
+import notificationIcon from "../../assets/notification.png";
+import helpIcon from "../../assets/help.png";
+import logoutIcon from "../../assets/close.png";
+import "./Navbar.css";
+import { Link, useNavigate } from "react-router-dom";
 
-import './Navbar.css'
-import { Link, Navigate } from 'react-router-dom'
-
-const Navbar = () => {
-
+const Navbar = ({ onCreateJob, onAddJob, onShowLeads, onDashboardClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
-  const userId = localStorage.getItem('id');
+  const userId = localStorage.getItem("id");
   const isLoggedIn = userId != null;
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -24,7 +34,9 @@ const Navbar = () => {
       }
 
       try {
-        const response = await axios.get(`http://localhost:5000/auth/user/${userId}`);
+        const response = await axios.get(
+          `http://localhost:5000/auth/user/${userId}`
+        );
         setUserData(response.data);
       } catch (error) {
         console.error("Failed to fetch user data:", error);
@@ -35,60 +47,185 @@ const Navbar = () => {
   }, [isLoggedIn]);
 
   const handleToggleMenu = () => {
-    setIsMenuOpen(prevState => !prevState);
+    setIsMenuOpen((prevState) => !prevState);
+  };
+  const handleSignOut = () => {
+    localStorage.removeItem('id');
+    localStorage.removeItem('token');
+    navigate('/');
   }
+  const handleFirstIconClick = () => {
+    if (userData && userData.accountType === "College") {
+      onShowLeads();
+    } else if (userData && userData.accountType === "Company") {
+      onCreateJob();
+    }
+    setIsMenuOpen(false);
+  };
+  const handleMiddleIconClick = () => {
+    if (userData && userData.accountType === "College") {
+      onShowLeads();
+    } else if (userData && userData.accountType === "Company") {
+      onAddJob();
+    }
+    setIsMenuOpen(false);
+  };
+
+  const handleDashboardClick = () => {
+    onDashboardClick();
+    setIsMenuOpen(false);
+  };
 
   return (
-    <div className='navbar'>
-      <Link to="/"><div className="navbar-logo">
-        <img src={collegeClubLogo} alt="" className='navbar-brand-logo' />
-        <h2>COLLEGE<br /><span>CLUB</span></h2>
-      </div>
+    <div className="navbar">
+      <Link to="/">
+        <div className="navbar-logo">
+          <img src={collegeClubLogo} alt="" className="navbar-brand-logo" />
+          <h2>
+            COLLEGE
+            <br />
+            <span>CLUB</span>
+          </h2>
+        </div>
       </Link>
-      <img src={menu} alt='menu' className='navbar-menu-icon' onClick={handleToggleMenu} />
-      
+      <img
+        src={menu}
+        alt="menu"
+        className="navbar-menu-icon"
+        onClick={handleToggleMenu}
+      />
+
       {isMenuOpen && (
-        <div className='mobile-menu'>
-          <div className='navbar-links-mobile'>
-            <Link to="/colleges">Colleges</Link>
-            <Link to="/courses">Courses</Link>
-            <Link to="/exams">Exams</Link>
-            <Link to="/skills">Skills</Link>
-            <Link to="/career">Career</Link>
-            {/* <Link to="">Help?</Link> */}
-          </div>
-
-          {/* <div className='navbar-right-mobile'>
-            <Link to="">Onboarding</Link>
-            <Link to="">Login</Link>
-            <Link to=""><img src={compare} alt='' className='navbar-bell'></img></Link>
-            <Link to=""><img src={notification} alt='' className='navbar-bell'></img></Link>
-            <Link to=""><img src={signout} alt='' className='navbar-bell'></img></Link>
-          </div> */}
-
-          <div className='navbar-right-mobile'>
-            {/* <Link to='/register'>Onboarding</Link> */}
+        <div className="mobile-menu">
+          <div className="navbar-right-mobile">
             {isLoggedIn ? (
               <>
-                <div className="navbar-right-mobile-menu">
-                <img src={compare} alt='' className='navbar-bell' />
-                <img src={notification} alt='' className='navbar-bell' />
-                <img src={signout} alt='' className='navbar-bell' />
+                <div className="navbar-profile-details">
+                  <img
+                    src={
+                      userData && userData.profilePicture
+                        ? userData.profilePicture
+                        : defaultImage
+                    }
+                    alt=""
+                  />
+                  <div className="navbar-profile-name">
+                    <h2>
+                      {userData && userData.organizationName}
+                      <span>✅</span>
+                    </h2>
+                    <h3>{userData && userData.fullName}</h3>
+                    <h4>{userData && userData.email}</h4>
+                    <h3>{userData && userData.accountType}</h3>
+                  </div>
                 </div>
-                
-                <Link to=''><img src={userData && userData.profilePicture} alt="" className='navbar-profile-picture' /></Link>
+                <div className="navbar-menu-middle">
+                  <div
+                    className="navbar-menu-middle-icon"
+                    onClick={handleFirstIconClick}
+                  >
+                    <img
+                      src={
+                        userData && userData.accountType === "College"
+                          ? cmsIcon
+                          : createJobIcon
+                      }
+                      alt=""
+                    />
+                    <p>
+                      {userData && userData.accountType === "College"
+                        ? "CMS"
+                        : "Create job"}
+                    </p>
+                  </div>
+
+                  <div
+                    className="navbar-menu-middle-icon"
+                    onClick={handleMiddleIconClick}
+                  >
+                    <img
+                      src={
+                        userData && userData.accountType === "College"
+                          ? leadsIcon
+                          : cmsIcon
+                      }
+                      alt=""
+                    />
+                    <p>
+                      {userData && userData.accountType === "College"
+                        ? "Leads"
+                        : "Add job"}
+                    </p>
+                  </div>
+
+                  <div className="navbar-menu-middle-icon">
+                    <img
+                      src={
+                        userData && userData.accountType === "College"
+                          ? eventsIcon
+                          : leadsIcon
+                      }
+                      alt=""
+                    />
+                    <p>
+                      {userData && userData.accountType === "College"
+                        ? "Events"
+                        : "Applicants"}
+                    </p>
+                  </div>
+                </div>
+                <div className="navbar-menu-bottom">
+                  <div
+                    className="navbar-menu-bottom-options"
+                    onClick={handleDashboardClick}
+                  >
+                    <img src={dashboardIcon} alt="" />
+                    <h3>Dashboard</h3>
+                  </div>
+                  <hr />
+                  <div className="navbar-menu-bottom-options">
+                    <img src={applicationIcon} alt="" />
+
+                    <h3>Application</h3>
+                  </div>
+                  <hr />
+                  <div className="navbar-menu-bottom-options">
+                    <img src={notificationIcon} alt="" />
+
+                    <h3>Notifications</h3>
+                  </div>
+                  <hr />
+
+                  <Link to={"/faqs"}>
+                    <div className="navbar-menu-bottom-options">
+                      <img src={helpIcon} alt="" />
+
+                      <h3>Help</h3>
+                    </div>
+                  </Link>
+
+                  <hr />
+                </div>
+                <div className="logout" onClick={handleSignOut}>
+                  <img src={logoutIcon} alt="" />
+                  <h3>Logout</h3>
+                </div>
               </>
             ) : (
               <>
-                <Link to='/register'><button className='navbar-button'>Onboarding</button></Link>
-                <Link to='/login'><button className='navbar-button'>Login</button></Link>
+                <Link to="/register">
+                  <button className="navbar-button">Onboarding</button>
+                </Link>
+                <Link to="/login">
+                  <button className="navbar-button">Login</button>
+                </Link>
               </>
             )}
           </div>
         </div>
       )}
 
-      <div className='navbar-links'>
+      <div className="navbar-links">
         <Link to="/colleges">Colleges</Link>
         <Link to="/courses">Courses</Link>
         <Link to="/exams">Exams</Link>
@@ -98,33 +235,30 @@ const Navbar = () => {
         {/* <Link to="">Help?</Link> */}
       </div>
 
-      {/* <div className='navbar-right'>
-        <Link to="/register">Onboarding</Link>
-        <Link to="">Login</Link>
-        <Link to=""><img src={compare} alt='' className='navbar-bell'></img></Link>
-        <Link to=""><img src={notification} alt='' className='navbar-bell'></img></Link>
-        <Link to=""><img src={signout} alt='' className='navbar-bell'></img></Link>
-      </div> */}
-
-      <div className='navbar-right'>
-        {/* <Link to='/register'>Onboarding</Link> */}
+      <div className="navbar-right">
         {isLoggedIn ? (
           <>
-            {/* <img src={compare} alt='' className='navbar-bell' />
-            <img src={notification} alt='' className='navbar-bell' />
-            <img src={signout} alt='' className='navbar-bell' /> */}
-            <Link to='/dashboard'><img src={userData && userData.profilePicture} alt="" className='navbar-profile-picture' /></Link>
+            <Link to="/dashboard">
+              <img
+                src={userData && userData.profilePicture}
+                alt=""
+                className="navbar-profile-picture"
+              />
+            </Link>
           </>
         ) : (
           <>
-            <Link to='/register'><button className='navbar-button'>Onboarding</button></Link>
-            <Link to='/login'><button className='navbar-button'>Login</button></Link>
+            <Link to="/register">
+              <button className="navbar-button">Onboarding</button>
+            </Link>
+            <Link to="/login">
+              <button className="navbar-button">Login</button>
+            </Link>
           </>
         )}
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

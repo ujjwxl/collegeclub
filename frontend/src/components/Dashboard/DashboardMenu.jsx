@@ -15,7 +15,7 @@ import helpIcon from "../../assets/help.png";
 import logoutIcon from "../../assets/close.png";
 import "./DashboardMenu.css";
 
-const DashboardMenu = ({ onCreateJob, onAddJob, onShowApplicants, onShowLeads, onDashboardClick }) => {
+const DashboardMenu = ({ onCreateJob, onAddJob, onShowLeads, onDashboardClick }) => {
 
   const [userData, setUserData] = useState(null);
 
@@ -66,14 +66,6 @@ const DashboardMenu = ({ onCreateJob, onAddJob, onShowApplicants, onShowLeads, o
     }
   };
 
-  const handleThirdIconClick = () => {
-    if (userData && userData.accountType === 'College') {
-      onShowLeads();
-    } else if(userData && userData.accountType === 'Company') {
-      onShowApplicants();
-    }
-  };
-
   const handleDashboardClick = () => {
     onDashboardClick();
   };
@@ -105,7 +97,7 @@ const DashboardMenu = ({ onCreateJob, onAddJob, onShowApplicants, onShowLeads, o
           <p>{userData && userData.accountType === 'College' ? 'Leads' : 'Add job'}</p>
         </div>
 
-        <div className="dashboard-menu-middle-icon" onClick={handleThirdIconClick}>
+        <div className="dashboard-menu-middle-icon">
           <img src={userData && userData.accountType === 'College' ? eventsIcon : leadsIcon} alt="" />
           <p>{userData && userData.accountType === 'College' ? 'Events' : 'Applicants'}</p>
         </div>

@@ -55,7 +55,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar onCreateJob={handleCreateJob} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} />
       <img src={backgroundImage} alt="" className='home1-img' />
       <div className='dashboard-overlay dashboard-container'>
         <DashboardMenu onCreateJob={handleCreateJob} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} />
