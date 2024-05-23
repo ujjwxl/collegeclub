@@ -1,0 +1,43 @@
+.applicants-list {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.applicant-list-item {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.applicant-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-and-details {
+    display: flex;
+    align-items: center;
+}
+
+.profile-picture {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.button-group {
+    display: flex;
+}
+
+.button-group button {
+    margin-right: auto;
+}

@@ -962,3 +962,26 @@ export const submitCompanyJobApplication = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getCompanyJobApplicants = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const companyApplicationsSnapshot = await getDocs(
+      query(collection(db, "companyapplications"), where("companyId", "==", userId))
+    );
+
+    const jobApplicants = [];
+    companyApplicationsSnapshot.forEach((doc) => {
+      jobApplicants.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
+
+    res.status(200).json(jobApplicants);
+  } catch (error) {
+    console.error("Error getting job applicants:", error);
+    res.status(500).json({ message: "Error getting job applicants" });
+  }
+};
