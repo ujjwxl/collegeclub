@@ -18,7 +18,7 @@ import notificationIcon from "../../assets/notification.png";
 import helpIcon from "../../assets/help.png";
 import logoutIcon from "../../assets/close.png";
 import "./Navbar.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,6 +26,7 @@ const Navbar = () => {
   const userId = localStorage.getItem("id");
   const isLoggedIn = userId != null;
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -54,7 +55,7 @@ const Navbar = () => {
     localStorage.removeItem('token');
     navigate('/');
   }
-  
+
   const handleDashboardClick = () => {
     // onDashboardClick();
     navigate('/dashboard');
@@ -211,12 +212,12 @@ const Navbar = () => {
       )}
 
       <div className="navbar-links">
-        <Link to="/colleges">Colleges</Link>
-        <Link to="/courses">Courses</Link>
-        <Link to="/exams">Exams</Link>
-        <Link to="/skills">Skills</Link>
-        <Link to="/career">Career</Link>
-        <Link to="/openings">Openings</Link>
+        <Link to="/colleges" className={location.pathname === "/colleges" ? "active-link" : ""}>Colleges</Link>
+        <Link to="/courses" className={location.pathname === "/courses" ? "active-link" : ""}>Courses</Link>
+        <Link to="/exams" className={location.pathname === "/exams" ? "active-link" : ""}>Exams</Link>
+        <Link to="/skills" className={location.pathname === "/skills" ? "active-link" : ""}>Skills</Link>
+        <Link to="/career" className={location.pathname === "/career" ? "active-link" : ""}>Career</Link>
+        <Link to="/openings" className={location.pathname === "/openings" ? "active-link" : ""}>Openings</Link>
         {/* <Link to="">Help?</Link> */}
       </div>
 

@@ -102,32 +102,7 @@ const Career = () => {
           <h3>Designation:</h3>
           <li>Sales Executive</li>
           <br />
-          <h3>How to Apply:</h3>
-          <p>
-            Interested candidates are invited to submit their resume,
-            portfolio, and a cover letter outlining their relevant
-            experience to{" "}
-            <a href="mailto:joinus@collegeclub.io">
-              joinus@collegeclub.io
-            </a>
-            . Please include the subject line "Sales Executive
-            Application - [Your Name]."
-          </p>
-
-          <p>
-            CollegeClub is an equal opportunity employer and welcomes
-            candidates from all backgrounds to apply.
-          </p>
-
-          <p className="accepting">
-            We are accepting applications from February 20th until March
-            28th. Please send your resume to{" "}
-            <a href="mailto:joinus@collegeclub.io">
-              joinus@collegeclub.io
-            </a>
-            .
-          </p>
-
+          
           <button onClick={() => setApplicationModal(true)} className="form-submit-button career-button">Apply now</button>
         </>
       ),
@@ -223,32 +198,6 @@ const Career = () => {
           <li>Software Engineer</li>
           <br />
 
-          <h3>How to Apply:</h3>
-          <p>
-            Interested candidates are invited to submit their resume,
-            portfolio, and a cover letter outlining their relevant
-            experience to
-            <a href="mailto:joinus@collegeclub.io">
-              joinus@collegeclub.io
-            </a>
-            . Please include the subject line "Full Stack Developer
-            Application - [Your Name]."
-          </p>
-          <br />
-
-          <p>
-            CollegeClub is an equal opportunity employer and welcomes
-            candidates from all backgrounds to apply.
-          </p>
-
-          <p class="accepting">
-            We are accepting applications from February 20th until March
-            28th. Please send your resume to
-            <a href="mailto:joinus@collegeclub.io">
-              joinus@collegeclub.io
-            </a>
-            .
-          </p>
           <button onClick={() => setApplicationModal(true)} className="form-submit-button career-button">Apply now</button>
         </>
       ),
@@ -373,31 +322,7 @@ const Career = () => {
           <h3>Designation:</h3>
           <li>Marketing Executive</li>
           <br />
-          <h3>How to Apply:</h3>
-          <p>
-            Interested candidates are invited to submit their resume,
-            portfolio, and a cover letter outlining their relevant
-            experience to
-            <a href="mailto:joinus@collegeclub.io">
-              joinus@collegeclub.io
-            </a>
-            . Please include the subject line "Marketing Executive
-            Application - [Your Name]."
-          </p>
-
-          <p>
-            CollegeClub is an equal opportunity employer and welcomes
-            candidates from all backgrounds to apply.
-          </p>
-
-          <p class="accepting">
-            We are accepting applications from February 20th until March
-            28th. Please send your resume to
-            <a href="mailto:joinus@collegeclub.io">
-              joinus@collegeclub.io
-            </a>
-            .
-          </p>
+          
           <button onClick={() => setApplicationModal(true)} className="form-submit-button career-button">Apply now</button>
         </>
       ),
@@ -490,24 +415,7 @@ const Career = () => {
           <h3>Designation:</h3>
           <li>FJT</li>
           <br />
-          <h3>How to Apply:</h3>
-          <p>
-            Interested candidates are invited to submit their resume and a brief cover letter expressing their interest in the Junior Team Member position at
-            <a href="mailto:joinus@collegeclub.io">
-              joinus@collegeclub.io
-            </a>. Please include the subject line "Fresher Junior Team Application - [Your Name]."
-          </p>
-
-          <p>
-            CollegeClub is an equal opportunity employer and welcomes candidates from all backgrounds to apply.
-          </p>
-
-          <p class="accepting">
-            We are accepting applications from February 20th until March 28th. Please send your resume to
-            <a href="mailto:joinus@collegeclub.io">
-              joinus@collegeclub.io
-            </a>.
-          </p>
+          
           <button onClick={() => setApplicationModal(true)} className="form-submit-button career-button">Apply now</button>
         </>
       ),
