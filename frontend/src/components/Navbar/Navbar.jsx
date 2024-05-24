@@ -63,7 +63,8 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar">
+    <>
+    <div className={`navbar ${isMenuOpen ? "blur-background" : ""}`}>
       <Link to="/">
         <div className="navbar-logo">
           <img src={collegeClubLogo} alt="" className="navbar-brand-logo" />
@@ -174,7 +175,7 @@ const Navbar = () => {
 
                     <h3>Application</h3>
                   </div>
-                  <hr />
+                  <hr /> */}
                   <div className="navbar-menu-bottom-options">
                     <img src={notificationIcon} alt="" />
 
@@ -190,7 +191,7 @@ const Navbar = () => {
                     </div>
                   </Link>
 
-                  <hr /> */}
+                  <hr />
                 </div>
                 <div className="logout" onClick={handleSignOut}>
                   <img src={logoutIcon} alt="" />
@@ -244,6 +245,8 @@ const Navbar = () => {
         )}
       </div>
     </div>
+    {isMenuOpen && <div className="backdrop"></div>}
+    </>
   );
 };
 

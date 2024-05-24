@@ -15,8 +15,8 @@
     border-radius: 10px;
     height: 30px;
     width: 30px;
-    transition: all 0.3s ease; /* Smooth transition for shadow effect */
-    box-shadow: 0px 0px 0px transparent; /* Initially, no shadow */
+    transition: all 0.3s ease; 
+    box-shadow: 0px 0px 0px transparent; 
   }
 
 .home-bottom{
@@ -30,6 +30,9 @@
    
       
       .bottombar a.active img {
-        box-shadow: 0px 0px 5px rgba(180, 179, 179, 0.5); /* Apply shadow to the active icon */
+        box-shadow: 0px 0px 5px rgba(180, 179, 179, 0.5); 
+      }
+      .bottombar .navbar-menu-middle-icon.active img {
+        box-shadow: 0px 0px 5px rgba(180, 179, 179, 0.5); 
       }
 }

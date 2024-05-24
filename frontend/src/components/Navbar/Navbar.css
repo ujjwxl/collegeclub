@@ -96,6 +96,15 @@
   color: #FE6952 !important;
 }
 
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px); 
+  z-index: 4;
+}
 @media only screen and (max-width: 1080px) {
   .navbar-links,
   .navbar-right {
@@ -120,8 +129,8 @@
     top: 50px;
     right: 0;
     height: 100vh;
-    width: 100%;
-    background-color: #240655;
+    width: 50%;
+    background-color: #340b75e9;
     font-family: "K2D", sans-serif;
   }
 

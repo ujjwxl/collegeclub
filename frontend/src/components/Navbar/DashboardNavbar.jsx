@@ -129,7 +129,7 @@ const DashboardNavbar = ({ onCreateJob, onAddJob, onShowLeads, onShowApplicants,
                     <h3>{userData && userData.accountType}</h3>
                   </div>
                 </div>
-                <div className="navbar-menu-middle">
+                {/* <div className="navbar-menu-middle">
                   <div
                     className="navbar-menu-middle-icon"
                     onClick={handleFirstIconClick}
@@ -183,7 +183,7 @@ const DashboardNavbar = ({ onCreateJob, onAddJob, onShowLeads, onShowApplicants,
                         : "Applicants"}
                     </p>
                   </div>
-                </div>
+                </div> */}
                 <div className="navbar-menu-bottom">
                   <div
                     className="navbar-menu-bottom-options"
