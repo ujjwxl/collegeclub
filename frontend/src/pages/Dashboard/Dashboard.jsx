@@ -72,15 +72,7 @@ const Dashboard = () => {
         {showDashboardBox && <DashboardBox />}
       </div>
       <DashboardBottomBar 
-        onCreateJob={handleCreateJob} 
-        onAddJob={handleAddJob} 
-        onShowApplicants={handleShowApplicants} 
-        onShowLeads={handleShowLeads} 
-        onDashboardClick={handleDashboardClick}
-        showCreateJob={showCreateJob}
-        showAddJob={showAddJob}
-        showJobApplicants={showJobApplicants}
-        showLeads={showLeads}
+        onCreateJob={handleCreateJob} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick}
       />
       <Footer />
     </>

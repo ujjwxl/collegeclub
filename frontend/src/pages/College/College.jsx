@@ -245,9 +245,6 @@ const College = () => {
             </div>
             <div className="filter-modal-content">
               <div className="filter-modal-content-left">
-                {/* <div className="filter-modal-title">
-                  <p>DEGREE</p>
-                </div> */}
                 <div
                   className="filter-modal-title"
                   onClick={() => handleFilterClick("Degree")}

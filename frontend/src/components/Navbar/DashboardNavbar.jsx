@@ -87,7 +87,8 @@ const DashboardNavbar = ({ onCreateJob, onAddJob, onShowLeads, onShowApplicants,
   };
 
   return (
-    <div className="navbar">
+    <>
+      <div className={`navbar ${isMenuOpen ? "blur-background" : ""}`}>
       <Link to="/">
         <div className="navbar-logo">
           <img src={collegeClubLogo} alt="" className="navbar-brand-logo" />
@@ -268,6 +269,8 @@ const DashboardNavbar = ({ onCreateJob, onAddJob, onShowLeads, onShowApplicants,
         )}
       </div>
     </div>
+    {isMenuOpen && <div className="backdrop"></div>}
+    </>
   );
 };
 

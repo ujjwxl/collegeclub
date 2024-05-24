@@ -240,6 +240,8 @@
 .active-filter {
   color: red; /* Change color to red when filter is active */
 }
+
+
 @media only screen and (max-width: 768px) {
   .colleges-overlay {
     flex-direction: column;
