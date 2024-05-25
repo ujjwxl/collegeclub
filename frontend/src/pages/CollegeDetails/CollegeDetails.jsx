@@ -17,6 +17,7 @@ import Banking from "../../assets/banking.png"
 import Gymnasium from "../../assets/gymnasium.png"
 import wifi from "../../assets/wi-fi.png"
 import Medical from "../../assets/medical.png";
+import BottomBar from "../../components/BottomBar/BottomBar";
 import "./CollegeDetails.css";
 
 const CollegeDetails = () => {
@@ -63,6 +64,7 @@ const CollegeDetails = () => {
   return (
     <div>
       <Navbar />
+      <BottomBar/>
       <img
         src={backgroundImage}
         alt=""

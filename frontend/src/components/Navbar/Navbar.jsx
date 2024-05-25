@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import collegeClubLogo from "../../assets/collegeclub-logo.png";
@@ -28,6 +28,7 @@ const Navbar = () => {
   const isLoggedIn = userId != null;
   const navigate = useNavigate();
   const location = useLocation();
+  const menuRef = useRef(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -47,6 +48,19 @@ const Navbar = () => {
 
     fetchUserData();
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    const handleClickOutsideMenu = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutsideMenu);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideMenu);
+    };
+  }, []);
 
   const handleToggleMenu = () => {
     setIsMenuOpen((prevState) => !prevState);
@@ -88,7 +102,8 @@ const Navbar = () => {
             className="mobile-menu"
             initial={{ x: "25%" }} // Step 3
             animate={{ x: isMenuOpen ? 0 : "100%" }} // Step 3
-            exit={{ x: "100%" }} // Step 3
+            exit={{ x: "100%" }}
+            ref={menuRef} 
           >
             {/* <div className="mobile-menu"> */}
 

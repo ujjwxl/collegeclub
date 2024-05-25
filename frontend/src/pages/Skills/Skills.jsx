@@ -87,12 +87,31 @@ const Skills = () => {
     setIsFilterModalOpen(!isFilterModalOpen);
   };
 
+  const handleClickOutsideModal = (e) => {
+    if (
+      isFilterModalOpen &&
+      !e.target.closest(".filter-modal") &&
+      !e.target.closest(".colleges-filter-btn")
+    ) {
+      setIsFilterModalOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.body.addEventListener("click", handleClickOutsideModal);
+
+    return () => {
+      document.body.removeEventListener("click", handleClickOutsideModal);
+    };
+  }, [isFilterModalOpen]);
+
   return (
     <>
       <Navbar />
       <BottomBar/>
       <img src={backgroundImage} alt="" className="home1-img" />
-      <div className="skills-overlay colleges-container">
+      <div className={`skills-overlay colleges-container ${isFilterModalOpen ? "blur-background" : ""}`}>
+
         <div className="skills-title">
           <h2>Courses</h2>
           <button className="colleges-filter-btn" onClick={toggleFilterModal}>
@@ -203,6 +222,8 @@ const Skills = () => {
         </div>
       )}
       <Footer />
+      {isFilterModalOpen && <div className="backdrop"></div>}
+
     </>
   );
 };

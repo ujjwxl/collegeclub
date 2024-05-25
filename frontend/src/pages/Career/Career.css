@@ -103,4 +103,7 @@
   .career-overlay{
     height: 101vh;
   }
+  .apply-job-modal-content{
+    margin-top: 70px;
+  }
 }

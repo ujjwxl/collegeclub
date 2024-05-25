@@ -245,6 +245,24 @@
       );
     };
 
+    const handleClickOutsideModal = (e) => {
+      if (
+        isFilterModalOpen &&
+        !e.target.closest(".filter-modal") &&
+        !e.target.closest(".colleges-filter-btn")
+      ) {
+        setIsFilterModalOpen(false);
+      }
+    };
+  
+    useEffect(() => {
+      document.body.addEventListener("click", handleClickOutsideModal);
+  
+      return () => {
+        document.body.removeEventListener("click", handleClickOutsideModal);
+      };
+    }, [isFilterModalOpen]);
+
     return (
       <>
         <Navbar />

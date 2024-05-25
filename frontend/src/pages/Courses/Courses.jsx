@@ -54,13 +54,30 @@ const Courses = () => {
   const openCollegeDetails = (collegeId) => {
     navigate(`/college/${collegeId}`);
   };
+  const handleClickOutsideModal = (e) => {
+    if (
+      isFilterModalOpen &&
+      !e.target.closest(".filter-modal") &&
+      !e.target.closest(".courses-filter-btn")
+    ) {
+      setIsFilterModalOpen(false);
+    }
+  };
 
+  useEffect(() => {
+    document.body.addEventListener("click", handleClickOutsideModal);
+
+    return () => {
+      document.body.removeEventListener("click", handleClickOutsideModal);
+    };
+  }, [isFilterModalOpen]);
   return (
     <>
       <Navbar />
       <BottomBar />
       <img src={backgroundImage} alt="" className="home1-img" />
-      <div className="courses-overlay colleges-container">
+      <div className={`courses-overlay colleges-container ${isFilterModalOpen ? "blur-background" : ""}`}>
+
         <div className="courses-title">
           <h2>Courses</h2>
           <button className="courses-filter-btn" onClick={toggleFilterModal}>
@@ -160,7 +177,7 @@ const Courses = () => {
                   </div>
                 </div>
                 <div className="colleges-display-box-item-details-two">
-                  <h3>{`Course Name : ` + course.courseName}</h3>
+                  <h3>{`Course: ` + course.courseName}</h3>
                   <h3>{`Fees : ` + course.fee}</h3>
                 </div>
               </div>
@@ -169,6 +186,8 @@ const Courses = () => {
         </div>
       </div>
       <Footer />
+      {isFilterModalOpen && <div className="backdrop"></div>}
+
     </>
   );
 };

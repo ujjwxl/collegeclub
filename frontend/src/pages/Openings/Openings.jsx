@@ -258,12 +258,31 @@ const Openings = () => {
       activeAccordion === accordionIndex ? null : accordionIndex
     );
   };
+
+  const handleClickOutsideModal = (e) => {
+    if (
+      isFilterModalOpen &&
+      !e.target.closest(".filter-modal") &&
+      !e.target.closest(".courses-filter-btn")
+    ) {
+      setIsFilterModalOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.body.addEventListener("click", handleClickOutsideModal);
+
+    return () => {
+      document.body.removeEventListener("click", handleClickOutsideModal);
+    };
+  }, [isFilterModalOpen]);
   return (
     <>
       <Navbar />
       <BottomBar />
       <img src={backgroundImage} alt="" className="home1-img" />
-      <div className="openings-overlay colleges-container">
+      <div className={`openings-overlay colleges-container ${isFilterModalOpen ? "blur-background" : ""}`}>
+
         <div className="courses-title">
           <h2>Openings</h2>
           <button className="courses-filter-btn" onClick={toggleFilterModal}>
@@ -608,6 +627,8 @@ const Openings = () => {
         </div>
       )}
       <Footer />
+      {isFilterModalOpen && <div className="backdrop"></div>}
+
     </>
   );
 };
