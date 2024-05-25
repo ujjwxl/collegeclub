@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import axios from "axios";
 import collegeClubLogo from "../../assets/collegeclub-logo.png";
 import notification from "../../assets/notification.png";
@@ -74,7 +75,7 @@ const DashboardNavbar = ({ onCreateJob, onAddJob, onShowLeads, onShowApplicants,
   const handleThirdIconClick = () => {
     if (userData && userData.accountType === 'College') {
       onShowLeads();
-    } else if(userData && userData.accountType === 'Company') {
+    } else if (userData && userData.accountType === 'Company') {
       onShowApplicants();
     }
     setIsMenuOpen(false);
@@ -89,48 +90,54 @@ const DashboardNavbar = ({ onCreateJob, onAddJob, onShowLeads, onShowApplicants,
   return (
     <>
       <div className={`navbar ${isMenuOpen ? "blur-background" : ""}`}>
-      <Link to="/">
-        <div className="navbar-logo">
-          <img src={collegeClubLogo} alt="" className="navbar-brand-logo" />
-          <h2>
-            COLLEGE
-            <br />
-            <span>CLUB</span>
-          </h2>
-        </div>
-      </Link>
-      <img
-        src={menu}
-        alt="menu"
-        className="navbar-menu-icon"
-        onClick={handleToggleMenu}
-      />
+        <Link to="/">
+          <div className="navbar-logo">
+            <img src={collegeClubLogo} alt="" className="navbar-brand-logo" />
+            <h2>
+              COLLEGE
+              <br />
+              <span>CLUB</span>
+            </h2>
+          </div>
+        </Link>
+        <img
+          src={menu}
+          alt="menu"
+          className="navbar-menu-icon"
+          onClick={handleToggleMenu}
+        />
 
-      {isMenuOpen && (
-        <div className="mobile-menu">
-          <div className="navbar-right-mobile">
-            {isLoggedIn ? (
-              <>
-                <div className="navbar-profile-details">
-                  <img
-                    src={
-                      userData && userData.profilePicture
-                        ? userData.profilePicture
-                        : defaultImage
-                    }
-                    alt=""
-                  />
-                  <div className="navbar-profile-name">
-                    <h2>
-                      {userData && userData.organizationName}
-                      <span>✅</span>
-                    </h2>
-                    <h3>{userData && userData.fullName}</h3>
-                    <h4>{userData && userData.email}</h4>
-                    <h3>{userData && userData.accountType}</h3>
+        {isMenuOpen && (
+          <motion.div // Step 2
+            className="mobile-menu"
+            initial={{ x: "25%" }} // Step 3
+            animate={{ x: isMenuOpen ? 0 : "100%" }} // Step 3
+            exit={{ x: "100%" }} // Step 3
+          >
+            {/* // <div className="mobile-menu"> */}
+            <div className="navbar-right-mobile">
+              {isLoggedIn ? (
+                <>
+                  <div className="navbar-profile-details">
+                    <img
+                      src={
+                        userData && userData.profilePicture
+                          ? userData.profilePicture
+                          : defaultImage
+                      }
+                      alt=""
+                    />
+                    <div className="navbar-profile-name">
+                      <h2>
+                        {userData && userData.organizationName}
+                        <span>✅</span>
+                      </h2>
+                      <h3>{userData && userData.fullName}</h3>
+                      <h4>{userData && userData.email}</h4>
+                      <h3>{userData && userData.accountType}</h3>
+                    </div>
                   </div>
-                </div>
-                {/* <div className="navbar-menu-middle">
+                  {/* <div className="navbar-menu-middle">
                   <div
                     className="navbar-menu-middle-icon"
                     onClick={handleFirstIconClick}
@@ -185,91 +192,91 @@ const DashboardNavbar = ({ onCreateJob, onAddJob, onShowLeads, onShowApplicants,
                     </p>
                   </div>
                 </div> */}
-                <div className="navbar-menu-bottom">
-                  <div
-                    className="navbar-menu-bottom-options"
-                    onClick={handleDashboardClick}
-                  >
-                    <img src={dashboardIcon} alt="" />
-                    <h3>Dashboard</h3>
-                  </div>
-                  <hr />
-                  <div className="navbar-menu-bottom-options">
-                    <img src={applicationIcon} alt="" />
-
-                    <h3>Application</h3>
-                  </div>
-                  <hr />
-                  <div className="navbar-menu-bottom-options">
-                    <img src={notificationIcon} alt="" />
-
-                    <h3>Notifications</h3>
-                  </div>
-                  <hr />
-
-                  <Link to={"/faqs"}>
-                    <div className="navbar-menu-bottom-options">
-                      <img src={helpIcon} alt="" />
-
-                      <h3>Help</h3>
+                  <div className="navbar-menu-bottom">
+                    <div
+                      className="navbar-menu-bottom-options"
+                      onClick={handleDashboardClick}
+                    >
+                      <img src={dashboardIcon} alt="" />
+                      <h3>Dashboard</h3>
                     </div>
+                    <hr />
+                    <div className="navbar-menu-bottom-options">
+                      <img src={applicationIcon} alt="" />
+
+                      <h3>Application</h3>
+                    </div>
+                    <hr />
+                    <div className="navbar-menu-bottom-options">
+                      <img src={notificationIcon} alt="" />
+
+                      <h3>Notifications</h3>
+                    </div>
+                    <hr />
+
+                    <Link to={"/faqs"}>
+                      <div className="navbar-menu-bottom-options">
+                        <img src={helpIcon} alt="" />
+
+                        <h3>Help</h3>
+                      </div>
+                    </Link>
+
+                    <hr />
+                  </div>
+                  <div className="logout" onClick={handleSignOut}>
+                    <img src={logoutIcon} alt="" />
+                    <h3>Logout</h3>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <Link to="/register">
+                    <button className="navbar-button">Onboarding</button>
                   </Link>
-
-                  <hr />
-                </div>
-                <div className="logout" onClick={handleSignOut}>
-                  <img src={logoutIcon} alt="" />
-                  <h3>Logout</h3>
-                </div>
-              </>
-            ) : (
-              <>
-                <Link to="/register">
-                  <button className="navbar-button">Onboarding</button>
-                </Link>
-                <Link to="/login">
-                  <button className="navbar-button">Login</button>
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-
-      <div className="navbar-links">
-        <Link to="/colleges">Colleges</Link>
-        <Link to="/courses">Courses</Link>
-        <Link to="/exams">Exams</Link>
-        <Link to="/skills">Skills</Link>
-        <Link to="/career">Career</Link>
-        <Link to="/openings">Openings</Link>
-        {/* <Link to="">Help?</Link> */}
-      </div>
-
-      <div className="navbar-right">
-        {isLoggedIn ? (
-          <>
-            <Link to="/dashboard">
-              <img
-                src={userData && userData.profilePicture}
-                alt=""
-                className="navbar-profile-picture"
-              />
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link to="/register">
-              <button className="navbar-button">Onboarding</button>
-            </Link>
-            <Link to="/login">
-              <button className="navbar-button">Login</button>
-            </Link>
-          </>
+                  <Link to="/login">
+                    <button className="navbar-button">Login</button>
+                  </Link>
+                </>
+              )}
+            </div>
+          </motion.div>
         )}
+
+        <div className="navbar-links">
+          <Link to="/colleges">Colleges</Link>
+          <Link to="/courses">Courses</Link>
+          <Link to="/exams">Exams</Link>
+          <Link to="/skills">Skills</Link>
+          <Link to="/career">Career</Link>
+          <Link to="/openings">Openings</Link>
+          {/* <Link to="">Help?</Link> */}
+        </div>
+
+        <div className="navbar-right">
+          {isLoggedIn ? (
+            <>
+              <Link to="/dashboard">
+                <img
+                  src={userData && userData.profilePicture}
+                  alt=""
+                  className="navbar-profile-picture"
+                />
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/register">
+                <button className="navbar-button">Onboarding</button>
+              </Link>
+              <Link to="/login">
+                <button className="navbar-button">Login</button>
+              </Link>
+            </>
+          )}
+        </div>
       </div>
-    </div>
-    {isMenuOpen && <div className="backdrop"></div>}
+      {isMenuOpen && <div className="backdrop"></div>}
     </>
   );
 };
