@@ -30,6 +30,7 @@
 .college-logo  {
   height: 100px;
   width: 100px;
+  border-radius: 100%;
 }
 
 
@@ -134,13 +135,52 @@
 }
 
 @media only screen and (max-width: 768px) {
+
+  .college-details-page-header {
+    width: auto;
+  }
+
+  .college-details-page-header-logo {
+    /* background-color: red; */
+    margin: auto 0;
+  }
+
+  .college-logo {
+    border-radius: 100%;
+  }
+
+  .college-name h2 {
+    font-size: 22px;
+  }
+
+  .college-details {
+    /* background-color: red; */
+    justify-content: start;
+  }
+
+  .college-details img {
+    height: 12px;
+    width: 12px;
+  }
+
+  .college-details h4 {
+    font-size: 12px;
+    margin: 0;
+    margin-right: 10px;
+  }
+
+  .college-page-navigation-bar {
+    display: none;
+  }
+
   .admission-process {
     white-space: wrap;
   }
 
   .college-logo  {
-    width: 80px;
-    height: 80px;
+    width: 75px;
+    height: 75px;
+    
   }
 
   .college-details-page-gallery img {

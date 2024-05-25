@@ -59,7 +59,7 @@ const CollegeDetails = () => {
     WiFi: wifi,
     Medical: Medical,
   };
-  
+
 
   return (
     <div>
@@ -72,15 +72,18 @@ const CollegeDetails = () => {
       <div className="dashboard-overlay dashboard-container details-form-overlay">
         <div className="college-details-page">
           <div className="college-details-page-header">
-            <img
-              src={collegeData && collegeData.profilePicture}
-              alt=""
-              className="college-logo"
-            />
+            <div className="college-details-page-header-logo">
+              <img
+                src={collegeData && collegeData.profilePicture}
+                alt=""
+                className="college-logo"
+              />
+            </div>
+
             <div className="college-details-page-header-details">
               <div className="college-name">
                 <h2>{collegeData && collegeData.organizationName}</h2>
-                <h2>({collegeData && collegeData.instituteType} University)</h2>
+                {/* <h2>({collegeData && collegeData.instituteType} University)</h2> */}
               </div>
               <div className="college-details">
                 <img src={location}></img>
