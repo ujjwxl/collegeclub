@@ -29,7 +29,7 @@ const AboutUs = () => {
             <h3>Our Mission</h3>
             <p>
               Empowering Education, Fostering Collaboration
-              <br /><br/> Our mission at CollegeClub is to transform the educational
+              <br /><br /> Our mission at CollegeClub is to transform the educational
               experience by providing a unified space where every stakeholder in
               the education ecosystem can thrive. We are committed to empowering
               students with resources, guiding colleges to enhance their campus
@@ -69,7 +69,7 @@ const AboutUs = () => {
             <h4>Collaboration:</h4>
             <p>Collaboration fuels progress. We believe in the strength of collective efforts, where the synergy of individuals and institutions creates unparalleled opportunities.</p>
             <h3>Contact Us</h3>
-            <p>We invite you to be a part of the CollegeClub community. If you have questions, feedback, or simply want to connect, reach out to us at [ letstalk@collegeclub.com ]. Together, let's shape the future of education.<br/><br/>Thank you for choosing CollegeClub.</p>
+            <p>We invite you to be a part of the CollegeClub community. If you have questions, feedback, or simply want to connect, reach out to us at [ letstalk@collegeclub.com ]. Together, let's shape the future of education.<br /><br />Thank you for choosing CollegeClub.</p>
           </div>
         </div>
       </div>

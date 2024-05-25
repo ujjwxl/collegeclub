@@ -24,7 +24,6 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* font-size: 3.2rem; */
   margin: 0;
 }
 
@@ -32,7 +31,6 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-gap: 10px;
-  /* background-color: red; */
   margin-left: 40px;
   margin-top: 8%;
 }
@@ -72,15 +70,18 @@
     top: 200vh;
     height: 101vh;
   }
+
   .home-category-slider {
     width: 95%;
     margin-left: 10px;
+    margin-top: 40%;
   }
 
   .category-circle {
     position: relative;
     display: flex;
     flex-direction: column;
+    text-align: center;
   }
 
   .category-circle img {
@@ -91,6 +92,6 @@
 
   .category-circle h2 {
     position: absolute;
-    margin-left: 20%;
+    margin-left: 34%;
   }
 }

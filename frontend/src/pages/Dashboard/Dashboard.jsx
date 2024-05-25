@@ -52,7 +52,7 @@ const Dashboard = () => {
   };
 
   const handleDashboardClick = () => {
-    setShowDashboardBox(true); // Show DashboardBox when clicked
+    setShowDashboardBox(true);
     setShowLeads(false);
     setShowCreateJob(false);
     setShowAddJob(false);
@@ -62,7 +62,9 @@ const Dashboard = () => {
   return (
     <>
       <DashboardNavbar />
+
       <img src={backgroundImage} alt="" className='home1-img' />
+
       <div className='dashboard-overlay dashboard-container'>
         <DashboardMenu onCreateJob={handleCreateJob} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} />
         {showCreateJob && <CreateJob />}
@@ -71,9 +73,9 @@ const Dashboard = () => {
         {showLeads && <LeadsComponent />}
         {showDashboardBox && <DashboardBox />}
       </div>
-      <DashboardBottomBar 
-        onCreateJob={handleCreateJob} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick}
-      />
+
+      <DashboardBottomBar onCreateJob={handleCreateJob} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} />
+
       <Footer />
     </>
   )

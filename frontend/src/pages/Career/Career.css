@@ -1,3 +1,4 @@
+
 .career {
   padding-top: 50px;
 }
@@ -29,43 +30,32 @@
   word-spacing: 2px;
   box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
 }
+
 .career-box hr{
     color: #555;
     background-color: #555;
     height: 1px;
     border: none;
 }
+
 .career-box h3 {
   margin: 0;
   margin-bottom: 15px;
 }
+
 .career-box h4{
     margin-left: 20px;
     cursor: pointer;
 }
+
 .career-box h4:hover{
     color: #6f26e6;
 }
+
 .career-box p {
   color: #bdbdbd;
   font-size: 16px;
 }
-/* .career-box::-webkit-scrollbar {
-  width: 10px;
-}
-
-.career-box::-webkit-scrollbar-track {
-  background: rgba(36, 6, 85, 0.5);
-}
-
-.career-box::-webkit-scrollbar-thumb {
-  background: #8e8e8e;
-  border-radius: 5px;
-}
-
-.career-box::-webkit-scrollbar-thumb:hover {
-  background: #555;
-} */
 
 .accordion{
     overflow-x: hidden;

@@ -103,7 +103,7 @@ const Career = () => {
           <h3>Designation:</h3>
           <li>Sales Executive</li>
           <br />
-          
+
           <button onClick={() => setApplicationModal(true)} className="form-submit-button career-button">Apply now</button>
         </>
       ),
@@ -323,7 +323,7 @@ const Career = () => {
           <h3>Designation:</h3>
           <li>Marketing Executive</li>
           <br />
-          
+
           <button onClick={() => setApplicationModal(true)} className="form-submit-button career-button">Apply now</button>
         </>
       ),
@@ -416,7 +416,7 @@ const Career = () => {
           <h3>Designation:</h3>
           <li>FJT</li>
           <br />
-          
+
           <button onClick={() => setApplicationModal(true)} className="form-submit-button career-button">Apply now</button>
         </>
       ),
@@ -560,6 +560,7 @@ const Career = () => {
           </div>
         </div>
       </div>
+
       {applicationModal && (
         <div className="modal apply-job-modal">
           <div className="modal-content apply-job-modal-content">
@@ -592,10 +593,6 @@ const Career = () => {
                   <input type="text" placeholder='Enter your city' onChange={(e) => setCity(e.target.value)} required />
                 </div>
 
-                {/* <div className="form-input-group">
-                  <label htmlFor="collegename">State*</label>
-                  <input type="text" placeholder='Enter your state' onChange={(e) => setState(e.target.value)} required />
-                </div> */}
               </div>
 
               <div className="form-input-group form-select apply-form-select">

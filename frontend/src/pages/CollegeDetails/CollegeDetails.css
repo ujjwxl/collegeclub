@@ -1,3 +1,4 @@
+
 .college-details-page {
   background-color: #240655;
   height: 90%;
@@ -5,10 +6,12 @@
   width: 95%;
   overflow-y: scroll;
 }
+
 .college-details-page h4 {
   margin-left: 30px;
   margin-right: 5px;
 }
+
 .college-details-page h3 {
   margin-left: 20px;
   font-size: 25px;
@@ -17,12 +20,13 @@
 .college-details-page li {
   margin-left: 35px;
 }
+
 .college-details-page h5 {
   margin-left: 30px;
 }
+
 .college-details-page-header {
   display: flex;
-  /* background-color: red; */
   background-color: #4527a0;
   padding: 20px;
 }
@@ -33,16 +37,17 @@
   border-radius: 100%;
 }
 
-
 .college-name {
   display: flex;
   margin-top: 20px;
 }
+
 .college-name h2 {
   margin: auto 0 auto 0;
   margin-left: 10px;
   font-size: 28px;
 }
+
 .college-details{
   display: flex;
   align-items: center;
@@ -51,10 +56,12 @@
   margin-top: 10px;
   font-size: 14px;
 }
+
 .college-details img{
   height: 18px;
   width: 18px;
 }
+
 .college-details h4 {
   margin: 0;
   margin-left: 5px;
@@ -68,6 +75,7 @@
 .college-details-page-gallery h3 {
   margin-left: 20px;
 }
+
 .college-details-page-gallery img {
   width: 200px;
   height: 200px;
@@ -141,7 +149,6 @@
   }
 
   .college-details-page-header-logo {
-    /* background-color: red; */
     margin: auto 0;
   }
 
@@ -154,7 +161,6 @@
   }
 
   .college-details {
-    /* background-color: red; */
     justify-content: start;
   }
 
@@ -180,7 +186,6 @@
   .college-logo  {
     width: 75px;
     height: 75px;
-    
   }
 
   .college-details-page-gallery img {

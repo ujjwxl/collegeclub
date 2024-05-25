@@ -29,31 +29,18 @@
   word-spacing: 2px;
   box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
 }
+
 .centered-box h2 {
   margin: 0;
 }
+
 .centered-box p {
   color: #bdbdbd;
   font-size: 16px;
 }
-/* .centered-box::-webkit-scrollbar {
-    width: 10px; 
+
+@media only screen and (max-width: 768px) {
+  .centered-box {
+    width: 80%;
   }
-  
-  .centered-box::-webkit-scrollbar-track {
-    background: rgba(36, 6, 85, 0.5); 
-  }
-  
-  .centered-box::-webkit-scrollbar-thumb {
-    background: #8e8e8e; 
-    border-radius: 5px; 
-  }
-  
-  .centered-box::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-  } */
-  @media only screen and (max-width: 768px) {
-    .centered-box{
-      width: 80%;
-    }
-  }
+}

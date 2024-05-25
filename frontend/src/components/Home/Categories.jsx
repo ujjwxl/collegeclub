@@ -69,58 +69,57 @@ const Categories = () => {
 
         {isMobile ? (
           <Slider {...settings} className='home-category-slider'>
-            <div class="category-circle">
-              <img src={technologyIcon} alt="" />
-              <h2>Science and technology</h2>
-            </div>
-            <div class="category-circle">
-              <img src={medicalIcon} alt="" />
-              <h2>Medical</h2>
-            </div>
-            <div class="category-circle">
-              <img src={businessIcon} alt="" />
-              <h2>Business and Management</h2>
-            </div>
-            <div class="category-circle">
-              <img src={fashionIcon} alt="" />
-              <h2>
-                Fashion and <br /> design
-              </h2>
-            </div>
-            <div class="category-circle">
-              <img src={agricultureIcon} alt="" />
-              <h2>Agriculture</h2>
-            </div>
-            <div class="category-circle">
-              <img src={earthIcon} alt="" />
-              <h2>Environmental Science</h2>
-            </div>
-
-            <div class="category-circle">
-              <img src={lawIcon} alt="" />
-              <h2>Law and Legal</h2>
-            </div>
-            <div class="category-circle">
-              <img src={hospitalityIcon} alt="" />
-              <h2>Hospitality</h2>
-            </div>
-            <div class="category-circle">
-              <img src={journalismIcon} alt="" />
-              <h2>Journalism</h2>
-            </div>
-            <div class="category-circle">
-              <img src={teachingIcon} alt="" />
-              <h2>Teaching</h2>
-            </div>
-            <div class="category-circle">
-              <img src={lifestyleIcon} alt="" />
-              <h2>Lifestyle</h2>
-            </div>
-            <div class="category-circle">
-              <img src={sportsIcon} alt="" />
-              <h2>Sports</h2>
-            </div>
-          </Slider>
+          <div class="category-circle">
+            <img src={technologyIcon} alt="" />
+            <h2>Technology</h2>
+          </div>
+          <div class="category-circle">
+            <img src={medicalIcon} alt="" />
+            <h2>&nbsp;&nbsp;Medical</h2>
+          </div>
+          <div class="category-circle">
+            <img src={businessIcon} alt="" />
+            <h2>Management</h2>
+          </div>
+          <div class="category-circle">
+            <img src={fashionIcon} alt="" />
+            <h2>&nbsp;&nbsp;&nbsp;Fashion</h2>
+          </div>
+          <div class="category-circle">
+            <img src={agricultureIcon} alt="" />
+            <h2>Agriculture</h2>
+          </div>
+          <div class="category-circle">
+            <img src={earthIcon} alt="" />
+            <h2>Environment</h2>
+          </div>
+        
+          <div class="category-circle">
+            <img src={lawIcon} alt="" />
+            <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Law&nbsp;&nbsp;&nbsp;</h2>
+          </div>
+          <div class="category-circle">
+            <img src={hospitalityIcon} alt="" />
+            <h2>Hospitality</h2>
+          </div>
+          <div class="category-circle">
+            <img src={journalismIcon} alt="" />
+            <h2>Journalism</h2>
+          </div>
+          <div class="category-circle">
+            <img src={teachingIcon} alt="" />
+            <h2>&nbsp;&nbsp;Teaching</h2>
+          </div>
+          <div class="category-circle">
+            <img src={lifestyleIcon} alt="" />
+            <h2>&nbsp;&nbsp;Lifestyle</h2>
+          </div>
+          <div class="category-circle">
+            <img src={sportsIcon} alt="" />
+            <h2>&nbsp;&nbsp;&nbsp;Sports&nbsp;&nbsp;</h2>
+          </div>
+        </Slider>
+        
         ) : (
           <div className="category-circle-grid">
             <div class="category-circle">

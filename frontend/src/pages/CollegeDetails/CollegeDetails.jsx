@@ -6,7 +6,6 @@ import location from "../../assets/location.png";
 import bookmark from "../../assets/bookmark.png";
 import pin from "../../assets/pin.png";
 import star from "../../assets/star.png";
-import DetailsFormComponent from "../../components/Forms/DetailsFormComponent";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Home/Footer";
 import Hostel from "../../assets/hostel.png";
@@ -21,6 +20,7 @@ import Medical from "../../assets/medical.png";
 import "./CollegeDetails.css";
 
 const CollegeDetails = () => {
+
   const { collegeId } = useParams();
   const [collegeData, setCollegeData] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -60,7 +60,6 @@ const CollegeDetails = () => {
     Medical: Medical,
   };
 
-
   return (
     <div>
       <Navbar />
@@ -83,7 +82,6 @@ const CollegeDetails = () => {
             <div className="college-details-page-header-details">
               <div className="college-name">
                 <h2>{collegeData && collegeData.organizationName}</h2>
-                {/* <h2>({collegeData && collegeData.instituteType} University)</h2> */}
               </div>
               <div className="college-details">
                 <img src={location}></img>
@@ -137,18 +135,6 @@ const CollegeDetails = () => {
             </div>
           </div>
 
-          {/* <h3>Courses</h3>
-          {collegeData &&
-            collegeData.courses.map((course, index) => (
-              <div key={index}>
-                <h4>{course.courseName}</h4>
-                <h5>Duration: {course.duration} years</h5>
-                <h5>Minimum Qualification: {course.minQualification}</h5>
-                <h5>Fee: {course.fee}</h5>
-                <h5>Distance: {course.distance}</h5>
-              </div>
-            ))} */}
-
           <div id="college-courses">
             <h3>Courses</h3>
             {collegeData && collegeData.courses.length > 0 ? (
@@ -183,15 +169,6 @@ const CollegeDetails = () => {
 
           <hr />
 
-          {/* <h3>Departments</h3>
-          {collegeData &&
-            collegeData.departments.map((department, index) => (
-              <div key={index}>
-                <h4>{department.departmentName}</h4>
-                <h5>{department.description}</h5>
-                <h5>Placement Percentage: {department.placementPercentage}</h5>
-              </div>
-            ))} */}
 
           <div id="college-departments">
             <h3>Departments</h3>
@@ -222,16 +199,6 @@ const CollegeDetails = () => {
           </div>
 
           <hr />
-
-          {/* <h3>Rankings</h3> */}
-          {/* {collegeData &&
-            collegeData.rankings.map((ranking, index) => (
-              <div key={index}>
-                <h4>Agency: {ranking.agencyName}</h4>
-                <h5>Rank: {ranking.rank}</h5>
-                <h5>Year: {ranking.year}</h5>
-              </div>
-            ))} */}
 
           <div id="college-ranking">
             <h3>Rankings</h3>
@@ -267,17 +234,6 @@ const CollegeDetails = () => {
             Scholarship Provided: {collegeData && collegeData.scholarship}
           </h3>
           <hr />
-
-          {/* <h3>News</h3>
-          {collegeData &&
-            collegeData.news.map((news, index) => (
-              <div key={index}>
-                <h4>Agency: {news.newsTitle}</h4>
-                <a href={news.refLink} target="_blank">
-                  Link
-                </a>
-              </div>
-            ))} */}
 
           <div id="college-news">
             <h3>News</h3>
