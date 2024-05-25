@@ -676,6 +676,43 @@ export const getCoursesByType = async (req, res) => {
   }
 };
 
+export const getAllCourses = async (req, res) => {
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("accountType", "==", "College"));
+    const querySnapshot = await getDocs(q);
+
+    const courses = [];
+    querySnapshot.forEach((doc) => {
+      const college = doc.data();
+      if (college && college.courses) {
+        college.courses.forEach((course) => {
+          courses.push({
+            collegeName: college.organizationName,
+            userId: college.userId,
+            collegeProfilePicture: college.profilePicture,
+            courseName: course.courseName,
+            duration: course.duration,
+            fee: course.fee,
+            distance: course.distance,
+            minQualification: course.minQualification,
+            district: college.district,
+            state: college.state,
+            email: college.email,
+            contactNumber: college.contactNumber,
+            // Add other course details you want to include
+          });
+        });
+      }
+    });
+
+    res.status(200).json({ courses });
+  } catch (error) {
+    console.error("Error fetching all courses:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const submitJobApplication = async (req, res) => {
   const { name, phoneNumber, email, city, state, position, resumeLink } =
     req.body;
