@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Home/Footer";
 import backgroundImage from "../../assets/home-1.jpg";
@@ -270,7 +271,9 @@ const Openings = () => {
           </button>
         </div>
         {isFilterModalOpen && (
-            <div className={`filter-modal ${isFilterModalOpen ? "show" : ""}`}>
+            <motion.div className={`filter-modal ${isFilterModalOpen ? "show" : ""}`} initial={{ x: "10%" }}
+            animate={{ x: isFilterModalOpen ? 0 : "100%" }}
+            exit={{ x: "100%" }}>
               <div className="filter-modal-header">
                 <h3 onClick={clearFilters}>Clear</h3>
                 <button
@@ -293,7 +296,7 @@ const Openings = () => {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
         <div className="openings-display-box">
           <div className="openings-display-box-filter">

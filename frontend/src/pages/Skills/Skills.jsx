@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import location from "../../assets/location.png";
@@ -99,7 +100,9 @@ const Skills = () => {
           </button>
         </div>
         {isFilterModalOpen && (
-          <div className={`filter-modal ${isFilterModalOpen ? "show" : ""}`}>
+          <motion.div className={`filter-modal ${isFilterModalOpen ? "show" : ""}`} initial={{ x: "10%" }}
+          animate={{ x: isFilterModalOpen ? 0 : "100%" }}
+          exit={{ x: "100%" }}>
             <div className="filter-modal-header">
               <h2>Courses Type</h2>
               <div className="clear-apply">
@@ -133,7 +136,7 @@ const Skills = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         )}
         <div className="skills-display-box">
           <div className="skills-display-box-filter">

@@ -44,7 +44,7 @@
 .filter-modal {
   position: fixed;
   width: 60%;
-  height: 100%;
+  height: 85%;
   background-color: #340b75;
   border: none;
   padding: 20px 0px;
@@ -52,7 +52,7 @@
   z-index: 3;
   right: -60%; /* Start off-screen */
   transition: right 1s ease; /* Smooth transition for right property */
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
 }
 
 .filter-modal.show {

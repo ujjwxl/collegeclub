@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import location from "../../assets/location.png";
@@ -29,7 +30,7 @@ const Courses = () => {
     "Journalism",
     "Teaching",
     "Lifestyle",
-    "Sports",
+    "Sports"
   ];
 
   const fetchCourses = async (courseType) => {
@@ -67,10 +68,12 @@ const Courses = () => {
           </button>
         </div>
         {isFilterModalOpen && (
-          <div className={`filter-modal ${isFilterModalOpen ? "show" : ""}`}>
+          <motion.div className={`filter-modal ${isFilterModalOpen ? "show" : ""}`} initial={{ x: "10%" }}
+            animate={{ x: isFilterModalOpen ? 0 : "100%" }}
+            exit={{ x: "100%" }}>
             <div className="filter-modal-header">
               {/* <h2>Courses Type</h2> */}
-              <div className="clear-apply">
+              <div className="clear-apply courses-apply">
                 <button
                   className="colleges-filter-modal-btn"
                   onClick={toggleFilterModal}
@@ -80,6 +83,13 @@ const Courses = () => {
               </div>
             </div>
             <div className="filter-modal-content-courses">
+              <div
+                className={`courses-left-items ${!selectedCourse ? "course-selected-button" : ""
+                  }`}
+                onClick={() => setSelectedCourse("")}
+              >
+                <h3>All</h3>
+              </div>
               {courses.map((course, index) => (
                 <div
                   className={`courses-left-items ${selectedCourse === course ? "course-selected-button" : ""
@@ -91,7 +101,7 @@ const Courses = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         )}
         <div className="courses-display-box">
           <div className="courses-display-box-filter">

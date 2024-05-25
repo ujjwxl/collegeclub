@@ -1,4 +1,5 @@
   import React, { useState, useEffect, cloneElement } from "react";
+  import { motion } from "framer-motion";
   import { useNavigate } from "react-router-dom";
   import Navbar from "../../components/Navbar/Navbar";
   import Navigation from "../../components/Navigation/Navigation";
@@ -249,7 +250,7 @@
         <Navbar />
         <BottomBar />
         <img src={backgroundImage} alt="" className="home1-img" />
-        <div className="colleges-overlay colleges-container">
+        <div className={`colleges-overlay colleges-container ${isFilterModalOpen ? "blur-background" : ""}`}>
           <div className="colleges-title">
             <h2>Colleges in India</h2>
             <button className="colleges-filter-btn" onClick={toggleFilterModal}>
@@ -257,14 +258,16 @@
             </button>
           </div>
           {isFilterModalOpen && (
-            <div className={`filter-modal ${isFilterModalOpen ? "show" : ""}`}>
+            <motion.div className={`filter-modal ${isFilterModalOpen ? "show" : ""}`} initial={{ x: "5%" }}
+            animate={{ x: isFilterModalOpen ? 0 : "100%" }}
+            exit={{ x: "100%" }}>
               <div className="filter-modal-header">
                 <h3 onClick={clearFilters}>Clear</h3>
                 <button
                   className="colleges-filter-modal-btn"
                   onClick={toggleFilterModal}
                 >
-                  APPLY
+                  Apply
                 </button>
               </div>
               <div className="filter-modal-content">
@@ -319,7 +322,7 @@
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
           <div className="colleges-display-box">
             <div className="colleges-display-box-filter">
@@ -481,6 +484,7 @@
           </div>
         </div>
         <Footer />
+        {isFilterModalOpen && <div className="backdrop"></div>}
       </>
     );
   };

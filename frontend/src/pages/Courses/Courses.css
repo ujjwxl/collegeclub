@@ -104,6 +104,10 @@
   background-color: #3b208b;
 }
 
+.courses-apply {
+    margin-left: 50px;
+}
+
 @media only screen and (max-width: 768px) {
     .courses-overlay {
         flex-direction: column;
