@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner';
 import axios from 'axios';
 
 
@@ -50,12 +51,12 @@ const CompanyProfileComponent = () => {
           })
             .then(res => {
               if (res.status == 200) {
-                alert("Profile form sent successfully!")
+                toast("Profile form submitted successfully!")
                 navigate('/form/details')
               }
             })
             .catch(e => {
-              alert("Please fill all the required fields!")
+              toast("Form could not be submitted!")
               console.log(e);
             })
         }

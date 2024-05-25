@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "sonner";
 import axios from "axios";
 import backgroundImage from "../../assets/home-1.jpg";
 import Navbar from "../../components/Navbar/Navbar";
@@ -46,11 +47,11 @@ function SlotBooking() {
       })
         .then(res => {
           if (res.status == 200) {
-            alert("Slot booked successfully!")
+            toast("Slot booked successfully!");
           }
         })
         .catch(e => {
-          alert("Please fill all the required fields!")
+          toast("Slot could not be booked!");
           console.log(e);
         })
     }

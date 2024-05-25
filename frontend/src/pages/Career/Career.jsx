@@ -7,6 +7,7 @@ import {
   AccordionItemPanel,
 } from "react-accessible-accordion";
 import "react-accessible-accordion/dist/fancy-example.css";
+import { toast } from "sonner";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Home/Footer";
@@ -471,12 +472,13 @@ const Career = () => {
 
     axios.post(`http://localhost:5000/upload/resume`, formData)
       .then((response) => {
-        alert('File uploaded successfully');
+        toast('File uploaded successfully!');
         console.log('File uploaded successfully');
         console.log(response);
         localStorage.setItem('resumeLink', response.data.downloadURL)
       })
       .catch((error) => {
+        toast('File could not be uploaded!');
         console.error('Error uploading file:', error);
       });
   };
@@ -487,7 +489,7 @@ const Career = () => {
     const resumeLink = localStorage.getItem('resumeLink');
 
     if (!resumeLink) {
-      alert('Please upload a resume first');
+      toast('Please upload a resume first!');
       return;
     }
 
@@ -503,14 +505,16 @@ const Career = () => {
       })
         .then(res => {
           if (res.status == 200) {
-            alert('Applied for job succesfully!');
+            toast('Applied for job succesfully!');
             localStorage.removeItem('resumeLink');
           }
         })
         .catch(e => {
+          toast('Could not apply for job!');
           console.log(e);
         })
     } catch (e) {
+      toast('Could not apply for job!');
       console.log(e);
     }
   }

@@ -25,7 +25,6 @@ const AddJob = () => {
             axios.put(`http://localhost:5000/auth/markjoblisted/${jobId}`)
                 .then(response => {
                     if (response.status === 200) {
-                        // alert('Job listed on the portal!')
                         toast('Job listed on the portal!');
                     }
                 })

@@ -8,6 +8,7 @@ import backgroundImage from "../../assets/home-1.jpg";
 import logo from "../../assets/collegeclub-logo.png";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase.js";
+import { toast } from "sonner";
 import axios from "axios";
 
 const Login = () => {
@@ -36,11 +37,12 @@ const Login = () => {
           }
         })
         .catch(e => {
-          alert("Please check your signin details!")
+          toast("Please check your login details!")
           console.log(e);
         })
     }
     catch (e) {
+      toast("Please check your login details!")
       console.log(e);
     }
   }

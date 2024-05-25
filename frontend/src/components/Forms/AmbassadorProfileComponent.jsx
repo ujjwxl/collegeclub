@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { toast } from "sonner";
 import axios from "axios";
 import "./ProfileFormComponent.css";
 
@@ -62,12 +63,12 @@ const AmbassadorProfileComponent = () => {
         })
         .then((res) => {
           if (res.status == 200) {
-            alert("Profile form sent successfully!");
+            toast("Profile form submitted successfully!");
             navigate("/form/details");
           }
         })
         .catch((e) => {
-          alert("Please fill all the required fields!");
+          toast("Form could not be submitted!");
           console.log(e);
         });
     } catch (e) {

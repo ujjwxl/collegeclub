@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Home/Footer";
 import "./Signup.css";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import axios from "axios";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
@@ -58,7 +59,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password != confirmPassword) alert("The passwords do not match!");
+    if (password != confirmPassword) toast("The passwords do not match!");
 
     try {
       await axios
@@ -74,11 +75,11 @@ const Signup = () => {
         })
         .then((res) => {
           if (res.status == 200) {
-            alert("Account created successfully!");
+            toast("Account created successfully!");
           }
         })
         .catch((e) => {
-          alert("Please check your signup details!");
+          toast("Please check your signup details!");
           console.log(e);
         });
     } catch (e) {

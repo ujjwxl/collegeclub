@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { toast } from 'sonner';
 import axios from 'axios'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Home/Footer'
@@ -27,11 +28,11 @@ const Feedback = () => {
             })
                 .then(res => {
                     if (res.status == 200) {
-                        alert("Feedback form sent successfully!")
+                        toast("Feedback sent successfully!")
                     }
                 })
                 .catch(e => {
-                    alert("Please fill all the required fields!")
+                    toast("Feedback could not be submitted!")
                     console.log(e);
                 })
         }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'sonner';
 import axios from 'axios';
 import './CreateJob.css';
 
@@ -68,14 +69,16 @@ const CreateJob = () => {
             })
                 .then((response => {
                     if (response.status == 200) {
-                        alert('Job created successfully');
+                        toast('Job created successfully!');
                     }
                 }))
                 .catch((error => {
                     console.log(error);
+                    toast('Job could not be created!');
                 }))
         } catch (e) {
             console.log(e);
+            toast('Job could not be created!');
         }
     };
 

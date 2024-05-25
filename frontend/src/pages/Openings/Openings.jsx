@@ -96,6 +96,7 @@ import Footer from "../../components/Home/Footer";
 import backgroundImage from "../../assets/home-1.jpg";
 import defaultImage from "../../assets/test-dp.jpg";
 import BottomBar from '../../components/BottomBar/BottomBar'
+import { toast } from "sonner";
 import axios from "axios";
 import "./Openings.css";
 
@@ -187,12 +188,13 @@ const Openings = () => {
 
         axios.post(`http://localhost:5000/upload/resume`, formData)
             .then((response) => {
-                alert('File uploaded successfully');
+                toast('File uploaded successfully!');
                 console.log('File uploaded successfully');
                 console.log(response);
                 localStorage.setItem('resumeLink', response.data.downloadURL)
             })
             .catch((error) => {
+                toast('File could not be uploaded!');
                 console.error('Error uploading file:', error);
             });
     };
@@ -203,40 +205,42 @@ const Openings = () => {
         const jobName = e.target.elements.jobName.value;
         const jobId = e.target.elements.jobId.value;
         const companyName = e.target.elements.companyName.value;
-    
+
         const resumeLink = localStorage.getItem('resumeLink');
-    
+
         if (!resumeLink) {
-          alert('Please upload a resume first');
-          return;
+            toast('Please upload a resume first!');
+            return;
         }
-    
+
         try {
-          await axios.post(`http://localhost:5000/auth/companyapply`, {
-            jobName,
-            jobId,
-            companyName,
-            companyId,
-            name,
-            phoneNumber,
-            email,
-            city,
-            state,
-            resumeLink            
-          })
-            .then(res => {
-              if (res.status == 200) {
-                alert('Applied for job succesfully!');
-                localStorage.removeItem('resumeLink');
-              }
+            await axios.post(`http://localhost:5000/auth/companyapply`, {
+                jobName,
+                jobId,
+                companyName,
+                companyId,
+                name,
+                phoneNumber,
+                email,
+                city,
+                state,
+                resumeLink
             })
-            .catch(e => {
-              console.log(e);
-            })
+                .then(res => {
+                    if (res.status == 200) {
+                        toast('Applied for job succesfully!');
+                        localStorage.removeItem('resumeLink');
+                    }
+                })
+                .catch(e => {
+                    toast('Could not apply for job!');
+                    console.log(e);
+                })
         } catch (e) {
-          console.log(e);
+            toast('Could not apply for job!');
+            console.log(e);
         }
-      }
+    }
 
     const filteredJobs = jobs.filter(job => {
         const locationTypeMatch = !locationTypeFilter || job.locationType.toLowerCase() === locationTypeFilter.toLowerCase();

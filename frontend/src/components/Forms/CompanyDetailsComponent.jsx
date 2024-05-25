@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import axios from 'axios';
 
 const CompanyDetailsComponent = () => {
@@ -36,11 +37,11 @@ const CompanyDetailsComponent = () => {
                 })
                 .then((res) => {
                     if (res.status === 200) {
-                        alert("Details form sent successfully!");
+                        toast("Details form submitted successfully!");
                     }
                 })
                 .catch((e) => {
-                    alert("Please fill all the required fields!");
+                    toast("Form could not be submitted!");
                     console.log(e);
                 });
         } catch (e) {
