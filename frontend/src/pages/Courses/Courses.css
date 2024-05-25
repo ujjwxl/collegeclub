@@ -105,24 +105,31 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .courses-overlay {
-    flex-direction: column;
-    height: calc(108% - 50px);
-  }
+    .courses-overlay {
+        flex-direction: column;
+        height: calc(108% - 50px);
+      }
 
-  .courses-display-box {
-    border-radius: 10px;
-    height: 82vh;
-  }
-
-    }
-    .colleges-display-box-item-details-two{
+      .courses-display-box {
+        border-radius: 10px;
+        height: 82vh;
+      }
+      .courses-display-box-filter {
+        display: none;
+      }
+    
+      .courses-display-box-list {
+        width: 100%;
+      }
+    
+      .colleges-display-box-item-details-two {
         margin-left: 10px;
-    }
-    .courses-left-items{
+      }
+    
+      .courses-left-items {
         margin-top: 10px;
         width: 60%;
-    }
+      }
     
 }
 /* @media only screen and (min-width: 768px) and (max-width: 1080px){
