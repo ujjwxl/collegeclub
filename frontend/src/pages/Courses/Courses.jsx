@@ -67,9 +67,9 @@ const Courses = () => {
           </button>
         </div>
         {isFilterModalOpen && (
-          <div className="filter-modal">
+          <div className={`filter-modal ${isFilterModalOpen ? "show" : ""}`}>
             <div className="filter-modal-header">
-              <h2>Courses Type</h2>
+              {/* <h2>Courses Type</h2> */}
               <div className="clear-apply">
                 <button
                   className="colleges-filter-modal-btn"

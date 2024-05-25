@@ -1,0 +1,38 @@
+.accord-item{
+    border-bottom: 2px solid #2f0d62; 
+
+}
+  .accord-title {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    background-color: #340b75;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .accord-title:hover {
+    background-color: #340b75;
+  }
+  
+  .accord-title,
+  .accord-content {
+    padding: 1.5rem;
+  }
+  
+  .accord-content {
+    background-color: #340b75;
+  }
+  
+  @media screen and (max-width: 700px) {
+    /* body {
+      font-size: 18px;
+    } */
+  
+    .accord {
+      width: 100%;
+    }
+    .accord-content{
+        padding-top: 0;
+    }
+  }

@@ -115,22 +115,15 @@
     height: 82vh;
   }
 
-  .courses-display-box-filter {
-    display: none;
-  }
-
-  .courses-display-box-list {
-    width: 100%;
-  }
-
-  .colleges-display-box-item-details-two {
-    margin-left: 10px;
-  }
-
-  .courses-left-items {
-    margin-top: 10px;
-    width: 60%;
-  }
+    }
+    .colleges-display-box-item-details-two{
+        margin-left: 10px;
+    }
+    .courses-left-items{
+        margin-top: 10px;
+        width: 60%;
+    }
+    
 }
 /* @media only screen and (min-width: 768px) and (max-width: 1080px){
     .courses-left-items{
