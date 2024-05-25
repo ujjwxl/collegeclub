@@ -15,7 +15,6 @@
   background-color: rgba(36, 6, 85, 0.5);
   color: white;
   text-align: center;
-  /* padding: 20px; */
   box-sizing: border-box;
   font-family: "Comfortaa", sans-serif;
   font-size: 1.5rem;
@@ -30,7 +29,6 @@
   background-color: rgba(36, 6, 85, 0.5);
   color: white;
   text-align: center;
-  /* padding: 20px; */
   box-sizing: border-box;
   font-family: "Comfortaa", sans-serif;
   font-size: 1.5rem;
@@ -61,7 +59,6 @@
 }
 
 .signup-otp-form-left-contents {
-  /* background-color: red; */
   margin: 5% 0 0 5%;
 }
 
@@ -212,13 +209,11 @@
 
 .signup-form-left {
   width: 50%;
-  /* background-color: blue; */
 }
 
 .signup-form-right {
   width: 50%;
   margin-top: 105px;
-  /* background-color: green; */
 }
 
 .PhoneInput {
@@ -237,9 +232,11 @@
 }
 
 @media only screen and (max-width: 768px) {
+
   .signup-overlay {
     height: 161vh;
   }
+
   .signup-form{
     width: 84%;
   }
@@ -247,9 +244,11 @@
   .signup-otp-page-image {
     height: 90vh;
   }
+
   .signup-otp-form {
     height: 75%;
   }
+
   .signup-otp-form-left-contents {
     display: flex;
     flex-direction: column;
@@ -257,20 +256,25 @@
     margin: 0 10px;
     margin-top: 10%;
   }
+
   .signup-otp-form-right {
     display: none;
   }
+
   .signup-otp-form-left {
     width: 100%;
     text-align: center;
   }
+
   .signup-otp-form-left button {
     width: 30%;
   }
+
   .signup-otp-form-left-contents h4 {
     font-size: 17px;
     font-weight: 100;
   }
+  
   .signup-page-image {
     height: 135vh;
   }
@@ -282,6 +286,7 @@
     padding-left: 20px;
     padding-bottom: 20px;
   }
+
   .signup-form-left {
     padding-top: 20px;
   }
@@ -301,20 +306,23 @@
   .signup-form-container button {
     width: 100%;
   }
+
   .signup-otp-form-left-contents .PhoneInput{
     width: 60%
   }
+
   .PhoneInput {
     width: 150%;
   }
+
   .phone-input-bottom input {
     margin-left: 0;
-    
   }
 
   .signup-form-right {
     margin-top: 30px;
   }
+
   .checkbox-label {
     width: 200%;
     display: none;
@@ -324,6 +332,7 @@
     width: 120%;
     margin-left: 35%;
   }
+
   .already-have-account {
     font-size: 16px;
     text-align: left;
@@ -331,4 +340,5 @@
     margin-bottom: 30px;
     width: 200%;
   }
+  
 }

@@ -6,6 +6,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Home/Footer";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { format } from 'date-fns';
 import "./SlotBooking.css";
 
 function SlotBooking() {
@@ -27,7 +28,7 @@ function SlotBooking() {
       slotOptions.push(`${hour}:00 - ${hour + 1}:00`);
     }
   } else {
-    for (let hour = 9; hour <= 19; hour++){
+    for (let hour = 9; hour <= 19; hour++) {
       slotOptions.push(`${hour}:00 - ${hour + 1}:00`);
     }
   }
@@ -35,14 +36,14 @@ function SlotBooking() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // console.log("Booking details:", name, contactNumber, queryType, selectedDate, selectedSlot);
+    const formattedDate = selectedDate ? format(selectedDate, 'dd MMM yyyy') : '';
 
     try {
       await axios.post('http://localhost:5000/slot/book', {
         name,
         contactNumber,
         queryType,
-        selectedDate,
+        selectedDate: formattedDate,
         selectedSlot
       })
         .then(res => {

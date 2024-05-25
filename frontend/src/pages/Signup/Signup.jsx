@@ -12,6 +12,7 @@ import { auth } from "../../firebase";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 
 const Signup = () => {
+
   const [accountType, setAccountType] = useState("");
   const [organizationName, setOrganizationName] = useState("");
   const [fullName, setFullName] = useState("");
@@ -35,7 +36,6 @@ const Signup = () => {
         contactNumber,
         recaptcha
       );
-      // console.log(confirmation);
       setUser(confirmation);
     } catch (err) {
       console.error(err);
@@ -90,13 +90,6 @@ const Signup = () => {
   return (
     <div>
       <Navbar />
-      {/* <img
-        src={backgroundImage}
-        alt=""
-        className="home1-img signup-page-image"
-      /> */}
-
-      {/* <div className="signup-overlay"> */}
       {phoneNumberModal ? (
         <>
           <img
@@ -240,7 +233,6 @@ const Signup = () => {
           </div>
         </>
       )}
-      {/* </div> */}
 
       <Footer />
     </div>

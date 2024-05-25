@@ -32,12 +32,7 @@ function App() {
 
   return (
     <>
-      <Toaster toastOptions={{
-        style: {
-          background: '#CCCCCC',
-        },
-        className: 'class',
-      }} />
+      <Toaster/>
       <Router>
         <Routes>
           <Route path="/" element={<Home />}></Route>
