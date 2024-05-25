@@ -14,11 +14,8 @@ const DetailsForm = () => {
         <div>
             <>
                 <Navbar />
-                {/* <img src={backgroundImage} alt="" className='home1-img' /> */}
                 <img src={backgroundImage} alt="" className='details-form-background-image' />
                 <div className='dashboard-overlay dashboard-container details-form-overlay'>
-                    {/* <DashboardMenu /> */}
-                    {/* <DetailsFormComponent/> */}
                     {type === 'College' ? <DetailsFormComponent/> : null}
                     {type === 'Company' ? <CompanyDetailsComponent/> : null}
                 </div>

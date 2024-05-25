@@ -2,9 +2,8 @@ import React from 'react'
 import backgroundImage from '../../assets/home-1.jpg'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Home/Footer'
-import DashboardMenu from '../../components/Dashboard/DashboardMenu'
 import ProfileFormComponent from '../../components/Forms/ProfileFormComponent'
-import './ProfileForm.css'  
+import './ProfileForm.css'
 import CompanyProfileComponent from '../../components/Forms/CompanyProfileComponent'
 import AmbassadorProfileComponent from '../../components/Forms/AmbassadorProfileComponent'
 
@@ -16,14 +15,11 @@ const ProfileForm = () => {
         <div>
             <>
                 <Navbar />
-                {/* <img src={backgroundImage} alt="" className='home1-img' /> */}
                 <img src={backgroundImage} alt="" className='form-background-image' />
                 <div className='dashboard-overlay dashboard-container form-overlay'>
-                    {/* <DashboardMenu /> */}
-                    {type === 'College' ? <ProfileFormComponent/> : null}
-                    {type == 'Company' ? <CompanyProfileComponent/> : null}
-                    {type == 'CC-Ambassador' ? <AmbassadorProfileComponent/> : null}
-                    {/* <CompanyProfileComponent/> */}
+                    {type === 'College' ? <ProfileFormComponent /> : null}
+                    {type == 'Company' ? <CompanyProfileComponent /> : null}
+                    {type == 'CC-Ambassador' ? <AmbassadorProfileComponent /> : null}
                 </div>
                 <Footer />
             </>

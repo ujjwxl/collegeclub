@@ -9,11 +9,9 @@ const UploadsForm = () => {
         <div>
             <>
                 <Navbar />
-                {/* <img src={backgroundImage} alt="" className='home1-img' /> */}
                 <img src={backgroundImage} alt="" className='form-background-image' />
                 <div className='dashboard-overlay dashboard-container form-overlay'>
-                    {/* <DashboardMenu /> */}
-                    <UploadsFormComponent/>
+                    <UploadsFormComponent />
                 </div>
                 <Footer />
             </>

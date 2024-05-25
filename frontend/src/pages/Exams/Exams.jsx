@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
-import location from "../../assets/location.png";
 import Footer from "../../components/Home/Footer";
 import backgroundImage from "../../assets/home-1.jpg";
-import defaultImage from "../../assets/test-dp.jpg";
-import axios from "axios";
 import "./Exams.css";
 
 const Exams = () => {
+
   const [selectedExam, setSelectedExam] = useState("JEE");
   const [examDetails, setExamDetails] = useState({});
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -216,17 +213,16 @@ const Exams = () => {
               </div>
             </div>
             <div className="filter-modal-content-courses">
-            {Object.keys(examsDetails).map((course, index) => (
-              <div
-                className={`exams-left-items ${
-                  selectedExam === course ? "exams-selected-button" : ""
-                }`}
-                key={index}
-                onClick={() => setSelectedExam(course)}
-              >
-                <h3>{course}</h3>
-              </div>
-            ))}
+              {Object.keys(examsDetails).map((course, index) => (
+                <div
+                  className={`exams-left-items ${selectedExam === course ? "exams-selected-button" : ""
+                    }`}
+                  key={index}
+                  onClick={() => setSelectedExam(course)}
+                >
+                  <h3>{course}</h3>
+                </div>
+              ))}
             </div>
           </div>
         )}
@@ -236,9 +232,8 @@ const Exams = () => {
 
             {Object.keys(examsDetails).map((course, index) => (
               <div
-                className={`exams-left-items ${
-                  selectedExam === course ? "exams-selected-button" : ""
-                }`}
+                className={`exams-left-items ${selectedExam === course ? "exams-selected-button" : ""
+                  }`}
                 key={index}
                 onClick={() => setSelectedExam(course)}
               >

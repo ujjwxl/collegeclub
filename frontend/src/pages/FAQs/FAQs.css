@@ -50,23 +50,17 @@
   background-color: #2ecc4a;
 }
 
-/* Accordion container */
 .accordion {
   font-family: Arial, sans-serif;
   padding: 10px;
-  /* background-color: red; */
 }
 
-/* Accordion item */
 .accordion-item {
   border: 1px solid #ddd;
   border-radius: 10px;
-  /* padding: 10px; */
-  /* background-color: blue; */
   margin-top: 5px;
 }
 
-/* Accordion title */
 .accordion-title {
   padding: 10px;
   cursor: pointer;
@@ -79,7 +73,6 @@
   align-items: center;
 }
 
-/* Accordion content */
 .accordion-content {
   color: black;
   border-bottom-left-radius: 10px;

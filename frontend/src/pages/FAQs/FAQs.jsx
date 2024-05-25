@@ -129,7 +129,7 @@ const Faqs = () => {
                                 </div>
                                 {index === activeIndex && (
                                     <div className="accordion-content">
-                                        <div dangerouslySetInnerHTML={{ __html: item.answer }}/>
+                                        <div dangerouslySetInnerHTML={{ __html: item.answer }} />
                                     </div>
                                 )}
                             </div>

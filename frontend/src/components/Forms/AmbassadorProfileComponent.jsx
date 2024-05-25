@@ -64,7 +64,7 @@ const AmbassadorProfileComponent = () => {
         .then((res) => {
           if (res.status == 200) {
             toast("Profile form submitted successfully!");
-            navigate("/form/details");
+            navigate("/form/uploads");
           }
         })
         .catch((e) => {

@@ -6,8 +6,6 @@ import Navbar from "../../components/Navbar/Navbar.jsx";
 import Footer from "../../components/Home/Footer.jsx";
 import backgroundImage from "../../assets/home-1.jpg";
 import logo from "../../assets/collegeclub-logo.png";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase.js";
 import { toast } from "sonner";
 import axios from "axios";
 
