@@ -242,7 +242,8 @@ const Openings = () => {
         const locationTypeMatch = !locationTypeFilter || job.locationType.toLowerCase() === locationTypeFilter.toLowerCase();
         const jobTypeMatch = !jobTypeFilter || job.jobType.toLowerCase() === jobTypeFilter.toLowerCase();
         const industryMatch = !industryFilter || job.industry.toLowerCase() === industryFilter.toLowerCase();
-        return locationTypeMatch && jobTypeMatch && industryMatch;
+        const isListedMatch = job.isListed === true;
+        return locationTypeMatch && jobTypeMatch && industryMatch && isListedMatch;
     });
 
     return (
