@@ -2,6 +2,7 @@
 import {
   signInWithEmailAndPassword,
   sendEmailVerification,
+  sendPasswordResetEmail
 } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
@@ -9,6 +10,21 @@ import { collection, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { auth, db } from "../firebase.js";
 import { doc, getDoc } from "firebase/firestore";
 import { query, where, getDocs } from "firebase/firestore";
+
+
+export const resetPassword = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    res.status(200).json({ message: "Password reset email sent successfully" });
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
+    res.status(500).json({ message: errorMessage });
+  }
+};
 
 export const registerUser = async (req, res) => {
   const {

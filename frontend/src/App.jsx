@@ -26,6 +26,7 @@ import Exams from './pages/Exams/Exams';
 import Skills from './pages/Skills/Skills';
 import Openings from './pages/Openings/Openings';
 import { Toaster } from 'sonner';
+import ForgotPassword from './pages/Login/ForgotPassword';
 
 function App() {
 
@@ -60,6 +61,7 @@ function App() {
           <Route path='/faqs' element={<Faqs />} />
           <Route path='/feedback' element={<Feedback />} />
           <Route path="/*" element={<ErrorPage />} />
+          <Route path='/reset' element={<ForgotPassword/>}/>
         </Routes>
       </Router>
     </>

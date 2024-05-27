@@ -26,7 +26,7 @@
   width: 90%;
   border-radius: 10px;
   margin: 2% auto 2% auto;
-  box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
+  /* box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9); */
 }
 
 .courses-title {
@@ -111,7 +111,7 @@
 @media only screen and (max-width: 768px) {
     .courses-overlay {
         flex-direction: column;
-        height: calc(108% - 50px);
+        height: calc(101% - 50px);
       }
 
       .courses-display-box {

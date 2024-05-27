@@ -1,6 +1,6 @@
 import express from 'express'
 import { registerUser, loginUser, getUserDetails, getColleges, completeProfileForm, completeDetailsForm, completeCompanyProfileForm, completeCompanyDetailsForm, completeAmbassadorProfileForm, saveFeedback, getCoursesByType, submitJobApplication, completeApplicationForm, createJobListing, getJobsByUserId, getAllJobs, markJobAsListed, markJobAsDelisted, deleteJob, submitCompanyJobApplication, getCompanyJobApplicants, getAllCourses} from '../controllers/AuthController.js';
-
+import { resetPassword } from '../controllers/AuthController.js';
 const router = express.Router();
 
 router.post('/register', registerUser)
@@ -25,6 +25,8 @@ router.put('/markjobdelisted/:jobId', markJobAsDelisted)
 router.delete('/deletejob/:jobId', deleteJob)
 router.post('/companyapply', submitCompanyJobApplication)
 router.get('/companyapplicants/:userId', getCompanyJobApplicants)
+router.post('/reset-password', resetPassword);
+
 
 // router.post('/login', loginUser)
 export default router

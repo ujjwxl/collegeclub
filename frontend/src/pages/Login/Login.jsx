@@ -69,7 +69,7 @@ const Login = () => {
                   <input type="checkbox"></input>
                   <label>Remember me</label>
                 </div>
-                <a href="#">Forgot Password?</a>
+                <a href="/reset">Forgot Password?</a>
               </div>
               <button className="login-btn" type="submit">
                 Login
@@ -78,9 +78,9 @@ const Login = () => {
             <p className="no-account">
               No account? <Link to={"/register"}>Create one!</Link>
             </p>
-            <Link className="terms">Privacy Policy</Link>
+            <Link to='/privacy' className="terms">Privacy Policy</Link>
             <span> | </span>
-            <Link className="terms">Terms</Link>
+            <Link to='/terms' className="terms">Terms</Link>
           </div>
         </div>
       </div>

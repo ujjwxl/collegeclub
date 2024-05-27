@@ -2,6 +2,7 @@ import React from 'react';
 import './Footer.css';
 import { Link } from 'react-router-dom';
 import linkedInLogo from '../../assets/linkedin-logo.png'
+// import linkedInLogo from '../../assets/linkedin1-logo.png'
 import twitterLogo from '../../assets/twitter-logo.png'
 import facebookLogo from '../../assets/facebook-logo.png'
 import instagramLogo from '../../assets/instagram-logo.png'
@@ -23,8 +24,8 @@ const Footer = () => {
             <div className="footer-column">
                 <h4>Account</h4>
                 <ul>
-                    <li>Onboarding</li>
-                    <li>Login</li>
+                    <Link to={'/register'}><li>Onboarding</li></Link>
+                    <Link to={'/login'}><li>Login</li></Link>
                 </ul>
                 {/* <div className="spacer"></div>
                 <h4>Other Links</h4>
@@ -37,9 +38,9 @@ const Footer = () => {
             <div className="footer-column">
                 <h4>Other Links</h4>
                 <ul>
-                    <li>Career</li>
-                    <li>FAQs</li>
-                    <li>Feedback and Suggestions</li>
+                    <Link to={'/career'}><li>Career</li></Link>
+                    <Link to={'/faqs'}><li>FAQs</li></Link>
+                    <Link to={'/feedback'}><li>Feedback and Suggestions</li></Link>
                 </ul>
             </div>
             <div className="footer-column">

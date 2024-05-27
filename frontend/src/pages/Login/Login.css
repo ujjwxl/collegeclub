@@ -38,7 +38,17 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   width: 30%;
   margin-bottom: 20px;
-  box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
+  /* box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9); */
+}
+.forgot-box {
+  background-color: rgba(36, 6, 85, 1);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 30%;
+  height: 50%;
+  margin-bottom: 20px;
+  /* box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9); */
 }
 
 .header {
@@ -149,6 +159,32 @@
   text-decoration: none;
   color: #ccc;
 }
+.payment-btn{
+  width: 100%;
+  border: none;
+  margin-top: 25px;
+  color: white;
+  font-size: 14px;
+  background-image: linear-gradient(
+    to right,
+    #eb3349 0,
+    #eb3349 51%,
+    #f45c43 100%
+  );
+  border-radius: 10px;
+  text-align: center;
+  padding: 11px 14px;
+  background-color: #ff7f3c;
+  font-family: 'Comfortaa', sans-serif;
+  transition: background-image 1s;
+  cursor: pointer;
+}
+.payment{
+  background: linear-gradient(75deg, #99fefe, #00d7f8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent; 
+}
 
 @media only screen and (max-width: 768px) {
   .login-component .CC-logo {
@@ -159,5 +195,8 @@
   }
   .login-overlay {
     height: 101vh;
+  }
+  .forgot-box{
+    width: 80%;
   }
 }
