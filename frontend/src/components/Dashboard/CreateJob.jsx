@@ -14,6 +14,7 @@ const CreateJob = () => {
     const [locationType, setLocationType] = useState('');
     const [yearsOfExperience, setYearsOfExperience] = useState('');
     const [skills, setSkills] = useState('');
+    const [salary, setSalary] = useState('');
     const [educationalQualification, setEducationalQualification] = useState('');
 
     const userId = localStorage.getItem('id');
@@ -65,6 +66,7 @@ const CreateJob = () => {
                 locationType,
                 yearsOfExperience,
                 skills,
+                salary,
                 educationalQualification
             })
                 .then((response => {
@@ -169,6 +171,11 @@ const CreateJob = () => {
                                 <option value="remote">Remote</option>
                                 <option value="hybrid">Hybrid</option>
                             </select>
+                        </div>
+
+                        <div className="form-input-group">
+                            <label htmlFor="collegename">Salary*</label>
+                            <input type="text" placeholder='Enter the salary' onChange={(e) => setSalary(e.target.value)} value={skills} required />
                         </div>
 
                         <div className="form-input-group">

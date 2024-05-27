@@ -799,6 +799,7 @@ export const createJobListing = async (req, res) => {
     locationType,
     yearsOfExperience,
     skills,
+    salary,
     educationalQualification,
   } = req.body;
 
@@ -814,6 +815,7 @@ export const createJobListing = async (req, res) => {
       locationType,
       yearsOfExperience,
       skills,
+      salary,
       educationalQualification,
       createdBy: userId,
       isListed: false,
