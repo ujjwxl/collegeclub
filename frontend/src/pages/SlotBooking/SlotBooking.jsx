@@ -111,7 +111,8 @@ function SlotBooking() {
                   selected={selectedDate}
                   onChange={date => setSelectedDate(date)}
                   dateFormat="yyyy-MM-dd"
-                  minDate={new Date()} // Set minimum date to current date
+                  minDate={new Date()} 
+                  className="datepicker"
                   required
                 />
               </div>

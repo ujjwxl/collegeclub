@@ -1,0 +1,12 @@
+.profile-box-container{
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+}
+.profile-box-container hr{
+    width: 100%;
+    margin-top: 4%;
+}
+.profile-box-container button{
+    margin-top: 3%;
+}

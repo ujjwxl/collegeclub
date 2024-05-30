@@ -1,39 +1,62 @@
-import React from 'react';
-import './BottomBar.css';
-import Home from '../../assets/home.png';
-import eventsIcon from '../../assets/event-icon.png';
-import createJobIcon from '../../assets/add-job.png';
-import leadsIcon from '../../assets/leads-icon.png';
-import cmsIcon from '../../assets/cms-icon.png';
-import testIcon from "../../assets/business-icon.png";
-import dashboardIcon from "../../assets/dashboard.png";
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Home from "../../assets/home.png";
+import eventsIcon from "../../assets/event-icon.png";
+import createJobIcon from "../../assets/add-job.png";
+import leadsIcon from "../../assets/leads-icon.png";
+import defaultImage from "../../assets/test-dp.jpg";
+import cmsIcon from "../../assets/cms-icon.png";
 
-const DashboardBottomBar = ({ onCreateJob, onAddJob, onShowApplicants, onShowLeads, onDashboardClick  }) => {
+const DashboardBottomBar = ({
+  onCreateJob,
+  onAddJob,
+  onShowApplicants,
+  onShowLeads,
+  onDashboardClick,
+  onProfileClick,
+}) => {
+  const [userData, setUserData] = useState(null);
+  const [accountType, setAccountType] = useState(null);
 
-  const accountType = localStorage.getItem('type');
-  console.log(accountType);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userId = localStorage.getItem("id");
+      if (!userId) return;
+
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/auth/user/${userId}`
+        );
+        setUserData(response.data);
+        setAccountType(response.data.accountType);
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      }
+    };
+    fetchUserData();
+  }, []);
 
   const handleFirstIconClick = () => {
-    if (accountType === 'College') {
+    if (accountType === "College") {
       onShowLeads();
-    } else if(accountType === 'Company') {
+    } else if (accountType === "Company") {
       onCreateJob();
     }
   };
 
   const handleMiddleIconClick = () => {
-    if (accountType === 'College') {
+    if (accountType === "College") {
       onShowLeads();
-    } else if(accountType === 'Company') {
+    } else if (accountType === "Company") {
       onAddJob();
     }
   };
 
   const handleThirdIconClick = () => {
-    if (accountType === 'College') {
+    if (accountType === "College") {
       onShowLeads();
-    } else if(accountType === 'Company') {
+    } else if (accountType === "Company") {
       onShowApplicants();
     }
   };
@@ -42,24 +65,62 @@ const DashboardBottomBar = ({ onCreateJob, onAddJob, onShowApplicants, onShowLea
     onDashboardClick();
   };
 
+  const handleShowProfileClick = () => {
+    onProfileClick();
+  };
+
   return (
-    <div className='bottombar'>
-      <Link to='/'>
-        <img src={Home} className='home-bottom' alt='Home' onClick={handleDashboardClick}/>
-      </Link>
-      <div className='navbar-menu-middle-icon' onClick={handleFirstIconClick}>
-        <img src={accountType === 'College' ? cmsIcon : createJobIcon} className='home-bottom' alt="" />
-      </div>
-      <div className='navbar-menu-middle-icon' onClick={handleMiddleIconClick}>
-        <img src={accountType === 'College' ? leadsIcon : cmsIcon} className='home-bottom' alt="" />
-      </div>
-      <div className='navbar-menu-middle-icon' onClick={handleThirdIconClick}>
-        <img src={accountType === 'College' ? eventsIcon : leadsIcon} className='home-bottom' alt="" />
-      </div>
-      {/* <div className={showLeads ? 'navbar-menu-middle-icon active' : 'navbar-menu-middle-icon'} onClick={onShowLeads}>
-        <img src={leadsIcon} alt="" />
-      </div> */}
-    </div>
+    <>
+      {userData && (
+        <div className="bottombar">
+          <Link to="/" onClick={handleDashboardClick}>
+            <img
+              src={Home}
+              className="home-bottom"
+              alt="Home"
+            />
+          </Link>
+          <div
+            className="navbar-menu-middle-icon"
+            onClick={handleFirstIconClick}
+          >
+            <img
+              src={accountType === "College" ? cmsIcon : createJobIcon}
+              className="home-bottom"
+              alt=""
+            />
+          </div>
+          <div
+            className="navbar-menu-middle-icon"
+            onClick={handleMiddleIconClick}
+          >
+            <img
+              src={accountType === "College" ? leadsIcon : cmsIcon}
+              className="home-bottom"
+              alt=""
+            />
+          </div>
+          <div
+            className="navbar-menu-middle-icon"
+            onClick={handleThirdIconClick}
+          >
+            <img
+              src={accountType === "College" ? eventsIcon : leadsIcon}
+              className="home-bottom"
+              alt=""
+            />
+          </div>
+
+          <div className="navbar-menu-middle-icon " onClick={handleShowProfileClick}>
+            <img
+              src={userData.profilePicture ? userData.profilePicture : defaultImage}
+              alt=""
+              className="profile-pic"
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
