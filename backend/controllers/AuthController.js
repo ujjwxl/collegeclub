@@ -1040,3 +1040,77 @@ export const getCompanyJobApplicants = async (req, res) => {
     res.status(500).json({ message: "Error getting job applicants" });
   }
 };
+
+// export const searchRecords = async (req, res) => {
+//   const { query } = req.query;
+
+//   try {
+//     const usersSnapshot = await getDocs(collection(db, "users"));
+//     const matchedUsers = [];
+
+//     usersSnapshot.forEach((doc) => {
+//       const userData = doc.data();
+//       const fields = Object.values(userData);
+      
+//       // Check if any field contains the query
+//       const match = fields.some((field) => {
+//         if (typeof field === 'string' && field.toLowerCase().includes(query.toLowerCase())) {
+//           return true;
+//         }
+//         return false;
+//       });
+
+//       if (match) {
+//         matchedUsers.push({
+//           id: doc.id,
+//           ...userData
+//         });
+//       }
+//     });
+
+//     res.status(200).json(matchedUsers);
+//   } catch (error) {
+//     console.error("Error searching Firestore:", error);
+//     res.status(500).json({ message: "Error searching Firestore" });
+//   }
+// };
+
+export const searchRecords = async (req, res) => {
+  const { query } = req.query;
+
+  try {
+    const usersSnapshot = await getDocs(collection(db, "users"));
+    const matchedUsers = [];
+
+    usersSnapshot.forEach((doc) => {
+      const userData = doc.data();
+
+      // Extract required fields and create a new object
+      const matchedUser = {
+        userId: userData.userId,
+        organizationName: userData.organizationName,
+        profilePicture: userData.profilePicture,
+        accountType: userData.accountType
+        // Add other required fields here
+      };
+
+      // Check if any field contains the query (optional)
+      const fields = Object.values(userData);
+      const match = fields.some((field) => {
+        if (typeof field === 'string' && field.toLowerCase().includes(query.toLowerCase())) {
+          return true;
+        }
+        return false;
+      });
+
+      if (match) {
+        matchedUsers.push(matchedUser);
+      }
+    });
+
+    res.status(200).json(matchedUsers);
+  } catch (error) {
+    console.error("Error searching Firestore:", error);
+    res.status(500).json({ message: "Error searching Firestore" });
+  }
+};
