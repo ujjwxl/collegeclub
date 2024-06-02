@@ -41,7 +41,7 @@
 
 .home-hero-section h3:first-of-type {
   letter-spacing: 5px;
-  font-size: 26px;
+  font-size: 23px;
   margin: 0;
   margin-bottom: 30px;
 }
@@ -105,6 +105,22 @@
   transform: translateY(0);
 }
 
+.college-text {
+  color: #cefb08;
+}
+
+.courses-text {
+  color: #ff6060;
+}
+.exams-text{
+  color: #F0F600;
+}
+.skills-text{
+  color: #F8A39B;
+}
+.opportunity-text{
+  color: #a3db2a;
+}
 @media only screen and (max-width: 768px) {
   .home-hero-overlay {
     top: 0vh;

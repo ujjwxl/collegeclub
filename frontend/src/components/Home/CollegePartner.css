@@ -25,7 +25,9 @@
   font-family: "K2D", sans-serif;
   letter-spacing: 5px;
 }
-
+.home-five-overlay p{
+  font-size: 18px;
+}
 @keyframes rotate-outer {
   from {
     transform: rotate(0deg);

@@ -25,6 +25,9 @@
     font-family: "K2D", sans-serif;
       letter-spacing: 5px;
 }
+.home-six-overlay p{
+  font-size: 18px;
+}
 .marquee{
     display: none;
   }

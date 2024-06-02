@@ -58,6 +58,7 @@ const Footer = () => {
                     <img src={instagramLogo} alt="" />
                     <img src={youtubeLogo} alt="" />
                 </div>
+                    <p className='copyright'>© 2024 CollegeClub.</p>
             </div>
         </footer>
     );

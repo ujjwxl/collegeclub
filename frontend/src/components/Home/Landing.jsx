@@ -5,7 +5,6 @@ import TypingPlaceholderInput from './TypingPlaceholderInput';
 import './Landing.css';
 
 const Landing = () => {
-
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const placeholderText = [
@@ -17,11 +16,12 @@ const Landing = () => {
   ];
 
   const sliderText = [
-    'Colleges',
-    'Courses',
-    'Exams',
-    'Skills'
-  ]
+    { text: 'Colleges', class: 'college-text' },
+    { text: 'Courses', class: 'courses-text' },
+    { text: 'Opportunity', class: 'opportunity-text' },
+    { text: 'Exams', class: 'exams-text' },
+    { text: 'Skills', class: 'skills-text' },
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,9 +39,9 @@ const Landing = () => {
           <h1>what are you looking for?</h1>
 
           <div className='vertical-text-slider'>
-            {sliderText.map((text, index) => (
-              <div key={index} className={`slide-text ${index === currentSlide ? 'active' : ''}`}>
-                {text}
+            {sliderText.map((item, index) => (
+              <div key={index} className={`slide-text ${index === currentSlide ? 'active' : ''} ${item.class}`}>
+                {item.text}
               </div>
             ))}
           </div>
@@ -56,5 +56,4 @@ const Landing = () => {
     </div>
   );
 };
-
 export default Landing;
