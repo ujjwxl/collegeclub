@@ -6,6 +6,7 @@ import './Landing.css';
 
 const Landing = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [showModal, setShowModal] = useState(false); // State to manage modal visibility
 
   const placeholderText = [
     'Design',
@@ -31,6 +32,11 @@ const Landing = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const toggleModal = () => {
+    setShowModal(!showModal);
+    document.body.classList.toggle('modal-open');
+  };
+
   return (
     <div>
       <img src={home1} alt="" className="home1-img" />
@@ -47,13 +53,29 @@ const Landing = () => {
           </div>
 
           <h3>collegeclub changes your college experience forever</h3>
-          <div className="home-hero-section-search">
+          <div className="home-hero-section-search" onClick={toggleModal}>
             <TypingPlaceholderInput placeholderText={placeholderText} />
             <img src={searchIcon} alt="" />
           </div>
         </div>
       </div>
+
+      {showModal && (
+        <div className="modal-search">
+          <div className="modal-content-search">
+            <span className="close-search" onClick={toggleModal}>&times;</span>
+            <input type="text" placeholder="Search for Colleges, Exams and more" />
+            <div className='search-results'>
+               <h3>Trending Searches</h3>
+               <h3>Trending Searches</h3>
+               <h3>Trending Searches</h3>
+               
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
 export default Landing;
