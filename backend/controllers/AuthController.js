@@ -8,7 +8,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
 // import { auth, db } from "../../firebase.js";
 import { auth, db } from "../firebase.js";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { query, where, getDocs } from "firebase/firestore";
 
 
@@ -155,7 +155,7 @@ export const getColleges = async (req, res) => {
 
 export const completeProfileForm = async (req, res) => {
   const { userId } = req.params;
-  const {
+  let {
     universityFullName,
     universityShortName,
     foundedYear,
@@ -174,6 +174,15 @@ export const completeProfileForm = async (req, res) => {
     referralCode,
   } = req.body;
 
+  universityFullName = universityFullName.toLowerCase();
+  universityShortName = universityShortName.toLowerCase();
+  country = country.toLowerCase();
+  state = state.toLowerCase();
+  district = district.toLowerCase();
+
+  const universityNameWords = universityFullName.toLowerCase().split(/\s+/);
+  const searchKeywords = [...universityNameWords, universityShortName.toLowerCase(), country.toLowerCase(), state.toLowerCase(), district.toLowerCase()];
+
   try {
     const usersCollectionRef = collection(db, "users");
     const q = query(usersCollectionRef, where("userId", "==", userId));
@@ -183,8 +192,8 @@ export const completeProfileForm = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    querySnapshot.forEach(async (doc) => {
-      const docRef = doc.ref;
+    querySnapshot.forEach(async (document) => {
+      const docRef = document.ref;
 
       await updateDoc(docRef, {
         organizationName: universityFullName,
@@ -206,6 +215,21 @@ export const completeProfileForm = async (req, res) => {
         profileFormFilled: true,
       });
 
+      const promises = searchKeywords.map(async keyword => {
+        const keywordCollectionRef = doc(db, "keywords", keyword);
+        const keywordDocumentRef = await getDoc(keywordCollectionRef);
+        const keywordDocumentSnapshot = keywordDocumentRef.exists() ? keywordDocumentRef.data() : {};
+    
+        keywordDocumentSnapshot.relevantUsers = keywordDocumentSnapshot.relevantUsers || [];
+        if (!keywordDocumentSnapshot.relevantUsers.includes(userId)) {
+            keywordDocumentSnapshot.relevantUsers.push(userId);
+        }
+    
+        await setDoc(keywordCollectionRef, keywordDocumentSnapshot);
+      });
+
+      await Promise.all(promises);
+
       console.log("Profile form updated successfully");
     });
 
@@ -216,10 +240,11 @@ export const completeProfileForm = async (req, res) => {
   }
 };
 
+
 export const completeCompanyProfileForm = async (req, res) => {
   const { userId } = req.params;
   const {
-    companyName,
+    companyName, // keyword
     foundedYear,
     headquarter,
     contactNumber,
@@ -227,13 +252,21 @@ export const completeCompanyProfileForm = async (req, res) => {
     website,
     fullAddress,
     pinCode,
-    country,
-    state,
-    district,
+    country, // keyword
+    state, // keyword
+    district, // keyword
     alternateContact,
     alternateNumber,
     referralCode,
   } = req.body;
+
+    companyName = companyName.toLowerCase();
+    country = country.toLowerCase();
+    state = state.toLowerCase();
+    district = district.toLowerCase();
+
+    const companyNameWords = companyName.toLowerCase().split(/\s+/);
+    const searchKeywords = [...companyNameWords, country.toLowerCase(), state.toLowerCase(), district.toLowerCase()];
 
   try {
     const usersCollectionRef = collection(db, "users");
@@ -264,6 +297,21 @@ export const completeCompanyProfileForm = async (req, res) => {
         referralCode,
         profileFormFilled: true,
       });
+
+      const promises = searchKeywords.map(async keyword => {
+        const keywordCollectionRef = doc(db, "keywords", keyword);
+        const keywordDocumentRef = await getDoc(keywordCollectionRef);
+        const keywordDocumentSnapshot = keywordDocumentRef.exists() ? keywordDocumentRef.data() : {};
+    
+        keywordDocumentSnapshot.relevantUsers = keywordDocumentSnapshot.relevantUsers || [];
+        if (!keywordDocumentSnapshot.relevantUsers.includes(userId)) {
+            keywordDocumentSnapshot.relevantUsers.push(userId);
+        }
+    
+        await setDoc(keywordCollectionRef, keywordDocumentSnapshot);
+      });
+
+      await Promise.all(promises);
 
       console.log("Company profile form updated successfully");
     });
@@ -338,26 +386,23 @@ export const completeAmbassadorProfileForm = async (req, res) => {
   }
 };
 
-// export const completeProfileForm = async (req, res) => {
+// export const completeDetailsForm = async (req, res) => {
 //   const { userId } = req.params;
+
 //   const {
-//     universityFullName,
-//     universityShortName,
-//     foundedYear,
-//     approvedBy,
-//     rankedBy,
-//     contactNumber,
-//     email,
-//     website,
-//     fullAddress,
-//     pinCode,
-//     country,
-//     state,
-//     district,
-//     alternateContact,
-//     alternateNumber,
-//     referralCode,
-//     companyName,
+//     selectedCourses, // array of strings containing multiple words
+//     selectedFacilities,
+//     aboutCollege,
+//     admissionProcess,
+//     courses, // array of objects, courseName containing multiple words
+//     departments,
+//     news,
+//     rankings,
+//     overallPlacement,
+//     promo,
+//     scholarship,
+//     selectedInstituteType, // keyword
+//     studyMode,
 //   } = req.body;
 
 //   try {
@@ -372,51 +417,29 @@ export const completeAmbassadorProfileForm = async (req, res) => {
 //     querySnapshot.forEach(async (doc) => {
 //       const docRef = doc.ref;
 
-//       if (companyName) { // If companyName exists, it's a company profile
-//         await updateDoc(docRef, {
-//           companyName,
-//           foundedYear,
-//           contactNumber,
-//           email,
-//           website,
-//           fullAddress,
-//           pinCode,
-//           country,
-//           state,
-//           district,
-//           alternateContact,
-//           alternateNumber,
-//           referralCode,
-//           profileFormFilled: true
-//         });
-//         console.log('Company profile form updated successfully');
-//       } else { // Otherwise, it's a college profile
-//         await updateDoc(docRef, {
-//           universityFullName,
-//           universityShortName,
-//           foundedYear,
-//           approvedBy,
-//           rankedBy,
-//           contactNumber,
-//           email,
-//           website,
-//           fullAddress,
-//           pinCode,
-//           country,
-//           state,
-//           district,
-//           alternateContact,
-//           alternateNumber,
-//           referralCode,
-//           profileFormFilled: true
-//         });
-//         console.log('College profile form updated successfully');
-//       }
+//       await updateDoc(docRef, {
+//         selectedCourses,
+//         selectedFacilities,
+//         aboutCollege,
+//         admissionProcess,
+//         courses,
+//         departments,
+//         news,
+//         rankings,
+//         overallPlacement,
+//         promo,
+//         scholarship,
+//         instituteType: selectedInstituteType,
+//         studyMode,
+//         detailsFormFilled: true,
+//       });
+
+//       console.log("Details form updated successfully");
 //     });
 
-//     res.status(200).json({ message: "Profile form updated successfully" });
+//     res.status(200).json({ message: "Details form updated successfully" });
 //   } catch (error) {
-//     console.error("Error updating user profile:", error.message);
+//     console.error("Error updating user details:", error.message);
 //     res.status(500).json({ message: error.message });
 //   }
 // };
@@ -425,20 +448,25 @@ export const completeDetailsForm = async (req, res) => {
   const { userId } = req.params;
 
   const {
-    selectedCourses,
+    selectedCourses, // array of strings containing multiple words
     selectedFacilities,
     aboutCollege,
     admissionProcess,
-    courses,
+    courses, // array of objects, courseName containing multiple words
     departments,
     news,
     rankings,
     overallPlacement,
     promo,
     scholarship,
-    selectedInstituteType,
+    selectedInstituteType, // keyword
     studyMode,
   } = req.body;
+
+  // Lowercase and split multiple word strings
+  const selectedCoursesWords = selectedCourses.map(course => course.toLowerCase().split(/\s+/)).flat();
+  const coursesWords = courses.map(course => course.courseName.toLowerCase().split(/\s+/)).flat();
+  const selectedInstituteTypeLower = selectedInstituteType.toLowerCase();
 
   try {
     const usersCollectionRef = collection(db, "users");
@@ -449,8 +477,8 @@ export const completeDetailsForm = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    querySnapshot.forEach(async (doc) => {
-      const docRef = doc.ref;
+    querySnapshot.forEach(async (document) => {
+      const docRef = document.ref;
 
       await updateDoc(docRef, {
         selectedCourses,
@@ -464,10 +492,27 @@ export const completeDetailsForm = async (req, res) => {
         overallPlacement,
         promo,
         scholarship,
-        instituteType: selectedInstituteType,
+        instituteType: selectedInstituteTypeLower,
         studyMode,
         detailsFormFilled: true,
       });
+
+      const searchKeywords = [...selectedCoursesWords, ...coursesWords, selectedInstituteTypeLower];
+      
+      const promises = searchKeywords.map(async keyword => {
+        const keywordCollectionRef = doc(db, "keywords", keyword);
+        const keywordDocumentRef = await getDoc(keywordCollectionRef);
+        const keywordDocumentSnapshot = keywordDocumentRef.exists() ? keywordDocumentRef.data() : {};
+    
+        keywordDocumentSnapshot.relevantUsers = keywordDocumentSnapshot.relevantUsers || [];
+        if (!keywordDocumentSnapshot.relevantUsers.includes(userId)) {
+            keywordDocumentSnapshot.relevantUsers.push(userId);
+        }
+    
+        await setDoc(keywordCollectionRef, keywordDocumentSnapshot);
+      });
+
+      await Promise.all(promises);
 
       console.log("Details form updated successfully");
     });
@@ -478,6 +523,7 @@ export const completeDetailsForm = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 export const completeCompanyDetailsForm = async (req, res) => {
   const { userId } = req.params;
@@ -942,7 +988,7 @@ export const markJobAsDelisted = async (req, res) => {
   const { jobId } = req.params;
 
   try {
-    const jobRef = doc(db, "jobs", jobId);
+    const jobRef = doc(db, "jobs", jobId); // line
     const jobDoc = await getDoc(jobRef);
 
     if (jobDoc.exists()) {
@@ -1085,16 +1131,13 @@ export const searchRecords = async (req, res) => {
     usersSnapshot.forEach((doc) => {
       const userData = doc.data();
 
-      // Extract required fields and create a new object
       const matchedUser = {
         userId: userData.userId,
         organizationName: userData.organizationName,
         profilePicture: userData.profilePicture,
         accountType: userData.accountType
-        // Add other required fields here
       };
 
-      // Check if any field contains the query (optional)
       const fields = Object.values(userData);
       const match = fields.some((field) => {
         if (typeof field === 'string' && field.toLowerCase().includes(query.toLowerCase())) {
