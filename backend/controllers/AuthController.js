@@ -943,7 +943,7 @@ export const searchRecords = async (req, res) => {
   }
 };
 
-export const searchRelevantUsers = async (req, res) => {
+export const searchRelevantUsersFake = async (req, res) => {
   const queryString = req.query.query;
 
   const givenQueryWords = queryString.trim().toLowerCase().split(/\s+/);
@@ -995,3 +995,59 @@ export const searchRelevantUsers = async (req, res) => {
   }
 }
 
+export const searchRelevantUsers = async (req, res) => {
+  const queryString = req.query.query;
+  const queryWords = queryString.trim().toLowerCase().split(/\s+/);
+
+  try {
+    const promises = queryWords.map(async (keyword) => {
+      const startAt = doc(db, "keywords", keyword);
+      const endAt = doc(db, "keywords", keyword + '\uffff');
+
+      const q = query(collection(db, "keywords"), where('__name__', '>=', startAt), where('__name__', '<', endAt));
+      const querySnapshot = await getDocs(q);
+
+      const relevantUsers = querySnapshot.docs.flatMap(doc => doc.data().relevantUsers || []);
+      return relevantUsers;
+    });
+
+    const allRelevantUsers = (await Promise.all(promises));
+
+    const arrayOfArrays = Array.from(allRelevantUsers);
+
+    const relevantUserIds = arrayOfArrays.reduce((acc, currentArray) => {
+      if (acc.length === 0) {
+        return currentArray;
+      } else {
+        return acc.filter(element => currentArray.includes(element));
+      }
+    }, []);
+
+    console.log(relevantUserIds);
+
+    const userDataPromises = relevantUserIds.map(async userId => {
+      const q = query(collection(db, "users"), where("userId", "==", userId));
+      const querySnapshot = await getDocs(q);
+      const userData = querySnapshot.docs.map(doc => {
+        const userData = doc.data();
+        return {
+          userId: userData.userId,
+          organizationName: userData.organizationName,
+          profilePicture: userData.profilePicture,
+          accountType: userData.accountType,
+          district: userData.district
+        };
+      });
+      return userData.length > 0 ? userData[0] : null;
+    });
+
+    const userDataResults = await Promise.all(userDataPromises);
+
+    const relevantUserData = userDataResults.filter(userData => userData !== null);
+
+    res.status(200).json({ relevantUserData });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};

@@ -67,11 +67,15 @@ const Landing = () => {
     if (searchQuery.length >= 3) {
       handleSearch();
     }
+    else{
+      setSearchResults([]);
+    }
   }, [searchQuery]);
     
     const handleCloseModal = (e) => {
       if (e.target.classList.contains('modal-search')) {
         toggleModal();
+        setSearchResults([]);
       }
   };
 
