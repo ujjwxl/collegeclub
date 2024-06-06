@@ -226,7 +226,8 @@ const Landing = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(`http://localhost:5000/auth/search?query=${encodeURIComponent(searchQuery)}`);
-      setSearchResults(response.data);
+      console.log(response.data.relevantUserData)
+      setSearchResults(response.data.relevantUserData);
     } catch (error) {
       console.error("Error searching:", error);
       setError("Error searching. Please try again later.");

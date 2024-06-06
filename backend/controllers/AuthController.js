@@ -386,64 +386,6 @@ export const completeAmbassadorProfileForm = async (req, res) => {
   }
 };
 
-// export const completeDetailsForm = async (req, res) => {
-//   const { userId } = req.params;
-
-//   const {
-//     selectedCourses, // array of strings containing multiple words
-//     selectedFacilities,
-//     aboutCollege,
-//     admissionProcess,
-//     courses, // array of objects, courseName containing multiple words
-//     departments,
-//     news,
-//     rankings,
-//     overallPlacement,
-//     promo,
-//     scholarship,
-//     selectedInstituteType, // keyword
-//     studyMode,
-//   } = req.body;
-
-//   try {
-//     const usersCollectionRef = collection(db, "users");
-//     const q = query(usersCollectionRef, where("userId", "==", userId));
-//     const querySnapshot = await getDocs(q);
-
-//     if (querySnapshot.empty) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-
-//     querySnapshot.forEach(async (doc) => {
-//       const docRef = doc.ref;
-
-//       await updateDoc(docRef, {
-//         selectedCourses,
-//         selectedFacilities,
-//         aboutCollege,
-//         admissionProcess,
-//         courses,
-//         departments,
-//         news,
-//         rankings,
-//         overallPlacement,
-//         promo,
-//         scholarship,
-//         instituteType: selectedInstituteType,
-//         studyMode,
-//         detailsFormFilled: true,
-//       });
-
-//       console.log("Details form updated successfully");
-//     });
-
-//     res.status(200).json({ message: "Details form updated successfully" });
-//   } catch (error) {
-//     console.error("Error updating user details:", error.message);
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
 export const completeDetailsForm = async (req, res) => {
   const { userId } = req.params;
 
@@ -571,78 +513,6 @@ export const completeCompanyDetailsForm = async (req, res) => {
   }
 };
 
-// export const completeDetailsForm = async (req, res) => {
-//   const { userId } = req.params;
-
-//   const {
-//     selectedCourses,
-//     aboutCollege,
-//     admissionProcess,
-//     courses,
-//     departments,
-//     news,
-//     rankings,
-//     overallPlacement,
-//     promo,
-//     scholarship,
-//     selectedInstituteType,
-//     studyMode,
-//     aboutCompany, // New fields for company details
-//     companyMission,
-//     registrationNumber,
-//     industryType
-//   } = req.body;
-
-//   try {
-//     const usersCollectionRef = collection(db, "users");
-//     const q = query(usersCollectionRef, where("userId", "==", userId));
-//     const querySnapshot = await getDocs(q);
-
-//     if (querySnapshot.empty) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-
-//     querySnapshot.forEach(async (doc) => {
-//       const docRef = doc.ref;
-
-//       if (aboutCompany) { // If aboutCompany exists, it's a company profile
-//         await updateDoc(docRef, {
-//           aboutCompany,
-//           companyMission,
-//           news,
-//           registrationNumber,
-//           promo,
-//           industryType,
-//           detailsFormFilled: true
-//         });
-//         console.log('Company details form updated successfully');
-//       } else { // Otherwise, it's a college profile
-//         await updateDoc(docRef, {
-//           selectedCourses,
-//           aboutCollege,
-//           admissionProcess,
-//           courses,
-//           departments,
-//           news,
-//           rankings,
-//           overallPlacement,
-//           promo,
-//           scholarship,
-//           instituteType:selectedInstituteType,
-//           studyMode,
-//           detailsFormFilled: true
-//         });
-//         console.log('College details form updated successfully');
-//       }
-//     });
-
-//     res.status(200).json({ message: "Details form updated successfully" });
-//   } catch (error) {
-//     console.error("Error updating user details:", error.message);
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
 export const saveFeedback = async (req, res) => {
   const { name, mobileNumber, email, type, message } = req.body;
 
@@ -664,38 +534,6 @@ export const saveFeedback = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// export const getCoursesByType = async (req, res) => {
-//   const { courseType } = req.params;
-
-//   console.log(courseType);
-
-//   try {
-//     const usersCollectionRef = collection(db, "users");
-//     const q = query(usersCollectionRef, where("accountType", "==", "College"));
-//     const querySnapshot = await getDocs(q);
-
-//     const courses = [];
-//     querySnapshot.forEach(doc => {
-//       const college = doc.data();
-//       college.courses.forEach(course => {
-//         if (course.courseType === courseType) {
-//           courses.push({
-//             collegeName: college.organizationName,
-//             courseName: course.courseName,
-//             duration: course.duration,
-//             fee: course.fee,
-//           });
-//         }
-//       });
-//     });
-
-//     res.status(200).json({ courses });
-//   } catch (error) {
-//     console.error("Error fetching courses by type:", error.message);
-//     res.status(500).json({ message: error.message });
-//   }
-// };
 
 export const getCoursesByType = async (req, res) => {
   const { courseType } = req.params;
@@ -876,25 +714,6 @@ export const createJobListing = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// export const getJobsByUserId = async (req, res) => {
-//   const { userId } = req.params;
-
-//   try {
-//     const q = query(collection(db, "jobs"), where("createdBy", "==", userId));
-//     const querySnapshot = await getDocs(q);
-
-//     const jobs = [];
-//     querySnapshot.forEach((doc) => {
-//       jobs.push({ id: doc.id, ...doc.data() });
-//     });
-
-//     res.status(200).json(jobs);
-//   } catch (error) {
-//     console.error("Error getting jobs by user ID:", error);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// };
 
 export const getJobsByUserId = async (req, res) => {
   const { userId } = req.params;
@@ -1087,40 +906,6 @@ export const getCompanyJobApplicants = async (req, res) => {
   }
 };
 
-// export const searchRecords = async (req, res) => {
-//   const { query } = req.query;
-
-//   try {
-//     const usersSnapshot = await getDocs(collection(db, "users"));
-//     const matchedUsers = [];
-
-//     usersSnapshot.forEach((doc) => {
-//       const userData = doc.data();
-//       const fields = Object.values(userData);
-      
-//       // Check if any field contains the query
-//       const match = fields.some((field) => {
-//         if (typeof field === 'string' && field.toLowerCase().includes(query.toLowerCase())) {
-//           return true;
-//         }
-//         return false;
-//       });
-
-//       if (match) {
-//         matchedUsers.push({
-//           id: doc.id,
-//           ...userData
-//         });
-//       }
-//     });
-
-//     res.status(200).json(matchedUsers);
-//   } catch (error) {
-//     console.error("Error searching Firestore:", error);
-//     res.status(500).json({ message: "Error searching Firestore" });
-//   }
-// };
-
 export const searchRecords = async (req, res) => {
   const { query } = req.query;
 
@@ -1157,3 +942,56 @@ export const searchRecords = async (req, res) => {
     res.status(500).json({ message: "Error searching Firestore" });
   }
 };
+
+export const searchRelevantUsers = async (req, res) => {
+  const queryString = req.query.query;
+
+  const givenQueryWords = queryString.trim().toLowerCase().split(/\s+/);
+  const queryWords = [...givenQueryWords];
+
+  try {
+    const promises = queryWords.map(async keyword => {
+      const keywordCollectionRef = doc(db, "keywords", keyword);
+      const keywordDocument = await getDoc(keywordCollectionRef);
+
+      if (keywordDocument.exists()) {
+        return keywordDocument.data().relevantUsers || [];
+      } else {
+        return [];
+      }
+    });
+
+    const results = await Promise.all(promises);
+  
+    let relevantUserIds = results.length ? results.reduce((acc, val) => acc.filter(id => val.includes(id))) : [];
+
+    // console.log(relevantUserIds);
+
+    const userDataPromises = relevantUserIds.map(async userId => {
+      const q = query(collection(db, "users"), where("userId", "==", userId));
+      const querySnapshot = await getDocs(q);
+      const userData = querySnapshot.docs.map(doc => {
+        const userData = doc.data();
+        return {
+          userId: userData.userId,
+          organizationName: userData.organizationName,
+          profilePicture: userData.profilePicture,
+          accountType: userData.accountType,
+          district: userData.district
+        };
+      });
+      return userData.length > 0 ? userData[0] : null;
+    });
+
+    const userDataResults = await Promise.all(userDataPromises);
+
+    const relevantUserData = userDataResults.filter(userData => userData !== null);
+
+    // console.log(relevantUserData);
+    res.status(200).json({ relevantUserData });
+  } catch(error) {
+    console.log(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
