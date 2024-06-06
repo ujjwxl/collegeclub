@@ -243,7 +243,7 @@ export const completeProfileForm = async (req, res) => {
 
 export const completeCompanyProfileForm = async (req, res) => {
   const { userId } = req.params;
-  const {
+  let {
     companyName, // keyword
     foundedYear,
     headquarter,
@@ -277,8 +277,8 @@ export const completeCompanyProfileForm = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    querySnapshot.forEach(async (doc) => {
-      const docRef = doc.ref;
+    querySnapshot.forEach(async (document) => {
+      const docRef = document.ref;
 
       await updateDoc(docRef, {
         organizationName: companyName,
@@ -1023,7 +1023,7 @@ export const searchRelevantUsers = async (req, res) => {
       }
     }, []);
 
-    console.log(relevantUserIds);
+    // console.log(relevantUserIds);
 
     const userDataPromises = relevantUserIds.map(async userId => {
       const q = query(collection(db, "users"), where("userId", "==", userId));

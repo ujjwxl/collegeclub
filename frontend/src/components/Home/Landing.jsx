@@ -108,7 +108,7 @@ const Landing = () => {
             <span className="close-search" onClick={toggleModal}>&times;</span>
             <input ref={inputRef} type="text" placeholder="Search for Colleges, Exams and more" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
             {/* <button onClick={handleSearch}>Search</button> */}
-            {error && <div>{error}</div>}
+            {/* {error && <div>{error}</div>} */}
           </div>
           <div className='search-results'>
           {searchResults.length > 0 ? (
