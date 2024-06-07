@@ -31,6 +31,11 @@ const CompanyProfileComponent = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        localStorage.setItem('keywordOrganizationName',companyName);
+        localStorage.setItem('keywordDistrict', district);
+        localStorage.setItem('keywordState', state);
+        localStorage.setItem('keywordCountry', country);
     
         try {
           await axios.post(`http://localhost:5000/auth/companyprofileform/${userId}`, {

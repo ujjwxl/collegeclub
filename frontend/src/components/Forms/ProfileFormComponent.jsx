@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import axios from 'axios';
 import './ProfileFormComponent.css'
+import { count } from 'firebase/firestore';
 
 const ProfileFormComponent = () => {
 
@@ -32,6 +33,12 @@ const ProfileFormComponent = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        localStorage.setItem('keywordOrganizationName',universityFullName);
+        localStorage.setItem('keywordShortName', universityShortName);
+        localStorage.setItem('keywordDistrict', district);
+        localStorage.setItem('keywordState', state);
+        localStorage.setItem('keywordCountry', country);
     
         try {
           await axios.post(`http://localhost:5000/auth/profileform/${userId}`, {

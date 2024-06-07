@@ -87,6 +87,10 @@ const DetailsFormComponent = () => {
         rankingsData.push({ agencyName, rank, year });
       }
 
+      localStorage.setItem('keywordSelectedCourses', selectedCourses);
+      localStorage.setItem('keywordCourses', courses);
+      localStorage.setItem('keywordInstituteType', selectedInstituteType);
+
       await axios
         .post(`http://localhost:5000/auth/detailsform/${userId}`, {
           selectedCourses,

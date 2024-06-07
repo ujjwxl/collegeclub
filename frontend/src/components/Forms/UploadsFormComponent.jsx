@@ -11,6 +11,16 @@ const UploadsFormComponent = () => {
     const [selectedImages, setSelectedImages] = useState([]);
     const [type, setType] = useState(localStorage.getItem('type'));
 
+
+    const organizationName = localStorage.getItem('keywordOrganizationName');
+    const shortName = localStorage.getItem('keywordShortName');
+    const district = localStorage.getItem('keywordDistrict');
+    const state = localStorage.getItem('keywordState');
+    const country = localStorage.getItem('keywordCountry');
+    const selectedCourses = localStorage.getItem('keywordSelectedCourses');
+    const courses = localStorage.getItem('keywordCourses');
+    const instituteType = localStorage.getItem('keywordInstituteType');
+
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
     };
@@ -46,6 +56,10 @@ const UploadsFormComponent = () => {
             .then((response) => {
                 toast('File uploaded successfully!');
                 console.log('File uploaded successfully');
+
+                if(endpoint === "profile"){
+                    localStorage.setItem('keywordProfilePicture', response.data.downloadURL);
+                }
             })
             .catch((error) => {
                 toast('File could not be uploaded!')
@@ -79,6 +93,28 @@ const UploadsFormComponent = () => {
             })
             .catch((error) => {
                 toast('Application form could not be completed!');
+                console.log(error);
+            })
+
+        const profilePicture = localStorage.getItem('keywordProfilePicture');
+        const accountType = localStorage.getItem('type');
+
+        axios.post(`http://localhost:5000/auth/createkeywords/${userId}`, {
+            organizationName,
+            shortName,
+            district,
+            state,
+            country,
+            selectedCourses,
+            courses,
+            instituteType,
+            profilePicture,
+            accountType
+        })
+            .then((response) => {
+                console.log('Keywords created!');
+            })
+            .catch((error) => {
                 console.log(error);
             })
     }

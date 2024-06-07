@@ -55,8 +55,8 @@ const Landing = () => {
     if (searchQuery.length >= 3) {
       try {
         const response = await axios.get(`http://localhost:5000/auth/search?query=${encodeURIComponent(searchQuery)}`);
-        console.log(response.data.relevantUserData);
-        setSearchResults(response.data.relevantUserData);
+        console.log(response.data);
+        setSearchResults(response.data);
       } catch (error) {
         console.error("Error searching:", error);
         setError("Error searching. Please try again later.");
@@ -116,6 +116,7 @@ const Landing = () => {
                 <div key={index} className="search-result">
                   <img src={result.profilePicture} alt="Profile" />
                   <div>
+                    <p>User ID: {result.userId}</p>
                     <p>Organization Name: {result.organizationName}</p>
                     <p>Location: {result.district}</p>
                     <p>Account Type: {result.accountType}</p>

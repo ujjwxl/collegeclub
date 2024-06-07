@@ -1017,6 +1017,118 @@ export const searchRelevantUsersFake = async (req, res) => {
   }
 }
 
+export const createKeywords = async (req, res) => {
+  const { userId } = req.params;
+
+  const {
+    organizationName, // will be there
+    shortName, // may not be there
+    district, // will be there
+    state, // will be there
+    country, // will be there
+    selectedCourses, // may not be there
+    courses, // may not be there
+    instituteType, // may not be there
+    profilePicture, // will be there
+    accountType // will be there
+  } = req.body;
+
+  const organizationNameWords = organizationName.toLowerCase().split(/\s+/);
+  // let searchKeywords = [...organizationNameWords, organizationName.toLowerCase(), country.toLowerCase(), state.toLowerCase(), district.toLowerCase()];
+  let searchKeywords = [...organizationNameWords, country.toLowerCase(), state.toLowerCase(), district.toLowerCase()];
+
+  if(shortName != null){
+    const shortNameLower = shortName.toLowerCase();
+    searchKeywords.push(shortNameLower);
+  }
+
+  if(selectedCourses != null){
+    const selectedCoursesWords = selectedCourses.toLowerCase().split(/[,\s]+/);
+    searchKeywords = [...searchKeywords, ...selectedCoursesWords];
+  }
+
+  if(courses != null){
+    const coursesWords = courses.toLowerCase().split(/[,\s]+/);
+    searchKeywords = [...searchKeywords, ...coursesWords];
+  }
+
+  if(instituteType != null) {
+    const instituteTypeLower = instituteType.toLowerCase();
+    searchKeywords.push(instituteTypeLower);
+  }
+
+  const promises = searchKeywords.map(async keyword => {
+    const keywordCollectionRef = doc(db, "keywordstest", keyword);
+    const keywordDocumentRef = await getDoc(keywordCollectionRef);
+    const keywordDocumentSnapshot = keywordDocumentRef.exists() ? keywordDocumentRef.data() : {};
+
+    keywordDocumentSnapshot.relevantUsers = keywordDocumentSnapshot.relevantUsers || [];
+    // if (!keywordDocumentSnapshot.relevantUsers.includes(userId)) {
+    //     keywordDocumentSnapshot.relevantUsers.push(userId);
+    // }
+
+    const keywordString = userId + ';' + organizationName + ';' + district + ';' + state + ';' + profilePicture  + ';' + accountType;
+    if(!keywordDocumentSnapshot.relevantUsers.includes(keywordString)) {
+      keywordDocumentSnapshot.relevantUsers.push(keywordString);
+    }
+    
+    await setDoc(keywordCollectionRef, keywordDocumentSnapshot);
+  });
+
+  await Promise.all(promises);
+}
+
+export const searchRelevantUsersNew = async (req, res) => {
+  const queryString = req.query.query;
+  const queryWords = queryString.trim().toLowerCase().split(/\s+/);
+
+  try {
+    const promises = queryWords.map(async (keyword) => {
+      const startAt = doc(db, "keywordstest", keyword);
+      const endAt = doc(db, "keywordstest", keyword + '\uffff');
+
+      const q = query(collection(db, "keywordstest"), where('__name__', '>=', startAt), where('__name__', '<', endAt));
+      const querySnapshot = await getDocs(q);
+
+      const relevantUsers = querySnapshot.docs.flatMap(doc => doc.data().relevantUsers || []);
+      return relevantUsers;
+    });
+
+    const allRelevantUsers = (await Promise.all(promises));
+    // console.log(allRelevantUsers);
+
+    const arrayOfArrays = Array.from(allRelevantUsers);
+    // console.log(arrayOfArrays);
+
+    const relevantUserIds = arrayOfArrays.reduce((acc, currentArray) => {
+      if (acc.length === 0) {
+        return currentArray;
+      } else {
+        return acc.filter(element => currentArray.includes(element));
+      }
+    }, []);
+
+    console.log(relevantUserIds);
+
+    const relevantUsers = relevantUserIds.map(userString => {
+      const [userId, organizationName, district, state, profilePicture, accountType] = userString.split(';');
+      return {
+        userId,
+        organizationName,
+        district,
+        state,
+        profilePicture,
+        accountType
+      };
+    });
+
+    res.status(200).json(relevantUsers);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 export const searchRelevantUsers = async (req, res) => {
   const queryString = req.query.query;
   const queryWords = queryString.trim().toLowerCase().split(/\s+/);
