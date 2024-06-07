@@ -1,67 +1,71 @@
 /* style for college page */
 
 .skills-overlay {
-    display: flex;
-    position: absolute;
-    top: 50px;
-    left: 0px;
-    width: 100%;
-    /* height: 101%; */
-    height: calc(101% - 50px);
-    background-color: rgba(36, 6, 85, 0.5);
-    color: white;
-    box-sizing: border-box;
-    font-family: "Comfortaa", sans-serif;
+  display: flex;
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  width: 100%;
+  /* height: 101%; */
+  height: calc(101% - 50px);
+  background-color: rgba(36, 6, 85, 0.5);
+  color: white;
+  box-sizing: border-box;
+  font-family: "Comfortaa", sans-serif;
 }
 
 .skills-display-box {
-    display: flex;
-    background-color: #240655;
-    width: 90%;
-    margin: 2% auto 2% auto;
-    border-radius: 10px;
-    /* box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9); */
-    
+  display: flex;
+  background-color: #240655;
+  width: 90%;
+  margin: 2% auto 2% auto;
+  border-radius: 10px;
+  /* box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9); */
 }
 
 .skills-display-box-filter {
-    width: 20%;
-    background-color: #4527a0;
-    overflow-y: scroll;
-    border-radius: 10px;
+  width: 20%;
+  background-color: #4527a0;
+  overflow-y: scroll;
+  border-radius: 10px;
 }
 
 .skills-display-box-list {
-    width: 80%;
-    overflow-y: auto;
-    padding: 10px;
+  width: 80%;
+  overflow-y: auto;
+  padding: 10px;
 }
 
 .skills-left-items {
-    font-size: 12px;
-    background-color: #240655;
-    padding: 2px;
-    text-align: center;
-    cursor: pointer;
-    margin: 0 10px;
-    border-radius: 10px;
-    margin-top: 10px;
+  font-size: 12px;
+  background-color: #240655;
+  padding: 2px;
+  text-align: center;
+  cursor: pointer;
+  margin: 0 10px;
+  border-radius: 10px;
+  margin-top: 10px;
 }
 
 .skills-selected-button {
-    background-image: linear-gradient(to right, #eb3349 0, #f45c43 51%, #eb3349 100%);
+  background-image: linear-gradient(
+    to right,
+    #eb3349 0,
+    #f45c43 51%,
+    #eb3349 100%
+  );
 }
 
 .course-tile {
-    background-color: #4527A0;
-    padding: 10px;
-    margin: 0 20px;
+  background-color: #4527a0;
+  padding: 10px;
+  margin: 0 20px;
 }
 
 .skills-cards-row {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 40px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 40px;
 }
 
 /* .skills-course-card {
@@ -75,126 +79,256 @@
     position: relative;
 } */
 .skills-course-card {
-    position: relative;
-    width: 30%;
-    height: 400px;
-    background-color: #4527A0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  position: relative;
+  width: 30%;
+  height: 400px;
+  background-color: #4527a0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 .skills-course-card img {
-    width: 100%;
-    height: 55%;
-    display: block;
-    max-width: 100%;
-    border-radius: 5px;
+  width: 100%;
+  height: 55%;
+  display: block;
+  max-width: 100%;
+  border-radius: 5px;
 }
-.instructor{
-    font-size: 13px;
+.instructor {
+  font-size: 13px;
 }
 .skills-course-card .skill-course-card-image {
-    position: absolute;
-    height: 70px;
-    width: 70px;
-    top: 38%;
+  position: absolute;
+  height: 70px;
+  width: 70px;
+  top: 38%;
 }
 
 .skill-course-card-button {
-    background-color: #38D6E6;
-    text-align: center;
-    width: 30%;
-    height: 40px;
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-    font-family: "Comfortaa", sans-serif;
-    font-size: 14px;   
+  background-color: #38d6e6;
+  text-align: center;
+  width: 30%;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: "Comfortaa", sans-serif;
+  font-size: 14px;
 }
 
 .skills-course-card img.skills-course-card-img {
-    transition: transform 0.3s ease-in-out;
-    width: 100%; 
-    height: 55%;
-    display: block;
-    max-width: 100%;
-  }
-  /* .skills-course-card:hover{
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+  height: 55%;
+  display: block;
+  max-width: 100%;
+}
+/* .skills-course-card:hover{
   box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
 
   } */
-  .skills-course-card:hover {
-    transform: scale(1.008);
-    box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.9);
+.skills-course-card:hover {
+  /* transform: scale(1.008); */
+  box-shadow: 0px 0px 8px rgba(190, 190, 190, 0.9);
 }
 
-  .skills-course-card:hover img.skills-course-card-img {
-    
-    transform: scale(1.04); 
-  }
-  .skills-title {
+.skills-course-card:hover img.skills-course-card-img {
+  transform: scale(1.04);
+}
+.skills-title {
+  display: flex;
+  align-items: center;
+  /* padding: 0 20px; */
+  margin: 0 30px;
+  justify-content: space-between;
+}
+.skills-title h2 {
+  font-size: 30px;
+}
+
+.modal-skills {
+  display: block;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+.modal-content-skills {
+  margin: 3% auto;
+  padding: 10px;
+  background: #fefefe;
+  color: rgb(234, 234, 234);
+  height: 87%;
+  width: 80%;
+  background: linear-gradient(to right, #5a33d0, #20034f);
+  display: flex;
+  justify-content: space-around;
+}
+.skills-left-modal {
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 20px;
+  margin-right: 50px;
+}
+
+.skills-left-modal::-webkit-scrollbar {
+  display: none;
+}
+.skills-left-modal h1 {
+  margin-top: 15%;
+  font-size: 45px;
+  color: rgb(245, 245, 245);
+}
+.skills-desc p {
+  /* font-weight: bold; */
+  font-size: 20px;
+  color: #ccc;
+}
+.rating-container {
+  display: flex;
+  align-items: center;
+}
+.rating-container p {
+  margin: 0;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+.star-rating {
+  color: rgb(224, 224, 15);
+}
+
+.star-rating > span {
+  font-size: 24px;
+}
+.span-skills{
+    color: white;
+    margin-left: 10px;
+}
+.skills-details{
+    background-color: white;
+    margin-top: 19%;
+    padding: 20px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px rgba(44, 44, 44, 0.9);
+
+}
+.skills-details h2{
+    color: #040453;
+    margin: 0;
+    font-size: 30px;
+}
+.whatlearn{
+    display: flex;
+    margin-top: 30px;
+    color: #5C6381;
+}
+.whatlearn-left{
+    display: flex;
+    flex-direction: column;
+}
+.whatlearn-content{
     display: flex;
     align-items: center;
-    /* padding: 0 20px; */
-    margin: 0 30px;
-    justify-content: space-between;
-  }
-  .skills-title h2{
-    font-size: 30px;
-  }
-  @media only screen and (max-width: 768px) {
-    .skills-overlay{
-        flex-direction: column;
+    margin: 10px 0;
+    margin-right: 10px;
+}
+.whatlearn-content p{
+    margin: 0;
+    margin-left: 5px;
+}
+.whatlearn img{
+    object-fit: contain;
+    height: 20px;
+}
+
+
+.skills-right-modal {
+  background-color: rgb(243, 243, 243);
+  width: 40%;
+  border-radius: 5px;
+  padding: 10px;
+  color: #040453;
+  box-shadow: 0px 0px 10px rgba(67, 67, 67, 0.9);
+
+}
+.skills-modal-img {
+  height: auto;
+  width: 100%;
+}
+.enroll {
+  width: 100%;
+  background-color: #5e3fd7;
+  border: 2px solid #5e3fd7;
+  padding: 15px 0;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-top: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+.enroll:hover {
+  border: 2px solid #5e3fd7;
+  background-color: rgb(243, 243, 243);
+  color: #5e3fd7;
+}
+@media only screen and (max-width: 768px) {
+  .skills-overlay {
+    flex-direction: column;
     height: calc(101% - 50px);
-
-    }
-    .skills-display-box-filter{
-        display: none;
-    }
-    .skills-display-box-list{
-        padding: 20px;
-        width: 100%;
-    }
-    .courses-skills{
-        display: none;
-    }
-    .skills-display-box{
-        border-radius: 10px;
-        height: 80vh;
-    }
-    .skills-left-items{
-        width: 60%;
-    }
-    .skills-course-card{
-        height: 380px;
-    }
-    
-    .skills-cards-row {
-        flex-direction: column;
-        align-items: center; /* Optional: Center cards horizontally */
-        margin-bottom: 20px; /* Adjust spacing between rows if needed */
-      }
-      .skills-course-card {
-        width: 93%; /* Adjust card width as needed */
-        margin-bottom: 20px; /* Adjust spacing between cards if needed */
-      }
-      .skills-course-card h3{
-        font-size: 22px;
-        margin-left: 10px;
-        /* margin-bottom: 5px; */
-      }
-      .skills-course-card p{
-        margin-left: 10px;
-      }
-      .skills-course-card button{
-        margin-left: 10px;
-      }
-    
+  }
+  .skills-display-box-filter {
+    display: none;
+  }
+  .skills-display-box-list {
+    padding: 20px;
+    width: 100%;
+  }
+  .courses-skills {
+    display: none;
+  }
+  .skills-display-box {
+    border-radius: 10px;
+    height: 80vh;
+  }
+  .skills-left-items {
+    width: 60%;
+  }
+  .skills-course-card {
+    height: 380px;
   }
 
-  @media only screen and (min-width: 769px) {
-    .skills-title{
-        display: none;
-    }
+  .skills-cards-row {
+    flex-direction: column;
+    align-items: center; /* Optional: Center cards horizontally */
+    margin-bottom: 20px; /* Adjust spacing between rows if needed */
   }
+  .skills-course-card {
+    width: 93%; /* Adjust card width as needed */
+    margin-bottom: 20px; /* Adjust spacing between cards if needed */
+  }
+  .skills-course-card h3 {
+    font-size: 22px;
+    margin-left: 10px;
+    /* margin-bottom: 5px; */
+  }
+  .skills-course-card p {
+    margin-left: 10px;
+  }
+  .skills-course-card button {
+    margin-left: 10px;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .skills-title {
+    display: none;
+  }
+}

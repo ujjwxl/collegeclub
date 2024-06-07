@@ -7,14 +7,26 @@ import Footer from "../../components/Home/Footer";
 import backgroundImage from "../../assets/home-1.jpg";
 import backgroundImageTwo from "../../assets/home-2.jpg";
 import backgroundImageThree from "../../assets/test-dp.jpg";
+import duration from "../../assets/clock.png";
+import level from "../../assets/signal.png";
+import language from "../../assets/language.png";
 import defaultImage from "../../assets/test-dp.jpg";
-import BottomBar from '../../components/BottomBar/BottomBar'
+import BottomBar from "../../components/BottomBar/BottomBar";
 import axios from "axios";
+import StarRating from "./StarRating";
+import tick from "../../assets/check-mark.png";
 import "./Skills.css";
 
 const Skills = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [selectedCourse, setSelectedCourse] = useState({
+    courseImage: backgroundImageThree,
+    category: "Soft Skills",
+    courseName: "JavaScript",
+    courseInstructor: "Arvind Kumar",
+    price: "Rs 3,099",
+    id: 2,
+  });
   const [examDetails, setExamDetails] = useState({});
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
@@ -82,7 +94,9 @@ const Skills = () => {
 
   const handleCloseModal = () => {
     setSelectedCourse(null);
+    document.body.classList.remove("modal-open");
   };
+
   const toggleFilterModal = () => {
     setIsFilterModalOpen(!isFilterModalOpen);
   };
@@ -105,13 +119,22 @@ const Skills = () => {
     };
   }, [isFilterModalOpen]);
 
+  useEffect(() => {
+    if (selectedCourse) {
+      document.body.classList.add("modal-open"); // Add a class to body when modal is open
+    }
+  }, [selectedCourse]);
+
   return (
     <>
       <Navbar />
-      <BottomBar/>
+      <BottomBar />
       <img src={backgroundImage} alt="" className="home1-img" />
-      <div className={`skills-overlay colleges-container ${isFilterModalOpen ? "blur-background" : ""}`}>
-
+      <div
+        className={`skills-overlay colleges-container ${
+          isFilterModalOpen ? "blur-background" : ""
+        }`}
+      >
         <div className="skills-title">
           <h2>Courses</h2>
           <button className="colleges-filter-btn" onClick={toggleFilterModal}>
@@ -119,9 +142,12 @@ const Skills = () => {
           </button>
         </div>
         {isFilterModalOpen && (
-          <motion.div className={`filter-modal ${isFilterModalOpen ? "show" : ""}`} initial={{ x: "10%" }}
-          animate={{ x: isFilterModalOpen ? 0 : "100%" }}
-          exit={{ x: "100%" }}>
+          <motion.div
+            className={`filter-modal ${isFilterModalOpen ? "show" : ""}`}
+            initial={{ x: "10%" }}
+            animate={{ x: isFilterModalOpen ? 0 : "100%" }}
+            exit={{ x: "100%" }}
+          >
             <div className="filter-modal-header">
               <h2>Courses Type</h2>
               <div className="clear-apply">
@@ -212,9 +238,120 @@ const Skills = () => {
         </div>
       </div>
       {selectedCourse && (
-        <div className="modal">
-          <div className="modal-content">
-            <p>ID : {selectedCourse.id}</p>
+        <div className="modal-skills">
+          <div className="modal-content-skills">
+            <div className="skills-left-modal">
+            <div className="skills-desc">
+              <h1>Python for Beginners - Learn Programming</h1>
+              <p>
+                Become a Full-Stack Web Developer with just ONE course. HTML,
+                CSS, Javascript, Node, React, PostgreSQL, Web3 and DApps
+              </p>
+              <div className="rating-container">
+                <p>4.0</p>
+                <StarRating rating={4} />
+              </div>
+              <p>
+                Created By:<span className="span-skills">Jack Nicholson</span>
+              </p>
+              </div>
+              <div className="skills-details">
+                <h2>What you will learn</h2>
+                <div className="whatlearn">
+                  <div className="whatlearn-left">
+                    <div className="whatlearn-content">
+                      <img src={tick}></img>
+                      <p>Grasp how Javascript works and it's fundamental concepts</p>
+                    </div>
+                    <div className="whatlearn-content">
+                      <img src={tick}></img>
+                      <p>Drastically improve your ability to debug problems in Javascript.</p>
+                    </div>
+                    <div className="whatlearn-content">
+                      <img src={tick}></img>
+                      <p>Avoid common pitfalls and mistakes other Javascript coders make</p>
+                    </div>
+                  </div>
+                  <div className="whatlearn-left">
+                    <div className="whatlearn-content">
+                      <img src={tick}></img>
+                      <p>Write solid, good Javascript code</p>
+                    </div>
+                    <div className="whatlearn-content">
+                      <img src={tick}></img>
+                      <p>Understand the source code of popular Javascript frameworks</p>
+                    </div>
+                    <div className="whatlearn-content">
+                      <img src={tick}></img>
+                      <p>Build your own Javascript framework or library</p>
+                    </div>
+                  </div>
+                </div>
+                <h2>Course Content</h2>
+              </div>
+            </div>
+            <div className="skills-right-modal">
+              <img src={backgroundImage} className="skills-modal-img"></img>
+              <div style={{ padding: "0px 10px" }}>
+                <h1>₹499</h1>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    margin: "15px 0",
+                    color: "#5C6381",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                      src={duration}
+                      style={{ objectFit: "contain", height: "15px" }}
+                    ></img>
+                    <p style={{ margin: "0", marginLeft: "10px" }}>
+                      Course Duration
+                    </p>
+                  </div>
+                  <p style={{ margin: "0" }}>4 Hours</p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    margin: "15px 0",
+                    color: "#5C6381",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                      src={level}
+                      style={{ objectFit: "contain", height: "15px" }}
+                    ></img>
+                    <p style={{ margin: "0", marginLeft: "10px" }}>
+                      Course Level
+                    </p>
+                  </div>
+                  <p style={{ margin: "0" }}>Medium</p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    margin: "15px 0",
+                    color: "#5C6381",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                      src={language}
+                      style={{ objectFit: "contain", height: "18px" }}
+                    ></img>
+                    <p style={{ margin: "0", marginLeft: "8px" }}>Language </p>
+                  </div>
+                  <p style={{ margin: "0" }}>English</p>
+                </div>
+              </div>
+              <button className="enroll">Enroll Now</button>
+            </div>
             <button className="close-button" onClick={handleCloseModal}>
               Close
             </button>
@@ -223,9 +360,9 @@ const Skills = () => {
       )}
       <Footer />
       {isFilterModalOpen && <div className="backdrop"></div>}
-
     </>
   );
 };
 
 export default Skills;
+// #5C6381
