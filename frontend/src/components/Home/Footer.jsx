@@ -36,6 +36,13 @@ const Footer = () => {
                 </ul> */}
             </div>
             <div className="footer-column">
+                <h4>Partners</h4>
+                <ul>
+                    <Link to={'/colleges'}><li>Colleges</li></Link>
+                    <Link to={'/companies'}><li>Companies</li></Link>
+                </ul>
+            </div>
+            <div className="footer-column">
                 <h4>Other Links</h4>
                 <ul>
                     <Link to={'/career'}><li>Career</li></Link>

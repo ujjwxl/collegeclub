@@ -1,5 +1,5 @@
 import express from 'express'
-import { registerUser, loginUser, getUserDetails, getColleges, completeProfileForm, completeDetailsForm, completeCompanyProfileForm, completeCompanyDetailsForm, completeAmbassadorProfileForm, saveFeedback, getCoursesByType, submitJobApplication, completeApplicationForm, createJobListing, getJobsByUserId, getAllJobs, markJobAsListed, markJobAsDelisted, deleteJob, submitCompanyJobApplication, getCompanyJobApplicants, getAllCourses, searchRecords, searchRelevantUsers} from '../controllers/AuthController.js';
+import { registerUser, loginUser, getUserDetails, getColleges, completeProfileForm, completeDetailsForm, completeCompanyProfileForm, completeCompanyDetailsForm, completeAmbassadorProfileForm, saveFeedback, getCoursesByType, submitJobApplication, completeApplicationForm, createJobListing, getJobsByUserId, getAllJobs, markJobAsListed, markJobAsDelisted, deleteJob, submitCompanyJobApplication, getCompanyJobApplicants, getAllCourses, searchRecords, searchRelevantUsers, getCompanies} from '../controllers/AuthController.js';
 import { resetPassword } from '../controllers/AuthController.js';
 const router = express.Router();
 
@@ -7,6 +7,7 @@ router.post('/register', registerUser)
 router.post('/login', loginUser)
 router.get('/user/:userId', getUserDetails)
 router.get('/college', getColleges)
+router.get('/company', getCompanies)
 router.post('/profileform/:userId', completeProfileForm)
 router.post('/detailsform/:userId', completeDetailsForm)
 router.post('/companyprofileform/:userId', completeCompanyProfileForm)

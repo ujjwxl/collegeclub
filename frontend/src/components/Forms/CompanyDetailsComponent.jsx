@@ -15,6 +15,28 @@ const CompanyDetailsComponent = () => {
 
     const userId = localStorage.getItem("id");
 
+    const industries = [
+        "Technology",
+        "Healthcare",
+        "Finance",
+        "Education",
+        "Manufacturing",
+        "Retail",
+        "Hospitality",
+        "Automotive",
+        "Construction",
+        "Real Estate",
+        "Media and Entertainment",
+        "Telecommunications",
+        "Non-profit",
+        "Government",
+        "Agriculture",
+        "Energy",
+        "Transportation",
+        "Consulting",
+        "Others"
+    ];
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -151,15 +173,15 @@ const CompanyDetailsComponent = () => {
                     </div>
                 </div>
                 <div className="form-input-flex-two">
-                    <div className="form-input-group">
-                        <label htmlFor="collegename">Industry Type</label>
-                        <input
-                            type="text"
-                            onChange={(e) => setIndustryType(e.target.value)}
-                            placeholder="Enter industry type*"
-                            required
-                        />
-                    </div>
+                <div className="form-input-group form-select apply-form-select">
+                            <label htmlFor="industry">Industry/Field*</label>
+                            <select value={industryType} onChange={(e) => setIndustryType(e.target.value)} required>
+                                <option value="">Select industry/field*</option>
+                                {industries.map((field) => (
+                                    <option key={field} value={field}>{field}</option>
+                                ))}
+                            </select>
+                        </div>
                 </div>
                 <hr />
 

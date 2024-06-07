@@ -27,6 +27,7 @@ import Skills from './pages/Skills/Skills';
 import Openings from './pages/Openings/Openings';
 import { Toaster } from 'sonner';
 import ForgotPassword from './pages/Login/ForgotPassword';
+import Company from './pages/Company/Company';
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
           <Route path='/paymentsuccess' element={<PaymentSuccess />} />
           <Route path='/colleges' element={<College />} />
           <Route path='/courses' element={<Courses />} />
+          <Route path='/companies' element={<Company />} />
           <Route path='/exams' element={<Exams />} />
           <Route path='/skills' element={<Skills />} />
           <Route path='/openings' element={<Openings />} />
