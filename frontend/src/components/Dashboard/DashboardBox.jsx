@@ -100,11 +100,11 @@ const DashboardBox = () => {
   return (
     <div className="dashboard-box">
       <div className="dashboard-box-container">
-        <h2>You have signed up successfully!</h2>
+        {/* <h2>You have signed up successfully!</h2> */}
         {/* <h3>Continue to payment to verify the account</h3>
         <button onClick={checkoutHandler}>Continue to Payment</button> */}
-        
-          {userData && userData.paymentStatus ? (
+
+        {/* {userData && userData.paymentStatus ? (
             <>
               <h3>You have paid successfully</h3>
               <p>Complete the form to onboard successfully</p>
@@ -115,8 +115,31 @@ const DashboardBox = () => {
               <h3>Continue to payment to verify the account</h3>
               <button className="dashboard-payment-button" onClick={checkoutHandler}>Continue to Payment</button>
             </>
-          )}
-        
+          )} */}
+
+        {userData && userData.paymentStatus ? (
+          <>
+            {userData.applicationFormCompleted ? (
+              <>
+                <h3>Welcome back!, {userData.organizationName}</h3>
+                <h3>What would you like to do today?</h3>
+              </>
+            ) : (
+              <>
+                <h3>You have paid successfully</h3>
+                <p>Complete the form to onboard successfully</p>
+                <Link to={'/form/profile'}><button className="dashboard-payment-button">Complete application form</button></Link>
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <h3>Continue to payment to verify the account</h3>
+            <button className="dashboard-payment-button" onClick={checkoutHandler}>Continue to Payment</button>
+          </>
+        )}
+
+
       </div>
     </div>
   );

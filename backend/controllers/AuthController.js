@@ -61,6 +61,7 @@ export const registerUser = async (req, res) => {
       userName,
       email,
       userId,
+      applicationFormCompleted: false,
       paymentStatus: false,
     });
 

@@ -99,6 +99,11 @@ const UploadsFormComponent = () => {
         const profilePicture = localStorage.getItem('keywordProfilePicture');
         const accountType = localStorage.getItem('type');
 
+        if(profilePicture === null){
+            toast('Please upload a profile picture');
+            return;
+        }
+
         axios.post(`http://localhost:5000/auth/createkeywords/${userId}`, {
             organizationName,
             shortName,

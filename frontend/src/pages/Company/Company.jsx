@@ -183,6 +183,17 @@ const Company = () => {
         };
     }, [isFilterModalOpen]);
 
+    const openCompanyDetails = (companyId, e) => {
+        if (e.target.tagName === "BUTTON") {
+          e.preventDefault();
+          e.stopPropagation();
+          navigate("/slot");
+        } else {
+          console.log(companyId)
+          navigate(`/company/${companyId}`);
+        }
+      };
+
 
     return (
         <>
@@ -261,7 +272,7 @@ const Company = () => {
                                             <div
                                                 className="colleges-display-box-item"
                                                 key={index}
-                                            // onClick={(e) => openCollegeDetails(college.userId, e)}
+                                                onClick={(e) => openCompanyDetails(company.userId, e)}
                                             >
                                                 <div className="college-display-box-item-image">
                                                     <img

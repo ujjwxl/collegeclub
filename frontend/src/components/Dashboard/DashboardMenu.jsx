@@ -55,6 +55,7 @@ const DashboardMenu = ({
   const handleSignOut = () => {
     localStorage.removeItem("id");
     localStorage.removeItem("token");
+    localStorage.clear();
     navigate("/");
   };
 

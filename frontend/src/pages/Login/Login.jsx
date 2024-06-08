@@ -27,9 +27,10 @@ const Login = () => {
         .then(res => {
           if (res.status == 200) {
             const { userData, token } = res.data;
-            const { userId, accountType } = userData;
+            const { userId, accountType, applicationFormCompleted } = userData;
             localStorage.setItem('id', userId);
             localStorage.setItem('type', accountType);
+            localStorage.setItem('applicationFormCompleted', applicationFormCompleted);
             localStorage.setItem('token', token);
             navigate('/dashboard');
           }
