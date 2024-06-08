@@ -160,7 +160,9 @@
   border-radius: 10px;
 }
 .college-button {
-  background: linear-gradient(45deg, #84ffff, #00b8d4);
+  position: absolute;
+  right: 0;
+  /* background: linear-gradient(45deg, #84ffff, #00b8d4);
   border-radius: 10px;
   color: white;
   border: none;
@@ -168,12 +170,20 @@
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease; */
+  background-image: linear-gradient(to right, #eb3349 0, #f45c43 51%, #eb3349 100%);
+  text-align: center;
+  color: #fff;
+  width: 30%;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: "Comfortaa", sans-serif;
 }
-.college-button:hover {
-  /* background-color: #0c7d92; */
+/* .college-button:hover {
   background: linear-gradient(45deg, #6f00ed, #00b8d4);
-}
+} */
 .colleges-display-box-list {
   /* margin-right: auto; */
   width: 80%;
@@ -214,6 +224,7 @@
 }
 
 .colleges-display-box-item-details-two {
+  position: relative;
   width: 50%;
   /* background-color: green; */
   margin: auto 0;
@@ -304,7 +315,7 @@
     font-size: 13px;
   }
   .college-button {
-    background: linear-gradient(45deg, #84ffff, #00b8d4);
+    /* background: linear-gradient(45deg, #84ffff, #00b8d4);
     border-radius: 10px;
     color: white;
     border: none;
@@ -312,7 +323,8 @@
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease; */
+    width: 70px
   }
   .colleges-filter-modal-btn {
     margin-right: 0;

@@ -91,8 +91,34 @@ const CompanyDetails = () => {
                     </div>
 
                     <div id="college-news">
+                        <h3>Services</h3>
+                        {companyData && companyData.services && companyData.services.length > 0 ? (
+                            <div className="table-container">
+                            <table className="college-table">
+                                <thead>
+                                    <tr>
+                                        <th>Service Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {companyData.services.map((service, index) => (
+                                        <tr key={index}>
+                                            <td>{service.serviceName}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        ) : (
+                            <p>No services available</p>
+                        )}
+                    </div>
+
+                    <hr />
+
+                    <div id="college-news">
                         <h3>News</h3>
-                        {companyData && companyData.news.length > 0 ? (
+                        {companyData && companyData.news && companyData.news.length > 0 ? (
                             <div className="table-container">
                                 <table className="college-table">
                                     <thead>

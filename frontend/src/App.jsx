@@ -45,31 +45,28 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path='/reset' element={<ForgotPassword />} />
 
+          <Route path='/colleges' element={<College />} />
+          <Route path='/courses' element={<Courses />} />
+          <Route path='/companies' element={<Company />} />
+          <Route path='/exams' element={<Exams />} />
+          <Route path='/skills' element={<Skills />} />
+          <Route path='/openings' element={<Openings />} />
+          <Route path='/skills/:courseId' element={<Skills />} />
+          <Route path='/college/:collegeId' element={<CollegeDetails />} />
+          <Route path='/company/:companyId' element={<CompanyDetails/>} />
+          <Route path='/slot' element={<SlotBooking />} />
+          <Route path='/about' element={<AboutUs />} />
+          <Route path='/mission' element={<Mission />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/career' element={<Career />} />
+          <Route path='/privacy' element={<Privacy />} />
+          <Route path='/terms' element={<Terms />} />
+          <Route path='/faqs' element={<Faqs />} />
+          <Route path='/feedback' element={<Feedback />} />
+
           <Route element={<PrivateRoutes />}>
             <Route path="/dashboard" element={<Dashboard />}></Route>
             <Route path='/paymentsuccess' element={<PaymentSuccess />} />
-            <Route path='/colleges' element={<College />} />
-            <Route path='/courses' element={<Courses />} />
-            <Route path='/companies' element={<Company />} />
-            <Route path='/exams' element={<Exams />} />
-            <Route path='/skills' element={<Skills />} />
-            <Route path='/openings' element={<Openings />} />
-            <Route path='/skills/:courseId' element={<Skills />} />
-            {/* <Route path='/form/profile' element={<ProfileForm />} />
-            <Route path='/form/details' element={<DetailsForm />} />
-            <Route path='/form/uploads' element={<UploadsForm />} /> */}
-            <Route path='/college/:collegeId' element={<CollegeDetails />} />
-            <Route path='/company/:companyId' element={<CompanyDetails/>} />
-            <Route path='/slot' element={<SlotBooking />} />
-            <Route path='/about' element={<AboutUs />} />
-            <Route path='/mission' element={<Mission />} />
-            <Route path='/contact' element={<Contact />} />
-            <Route path='/career' element={<Career />} />
-            <Route path='/privacy' element={<Privacy />} />
-            <Route path='/terms' element={<Terms />} />
-            <Route path='/faqs' element={<Faqs />} />
-            <Route path='/feedback' element={<Feedback />} />
-            <Route path="/*" element={<ErrorPage />} />
           </Route>
 
           <Route element={<FormRoutes />}>
@@ -77,6 +74,8 @@ function App() {
             <Route path='/form/details' element={<DetailsForm />} />
             <Route path='/form/uploads' element={<UploadsForm />} />
           </Route>
+
+          <Route path="/*" element={<ErrorPage />} />
 
           {/* <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path='/paymentsuccess' element={<PaymentSuccess />} />
@@ -101,7 +100,7 @@ function App() {
           <Route path='/faqs' element={<Faqs />} />
           <Route path='/feedback' element={<Feedback />} />
           <Route path="/*" element={<ErrorPage />} /> */}
-
+          
         </Routes>
       </Router>
     </>
