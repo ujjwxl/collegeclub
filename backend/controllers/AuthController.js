@@ -496,6 +496,7 @@ export const completeCompanyDetailsForm = async (req, res) => {
   const {
     aboutCompany,
     companyMission,
+    services,
     news,
     registrationNumber,
     promo,
@@ -517,6 +518,7 @@ export const completeCompanyDetailsForm = async (req, res) => {
       await updateDoc(docRef, {
         aboutCompany,
         companyMission,
+        services,
         news,
         registrationNumber,
         promo,

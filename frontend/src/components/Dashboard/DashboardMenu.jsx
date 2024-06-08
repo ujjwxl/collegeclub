@@ -148,11 +148,11 @@ const DashboardMenu = ({
             </div>
             <div className="dashboard-menu-middle-icon" onClick={onAddJob}>
               <img src={cmsIcon} alt="" />
-              <p>CMS</p>
+              <p>Add Job</p>
             </div>
-            <div className="dashboard-menu-middle-icon" onClick={onShowLeads}>
+            <div className="dashboard-menu-middle-icon" onClick={onShowApplicants}>
               <img src={leadsIcon} alt="" />
-              <p>Leads</p>
+              <p>Applicants</p>
             </div>
           </>
         ) : (
@@ -163,13 +163,13 @@ const DashboardMenu = ({
             </div>
             <div
               className="dashboard-menu-middle-icon"
-              onClick={onShowApplicants}
+              onClick={onShowLeads}
             >
-              <img src={eventsIcon} alt="" />
-              <p>Applicants</p>
+              <img src={leadsIcon} alt="" />
+              <p>Admissions</p>
             </div>
-            <div className="dashboard-menu-middle-icon" onClick={onAddJob}>
-              <img src={cmsIcon} alt="" />
+            <div className="dashboard-menu-middle-icon" onClick={onShowLeads}>
+              <img src={eventsIcon} alt="" />
               <p>Jobs</p>
             </div>
             

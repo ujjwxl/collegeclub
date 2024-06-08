@@ -6,6 +6,7 @@ import axios from 'axios';
 const CompanyDetailsComponent = () => {
 
     const [newsCount, setNewsCount] = useState(1);
+    const [servicesCount, setServicesCount] = useState(1);
 
     const [aboutCompany, setAboutCompany] = useState("");
     const [companyMission, setCompanyMission] = useState("");
@@ -48,10 +49,17 @@ const CompanyDetailsComponent = () => {
                 newsData.push({ newsTitle, refLink });
             }
 
+            const servicesData = [];
+            for (let i = 0; i < servicesCount; i++) {
+                const serviceName = e.target[`serviceName${i}`].value;
+                servicesData.push({ serviceName });
+            }
+
             await axios
                 .post(`http://localhost:5000/auth/companydetailsform/${userId}`, {
                     aboutCompany,
                     companyMission,
+                    services: servicesData,
                     news: newsData,
                     registrationNumber,
                     promo,
@@ -77,6 +85,14 @@ const CompanyDetailsComponent = () => {
 
     const handleRemoveNews = () => {
         setNewsCount(newsCount - 1);
+    };
+
+    const handleAddService = () => {
+        setServicesCount(servicesCount + 1);
+    };
+
+    const handleRemoveService = () => {
+        setServicesCount(servicesCount - 1);
     };
 
     return (
@@ -106,6 +122,38 @@ const CompanyDetailsComponent = () => {
                     rows="10"
                     required
                 ></textarea>
+                <hr />
+
+                <h3>Services</h3>
+                {[...Array(servicesCount)].map((_, index) => (
+                    <div className="form-input-flex-two" key={index}>
+                        <div className="form-input-group">
+                            <label htmlFor="collegename">Service name*</label>
+                            <input
+                                type="text"
+                                name={`serviceName${index}`}
+                                placeholder="Enter the service name"
+                                required
+                            />
+                        </div>
+
+                        <button
+                            type="button"
+                            className="form-remove-button"
+                            onClick={handleRemoveService}
+                        >
+                            Remove
+                        </button>
+                    </div>
+                ))}
+
+                <button
+                    type="button"
+                    className="form-remove-button form-add-button"
+                    onClick={handleAddService}
+                >
+                    ADD
+                </button>
                 <hr />
 
                 <h3>News and Articles</h3>
