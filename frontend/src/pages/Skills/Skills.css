@@ -404,9 +404,24 @@
   box-shadow: 0px 0px 10px rgba(67, 67, 67, 0.9);
 
 }
+.skills-right-modal p{
+  font-size: 17px;
+}
 .skills-modal-img {
   height: auto;
   width: 100%;
+}
+.price{
+  display: flex;
+  align-items: center;
+}
+.price h3{
+  text-decoration: line-through;
+  margin-left: 10px;
+}
+.price p{
+  color: red;
+  margin-left: 15px;
 }
 .enroll {
   width: 100%;

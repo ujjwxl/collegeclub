@@ -15,6 +15,7 @@ import arrow from "../../assets/right-arrow.png";
 import duration from "../../assets/clock.png";
 import level from "../../assets/signal.png";
 import language from "../../assets/language.png";
+import medal from "../../assets/medal.png";
 import play from "../../assets/play.png";
 import defaultImage from "../../assets/test-dp.jpg";
 import BottomBar from "../../components/BottomBar/BottomBar";
@@ -665,7 +666,12 @@ const Skills = () => {
             <div className="skills-right-modal">
               <img src={backgroundImage} className="skills-modal-img"></img>
               <div style={{ padding: "0px 10px" }}>
+              <div className="price">
                 <h1>₹499</h1>
+                <h3>₹3499</h3>
+                <p>50% off</p>
+              </div>
+                
                 <div
                   style={{
                     display: "flex",
@@ -677,7 +683,7 @@ const Skills = () => {
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <img
                       src={duration}
-                      style={{ objectFit: "contain", height: "15px" }}
+                      style={{ objectFit: "contain", height: "17px" }}
                     ></img>
                     <p style={{ margin: "0", marginLeft: "10px" }}>
                       Course Duration
@@ -696,7 +702,7 @@ const Skills = () => {
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <img
                       src={level}
-                      style={{ objectFit: "contain", height: "15px" }}
+                      style={{ objectFit: "contain", height: "17px" }}
                     ></img>
                     <p style={{ margin: "0", marginLeft: "10px" }}>
                       Course Level
@@ -715,13 +721,32 @@ const Skills = () => {
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <img
                       src={language}
-                      style={{ objectFit: "contain", height: "18px" }}
+                      style={{ objectFit: "contain", height: "20px" }}
                     ></img>
                     <p style={{ margin: "0", marginLeft: "8px" }}>Language </p>
                   </div>
                   <p style={{ margin: "0" }}>English</p>
                 </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    margin: "15px 0",
+                    color: "#5C6381",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                      src={medal}
+                      style={{ objectFit: "contain", height: "17px" }}
+                    ></img>
+                    <p style={{ margin: "0", marginLeft: "10px" }}>
+                      Certificate of Completion
+                    </p>
+                  </div>
+                </div>
               </div>
+              
               <button className="enroll">Enroll Now</button>
             </div>
             <button className="close-button" onClick={handleCloseModal}>
