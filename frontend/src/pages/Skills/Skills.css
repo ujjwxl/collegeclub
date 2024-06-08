@@ -35,6 +35,9 @@
   overflow-y: auto;
   padding: 10px;
 }
+.skills-display-box-list::-webkit-scrollbar {
+  display: none;
+}
 
 .skills-left-items {
   font-size: 12px;
@@ -84,8 +87,9 @@
   height: 400px;
   background-color: #4527a0;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #2b2f4c;
   border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(37, 36, 36, 0.9);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 .skills-course-card img {
@@ -176,6 +180,7 @@
   -ms-overflow-style: none;
   padding: 20px;
   margin-right: 50px;
+  max-width: 63%;
 }
 
 .skills-left-modal::-webkit-scrollbar {
@@ -220,13 +225,23 @@
 
 }
 .skills-details h2{
-    color: #040453;
+    /* color: #040453; */
+    /* background: linear-gradient(to right, #1c1cc5, #040453);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+    color: rgb(27, 27, 27);
     margin: 0;
     font-size: 30px;
 }
+ .h2-span {
+  background: linear-gradient(to right, #1c1cc5, #040453);
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+}
+
 .whatlearn{
     display: flex;
-    margin-top: 30px;
+    margin-top: 25px;
     color: #5C6381;
 }
 .whatlearn-left{
@@ -247,11 +262,95 @@
     object-fit: contain;
     height: 20px;
 }
+.skills-content h2{
+  margin: 30px 0;
+}
+.skills-accordions{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.accord-skills{
+  /* margin: 0 10px; */
+  width: 95%;
+}
+.accord-skills-summary{
+  font-weight: bold;
+  font-size: 17px;
+  color: #040453;
+  background-color: #040453;
+}
+
+.expand{
+  margin: 0;
+}
+.skills-accord-details{
+  display: flex;
+  /* margin-left: 10px; */
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.skills-accord-details img{
+  object-fit: contain;
+  height: 18px;
+}
+.skills-accord-details p{
+  margin: 0;
+  margin-left: 10px;
+}
+.skills-accord-details-l{
+  display: flex;
+}
+.skills-description h2{
+  margin: 30px 0;
+}
+.skills-description p{
+  /* margin: 0; */
+  font-size: 16px;
+  color: #49506c;
+}
+.skills-description li{
+  color: #20034f;
+}
+.howtoapply h2{
+  margin: 30px 0;
+}
+.apply-section{
+  display: flex;
+  background-color: #fafafa;
+  border-radius: 20px;
+  padding: 10px;
+  align-items: center;
+}
+.apply-section h3{
+  color: black;
+  margin: 0;
+  margin-top: 5px;
+}
+.apply-section img{
+  object-fit: contain;
+  height: 40px;
+}
+.apply-section p{
+  color: #040453;
+  margin: 0;
+  margin-top: 5px;
+  font-size: 14px;
+}
+.app-submit{
+  margin: 0 10px ;
+}
+.instructor h2{
+  margin: 30px 0;
+
+}
 
 
 .skills-right-modal {
   background-color: rgb(243, 243, 243);
   width: 40%;
+  /* min-width: 30%; */
   border-radius: 5px;
   padding: 10px;
   color: #040453;
@@ -279,6 +378,8 @@
   background-color: rgb(243, 243, 243);
   color: #5e3fd7;
 }
+
+
 @media only screen and (max-width: 768px) {
   .skills-overlay {
     flex-direction: column;

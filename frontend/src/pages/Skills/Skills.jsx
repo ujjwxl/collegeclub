@@ -7,14 +7,26 @@ import Footer from "../../components/Home/Footer";
 import backgroundImage from "../../assets/home-1.jpg";
 import backgroundImageTwo from "../../assets/home-2.jpg";
 import backgroundImageThree from "../../assets/test-dp.jpg";
+import apply from "../../assets/mail.png";
+import review from "../../assets/documents.png";
+import offer from "../../assets/job-offer.png";
+import payment from "../../assets/credit-card.png";
+import arrow from "../../assets/right-arrow.png";
 import duration from "../../assets/clock.png";
 import level from "../../assets/signal.png";
 import language from "../../assets/language.png";
+import play from "../../assets/play.png";
 import defaultImage from "../../assets/test-dp.jpg";
 import BottomBar from "../../components/BottomBar/BottomBar";
 import axios from "axios";
 import StarRating from "./StarRating";
 import tick from "../../assets/check-mark.png";
+import Accordion from "@mui/material/Accordion";
+import AccordionActions from "@mui/material/AccordionActions";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Button from "@mui/material/Button";
 import "./Skills.css";
 
 const Skills = () => {
@@ -241,35 +253,43 @@ const Skills = () => {
         <div className="modal-skills">
           <div className="modal-content-skills">
             <div className="skills-left-modal">
-            <div className="skills-desc">
-              <h1>Python for Beginners - Learn Programming</h1>
-              <p>
-                Become a Full-Stack Web Developer with just ONE course. HTML,
-                CSS, Javascript, Node, React, PostgreSQL, Web3 and DApps
-              </p>
-              <div className="rating-container">
-                <p>4.0</p>
-                <StarRating rating={4} />
-              </div>
-              <p>
-                Created By:<span className="span-skills">Jack Nicholson</span>
-              </p>
+              <div className="skills-desc">
+                <h1>Python for Beginners - Learn Programming</h1>
+                <p>
+                  Become a Full-Stack Web Developer with just ONE course. HTML,
+                  CSS, Javascript, Node, React, PostgreSQL, Web3 and DApps
+                </p>
+                <div className="rating-container">
+                  <p>4.0</p>
+                  <StarRating rating={4} />
+                </div>
+                <p>
+                  Created By:<span className="span-skills">Jack Nicholson</span>
+                </p>
               </div>
               <div className="skills-details">
-                <h2>What you will learn</h2>
+                <h2>What you will <span className="h2-span">learn?</span></h2>
                 <div className="whatlearn">
                   <div className="whatlearn-left">
                     <div className="whatlearn-content">
                       <img src={tick}></img>
-                      <p>Grasp how Javascript works and it's fundamental concepts</p>
+                      <p>
+                        Grasp how Javascript works and it's fundamental concepts
+                      </p>
                     </div>
                     <div className="whatlearn-content">
                       <img src={tick}></img>
-                      <p>Drastically improve your ability to debug problems in Javascript.</p>
+                      <p>
+                        Drastically improve your ability to debug problems in
+                        Javascript.
+                      </p>
                     </div>
                     <div className="whatlearn-content">
                       <img src={tick}></img>
-                      <p>Avoid common pitfalls and mistakes other Javascript coders make</p>
+                      <p>
+                        Avoid common pitfalls and mistakes other Javascript
+                        coders make
+                      </p>
                     </div>
                   </div>
                   <div className="whatlearn-left">
@@ -279,7 +299,10 @@ const Skills = () => {
                     </div>
                     <div className="whatlearn-content">
                       <img src={tick}></img>
-                      <p>Understand the source code of popular Javascript frameworks</p>
+                      <p>
+                        Understand the source code of popular Javascript
+                        frameworks
+                      </p>
                     </div>
                     <div className="whatlearn-content">
                       <img src={tick}></img>
@@ -287,7 +310,314 @@ const Skills = () => {
                     </div>
                   </div>
                 </div>
-                <h2>Course Content</h2>
+                <div className="skills-content">
+                  <h2>Course <span className="h2-span">Content</span></h2>
+                  <div className="skills-accordions">
+                    <Accordion className="accord-skills">
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon className="expand" />}
+                        aria-controls="panel1-content"
+                        id="panel1-header"
+                        className="accord-skills-summary"
+                      >
+                        Working with variables in Python to Manage Data
+                      </AccordionSummary>
+                      <AccordionDetails className="accord-skills">
+                        <div className="skills-accord-details">
+                          <div className="skills-accord-details-l">
+                            <img src={play}></img>
+                            <p>Introduction</p>
+                          </div>
+                          <p>18:30</p>
+                        </div>
+                      </AccordionDetails>
+                      <AccordionDetails className="accord-skills">
+                        <div className="skills-accord-details">
+                          <div className="skills-accord-details-l">
+                            <img src={play}></img>
+                            <p>The Python Input Function</p>
+                          </div>
+                          <p>10:12</p>
+                        </div>
+                      </AccordionDetails>
+                      <AccordionDetails className="accord-skills">
+                        <div className="skills-accord-details">
+                          <div className="skills-accord-details-l">
+                            <img src={play}></img>
+                            <p>Variable Naming</p>
+                          </div>
+                          <p>03:58</p>
+                        </div>
+                      </AccordionDetails>
+                      <AccordionDetails className="accord-skills">
+                        <div className="skills-accord-details">
+                          <div className="skills-accord-details-l">
+                            <img src={play}></img>
+                            <p>Congratulations! Well done!</p>
+                          </div>
+                          <p>0:12</p>
+                        </div>
+                      </AccordionDetails>
+                    </Accordion>
+                    <Accordion className="accord-skills">
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon className="expand" />}
+                        aria-controls="panel2-content"
+                        id="panel2-header"
+                        className="accord-skills-summary"
+                      >
+                        Understanding Data Types and How to Manipulate Strings
+                      </AccordionSummary>
+                      <AccordionDetails className="accord-skills">
+                        <div className="skills-accord-details">
+                          <div className="skills-accord-details-l">
+                            <img src={play}></img>
+                            <p>Type Error, Type Checking and Type Conversion</p>
+                          </div>
+                          <p>07:19</p>
+                        </div>
+                      </AccordionDetails>
+                      <AccordionDetails className="accord-skills">
+                        <div className="skills-accord-details">
+                          <div className="skills-accord-details-l">
+                            <img src={play}></img>
+                            <p>[Interactive Coding Exercise] BMI Calculator</p>
+                          </div>
+                          <p>06:14</p>
+                        </div>
+                      </AccordionDetails>
+                      <AccordionDetails className="accord-skills">
+                        <div className="skills-accord-details">
+                          <div className="skills-accord-details-l">
+                            <img src={play}></img>
+                            <p>Number Manipulation and F Strings in Python</p>
+                          </div>
+                          <p>08:10</p>
+                        </div>
+                      </AccordionDetails>
+                    </Accordion>
+                    <Accordion className="accord-skills">
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon className="expand" />}
+                        aria-controls="panel3-content"
+                        id="panel3-header"
+                        className="accord-skills-summary"
+                      >
+                        Control Flow and Logical Operators
+                      </AccordionSummary>
+                      <AccordionDetails className="accord-skills">
+                        <div className="skills-accord-details">
+                          <div className="skills-accord-details-l">
+                            <img src={play}></img>
+                            <p>
+                              Control Flow with if / else and Conditional
+                              Operators
+                            </p>
+                          </div>
+                          <p>10:24</p>
+                        </div>
+                      </AccordionDetails>
+                      <AccordionDetails className="accord-skills">
+                        <div className="skills-accord-details">
+                          <div className="skills-accord-details-l">
+                            <img src={play}></img>
+                            <p>Nested if statements and elif statements</p>
+                          </div>
+                          <p>06:24</p>
+                        </div>
+                      </AccordionDetails>
+                    </Accordion>
+                    <Accordion className="accord-skills">
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon className="expand" />}
+                        aria-controls="panel2-content"
+                        id="panel2-header"
+                        className="accord-skills-summary"
+                      >
+                        Randomisation and Python Lists
+                      </AccordionSummary>
+                      <AccordionDetails className="accord-skills">
+                        <div className="skills-accord-details">
+                          <div className="skills-accord-details-l">
+                            <img src={play}></img>
+                            <p>Understanding the Offset and Appending Items to Lists</p>
+                          </div>
+                          <p>13:14</p>
+                        </div>
+                      </AccordionDetails>
+                      <AccordionDetails className="accord-skills">
+                        <div className="skills-accord-details">
+                          <div className="skills-accord-details-l">
+                            <img src={play}></img>
+                            <p>[Interactive Coding Exercise] Treasure Map</p>
+                          </div>
+                          <p>06:14</p>
+                        </div>
+                      </AccordionDetails>
+                      <AccordionDetails className="accord-skills">
+                        <div className="skills-accord-details">
+                          <div className="skills-accord-details-l">
+                            <img src={play}></img>
+                            <p>IndexErrors and Working with Nested Lists</p>
+                          </div>
+                          <p>05:25</p>
+                        </div>
+                      </AccordionDetails>
+                    </Accordion>
+                    <Accordion className="accord-skills">
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon className="expand" />}
+                        aria-controls="panel3-content"
+                        id="panel3-header"
+                        className="accord-skills-summary"
+                      >
+                        Python Functions and Karel
+                      </AccordionSummary>
+                      <AccordionDetails className="accord-skills">
+                        <div className="skills-accord-details">
+                          <div className="skills-accord-details-l">
+                            <img src={play}></img>
+                            <p>
+                            for loops and the range() function
+                            </p>
+                          </div>
+                          <p>10:24</p>
+                        </div>
+                      </AccordionDetails>
+                      <AccordionDetails className="accord-skills">
+                        <div className="skills-accord-details">
+                          <div className="skills-accord-details-l">
+                            <img src={play}></img>
+                            <p>Hard Work and Perseverance beats Raw Talent Every Time</p>
+                          </div>
+                          <p>01:08</p>
+                        </div>
+                      </AccordionDetails>
+                    </Accordion>
+                  </div>
+                </div>
+                <div className="skills-description">
+                  <h2>Course <span className="h2-span">Description</span></h2>
+                  <p>
+                    Welcome to the 100 Days of Code - The Complete Python Pro
+                    Bootcamp,<strong> the only course you need</strong> to learn
+                    to code with Python. With over 500,000{" "}
+                    <strong>5 STAR reviews</strong> and a 4.8 average, my
+                    courses are some of the HIGHESTRATED courses in the history
+                    of Udemy!;
+                  </p>
+                  <p>
+                    <strong>
+                      100 days, 1 hour per day, learn to build 1 project per
+                      day, this is how you master Python.
+                    </strong>
+                  </p>
+                  <p>
+                    At 60+ hours, this Python course is without a doubt the{" "}
+                    <strong>most comprehensive </strong>Python course available
+                    anywhere online. Even if you have <strong>zero</strong>{" "}
+                    programming experience, this course will take you from{" "}
+                    <strong>beginner to professional</strong>. Here's why:
+                  </p>
+                  <ul>
+                    <li>
+                      <p>
+                        The course is taught by the{" "}
+                        <strong>lead instructor</strong> at the App Brewery,
+                        London's{" "}
+                        <strong>best in-person programming Bootcamp</strong>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        The course has been updated and you'll be learning the
+                        latest tools and technologies used at large companies
+                        such as Apple, Google and Netflix.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        This course doesn't cut any corners, there are beautiful{" "}
+                        <strong>animated explanation videos</strong> and tens of{" "}
+                        <strong>real-world projects</strong> which you will get
+                        to build. e.g. Tinder auto swiper, Snake game, Blog
+                        Website, LinkedIn Auto Submit Job Application
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        The curriculum was developed over a period of
+                        <strong> 2 years</strong>, with comprehensive student
+                        testing and feedback.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        We've taught over 600,000 students how to code and many
+                        have gone on to <strong>change their lives </strong>by
+                        becoming professional developers or starting their own
+                        tech startup.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        You'll save yourself <strong>over $12,000 </strong>by
+                        enrolling, and still get access to the same teaching
+                        materials and learn from the same instructor and
+                        curriculum as our in-person programming Bootcamp.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        The course is <strong>constantly updated</strong> with
+                        new content, with new projects and modules determined by
+                        students - that's you!
+                      </p>
+                    </li>
+                  </ul>
+                  <p>
+                    We'll take you <strong>step-by-step</strong> through
+                    engaging video tutorials and teach you everything you need
+                    to know to succeed as a Python developer.
+                  </p>
+                  <p>
+                    The course includes over <strong>65 hours</strong> of HD
+                    video tutorials and builds your programming knowledge while
+                    making real-world Python projects.
+                  </p>
+                </div>
+                <div className="howtoapply">
+                  <h2>How to <span className="h2-span">Apply?</span></h2>
+                  <div className="apply-section">
+                    <div className="app-submit">
+                      <img src={apply}></img>
+                      <h3>Complete Application</h3>
+                      <p>Fill out an application giving basic details</p>
+                    </div>
+                    <img src={arrow}></img>
+                    <div className="app-submit">
+                      <img src={review}></img>
+                      <h3>Review + Shortlisting</h3>
+                      <p>On selection, an offer letter will be sent confirming your admission to the program</p>
+                    </div>
+                    <img src={arrow}></img>
+                    <div className="app-submit">
+                      <img src={offer}></img>
+                      <h3>Offer Letter & Reserve Seat</h3>
+                      <p>Reserve your seat by payin the block amount of Rs 5000 to kickstart your journey</p>
+                    </div>
+                    <img src={arrow}></img>
+                    <div className="app-submit">
+                      <img src={payment}></img>
+                      <h3>Payment</h3>
+                      <p>Fill out an application giving basic details</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="instructor">
+                  <h2><span className="h2-span">Instructor</span></h2>
+                  
+                </div>
               </div>
             </div>
             <div className="skills-right-modal">
