@@ -264,11 +264,13 @@ const Skills = () => {
                   <StarRating rating={4} />
                 </div>
                 <p>
-                  Created By:<span className="span-skills">Jack Nicholson</span>
+                  Created By:<span className="span-skills"><a href="#instructor">Jack Nicholson</a></span>
                 </p>
               </div>
               <div className="skills-details">
-                <h2>What you will <span className="h2-span">learn?</span></h2>
+                <h2>
+                  What you will <span className="h2-span">learn?</span>
+                </h2>
                 <div className="whatlearn">
                   <div className="whatlearn-left">
                     <div className="whatlearn-content">
@@ -311,7 +313,9 @@ const Skills = () => {
                   </div>
                 </div>
                 <div className="skills-content">
-                  <h2>Course <span className="h2-span">Content</span></h2>
+                  <h2>
+                    Course <span className="h2-span">Content</span>
+                  </h2>
                   <div className="skills-accordions">
                     <Accordion className="accord-skills">
                       <AccordionSummary
@@ -440,7 +444,10 @@ const Skills = () => {
                         <div className="skills-accord-details">
                           <div className="skills-accord-details-l">
                             <img src={play}></img>
-                            <p>Understanding the Offset and Appending Items to Lists</p>
+                            <p>
+                              Understanding the Offset and Appending Items to
+                              Lists
+                            </p>
                           </div>
                           <p>13:14</p>
                         </div>
@@ -477,9 +484,7 @@ const Skills = () => {
                         <div className="skills-accord-details">
                           <div className="skills-accord-details-l">
                             <img src={play}></img>
-                            <p>
-                            for loops and the range() function
-                            </p>
+                            <p>for loops and the range() function</p>
                           </div>
                           <p>10:24</p>
                         </div>
@@ -488,7 +493,10 @@ const Skills = () => {
                         <div className="skills-accord-details">
                           <div className="skills-accord-details-l">
                             <img src={play}></img>
-                            <p>Hard Work and Perseverance beats Raw Talent Every Time</p>
+                            <p>
+                              Hard Work and Perseverance beats Raw Talent Every
+                              Time
+                            </p>
                           </div>
                           <p>01:08</p>
                         </div>
@@ -497,7 +505,9 @@ const Skills = () => {
                   </div>
                 </div>
                 <div className="skills-description">
-                  <h2>Course <span className="h2-span">Description</span></h2>
+                  <h2>
+                    Course <span className="h2-span">Description</span>
+                  </h2>
                   <p>
                     Welcome to the 100 Days of Code - The Complete Python Pro
                     Bootcamp,<strong> the only course you need</strong> to learn
@@ -587,7 +597,9 @@ const Skills = () => {
                   </p>
                 </div>
                 <div className="howtoapply">
-                  <h2>How to <span className="h2-span">Apply?</span></h2>
+                  <h2>
+                    How to <span className="h2-span">Apply?</span>
+                  </h2>
                   <div className="apply-section">
                     <div className="app-submit">
                       <img src={apply}></img>
@@ -598,13 +610,19 @@ const Skills = () => {
                     <div className="app-submit">
                       <img src={review}></img>
                       <h3>Review + Shortlisting</h3>
-                      <p>On selection, an offer letter will be sent confirming your admission to the program</p>
+                      <p>
+                        On selection, an offer letter will be sent confirming
+                        your admission to the program
+                      </p>
                     </div>
                     <img src={arrow}></img>
                     <div className="app-submit">
                       <img src={offer}></img>
                       <h3>Offer Letter & Reserve Seat</h3>
-                      <p>Reserve your seat by payin the block amount of Rs 5000 to kickstart your journey</p>
+                      <p>
+                        Reserve your seat by payin the block amount of Rs 5000
+                        to kickstart your journey
+                      </p>
                     </div>
                     <img src={arrow}></img>
                     <div className="app-submit">
@@ -614,9 +632,33 @@ const Skills = () => {
                     </div>
                   </div>
                 </div>
-                <div className="instructor">
-                  <h2><span className="h2-span">Instructor</span></h2>
-                  
+                <div className="instructor" id="instructor">
+                  <h2>
+                    <span className="h2-span">Instructor</span>
+                  </h2>
+                  <div className="inst-profile">
+                    <div className="inst-img">
+                      <img src="https://img-c.udemycdn.com/user/200_H/31334738_a13c_3.jpg"></img>
+                      <div className="inst-name">
+                        <h3>Angela Yu</h3>
+                        <p>Developer and Lead Instructor</p>
+                      </div>
+                    </div>
+                    <h3>About Me</h3>
+                    <p>
+                      I'm Angela, I'm a developer with a passion for teaching.
+                      I'm the lead instructor at the London App Brewery,
+                      London's leading Programming Bootcamp. I've helped
+                      hundreds of thousands of students learn to code and change
+                      their lives by becoming a developer. I've been invited by
+                      companies such as Twitter, Facebook and Google to teach
+                      their employees. </p><p>My first foray into programming was when
+                      I was just 12 years old, wanting to build my own Space
+                      Invader game. Since then, I've made hundred of websites,
+                      apps and games. But most importantly, I realised that my
+                      greatest passion is teaching.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
