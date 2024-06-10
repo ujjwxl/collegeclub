@@ -4,6 +4,7 @@
   import Navbar from "../../components/Navbar/Navbar";
   import Navigation from "../../components/Navigation/Navigation";
   import location from "../../assets/location.png";
+  import down from "../../assets/down.png";
   import Footer from "../../components/Home/Footer";
   import backgroundImage from "../../assets/home-1.jpg";
   import defaultImage from "../../assets/test-dp.jpg";
@@ -289,45 +290,6 @@
                 </button>
               </div>
               <div className="filter-modal-content">
-                {/* <div className="filter-modal-content-left">
-                  <div
-                    className="filter-modal-title"
-                    onClick={() => handleFilterClick("Degree")}
-                  >
-                    <p>Degree</p>
-                  </div>
-                  <div
-                    className="filter-modal-title"
-                    onClick={() => handleFilterClick("State")}
-                  >
-                    <p>State</p>
-                  </div>
-                  <div
-                    className="filter-modal-title"
-                    onClick={() => handleFilterClick("Study Mode")}
-                  >
-                    <p>Study Mode</p>
-                  </div>
-                  <div
-                    className="filter-modal-title"
-                    onClick={() => handleFilterClick("Type")}
-                  >
-                    <p>Type</p>
-                  </div>
-                  <div
-                    className="filter-modal-title"
-                    onClick={() => handleFilterClick("Courses")}
-                  >
-                    <p>Courses</p>
-                  </div>
-                </div>
-                <div className="filter-modal-content-right">
-                  {clickedFilter && (
-                    <div className="filter-options">
-                      {renderFilterOptions(clickedFilter)}
-                    </div>
-                  )}
-                </div> */}
                 <div className="accord">
                   {accordionData.map(({ title, content }, index) => (
                     <Accordion
@@ -374,7 +336,8 @@
                   ))}
               {!showAllInstitute && (
                 <a className="showAll" onClick={toggleshowAllInstitute}>
-                  Show More...
+                  Show More
+                  <img src={down}></img>
                 </a>
               )}
 
@@ -409,7 +372,8 @@
               {/* Show 'Show more' button if there are more options */}
               {!showAllDegree && (
                 <a className="showAll" onClick={toggleshowAllDegree}>
-                  Show More...
+                  Show More
+                  <img src={down}></img>
                 </a>
               )}
 
@@ -449,7 +413,8 @@
               {/* Show 'Show more' button if there are more options */}
               {!showAllState && (
                 <a className="showAll" onClick={toggleshowAllState}>
-                  Show More...
+                  Show More
+                  <img src={down}></img>
                 </a>
               )}
             </div>

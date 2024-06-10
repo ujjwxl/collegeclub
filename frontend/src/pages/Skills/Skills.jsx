@@ -12,6 +12,7 @@ import review from "../../assets/documents.png";
 import offer from "../../assets/job-offer.png";
 import payment from "../../assets/credit-card.png";
 import arrow from "../../assets/right-arrow.png";
+import downarrow from "../../assets/down-arrow.png";
 import duration from "../../assets/clock.png";
 import level from "../../assets/signal.png";
 import language from "../../assets/language.png";
@@ -134,9 +135,28 @@ const Skills = () => {
 
   useEffect(() => {
     if (selectedCourse) {
-      document.body.classList.add("modal-open"); // Add a class to body when modal is open
+      document.body.classList.add("modal-open");
     }
   }, [selectedCourse]);
+
+  // const handleClickOutsideModal = (e) => {
+  //   if (
+  //     (isFilterModalOpen && !e.target.closest(".filter-modal") && !e.target.closest(".colleges-filter-btn")) ||
+  //     (selectedCourse && !e.target.closest(".modal-content-skills"))
+  //   ) {
+  //     setIsFilterModalOpen(false);
+  //     setSelectedCourse(null);
+  //     document.body.classList.remove("modal-open");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   document.body.addEventListener("click", handleClickOutsideModal);
+
+  //   return () => {
+  //     document.body.removeEventListener("click", handleClickOutsideModal);
+  //   };
+  // }, [isFilterModalOpen, selectedCourse]);
 
   return (
     <>
@@ -238,7 +258,7 @@ const Skills = () => {
                     <p className="instructor">{course.courseInstructor}</p>
                     <p>{course.price}</p>
                     <button
-                      className="college-button"
+                      className="skills-button"
                       onClick={() => handleViewMore(course)}
                     >
                       View more
@@ -265,9 +285,51 @@ const Skills = () => {
                   <StarRating rating={4} />
                 </div>
                 <p>
-                  Created By:<span className="span-skills"><a href="#instructor">Jack Nicholson</a></span>
+                  Created By:
+                  <span className="span-skills">
+                    <a href="#instructor">Jack Nicholson</a>
+                  </span>
                 </p>
               </div>
+              <div className="skills-price">
+                <img src={backgroundImage} className="skills-modal-img"></img>
+
+                <div className="price">
+                  <h1>₹499</h1>
+                  <h3>₹3499</h3>
+                  <p>50% off</p>
+                </div>
+                <div className="skills-summary">
+                  <div className="skills-summary-left">
+                    <img src={duration}></img>
+                    <p>Course Duration</p>
+                  </div>
+                  <p>4 Hours</p>
+                </div>
+                <div className="skills-summary">
+                  <div className="skills-summary-left">
+                    <img src={level}></img>
+                    <p>Course Level</p>
+                  </div>
+                  <p>Medium</p>
+                </div>
+                <div className="skills-summary">
+                  <div className="skills-summary-left">
+                    <img src={language}></img>
+                    <p>Language </p>
+                  </div>
+                  <p>English</p>
+                </div>
+                <div className="skills-summary">
+                  <div className="skills-summary-left">
+                    <img src={medal}></img>
+                    <p>Certificate of Completion</p>
+                  </div>
+                </div>
+              <button className="enroll">Enroll Now</button>
+
+              </div>
+
               <div className="skills-details">
                 <h2>
                   What you will <span className="h2-span">learn?</span>
@@ -607,7 +669,8 @@ const Skills = () => {
                       <h3>Complete Application</h3>
                       <p>Fill out an application giving basic details</p>
                     </div>
-                    <img src={arrow}></img>
+                    <img className="rightarrow" src={arrow}></img>
+                    <img className="downarrow" src={downarrow}></img>
                     <div className="app-submit">
                       <img src={review}></img>
                       <h3>Review + Shortlisting</h3>
@@ -616,7 +679,8 @@ const Skills = () => {
                         your admission to the program
                       </p>
                     </div>
-                    <img src={arrow}></img>
+                    <img className="rightarrow" src={arrow}></img>
+                    <img className="downarrow" src={downarrow}></img>
                     <div className="app-submit">
                       <img src={offer}></img>
                       <h3>Offer Letter & Reserve Seat</h3>
@@ -625,7 +689,8 @@ const Skills = () => {
                         to kickstart your journey
                       </p>
                     </div>
-                    <img src={arrow}></img>
+                    <img className="rightarrow" src={arrow}></img>
+                    <img className="downarrow" src={downarrow}></img>
                     <div className="app-submit">
                       <img src={payment}></img>
                       <h3>Payment</h3>
@@ -653,11 +718,14 @@ const Skills = () => {
                       hundreds of thousands of students learn to code and change
                       their lives by becoming a developer. I've been invited by
                       companies such as Twitter, Facebook and Google to teach
-                      their employees. </p><p>My first foray into programming was when
-                      I was just 12 years old, wanting to build my own Space
-                      Invader game. Since then, I've made hundred of websites,
-                      apps and games. But most importantly, I realised that my
-                      greatest passion is teaching.
+                      their employees.{" "}
+                    </p>
+                    <p>
+                      My first foray into programming was when I was just 12
+                      years old, wanting to build my own Space Invader game.
+                      Since then, I've made hundred of websites, apps and games.
+                      But most importantly, I realised that my greatest passion
+                      is teaching.
                     </p>
                   </div>
                 </div>
@@ -665,88 +733,42 @@ const Skills = () => {
             </div>
             <div className="skills-right-modal">
               <img src={backgroundImage} className="skills-modal-img"></img>
-              <div style={{ padding: "0px 10px" }}>
-              <div className="price">
-                <h1>₹499</h1>
-                <h3>₹3499</h3>
-                <p>50% off</p>
-              </div>
-                
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    margin: "15px 0",
-                    color: "#5C6381",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <img
-                      src={duration}
-                      style={{ objectFit: "contain", height: "17px" }}
-                    ></img>
-                    <p style={{ margin: "0", marginLeft: "10px" }}>
-                      Course Duration
-                    </p>
-                  </div>
-                  <p style={{ margin: "0" }}>4 Hours</p>
+              <div className="skills-right-modal-desc">
+                <div className="price">
+                  <h1>₹499</h1>
+                  <h3>₹3499</h3>
+                  <p>50% off</p>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    margin: "15px 0",
-                    color: "#5C6381",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <img
-                      src={level}
-                      style={{ objectFit: "contain", height: "17px" }}
-                    ></img>
-                    <p style={{ margin: "0", marginLeft: "10px" }}>
-                      Course Level
-                    </p>
+
+                <div className="skills-summary">
+                  <div className="skills-summary-left">
+                    <img src={duration}></img>
+                    <p>Course Duration</p>
                   </div>
-                  <p style={{ margin: "0" }}>Medium</p>
+                  <p>4 Hours</p>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    margin: "15px 0",
-                    color: "#5C6381",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <img
-                      src={language}
-                      style={{ objectFit: "contain", height: "20px" }}
-                    ></img>
-                    <p style={{ margin: "0", marginLeft: "8px" }}>Language </p>
+                <div className="skills-summary">
+                  <div className="skills-summary-left">
+                    <img src={level}></img>
+                    <p>Course Level</p>
                   </div>
-                  <p style={{ margin: "0" }}>English</p>
+                  <p>Medium</p>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    margin: "15px 0",
-                    color: "#5C6381",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <img
-                      src={medal}
-                      style={{ objectFit: "contain", height: "17px" }}
-                    ></img>
-                    <p style={{ margin: "0", marginLeft: "10px" }}>
-                      Certificate of Completion
-                    </p>
+                <div className="skills-summary">
+                  <div className="skills-summary-left">
+                    <img src={language}></img>
+                    <p>Language </p>
+                  </div>
+                  <p>English</p>
+                </div>
+                <div className="skills-summary">
+                  <div className="skills-summary-left">
+                    <img src={medal}></img>
+                    <p>Certificate of Completion</p>
                   </div>
                 </div>
               </div>
-              
+
               <button className="enroll">Enroll Now</button>
             </div>
             <button className="close-button" onClick={handleCloseModal}>
