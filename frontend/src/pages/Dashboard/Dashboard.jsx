@@ -12,13 +12,15 @@ import JobApplicants from '../../components/Dashboard/JobApplicants';
 import DashboardNavbar from '../../components/Navbar/DashboardNavbar';
 import Profile from '../../components/Dashboard/Profile';
 import DashboardBottomBar from '../../components/BottomBar/DashboardBottomBar';
+import StudentAdmission from '../../components/Dashboard/CourseAdmission';
 
 const Dashboard = () => {
   const [showCreateJob, setShowCreateJob] = useState(false);
   const [showAddJob, setShowAddJob] = useState(false);
   const [showJobApplicants, setShowJobApplicants] = useState(false);
   const [showLeads, setShowLeads] = useState(false);
-  const [showProfile, setShowProfile] =useState(false);
+  const [showProfile, setShowProfile] = useState(false);
+  const [showAdmissionForm, setShowAddmissionForm] = useState(false);
   const [showDashboardBox, setShowDashboardBox] = useState(true);
 
   const handleCreateJob = () => {
@@ -63,8 +65,19 @@ const Dashboard = () => {
     setShowCreateJob(false);
     setShowAddJob(false);
     setShowProfile(false);
+    setShowAddmissionForm(false);
     setShowJobApplicants(false);
   };
+
+  const handleShowAdmissionForm = () => {
+    setShowAddmissionForm(true);
+    setShowCreateJob(false);
+    setShowProfile(false);
+    setShowDashboardBox(false);
+    setShowAddJob(false);
+    setShowJobApplicants(false);
+    setShowLeads(false);
+  }
 
   const handleShowProfileClick =()=>{
     setShowDashboardBox(false);
@@ -72,6 +85,7 @@ const Dashboard = () => {
     setShowCreateJob(false);
     setShowAddJob(false);
     setShowJobApplicants(false);
+    setShowAddmissionForm(false);
     setShowProfile(true);
   }
 
@@ -82,12 +96,13 @@ const Dashboard = () => {
       <img src={backgroundImage} alt="" className='home1-img' />
 
       <div className='dashboard-overlay dashboard-container'>
-        <DashboardMenu onCreateJob={handleCreateJob} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} onProfileClick= {handleShowProfileClick} />
+        <DashboardMenu onCreateJob={handleCreateJob} onShowAdmissionForm={handleShowAdmissionForm} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} onProfileClick= {handleShowProfileClick} />
         {showCreateJob && <CreateJob />}
         {showAddJob && <AddJob />}
         {showJobApplicants && <JobApplicants />}
         {showLeads && <LeadsComponent />}
         {showDashboardBox && <DashboardBox />}
+        {showAdmissionForm && <StudentAdmission/>}
         {showProfile && <Profile />}
       </div>
 

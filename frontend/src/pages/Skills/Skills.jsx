@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import location from "../../assets/location.png";
 import Footer from "../../components/Home/Footer";
@@ -45,6 +45,8 @@ const Skills = () => {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
   const categories = ["Programming", "Soft Skills"];
+
+  const navigate = useNavigate();
 
   const courses = [
     {
@@ -158,15 +160,19 @@ const Skills = () => {
   //   };
   // }, [isFilterModalOpen, selectedCourse]);
 
+  const handleStudentOnboarding = () => {
+    localStorage.setItem('isStudentOnboarding', true);
+    navigate('/register');
+  }
+ 
   return (
     <>
       <Navbar />
       <BottomBar />
       <img src={backgroundImage} alt="" className="home1-img" />
       <div
-        className={`skills-overlay colleges-container ${
-          isFilterModalOpen ? "blur-background" : ""
-        }`}
+        className={`skills-overlay colleges-container ${isFilterModalOpen ? "blur-background" : ""
+          }`}
       >
         <div className="skills-title">
           <h2>Courses</h2>
@@ -194,9 +200,8 @@ const Skills = () => {
             </div>
             <div className="filter-modal-content-courses">
               <div
-                className={`skills-left-items ${
-                  selectedCategory === "" ? "skills-selected-button" : ""
-                }`}
+                className={`skills-left-items ${selectedCategory === "" ? "skills-selected-button" : ""
+                  }`}
                 onClick={() => setSelectedCategory("")}
               >
                 <h3>All</h3>
@@ -204,9 +209,8 @@ const Skills = () => {
 
               {categories.map((course, index) => (
                 <div
-                  className={`skills-left-items ${
-                    selectedCategory === course ? "skills-selected-button" : ""
-                  }`}
+                  className={`skills-left-items ${selectedCategory === course ? "skills-selected-button" : ""
+                    }`}
                   key={index}
                   onClick={() => setSelectedCategory(course)}
                 >
@@ -221,9 +225,8 @@ const Skills = () => {
             <h3>Select a category</h3>
 
             <div
-              className={`skills-left-items ${
-                selectedCategory === "" ? "skills-selected-button" : ""
-              }`}
+              className={`skills-left-items ${selectedCategory === "" ? "skills-selected-button" : ""
+                }`}
               onClick={() => setSelectedCategory("")}
             >
               <h3>All</h3>
@@ -231,9 +234,8 @@ const Skills = () => {
 
             {categories.map((course, index) => (
               <div
-                className={`skills-left-items ${
-                  selectedCategory === course ? "skills-selected-button" : ""
-                }`}
+                className={`skills-left-items ${selectedCategory === course ? "skills-selected-button" : ""
+                  }`}
                 key={index}
                 onClick={() => setSelectedCategory(course)}
               >
@@ -326,7 +328,7 @@ const Skills = () => {
                     <p>Certificate of Completion</p>
                   </div>
                 </div>
-              <button className="enroll">Enroll Now</button>
+                <button className="enroll" onClick={handleStudentOnboarding}>Enroll Now</button>
 
               </div>
 
@@ -769,7 +771,7 @@ const Skills = () => {
                 </div>
               </div>
 
-              <button className="enroll">Enroll Now</button>
+              <button className="enroll" onClick={handleStudentOnboarding}>Enroll Now</button>
             </div>
             <button className="close-button" onClick={handleCloseModal}>
               Close

@@ -87,6 +87,8 @@ const Signup = () => {
     }
   };
 
+  const isStudentOnboarding = localStorage.getItem('isStudentOnboarding');
+
   return (
     <div>
       <Navbar />
@@ -150,15 +152,20 @@ const Signup = () => {
                     <option value="" disabled selected>
                       Select account type
                     </option>
-                    <option value="College">College</option>
-                    <option value="Company">Company</option>
-                    <option value="CC-Ambassador">CC Ambassador</option>
+                    {isStudentOnboarding !== "true" && (
+                      <>
+                        <option value="College">College</option>
+                        <option value="Company">Company</option>
+                        <option value="CC-Ambassador">CC Ambassador</option>
+                      </>
+                    )}
+                    <option value="Student">Student</option>
                   </select>{" "}
                   <br />
                   <input
-                    type="text"
+                    type="text" 
                     name="organization"
-                    placeholder="Enter organization name"
+                    placeholder={isStudentOnboarding !== "true" ? "Enter organization name" : "Enter college or company name"}
                     onChange={(e) => setOrganizationName(e.target.value)}
                   />{" "}
                   <br />

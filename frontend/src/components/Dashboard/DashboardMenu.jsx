@@ -18,6 +18,7 @@ import "./DashboardMenu.css";
 const DashboardMenu = ({
   onCreateJob,
   onAddJob,
+  onShowAdmissionForm,
   onShowApplicants,
   onShowLeads,
   onDashboardClick,
@@ -103,11 +104,21 @@ const DashboardMenu = ({
           alt=""
         />
         <div className="dashboard-menu-top-right">
-          <h2>
+          {userData && userData.accountType === "Student" ? (
+            <h2>{userData && userData.fullName}</h2>
+          ) : (
+            <h2>{userData && userData.organizationName}</h2>
+          )}
+          {/* <h2>
             {userData && userData.organizationName}
             <span>✅</span>
-          </h2>
-          <h3>{userData && userData.fullName}</h3>
+          </h2> */}
+          {userData && userData.accountType === "Student" ? (
+            <h3>{userData && userData.organizationName}</h3>
+          ) : (
+            <h3>{userData && userData.fullName}</h3>
+          )}
+          {/* <h3>{userData && userData.fullName}</h3> */}
           <h4>{userData && userData.email}</h4>
           <h3>{userData && userData.accountType}</h3>
         </div>
@@ -153,6 +164,13 @@ const DashboardMenu = ({
             <div className="dashboard-menu-middle-icon" onClick={onShowApplicants}>
               <img src={leadsIcon} alt="" />
               <p>Applicants</p>
+            </div>
+          </>
+        ) : userData && userData.accountType === "Student" ? (
+          <>
+            <div className="dashboard-menu-middle-icon" onClick={onShowAdmissionForm}>
+              <img src={cmsIcon} alt="" />
+              <p>Apply for a course</p>
             </div>
           </>
         ) : (
