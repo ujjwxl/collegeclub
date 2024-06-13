@@ -162,6 +162,7 @@ const Skills = () => {
 
   const handleStudentOnboarding = () => {
     localStorage.setItem('isStudentOnboarding', true);
+    localStorage.setItem('selectedCourse', JSON.stringify(selectedCourse)); // for displaying course card in the student dashboard after login
     navigate('/register');
   }
  
@@ -272,6 +273,7 @@ const Skills = () => {
           </div>
         </div>
       </div>
+      
       {selectedCourse && (
         <div className="modal-skills">
           <div className="modal-content-skills">
