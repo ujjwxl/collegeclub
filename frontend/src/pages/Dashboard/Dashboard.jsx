@@ -101,7 +101,7 @@ const Dashboard = () => {
         {showAddJob && <AddJob />}
         {showJobApplicants && <JobApplicants />}
         {showLeads && <LeadsComponent />}
-        {showDashboardBox && <DashboardBox />}
+        {showDashboardBox && <DashboardBox onShowAdmissionForm={handleShowAdmissionForm}/>}
         {showAdmissionForm && <StudentAdmission/>}
         {showProfile && <Profile />}
       </div>

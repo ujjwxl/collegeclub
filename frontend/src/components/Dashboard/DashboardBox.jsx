@@ -15,7 +15,7 @@ import play from "../../assets/play.png";
 import axios from 'axios';
 import "./DashboardBox.css";
 
-const DashboardBox = () => {
+const DashboardBox = ({onShowAdmissionForm}) => {
 
   const [userData, setUserData] = useState(null);
 
@@ -178,42 +178,44 @@ const DashboardBox = () => {
               </div>
 
               <div className="howtoapply">
-                  <h2>How to Apply?</h2>
-                  <div className="apply-section">
-                    <div className="app-submit">
-                      <img src={apply}></img>
-                      <h3>Complete Application</h3>
-                      <p>Fill out an application giving basic details</p>
-                    </div>
-                    <img className="rightarrow" src={arrow}></img>
-                    <img className="downarrow" src={downarrow}></img>
-                    <div className="app-submit">
-                      <img src={review}></img>
-                      <h3>Review + Shortlisting</h3>
-                      <p>
-                        On selection, an offer letter will be sent confirming
-                        your admission to the program
-                      </p>
-                    </div>
-                    <img className="rightarrow" src={arrow}></img>
-                    <img className="downarrow" src={downarrow}></img>
-                    <div className="app-submit">
-                      <img src={offer}></img>
-                      <h3>Offer Letter & Reserve Seat</h3>
-                      <p>
-                        Reserve your seat by payin the block amount of Rs 5000
-                        to kickstart your journey
-                      </p>
-                    </div>
-                    <img className="rightarrow" src={arrow}></img>
-                    <img className="downarrow" src={downarrow}></img>
-                    <div className="app-submit">
-                      <img src={payment}></img>
-                      <h3>Payment</h3>
-                      <p>Fill out an application giving basic details</p>
-                    </div>
+                <h2>How to Apply?</h2>
+                <div className="apply-section">
+                  <div className="app-submit">
+                    <img src={apply}></img>
+                    <h3>Complete Application</h3>
+                    <p>Fill out an application giving basic details</p>
+                  </div>
+                  <img className="rightarrow" src={arrow}></img>
+                  <img className="downarrow" src={downarrow}></img>
+                  <div className="app-submit">
+                    <img src={review}></img>
+                    <h3>Review + Shortlisting</h3>
+                    <p>
+                      On selection, an offer letter will be sent confirming
+                      your admission to the program
+                    </p>
+                  </div>
+                  <img className="rightarrow" src={arrow}></img>
+                  <img className="downarrow" src={downarrow}></img>
+                  <div className="app-submit">
+                    <img src={offer}></img>
+                    <h3>Offer Letter & Reserve Seat</h3>
+                    <p>
+                      Reserve your seat by payin the block amount of Rs 5000
+                      to kickstart your journey
+                    </p>
+                  </div>
+                  <img className="rightarrow" src={arrow}></img>
+                  <img className="downarrow" src={downarrow}></img>
+                  <div className="app-submit">
+                    <img src={payment}></img>
+                    <h3>Payment</h3>
+                    <p>Fill out an application giving basic details</p>
                   </div>
                 </div>
+              </div>
+
+              <button className="form-submit-button" style={{marginTop: '20px'}} onClick={onShowAdmissionForm}>Let's get started</button>
             </>
           ) : ( // this is when the user has not selected a course
             <>

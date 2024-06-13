@@ -17,6 +17,7 @@
 
 .form-input-flex-two {
     display: flex;
+    justify-content: space-between;
 }
 
 .form-input-group {
