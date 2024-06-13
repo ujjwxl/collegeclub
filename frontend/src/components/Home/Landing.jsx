@@ -116,7 +116,7 @@ const Landing = () => {
                 <div key={index} className="search-result">
                   <img src={result.profilePicture} alt="Profile" />
                   <div>
-                    <p>User ID: {result.userId}</p>
+                    {/* <p>User ID: {result.userId}</p> */}
                     <p>Organization Name: {result.organizationName}</p>
                     <p>Location: {result.district}</p>
                     <p>Account Type: {result.accountType}</p>

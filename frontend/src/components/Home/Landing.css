@@ -235,6 +235,24 @@ body.modal-open {
     width: 22px;
     top: 13px;
   }
+  .search-results{
+    background-color: #240655;
+    position: relative;
+    top: 70px;
+    padding: 10px;
+  }
+  .modal-content-search{
+    padding-left: 40px;
+  }
+  .modal-content-search input{
+    height: 30px;
+    font-size: 20px;
+    width: 80%;
+  }
+  .close-search{
+    right: 40px;
+    top: 0px;
+  }
 }
 
 
