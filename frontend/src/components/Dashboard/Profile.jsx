@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "sonner";
 import './Profile.css'
 
 const Profile = () => {
@@ -43,32 +44,29 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = localStorage.getItem("id");
+    console.log(userId);
 
     try {
-      // Update user profile
-      await axios.put(`http://localhost:5000/auth/user/${userId}`, {
+      await axios.post(`http://localhost:5000/auth/updateprofile/${userId}`, {
         fullName: editedName,
         contactNumber: editedNumber,
       });
 
-      // Change password
-      await axios.put(`http://localhost:5000/auth/change-password/${userId}`, {
+      await axios.post(`http://localhost:5000/auth/changepassword/${userId}`, {
         newPassword: newPassword
       });
 
-      // Optional: Fetch updated user data after changes
       const response = await axios.get(
         `http://localhost:5000/auth/user/${userId}`
       );
       setUserData(response.data);
-
-      // Clear password field after submission
       setNewPassword("");
 
-      alert("Profile updated successfully!");
+      toast("Profile updated successfully!");
+      window.location.reload();
     } catch (error) {
       console.error("Failed to update profile:", error);
-      alert("Failed to update profile. Please try again later.");
+      toast("Failed to update profile. Please try again later.");
     }
   };
 

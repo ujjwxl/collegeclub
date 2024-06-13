@@ -2,7 +2,9 @@
 import {
   signInWithEmailAndPassword,
   sendEmailVerification,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  getAuth,
+  updatePassword
 } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
@@ -131,6 +133,45 @@ export const getUserDetails = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+export const updateProfileForm = async (req, res) => {
+  const { userId } = req.params;
+  const { fullName, contactNumber } = req.body;
+
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    querySnapshot.forEach(async (doc) => {
+      try {
+        await updateDoc(doc.ref, {
+          fullName: fullName || doc.data().fullName,
+          contactNumber: contactNumber || doc.data().contactNumber,
+        });
+      } catch (updateError) {
+        throw updateError;
+      }
+    });
+
+    res.status(200).json({ message: "Profile updated successfully" });
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res.status(500).json({ message: "Failed to update profile" });
+  }
+}
+
+export const changePassword = async (req, res) => {
+  const { userId } = req.params;
+  const { newPassword } = req.body;
+
+  
+};
+
+
 
 export const getColleges = async (req, res) => {
   try {

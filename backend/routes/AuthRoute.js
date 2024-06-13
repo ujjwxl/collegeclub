@@ -1,11 +1,13 @@
 import express from 'express'
-import { registerUser, loginUser, getUserDetails, getColleges, completeProfileForm, completeDetailsForm, completeCompanyProfileForm, completeCompanyDetailsForm, completeAmbassadorProfileForm, saveFeedback, getCoursesByType, submitJobApplication, completeApplicationForm, createJobListing, getJobsByUserId, getAllJobs, markJobAsListed, markJobAsDelisted, deleteJob, submitCompanyJobApplication, getCompanyJobApplicants, getAllCourses, searchRecords, searchRelevantUsers, getCompanies, createKeywords, searchRelevantUsersNew} from '../controllers/AuthController.js';
+import { registerUser, loginUser, getUserDetails, getColleges, completeProfileForm, completeDetailsForm, completeCompanyProfileForm, completeCompanyDetailsForm, completeAmbassadorProfileForm, saveFeedback, getCoursesByType, submitJobApplication, completeApplicationForm, createJobListing, getJobsByUserId, getAllJobs, markJobAsListed, markJobAsDelisted, deleteJob, submitCompanyJobApplication, getCompanyJobApplicants, getAllCourses, searchRecords, searchRelevantUsers, getCompanies, createKeywords, searchRelevantUsersNew, updateProfileForm, changePassword} from '../controllers/AuthController.js';
 import { resetPassword } from '../controllers/AuthController.js';
 const router = express.Router();
 
 router.post('/register', registerUser)
 router.post('/login', loginUser)
 router.get('/user/:userId', getUserDetails)
+router.post('/updateprofile/:userId', updateProfileForm)
+router.post('/changepassword/:userId', changePassword)
 router.get('/college', getColleges)
 router.get('/company', getCompanies)
 router.post('/profileform/:userId', completeProfileForm)
