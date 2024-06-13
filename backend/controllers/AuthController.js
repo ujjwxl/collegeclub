@@ -1229,3 +1229,54 @@ export const searchRelevantUsers = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+export const completeCourseApplication = async (req, res) => {
+  const { userId } = req.params;
+
+  const {
+    fullName,
+    dateOfBirth,
+    gender,
+    email,
+    phoneNumber,
+    courseId,
+    courseName,
+    organizationName,
+    hasBachelorsDegree,
+    bachelorsDegreeOrganization,
+    isPursuingBachelorsDegree,
+    pursuingBachelorsDegreeOrganization,
+    pursuingBachelorsDegreeEndDate,
+    isWorking,
+    workingOrganization
+  } = req.body;
+
+  try {
+    const docRef = await addDoc(collection(db, "courseapplications"), {
+      fullName,
+      applicantId: userId,
+      dateOfBirth,
+      gender,
+      email,
+      phoneNumber,
+      courseId,
+      courseName,
+      organizationName,
+      hasBachelorsDegree,
+      bachelorsDegreeOrganization,
+      isPursuingBachelorsDegree,
+      pursuingBachelorsDegreeOrganization,
+      pursuingBachelorsDegreeEndDate,
+      isWorking,
+      workingOrganization
+    });
+
+    console.log("Document written with ID: ", docRef.id);
+    res.status(200).json(docRef);
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
+    res.status(500).json({ message: error.message });
+  }
+};

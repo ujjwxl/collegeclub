@@ -152,7 +152,7 @@ const StudentAdmission = () => {
                             <>
                                 <div className="form-input-group">
                                     <label htmlFor="email">Organization Name*</label>
-                                    <input type="email" placeholder='Enter the organization name' onChange={(e) => setBachelorsDegreeOrganization(e.target.value)} value={bachelorsDegreeOrganization} required />
+                                    <input type="text" placeholder='Enter the organization name' onChange={(e) => setBachelorsDegreeOrganization(e.target.value)} value={bachelorsDegreeOrganization} required />
                                 </div>
                             </>
                         )}
@@ -174,7 +174,7 @@ const StudentAdmission = () => {
                             <>
                                 <div className="form-input-group">
                                     <label htmlFor="email">Organization Name*</label>
-                                    <input type="email" placeholder='Enter the organization name' onChange={(e) => setPursuingBachelorsDegreeOrganization(e.target.value)} value={pursuingBachelorsDegreeOrganization} required />
+                                    <input type="text" placeholder='Enter the organization name' onChange={(e) => setPursuingBachelorsDegreeOrganization(e.target.value)} value={pursuingBachelorsDegreeOrganization} required />
                                 </div>
 
                             </>
@@ -204,7 +204,7 @@ const StudentAdmission = () => {
                             <>
                                 <div className="form-input-group">
                                     <label htmlFor="email">Organization Name*</label>
-                                    <input type="email" placeholder='Enter the organization name' onChange={(e) => setWorkingOrganization(e.target.value)} value={workingOrganization} required />
+                                    <input type="text" placeholder='Enter the organization name' onChange={(e) => setWorkingOrganization(e.target.value)} value={workingOrganization} required />
                                 </div>
 
                             </>
