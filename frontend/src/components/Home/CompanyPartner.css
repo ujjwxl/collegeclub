@@ -43,7 +43,7 @@
       margin-left: 10px;
       margin-right: 10px;
     }
-    svg {
+    .circle-rotating-svg {
         position: absolute;
         left: 0;
         scale: 0.8;

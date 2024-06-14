@@ -111,7 +111,7 @@ svg {
     flex-direction: column;
     width: 100%;
   }
-  svg {
+  .circle-rotating-svg {
     position: absolute;
     left: 0;
     scale: 0.8;

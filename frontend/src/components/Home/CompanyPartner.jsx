@@ -44,7 +44,7 @@ const CompanyPartner = () => {
                         </div>
                     </div>
 
-                    <svg width="400" height="400">
+                    <svg width="400" height="400" className='circle-rotating-svg'>
                         {/* Outer circle */}
                         <circle cx="200" cy="200" r="150" fill="none" stroke="black" strokeWidth="2" />
                         {/* Inner circle */}

@@ -15,7 +15,7 @@ const CollegePartner = () => {
             <div className="home-five-overlay">
                 <h2>COLLEGE PARTNER</h2>
                 <div className="circle-logos-container">
-                    <svg width="400" height="400">
+                    <svg width="400" height="400" className='circle-rotating-svg'>
                         {/* Outer circle */}
                         <circle cx="200" cy="200" r="150" fill="none" stroke="black" strokeWidth="2" />
                         {/* Inner circle */}

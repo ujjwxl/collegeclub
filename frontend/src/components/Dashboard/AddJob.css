@@ -42,3 +42,9 @@
 .button-group button {
     margin-right: auto;
 }
+
+.lottie-done-animation {
+    width: 25%;
+    margin-bottom: 50px;
+    margin-left: 25%;
+}
