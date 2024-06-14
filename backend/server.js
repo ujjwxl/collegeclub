@@ -7,7 +7,7 @@ import crypto from 'crypto'
 import multer from 'multer';
 import AuthRoute from './routes/AuthRoute.js'
 import SlotRoute from './routes/SlotRoute.js'
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { addDoc, arrayUnion, collection, doc, updateDoc } from "firebase/firestore";
 import { query, where, getDocs } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { db } from './firebase.js'
@@ -36,6 +36,20 @@ app.post('/checkout', async (req,res) => {
     const options = {
         // amount: Number(req.body.amount * 100)
         amount: 500000,
+        currency: "INR",
+    };
+
+    const order = await instance.orders.create(options);
+    console.log(order);
+    res.status(200).json({
+        success: true, order
+    })
+})
+
+app.post('/coursecheckout', async (req,res) => {
+    
+    const options = {
+        amount: 300000,
         currency: "INR",
     };
 
@@ -78,6 +92,54 @@ app.post("/paymentverification",async(req,res) => {
             paymentStatus: true,
             paymentId: razorpay_payment_id,
             orderId: razorpay_order_id
+        });
+        
+        console.log('Payment status updated successfully');
+    });
+
+     res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`)
+    }
+    else{
+     res.status(400).json({success:false});
+    }
+ })
+
+
+ app.post("/coursepaymentverification",async(req,res) => {
+
+    const userId = req.query.userid;
+    const selectedCourse = req.query.courseid;
+
+    console.log("Selected course : ", selectedCourse);
+
+    const { razorpay_order_id,razorpay_payment_id,razorpay_signature } = req.body;
+    const body = razorpay_order_id + "|" +razorpay_payment_id;
+    const expectedsgnature = crypto.createHmac('sha256',process.env.SECRET).update(body.toString()).digest('hex')
+    const isauth = expectedsgnature === razorpay_signature;
+
+    if(isauth){
+     console.log('Order id')
+     console.log(razorpay_order_id)
+
+     console.log('Payment id')
+     console.log(razorpay_payment_id)
+
+     const usersCollectionRef = collection(db, "users");
+     const q = query(usersCollectionRef, where("userId", "==", userId));
+     const querySnapshot = await getDocs(q);
+
+     querySnapshot.forEach(async (doc) => {
+        const docRef = doc.ref;
+
+        const courseDetails = {
+            paymentStatus: true,
+            paymentId: razorpay_payment_id,
+            orderId: razorpay_order_id,
+            courseId: selectedCourse
+        }
+
+        await updateDoc(docRef, { 
+            purchasedCourses: arrayUnion(courseDetails),
         });
         
         console.log('Payment status updated successfully');

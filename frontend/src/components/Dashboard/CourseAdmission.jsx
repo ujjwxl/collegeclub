@@ -58,8 +58,29 @@ const StudentAdmission = () => {
 
     const userId = localStorage.getItem('id');
 
+    const [userData, setUserData] = useState(null);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+          if (!userId) {
+            return;
+          }
+    
+          try {
+            const response = await axios.get(`http://localhost:5000/auth/user/${userId}`);
+            setUserData(response.data);
+          } catch (error) {
+            console.error("Failed to fetch user data:", error);
+          }
+        };
+    
+        fetchUserData();
+      }, [userId]);
+    
+
     let selectedCourse = localStorage.getItem('selectedCourse');
     selectedCourse = JSON.parse(selectedCourse);
+    console.log(selectedCourse);
 
     const courses = [
         { value: "course1", label: "JavaScript" },
@@ -120,6 +141,37 @@ const StudentAdmission = () => {
             console.log(e);
             toast('Admission could not be created!');
         }
+    };
+
+    const checkoutHandler = async (amount) => {
+        const { data: { key } } = await axios.get("http://localhost:5000/api/getkey")
+        const { data: { order } } = await axios.post("http://localhost:5000/coursecheckout")
+    
+        console.log(window);
+
+        const options = {
+          key,
+          amount: 5000,
+          currency: "INR",
+          name: userData.fullname,
+          description: "Course Fees",
+          image: "https://media.licdn.com/dms/image/D4D0BAQHiy2Ug9laZOA/company-logo_200_200/0/1691938402527?e=2147483647&v=beta&t=Pbz6CO3ccliuj0uAJgDr81gG7IPPn_7lkKTrn7njOds",
+          order_id: order.id,
+          callback_url: `http://localhost:5000/coursepaymentverification?userid=${userId}&courseid=${selectedCourse.id}`,
+          prefill: {
+            name: userData.fullname,
+            email: userData.email,
+            contact: userData.contactNumber
+          },
+          notes: {
+            "address": "razorapy official"
+          },
+          theme: {
+            "color": "#3399cc"
+          }
+        };
+        const razor = new window.Razorpay(options);
+        razor.open();
     };
 
     return (
@@ -272,7 +324,7 @@ const StudentAdmission = () => {
                     <div style={{ textAlign: "center", marginLeft: "auto", marginRight: "auto" }}>
                         <p>Congratulations, you have secured a seat in this course</p>
                         <Lottie loop={false} animationData={Done} className='lottie-done-animation'></Lottie>
-                        <button className='form-submit-button'>Continue to payment</button>
+                        <button className='form-submit-button' onClick={checkoutHandler}>Continue to payment</button>
                     </div>
                 )}
             </div>

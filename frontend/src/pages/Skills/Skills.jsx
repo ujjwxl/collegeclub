@@ -33,14 +33,16 @@ import "./Skills.css";
 
 const Skills = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedCourse, setSelectedCourse] = useState({
-    courseImage: backgroundImageThree,
-    category: "Soft Skills",
-    courseName: "JavaScript",
-    courseInstructor: "Arvind Kumar",
-    price: "Rs 3,099",
-    id: 2,
-  });
+  // const [selectedCourse, setSelectedCourse] = useState({
+  //   courseImage: backgroundImageThree,
+  //   category: "Soft Skills",
+  //   courseName: "JavaScript",
+  //   courseInstructor: "Arvind Kumar",
+  //   price: "Rs 3,099",
+  //   id: 2,
+  // });
+
+  const [selectedCourse, setSelectedCourse] = useState("");
   const [examDetails, setExamDetails] = useState({});
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
