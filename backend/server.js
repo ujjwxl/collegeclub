@@ -109,6 +109,8 @@ app.post("/paymentverification",async(req,res) => {
 
     const userId = req.query.userid;
     const selectedCourse = req.query.courseid;
+    const courseName = req.query.coursename;
+    const instructorName = req.query.instructorname;
 
     console.log("Selected course : ", selectedCourse);
 
@@ -132,10 +134,13 @@ app.post("/paymentverification",async(req,res) => {
         const docRef = doc.ref;
 
         const courseDetails = {
-            paymentStatus: true,
+            paymentStatus: "partial",
             paymentId: razorpay_payment_id,
             orderId: razorpay_order_id,
-            courseId: selectedCourse
+            courseId: selectedCourse,
+            courseName,
+            instructorName,
+            paid: 3000
         }
 
         await updateDoc(docRef, { 

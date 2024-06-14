@@ -54,7 +54,7 @@ const Skills = () => {
     {
       courseImage: backgroundImage,
       category: "Programming",
-      courseName: "JavaScript",
+      courseName: "Web Development",
       courseInstructor: "Arvind Kumar",
       price: "Rs 3,099",
       id: 1,
@@ -70,7 +70,7 @@ const Skills = () => {
     {
       courseImage: backgroundImage,
       category: "Programming",
-      courseName: "JavaScript",
+      courseName: "Python",
       courseInstructor: "Arvind Kumar",
       price: "Rs 3,099",
       id: 3,

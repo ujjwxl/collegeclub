@@ -18,6 +18,7 @@ import "./DashboardMenu.css";
 const DashboardMenu = ({
   onCreateJob,
   onAddJob,
+  onShowMyCourses,
   onShowAdmissionForm,
   onShowApplicants,
   onShowLeads,
@@ -170,7 +171,11 @@ const DashboardMenu = ({
           <>
             <div className="dashboard-menu-middle-icon" onClick={onShowAdmissionForm}>
               <img src={cmsIcon} alt="" />
-              <p>Apply for a course</p>
+              <p>Apply</p>
+            </div>
+            <div className="dashboard-menu-middle-icon" onClick={onShowMyCourses}>
+              <img src={eventsIcon} alt="" />
+              <p>My Courses</p>
             </div>
           </>
         ) : (

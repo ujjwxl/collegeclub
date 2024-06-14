@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import backgroundImage from "../../assets/home-1.jpg";
 import Footer from "../Home/Footer";
@@ -8,6 +8,18 @@ const PaymentSuccess = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const paymentId = searchParams.get("reference");
+
+  const navigate = useNavigate();
+
+  const accountType = localStorage.getItem('type');
+
+  const handleGoToDashboard = () => {
+    if(accountType === "Student") {
+      localStorage.removeItem('selectedCourse');
+    }
+
+    navigate('/dashboard');
+  }
 
   return (
     <>
@@ -28,9 +40,7 @@ const PaymentSuccess = () => {
             <h2 className="payment">Payment Successful</h2>
             <h6>Payment ID: {paymentId}</h6>
           </div>
-          <Link to={"/dashboard"} >
-            <button className="payment-btn">Go to dashboard</button>
-          </Link>
+            <button className="payment-btn" onClick={handleGoToDashboard}>Go to dashboard</button>
         </div>
       </div>
       <Footer />

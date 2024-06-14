@@ -1,5 +1,5 @@
 import express from 'express'
-import { registerUser, loginUser, getUserDetails, getColleges, completeProfileForm, completeDetailsForm, completeCompanyProfileForm, completeCompanyDetailsForm, completeAmbassadorProfileForm, saveFeedback, getCoursesByType, submitJobApplication, completeApplicationForm, createJobListing, getJobsByUserId, getAllJobs, markJobAsListed, markJobAsDelisted, deleteJob, submitCompanyJobApplication, getCompanyJobApplicants, getAllCourses, searchRecords, searchRelevantUsers, getCompanies, createKeywords, searchRelevantUsersNew, updateProfileForm, changePassword, completeCourseApplication} from '../controllers/AuthController.js';
+import { registerUser, loginUser, getUserDetails, getColleges, completeProfileForm, completeDetailsForm, completeCompanyProfileForm, completeCompanyDetailsForm, completeAmbassadorProfileForm, saveFeedback, getCoursesByType, submitJobApplication, completeApplicationForm, createJobListing, getJobsByUserId, getAllJobs, markJobAsListed, markJobAsDelisted, deleteJob, submitCompanyJobApplication, getCompanyJobApplicants, getAllCourses, searchRecords, searchRelevantUsers, getCompanies, createKeywords, searchRelevantUsersNew, updateProfileForm, changePassword, completeCourseApplication, getUserCourses} from '../controllers/AuthController.js';
 import { resetPassword } from '../controllers/AuthController.js';
 const router = express.Router();
 
@@ -32,6 +32,7 @@ router.post('/reset-password', resetPassword);
 router.post('/createkeywords/:userId', createKeywords);
 router.get('/search', searchRelevantUsersNew);
 router.post('/createadmission/:userId', completeCourseApplication);
+router.get('/getcourses/:userId', getUserCourses);
 
 
 // router.post('/login', loginUser)

@@ -157,7 +157,7 @@ const StudentAdmission = () => {
           description: "Course Fees",
           image: "https://media.licdn.com/dms/image/D4D0BAQHiy2Ug9laZOA/company-logo_200_200/0/1691938402527?e=2147483647&v=beta&t=Pbz6CO3ccliuj0uAJgDr81gG7IPPn_7lkKTrn7njOds",
           order_id: order.id,
-          callback_url: `http://localhost:5000/coursepaymentverification?userid=${userId}&courseid=${selectedCourse.id}`,
+          callback_url: `http://localhost:5000/coursepaymentverification?userid=${userId}&courseid=${selectedCourse.id}&coursename=${selectedCourse.courseName}&instructorname=${selectedCourse.courseInstructor}`,
           prefill: {
             name: userData.fullname,
             email: userData.email,
@@ -171,6 +171,7 @@ const StudentAdmission = () => {
           }
         };
         const razor = new window.Razorpay(options);
+
         razor.open();
     };
 

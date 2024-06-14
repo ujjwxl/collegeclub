@@ -1280,3 +1280,29 @@ export const completeCourseApplication = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getUserCourses = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+
+    const purchasedCoursesSnapshot = await getDocs(
+      query(collection(db, "users"), where("userId", "==", userId))
+    );
+
+    const purchasedCourses = [];
+    purchasedCoursesSnapshot.forEach((doc) => {
+      const userData = doc.data();
+      if (userData.purchasedCourses) {
+        userData.purchasedCourses.forEach((course) => {
+          purchasedCourses.push(course);
+        });
+      }
+    });
+
+    res.status(200).json(purchasedCourses);
+  } catch (error) {
+    console.error("Error getting user courses:", error);
+    res.status(500).json({ message: "Error getting user courses" });
+  }
+};
