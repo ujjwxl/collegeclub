@@ -254,6 +254,35 @@ app.post("/upload/banner/:userId", upload.single("filename"), async (req, res) =
     }
 });
 
+app.post("/upload/studentprofilepicture/:userId", upload.single("filename"), async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const dateTime = giveCurrentDateTime();
+
+        const storageRef = ref(storage, `files/${req.file.originalname + "       " + dateTime}`);
+
+        const metadata = {
+            contentType: req.file.mimetype,
+        };
+
+        const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
+
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        console.log('Student profile photo successfully uploaded.');
+
+        return res.send({
+            message: 'PAN card uploaded to Firebase storage',
+            name: req.file.originalname,
+            type: req.file.mimetype,
+            downloadURL: downloadURL
+        })
+    } catch (error) {
+        return res.status(400).send(error.message)
+    }
+});
+
 
 app.post("/upload/authorization/:userId", upload.single("filename"), async (req, res) => {
     const { userId } = req.params;

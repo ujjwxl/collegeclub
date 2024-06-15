@@ -7,7 +7,7 @@ import {
   updatePassword
 } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, deleteDoc, arrayUnion } from "firebase/firestore";
 // import { auth, db } from "../../firebase.js";
 import { auth, db } from "../firebase.js";
 import { doc, getDoc, setDoc } from "firebase/firestore";
@@ -1304,5 +1304,67 @@ export const getUserCourses = async (req, res) => {
   } catch (error) {
     console.error("Error getting user courses:", error);
     res.status(500).json({ message: "Error getting user courses" });
+  }
+};
+
+export const registerStudentDetails = async (req, res) => {
+  const { userId } = req.params;
+  const {
+    fullName,
+    dateOfBirth,
+    gender,
+    email,
+    phoneNumber,
+    bloodGroup,
+    studentPicture,
+    fatherName,
+    motherName,
+    course,
+    rollNo,
+    session,
+    address
+  } = req.body;
+
+  console.log(studentPicture);
+
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    querySnapshot.forEach(async (document) => {
+      const docRef = document.ref;
+
+      const student = {
+        fullName,
+        dateOfBirth,
+        gender,
+        email,
+        phoneNumber,
+        bloodGroup,
+        studentPicture,
+        fatherName,
+        motherName,
+        course,
+        rollNo,
+        session,
+        address
+      };
+
+      await updateDoc(docRef, {
+        students: arrayUnion(student)
+      });
+
+      console.log("Student registered successfully");
+    });
+
+    res.status(200).json({ message: "Student registered successfully" });
+  } catch (error) {
+    console.error("Error updating user profile:", error.message);
+    res.status(500).json({ message: error.message });
   }
 };

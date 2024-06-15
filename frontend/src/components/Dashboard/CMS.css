@@ -13,7 +13,7 @@
   display: flex;
   width: 100%;
   justify-content: space-around;
-  background-color: #2a0761;
+  /* background-color: #2a0761; */
   /* color: black; */
   border-radius: 8px;
   padding: 4px;
@@ -43,4 +43,44 @@
   /* background: linear-gradient(45deg, #f6624c, #d97126); */
   background: linear-gradient(45deg, #64e4e4, #00b8d4);
   border-radius: 8px;
+}
+
+
+.cms-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* background-color: #2A0761; */
+  margin-top: 50px;
+  padding: 10px;
+  height: 250px;
+  border-radius: 20px;
+  font-size: 12px;
+  width: 10%;
+}
+
+.cms-sidebar img {
+  object-fit: contain;
+  height: 25px;
+}
+
+.cms-sidebar-first-option {
+  /* background-color: red; */
+  text-align: center;
+}
+
+.cms-sidebar-second-option {
+  /* background-color: blue; */
+  text-align: center;
+}
+
+.student-cell-section {
+  display: flex;
+  width: 100%;
+}
+
+.cms-form {
+  /* background-color: red; */
+  width: 90%;
+  margin-top: 20px;
 }
