@@ -16,6 +16,7 @@ import StudentAdmission from '../../components/Dashboard/CourseAdmission';
 import MyCourses from '../../components/Dashboard/MyCourses';
 import StudentOpenings from '../../components/Dashboard/StudentOpenings';
 import StudentCertificates from '../../components/Dashboard/StudentCertificates';
+import CMS from '../../components/Dashboard/CMS';
 
 const Dashboard = () => {
   const [showCreateJob, setShowCreateJob] = useState(false);
@@ -27,6 +28,7 @@ const Dashboard = () => {
   const [showStudentOpenings, setShowStudentOpenings] = useState(false);
   const [showStudentCertificates, setShowStudentCertificates] = useState(false);
   const [showMyCourses, setShowMyCourses] = useState(false);
+  const [showCMS, setShowCMS] = useState(false);
   const [showDashboardBox, setShowDashboardBox] = useState(true);
 
   const handleCreateJob = () => {
@@ -63,6 +65,7 @@ const Dashboard = () => {
     setShowProfile(false);
     setShowAddJob(false);
     setShowJobApplicants(false);
+    setShowCMS(false);
   };
 
   const handleDashboardClick = () => {
@@ -128,6 +131,20 @@ const Dashboard = () => {
     setShowStudentCertificates(true);
   }
 
+  const handleShowCMS = () => {
+    setShowDashboardBox(false);
+    setShowLeads(false);
+    setShowCreateJob(false);
+    setShowAddJob(false);
+    setShowJobApplicants(false);
+    setShowAddmissionForm(false);
+    setShowMyCourses(false);
+    setShowProfile(false);
+    setShowStudentCertificates(false);
+    setShowStudentOpenings(false);
+    setShowCMS(true);
+  }
+
   const handleShowProfileClick =()=>{
     setShowDashboardBox(false);
     setShowLeads(false);
@@ -138,6 +155,7 @@ const Dashboard = () => {
     setShowMyCourses(false);
     setShowStudentOpenings(false);
     setShowStudentCertificates(false);
+    setShowCMS(false);
     setShowProfile(true);
   }
 
@@ -148,10 +166,11 @@ const Dashboard = () => {
       <img src={backgroundImage} alt="" className='home1-img' />
 
       <div className='dashboard-overlay dashboard-container'>
-        <DashboardMenu onCreateJob={handleCreateJob} onShowStudentCertificates={handleShowStudentCertificates} onShowStudentOpenings={handleShowStudentOpenings} onShowMyCourses={handleShowMyCourses} onShowAdmissionForm={handleShowAdmissionForm} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} onProfileClick= {handleShowProfileClick} />
+        <DashboardMenu onCreateJob={handleCreateJob} onShowCMS={handleShowCMS} onShowStudentCertificates={handleShowStudentCertificates} onShowStudentOpenings={handleShowStudentOpenings} onShowMyCourses={handleShowMyCourses} onShowAdmissionForm={handleShowAdmissionForm} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} onProfileClick= {handleShowProfileClick} />
         {showCreateJob && <CreateJob />}
         {showAddJob && <AddJob />}
         {showJobApplicants && <JobApplicants />}
+        {showCMS && <CMS/>}
         {showLeads && <LeadsComponent />}
         {showDashboardBox && <DashboardBox onShowAdmissionForm={handleShowAdmissionForm}/>}
         {showAdmissionForm && <StudentAdmission/>}

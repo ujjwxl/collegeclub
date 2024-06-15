@@ -20,6 +20,7 @@ import "./DashboardMenu.css";
 const DashboardMenu = ({
   onCreateJob,
   onAddJob,
+  onShowCMS,
   onShowStudentCertificates,
   onShowStudentOpenings,
   onShowMyCourses,
@@ -136,7 +137,7 @@ const DashboardMenu = ({
           <>
             <div
               className="dashboard-menu-middle-icon"
-              onClick={handleFirstIconClick}
+              onClick={onShowCMS}
             >
               <img src={cmsIcon} alt="" />
               <p>CMS</p>
