@@ -14,6 +14,8 @@ import Profile from '../../components/Dashboard/Profile';
 import DashboardBottomBar from '../../components/BottomBar/DashboardBottomBar';
 import StudentAdmission from '../../components/Dashboard/CourseAdmission';
 import MyCourses from '../../components/Dashboard/MyCourses';
+import StudentOpenings from '../../components/Dashboard/StudentOpenings';
+import StudentCertificates from '../../components/Dashboard/StudentCertificates';
 
 const Dashboard = () => {
   const [showCreateJob, setShowCreateJob] = useState(false);
@@ -22,6 +24,8 @@ const Dashboard = () => {
   const [showLeads, setShowLeads] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showAdmissionForm, setShowAddmissionForm] = useState(false);
+  const [showStudentOpenings, setShowStudentOpenings] = useState(false);
+  const [showStudentCertificates, setShowStudentCertificates] = useState(false);
   const [showMyCourses, setShowMyCourses] = useState(false);
   const [showDashboardBox, setShowDashboardBox] = useState(true);
 
@@ -69,6 +73,8 @@ const Dashboard = () => {
     setShowProfile(false);
     setShowAddmissionForm(false);
     setShowMyCourses(false);
+    setShowStudentOpenings(false);
+    setShowStudentCertificates(false);
     setShowJobApplicants(false);
   };
 
@@ -91,7 +97,35 @@ const Dashboard = () => {
     setShowDashboardBox(false);
     setShowAddJob(false);
     setShowJobApplicants(false);
+    setShowStudentOpenings(false);
+    setShowStudentCertificates(false);
     setShowLeads(false);
+  }
+
+  const handleShowStudentOpenings = () => {
+    setShowDashboardBox(false);
+    setShowLeads(false);
+    setShowCreateJob(false);
+    setShowAddJob(false);
+    setShowJobApplicants(false);
+    setShowAddmissionForm(false);
+    setShowMyCourses(false);
+    setShowProfile(false);
+    setShowStudentCertificates(false);
+    setShowStudentOpenings(true);
+  }
+
+  const handleShowStudentCertificates = () => {
+    setShowDashboardBox(false);
+    setShowLeads(false);
+    setShowCreateJob(false);
+    setShowAddJob(false);
+    setShowJobApplicants(false);
+    setShowAddmissionForm(false);
+    setShowMyCourses(false);
+    setShowProfile(false);
+    setShowStudentOpenings(false);
+    setShowStudentCertificates(true);
   }
 
   const handleShowProfileClick =()=>{
@@ -102,6 +136,8 @@ const Dashboard = () => {
     setShowJobApplicants(false);
     setShowAddmissionForm(false);
     setShowMyCourses(false);
+    setShowStudentOpenings(false);
+    setShowStudentCertificates(false);
     setShowProfile(true);
   }
 
@@ -112,13 +148,15 @@ const Dashboard = () => {
       <img src={backgroundImage} alt="" className='home1-img' />
 
       <div className='dashboard-overlay dashboard-container'>
-        <DashboardMenu onCreateJob={handleCreateJob} onShowMyCourses={handleShowMyCourses} onShowAdmissionForm={handleShowAdmissionForm} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} onProfileClick= {handleShowProfileClick} />
+        <DashboardMenu onCreateJob={handleCreateJob} onShowStudentCertificates={handleShowStudentCertificates} onShowStudentOpenings={handleShowStudentOpenings} onShowMyCourses={handleShowMyCourses} onShowAdmissionForm={handleShowAdmissionForm} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} onProfileClick= {handleShowProfileClick} />
         {showCreateJob && <CreateJob />}
         {showAddJob && <AddJob />}
         {showJobApplicants && <JobApplicants />}
         {showLeads && <LeadsComponent />}
         {showDashboardBox && <DashboardBox onShowAdmissionForm={handleShowAdmissionForm}/>}
         {showAdmissionForm && <StudentAdmission/>}
+        {showStudentCertificates && <StudentCertificates/>}
+        {showStudentOpenings && <StudentOpenings/>}
         {showMyCourses && <MyCourses/>}
         {showProfile && <Profile />}
       </div>

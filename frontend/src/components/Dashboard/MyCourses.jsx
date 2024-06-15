@@ -85,7 +85,7 @@ const MyCourses = () => {
                             </h2>
                         </div>
 
-                        <div className="table-container" style={{width: "95%", marginTop: "50px"}}>
+                        <div className="table-container" style={{ width: "95%", marginTop: "50px" }}>
                             <table className="college-table">
                                 <thead>
                                     <tr>
@@ -99,7 +99,11 @@ const MyCourses = () => {
                                     <tr key={selectedCourse.courseId}>
                                         <td>{selectedCourse.courseName}</td>
                                         <td>₹10,000</td>
-                                        <td>₹{selectedCourse.paid}</td>
+                                        <td>₹{selectedCourse.paid} <br />
+                                            <h5 style={{ margin: "0", marginTop: "10px" }}>
+                                                Paid on
+                                            </h5>
+                                        </td>
                                         <td>₹7,000</td>
                                     </tr>
                                 </tbody>

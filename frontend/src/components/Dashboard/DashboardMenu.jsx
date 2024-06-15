@@ -7,6 +7,8 @@ import eventsIcon from "../../assets/event-icon.png";
 import createJobIcon from "../../assets/add-job.png";
 import leadsIcon from "../../assets/leads-icon.png";
 import cmsIcon from "../../assets/cms-icon.png";
+import certificatesIcon from '../../assets/document.png';
+import jobsIcon from '../../assets/suitcase.png';
 import testIcon from "../../assets/business-icon.png";
 import dashboardIcon from "../../assets/dashboard.png";
 import applicationIcon from "../../assets/edit.png";
@@ -18,6 +20,8 @@ import "./DashboardMenu.css";
 const DashboardMenu = ({
   onCreateJob,
   onAddJob,
+  onShowStudentCertificates,
+  onShowStudentOpenings,
   onShowMyCourses,
   onShowAdmissionForm,
   onShowApplicants,
@@ -169,13 +173,17 @@ const DashboardMenu = ({
           </>
         ) : userData && userData.accountType === "Student" ? (
           <>
-            <div className="dashboard-menu-middle-icon" onClick={onShowAdmissionForm}>
-              <img src={cmsIcon} alt="" />
-              <p>Apply</p>
-            </div>
             <div className="dashboard-menu-middle-icon" onClick={onShowMyCourses}>
               <img src={eventsIcon} alt="" />
               <p>My Courses</p>
+            </div>
+            <div className="dashboard-menu-middle-icon" onClick={onShowStudentCertificates}>
+              <img src={certificatesIcon} alt="" />
+              <p>Certificates</p>
+            </div>
+            <div className="dashboard-menu-middle-icon" onClick={onShowStudentOpenings}>
+              <img src={jobsIcon} alt="" />
+              <p>Openings</p>
             </div>
           </>
         ) : (
