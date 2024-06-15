@@ -1,26 +1,241 @@
 import React, { useState } from "react";
 import "./CreateJob.css";
 import "./CMS.css";
-
 import jobsIcon from "../../assets/suitcase.png";
 import leadsIcon from "../../assets/leads-icon.png";
 
 const StudentOpenings = () => {
   const [activeDiv, setActiveDiv] = useState(null);
+  const [fullName, setFullName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [gender, setGender] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [bloodGroup, setBloodGroup] = useState("");
+  const [uploadPhoto, setUploadPhoto] = useState(null); // Assuming you'll handle file upload
+  const [fatherName, setFatherName] = useState("");
+  const [motherName, setMotherName] = useState("");
+  const [course, setCourse] = useState("");
+  const [rollNo, setRollNo] = useState("");
+  const [session, setsession] = useState("");
+  const [address, setAddress] = useState("");
 
   const handleClick = (event) => {
-    setActiveDiv(event.currentTarget.getAttribute("data-key"));
+    const key = event.currentTarget.getAttribute("data-key");
+    setActiveDiv(key);
   };
 
   const handleFocus = (event) => {
-    setActiveDiv(event.currentTarget.getAttribute("data-key"));
+    const key = event.currentTarget.getAttribute("data-key");
+    setActiveDiv(key);
+  };
+  const genders = [
+    { value: "male", label: "Male" },
+    { value: "female", label: "Female" },
+    { value: "others", label: "Others" },
+  ];
+
+  const renderForm = () => {
+    if (activeDiv === "Student Cell") {
+      return (
+        <form>
+          <div className="form-input-flex-two create-job-input-flex">
+            <div className="form-input-group">
+              <label htmlFor="fullName">Full Name*</label>
+              <input
+                type="text"
+                placeholder="Enter the full name"
+                onChange={(e) => setFullName(e.target.value)}
+                value={fullName}
+                required
+              />
+            </div>
+
+            <div className="form-input-group">
+              <label htmlFor="dateOfBirth">Date of Birth*</label>
+              <input
+                type="date"
+                onChange={(e) => setDateOfBirth(e.target.value)}
+                value={dateOfBirth}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-input-flex-two create-job-input-flex">
+          <div className="form-input-group">
+              <label htmlFor="course">Course*</label>
+              <input
+                type="text"
+                placeholder="Enter course"
+                onChange={(e) => setCourse(e.target.value)}
+                value={course}
+                required
+              />
+            </div>
+
+            <div className="form-input-group form-select apply-form-select">
+              <label htmlFor="gender">Gender*</label>
+              <select
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+                required
+              >
+                <option value="">Select gender*</option>
+                {genders.map((gender) => (
+                  <option key={gender.value} value={gender.value}>
+                    {gender.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="form-input-flex-two create-job-input-flex">
+            <div className="form-input-group">
+              <label htmlFor="email">Email*</label>
+              <input
+                type="email"
+                placeholder="Enter the email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
+              />
+            </div>
+
+            <div className="form-input-group">
+              <label htmlFor="phoneNumber">Phone Number*</label>
+              <input
+                type="text"
+                placeholder="Enter the phone number"
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                value={phoneNumber}
+                required
+              />
+            </div>
+          </div>
+          <div className="form-input-flex-two create-job-input-flex">
+            <div className="form-input-group">
+              <label htmlFor="bloodGroup">Blood Group*</label>
+              <input
+                type="text"
+                placeholder="Enter blood group"
+                onChange={(e) => setBloodGroup(e.target.value)}
+                value={bloodGroup}
+                required
+              />
+            </div>
+
+            <div className="form-input-group">
+              <label htmlFor="uploadPhoto">Upload Photo*</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setUploadPhoto(e.target.files[0])}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-input-flex-two create-job-input-flex">
+            <div className="form-input-group">
+              <label htmlFor="fatherName">Father's Name*</label>
+              <input
+                type="text"
+                placeholder="Enter father's name"
+                onChange={(e) => setFatherName(e.target.value)}
+                value={fatherName}
+                required
+              />
+            </div>
+
+            <div className="form-input-group">
+              <label htmlFor="motherName">Mother's Name*</label>
+              <input
+                type="text"
+                placeholder="Enter mother's name"
+                onChange={(e) => setMotherName(e.target.value)}
+                value={motherName}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-input-flex-two create-job-input-flex">
+            
+
+            <div className="form-input-group">
+              <label htmlFor="rollNo">Roll No.*</label>
+              <input
+                type="text"
+                placeholder="Enter roll number"
+                onChange={(e) => setRollNo(e.target.value)}
+                value={rollNo}
+                required
+              />
+            </div>
+            <div className="form-input-group">
+              <label htmlFor="session">Session*</label>
+              <input
+                type="text"
+                placeholder="Enter session"
+                onChange={(e) => setSession(e.target.value)}
+                value={session}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="form-input-flex-two create-job-input-flex">
+            {/* <div className="form-input-group">
+              <label htmlFor="session">Session*</label>
+              <input
+                type="text"
+                placeholder="Enter session"
+                onChange={(e) => setSession(e.target.value)}
+                value={session}
+                required
+              />
+            </div> */}
+
+            <div className="form-input-group">
+              <label htmlFor="address">Address*</label>
+              <input
+                type="text"
+                placeholder="Enter address"
+                onChange={(e) => setAddress(e.target.value)}
+                value={address}
+                required
+              />
+            </div>
+          </div>
+
+          <button className="form-submit-button">Continue</button>
+        </form>
+      );
+    } else if (activeDiv === "T&P Cell") {
+      return (
+        <form>
+          <div className="form-input-group">
+            <label htmlFor="jobTitle">Job Title*</label>
+            <input
+              type="text"
+              placeholder="Enter the job title"
+              required
+            />
+          </div>
+          <button className="form-submit-button">Continue</button>
+        </form>
+      );
+    }
+    return null;
   };
 
   return (
     <div className="dashboard-box create-job-box">
       <div className="dashboard-box-container create-job-container">
         <input className="cms-search" placeholder="Search"></input>
-      <h2>CMS</h2>
+        <h2>CMS</h2>
         <div className="cms-box">
           <div
             className={activeDiv === "Student Cell" ? "active" : ""}
@@ -57,6 +272,7 @@ const StudentOpenings = () => {
             </h2>
           </div>
         </div>
+        {renderForm()}
       </div>
     </div>
   );
