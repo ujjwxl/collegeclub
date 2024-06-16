@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 import "./CreateJob.css";
 import "./CMS.css";
@@ -21,12 +21,21 @@ const StudentOpenings = () => {
     const [rollNo, setRollNo] = useState("");
     const [session, setSession] = useState("");
     const [address, setAddress] = useState("");
+    const [students, setStudents] = useState([]);
+    const [sidebarOption, setSidebarOption] = useState("");
 
     const userId = localStorage.getItem('id');
 
     const handleClick = (event) => {
         const key = event.currentTarget.getAttribute("data-key");
         setActiveDiv(key);
+    };
+
+    const handleSidebarOptionClick = (option) => {
+        setSidebarOption(option);
+        if (option === "second-option") {
+            fetchAllStudents();
+        }
     };
 
     const handleFocus = (event) => {
@@ -38,6 +47,19 @@ const StudentOpenings = () => {
         { value: "female", label: "Female" },
         { value: "others", label: "Others" },
     ];
+
+    useEffect(() => {
+        fetchAllStudents();
+    }, []);
+
+    const fetchAllStudents = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/auth/getallstudents/${userId}`);
+            setStudents(response.data);
+        } catch (error) {
+            console.log('Error fetching students:', error);
+        }
+    };
 
     const handleFileUpload = (file, endpoint) => {
 
@@ -79,6 +101,7 @@ const StudentOpenings = () => {
                 .then(response => {
                     if (response.status == 200) {
                         toast('Student registered successfully!');
+                        fetchAllStudents();
                     }
                 })
                 .catch(error => {
@@ -91,6 +114,21 @@ const StudentOpenings = () => {
 
     const renderForm = () => {
         if (activeDiv === "Student Cell") {
+            if (sidebarOption === "second-option") {
+                return (
+                    <div>
+                        <h2>List of Registered Students</h2>
+                        <ul>
+                            {students.map((student, index) => (
+                                <li key={index}>
+                                    {student.fullName} - {student.email}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                );
+            } 
+            else {
             return (
                 <form>
                     <div className="form-input-flex-two create-job-input-flex">
@@ -267,6 +305,7 @@ const StudentOpenings = () => {
                     <button className="form-submit-button" onClick={handleSubmit}>Continue</button>
                 </form>
             );
+        }
         } else if (activeDiv === "T&P Cell") {
             return (
                 <form>
@@ -332,12 +371,12 @@ const StudentOpenings = () => {
                 {activeDiv === "Student Cell" && (
                     <div className="student-cell-section">
                         <div className="cms-sidebar">
-                            <div className="cms-sidebar-first-option">
+                            <div className="cms-sidebar-first-option" onClick={() => handleSidebarOptionClick("first-option")}>
                                 <img src={leadsIcon} alt="" />
                                 <h3>Register <br /> Student</h3>
                             </div>
 
-                            <div className="cms-sidebar-second-option">
+                            <div className="cms-sidebar-second-option" onClick={() => handleSidebarOptionClick("second-option")}>
                                 <img src={jobsIcon} alt="" />
                                 <h3>View all <br /> Students</h3>
                             </div>
@@ -349,6 +388,10 @@ const StudentOpenings = () => {
 
                     </div>
 
+                )}
+
+                {activeDiv=== "T&P Cell" && (
+                    <div>{renderForm()}</div>
                 )}
                 <div className="college-cms-bottom-navigation">
 

@@ -1368,3 +1368,33 @@ export const registerStudentDetails = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getAllStudents = async (req, res) => {
+  const { userId } = req.params;
+  console.log("YAHOO");
+
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+    
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    let students = [];
+
+    querySnapshot.forEach((document) => {
+      const userData = document.data();
+      if (userData.students && userData.students.length > 0) {
+        students = [...students, ...userData.students];
+      }
+    });
+
+    res.status(200).json(students);
+  } catch (error) {
+    console.error("Error fetching students:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
