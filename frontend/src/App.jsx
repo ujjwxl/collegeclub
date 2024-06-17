@@ -31,6 +31,7 @@ import Company from './pages/Company/Company';
 import PrivateRoutes from './utils/PrivateRoutes';
 import FormRoutes from './utils/FormRoutes';
 import CompanyDetails from './pages/CompanyDetails/CompanyDetails';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
 
@@ -38,7 +39,9 @@ function App() {
   return (
     <>
       <Toaster />
+      
       <Router>
+      <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/register" element={<Signup />}></Route>
