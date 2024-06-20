@@ -4,15 +4,20 @@ import {
   sendEmailVerification,
   sendPasswordResetEmail,
   getAuth,
-  updatePassword
+  updatePassword,
 } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc, updateDoc, deleteDoc, arrayUnion } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  arrayUnion,
+} from "firebase/firestore";
 // import { auth, db } from "../../firebase.js";
 import { auth, db } from "../firebase.js";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { query, where, getDocs } from "firebase/firestore";
-
 
 export const resetPassword = async (req, res) => {
   const { email } = req.body;
@@ -162,16 +167,12 @@ export const updateProfileForm = async (req, res) => {
     console.error("Error updating profile:", error);
     res.status(500).json({ message: "Failed to update profile" });
   }
-}
+};
 
 export const changePassword = async (req, res) => {
   const { userId } = req.params;
   const { newPassword } = req.body;
-
-  
 };
-
-
 
 export const getColleges = async (req, res) => {
   try {
@@ -245,7 +246,13 @@ export const completeProfileForm = async (req, res) => {
   district = district.toLowerCase();
 
   const universityNameWords = universityFullName.toLowerCase().split(/\s+/);
-  const searchKeywords = [...universityNameWords, universityShortName.toLowerCase(), country.toLowerCase(), state.toLowerCase(), district.toLowerCase()];
+  const searchKeywords = [
+    ...universityNameWords,
+    universityShortName.toLowerCase(),
+    country.toLowerCase(),
+    state.toLowerCase(),
+    district.toLowerCase(),
+  ];
 
   try {
     const usersCollectionRef = collection(db, "users");
@@ -279,16 +286,19 @@ export const completeProfileForm = async (req, res) => {
         profileFormFilled: true,
       });
 
-      const promises = searchKeywords.map(async keyword => {
+      const promises = searchKeywords.map(async (keyword) => {
         const keywordCollectionRef = doc(db, "keywords", keyword);
         const keywordDocumentRef = await getDoc(keywordCollectionRef);
-        const keywordDocumentSnapshot = keywordDocumentRef.exists() ? keywordDocumentRef.data() : {};
-    
-        keywordDocumentSnapshot.relevantUsers = keywordDocumentSnapshot.relevantUsers || [];
+        const keywordDocumentSnapshot = keywordDocumentRef.exists()
+          ? keywordDocumentRef.data()
+          : {};
+
+        keywordDocumentSnapshot.relevantUsers =
+          keywordDocumentSnapshot.relevantUsers || [];
         if (!keywordDocumentSnapshot.relevantUsers.includes(userId)) {
-            keywordDocumentSnapshot.relevantUsers.push(userId);
+          keywordDocumentSnapshot.relevantUsers.push(userId);
         }
-    
+
         await setDoc(keywordCollectionRef, keywordDocumentSnapshot);
       });
 
@@ -303,7 +313,6 @@ export const completeProfileForm = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 
 export const completeCompanyProfileForm = async (req, res) => {
   const { userId } = req.params;
@@ -324,13 +333,18 @@ export const completeCompanyProfileForm = async (req, res) => {
     referralCode,
   } = req.body;
 
-    companyName = companyName.toLowerCase();
-    country = country.toLowerCase();
-    state = state.toLowerCase();
-    district = district.toLowerCase();
+  companyName = companyName.toLowerCase();
+  country = country.toLowerCase();
+  state = state.toLowerCase();
+  district = district.toLowerCase();
 
-    const companyNameWords = companyName.toLowerCase().split(/\s+/);
-    const searchKeywords = [...companyNameWords, country.toLowerCase(), state.toLowerCase(), district.toLowerCase()];
+  const companyNameWords = companyName.toLowerCase().split(/\s+/);
+  const searchKeywords = [
+    ...companyNameWords,
+    country.toLowerCase(),
+    state.toLowerCase(),
+    district.toLowerCase(),
+  ];
 
   try {
     const usersCollectionRef = collection(db, "users");
@@ -362,16 +376,19 @@ export const completeCompanyProfileForm = async (req, res) => {
         profileFormFilled: true,
       });
 
-      const promises = searchKeywords.map(async keyword => {
+      const promises = searchKeywords.map(async (keyword) => {
         const keywordCollectionRef = doc(db, "keywords", keyword);
         const keywordDocumentRef = await getDoc(keywordCollectionRef);
-        const keywordDocumentSnapshot = keywordDocumentRef.exists() ? keywordDocumentRef.data() : {};
-    
-        keywordDocumentSnapshot.relevantUsers = keywordDocumentSnapshot.relevantUsers || [];
+        const keywordDocumentSnapshot = keywordDocumentRef.exists()
+          ? keywordDocumentRef.data()
+          : {};
+
+        keywordDocumentSnapshot.relevantUsers =
+          keywordDocumentSnapshot.relevantUsers || [];
         if (!keywordDocumentSnapshot.relevantUsers.includes(userId)) {
-            keywordDocumentSnapshot.relevantUsers.push(userId);
+          keywordDocumentSnapshot.relevantUsers.push(userId);
         }
-    
+
         await setDoc(keywordCollectionRef, keywordDocumentSnapshot);
       });
 
@@ -470,8 +487,12 @@ export const completeDetailsForm = async (req, res) => {
   } = req.body;
 
   // Lowercase and split multiple word strings
-  const selectedCoursesWords = selectedCourses.map(course => course.toLowerCase().split(/\s+/)).flat();
-  const coursesWords = courses.map(course => course.courseName.toLowerCase().split(/\s+/)).flat();
+  const selectedCoursesWords = selectedCourses
+    .map((course) => course.toLowerCase().split(/\s+/))
+    .flat();
+  const coursesWords = courses
+    .map((course) => course.courseName.toLowerCase().split(/\s+/))
+    .flat();
   const selectedInstituteTypeLower = selectedInstituteType.toLowerCase();
 
   try {
@@ -503,18 +524,25 @@ export const completeDetailsForm = async (req, res) => {
         detailsFormFilled: true,
       });
 
-      const searchKeywords = [...selectedCoursesWords, ...coursesWords, selectedInstituteTypeLower];
-      
-      const promises = searchKeywords.map(async keyword => {
+      const searchKeywords = [
+        ...selectedCoursesWords,
+        ...coursesWords,
+        selectedInstituteTypeLower,
+      ];
+
+      const promises = searchKeywords.map(async (keyword) => {
         const keywordCollectionRef = doc(db, "keywords", keyword);
         const keywordDocumentRef = await getDoc(keywordCollectionRef);
-        const keywordDocumentSnapshot = keywordDocumentRef.exists() ? keywordDocumentRef.data() : {};
-    
-        keywordDocumentSnapshot.relevantUsers = keywordDocumentSnapshot.relevantUsers || [];
+        const keywordDocumentSnapshot = keywordDocumentRef.exists()
+          ? keywordDocumentRef.data()
+          : {};
+
+        keywordDocumentSnapshot.relevantUsers =
+          keywordDocumentSnapshot.relevantUsers || [];
         if (!keywordDocumentSnapshot.relevantUsers.includes(userId)) {
-            keywordDocumentSnapshot.relevantUsers.push(userId);
+          keywordDocumentSnapshot.relevantUsers.push(userId);
         }
-    
+
         await setDoc(keywordCollectionRef, keywordDocumentSnapshot);
       });
 
@@ -529,7 +557,6 @@ export const completeDetailsForm = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 
 export const completeCompanyDetailsForm = async (req, res) => {
   const { userId } = req.params;
@@ -954,14 +981,17 @@ export const getCompanyJobApplicants = async (req, res) => {
 
   try {
     const companyApplicationsSnapshot = await getDocs(
-      query(collection(db, "companyapplications"), where("companyId", "==", userId))
+      query(
+        collection(db, "companyapplications"),
+        where("companyId", "==", userId)
+      )
     );
 
     const jobApplicants = [];
     companyApplicationsSnapshot.forEach((doc) => {
       jobApplicants.push({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
       });
     });
 
@@ -986,12 +1016,15 @@ export const searchRecords = async (req, res) => {
         userId: userData.userId,
         organizationName: userData.organizationName,
         profilePicture: userData.profilePicture,
-        accountType: userData.accountType
+        accountType: userData.accountType,
       };
 
       const fields = Object.values(userData);
       const match = fields.some((field) => {
-        if (typeof field === 'string' && field.toLowerCase().includes(query.toLowerCase())) {
+        if (
+          typeof field === "string" &&
+          field.toLowerCase().includes(query.toLowerCase())
+        ) {
           return true;
         }
         return false;
@@ -1016,7 +1049,7 @@ export const searchRelevantUsersFake = async (req, res) => {
   const queryWords = [...givenQueryWords];
 
   try {
-    const promises = queryWords.map(async keyword => {
+    const promises = queryWords.map(async (keyword) => {
       const keywordCollectionRef = doc(db, "keywords", keyword);
       const keywordDocument = await getDoc(keywordCollectionRef);
 
@@ -1028,22 +1061,24 @@ export const searchRelevantUsersFake = async (req, res) => {
     });
 
     const results = await Promise.all(promises);
-  
-    let relevantUserIds = results.length ? results.reduce((acc, val) => acc.filter(id => val.includes(id))) : [];
+
+    let relevantUserIds = results.length
+      ? results.reduce((acc, val) => acc.filter((id) => val.includes(id)))
+      : [];
 
     // console.log(relevantUserIds);
 
-    const userDataPromises = relevantUserIds.map(async userId => {
+    const userDataPromises = relevantUserIds.map(async (userId) => {
       const q = query(collection(db, "users"), where("userId", "==", userId));
       const querySnapshot = await getDocs(q);
-      const userData = querySnapshot.docs.map(doc => {
+      const userData = querySnapshot.docs.map((doc) => {
         const userData = doc.data();
         return {
           userId: userData.userId,
           organizationName: userData.organizationName,
           profilePicture: userData.profilePicture,
           accountType: userData.accountType,
-          district: userData.district
+          district: userData.district,
         };
       });
       return userData.length > 0 ? userData[0] : null;
@@ -1051,15 +1086,17 @@ export const searchRelevantUsersFake = async (req, res) => {
 
     const userDataResults = await Promise.all(userDataPromises);
 
-    const relevantUserData = userDataResults.filter(userData => userData !== null);
+    const relevantUserData = userDataResults.filter(
+      (userData) => userData !== null
+    );
 
     // console.log(relevantUserData);
     res.status(200).json({ relevantUserData });
-  } catch(error) {
+  } catch (error) {
     console.log(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: "Internal Server Error" });
   }
-}
+};
 
 export const createKeywords = async (req, res) => {
   const { userId } = req.params;
@@ -1074,53 +1111,72 @@ export const createKeywords = async (req, res) => {
     courses, // may not be there
     instituteType, // may not be there
     profilePicture, // will be there
-    accountType // will be there
+    accountType, // will be there
   } = req.body;
 
   const organizationNameWords = organizationName.toLowerCase().split(/\s+/);
   // let searchKeywords = [...organizationNameWords, organizationName.toLowerCase(), country.toLowerCase(), state.toLowerCase(), district.toLowerCase()];
-  let searchKeywords = [...organizationNameWords, country.toLowerCase(), state.toLowerCase(), district.toLowerCase()];
+  let searchKeywords = [
+    ...organizationNameWords,
+    country.toLowerCase(),
+    state.toLowerCase(),
+    district.toLowerCase(),
+  ];
 
-  if(shortName != null){
+  if (shortName != null) {
     const shortNameLower = shortName.toLowerCase();
     searchKeywords.push(shortNameLower);
   }
 
-  if(selectedCourses != null){
+  if (selectedCourses != null) {
     const selectedCoursesWords = selectedCourses.toLowerCase().split(/[,\s]+/);
     searchKeywords = [...searchKeywords, ...selectedCoursesWords];
   }
 
-  if(courses != null){
+  if (courses != null) {
     const coursesWords = courses.toLowerCase().split(/[,\s]+/);
     searchKeywords = [...searchKeywords, ...coursesWords];
   }
 
-  if(instituteType != null) {
+  if (instituteType != null) {
     const instituteTypeLower = instituteType.toLowerCase();
     searchKeywords.push(instituteTypeLower);
   }
 
-  const promises = searchKeywords.map(async keyword => {
+  const promises = searchKeywords.map(async (keyword) => {
     const keywordCollectionRef = doc(db, "keywordstest", keyword);
     const keywordDocumentRef = await getDoc(keywordCollectionRef);
-    const keywordDocumentSnapshot = keywordDocumentRef.exists() ? keywordDocumentRef.data() : {};
+    const keywordDocumentSnapshot = keywordDocumentRef.exists()
+      ? keywordDocumentRef.data()
+      : {};
 
-    keywordDocumentSnapshot.relevantUsers = keywordDocumentSnapshot.relevantUsers || [];
+    keywordDocumentSnapshot.relevantUsers =
+      keywordDocumentSnapshot.relevantUsers || [];
     // if (!keywordDocumentSnapshot.relevantUsers.includes(userId)) {
     //     keywordDocumentSnapshot.relevantUsers.push(userId);
     // }
 
-    const keywordString = userId + ';' + organizationName + ';' + district + ';' + state + ';' + profilePicture  + ';' + accountType;
-    if(!keywordDocumentSnapshot.relevantUsers.includes(keywordString)) {
+    const keywordString =
+      userId +
+      ";" +
+      organizationName +
+      ";" +
+      district +
+      ";" +
+      state +
+      ";" +
+      profilePicture +
+      ";" +
+      accountType;
+    if (!keywordDocumentSnapshot.relevantUsers.includes(keywordString)) {
       keywordDocumentSnapshot.relevantUsers.push(keywordString);
     }
-    
+
     await setDoc(keywordCollectionRef, keywordDocumentSnapshot);
   });
 
   await Promise.all(promises);
-}
+};
 
 export const searchRelevantUsersNew = async (req, res) => {
   const queryString = req.query.query;
@@ -1129,16 +1185,22 @@ export const searchRelevantUsersNew = async (req, res) => {
   try {
     const promises = queryWords.map(async (keyword) => {
       const startAt = doc(db, "keywordstest", keyword);
-      const endAt = doc(db, "keywordstest", keyword + '\uffff');
+      const endAt = doc(db, "keywordstest", keyword + "\uffff");
 
-      const q = query(collection(db, "keywordstest"), where('__name__', '>=', startAt), where('__name__', '<', endAt));
+      const q = query(
+        collection(db, "keywordstest"),
+        where("__name__", ">=", startAt),
+        where("__name__", "<", endAt)
+      );
       const querySnapshot = await getDocs(q);
 
-      const relevantUsers = querySnapshot.docs.flatMap(doc => doc.data().relevantUsers || []);
+      const relevantUsers = querySnapshot.docs.flatMap(
+        (doc) => doc.data().relevantUsers || []
+      );
       return relevantUsers;
     });
 
-    const allRelevantUsers = (await Promise.all(promises));
+    const allRelevantUsers = await Promise.all(promises);
     // console.log(allRelevantUsers);
 
     const arrayOfArrays = Array.from(allRelevantUsers);
@@ -1148,28 +1210,35 @@ export const searchRelevantUsersNew = async (req, res) => {
       if (acc.length === 0) {
         return currentArray;
       } else {
-        return acc.filter(element => currentArray.includes(element));
+        return acc.filter((element) => currentArray.includes(element));
       }
     }, []);
 
     console.log(relevantUserIds);
 
-    const relevantUsers = relevantUserIds.map(userString => {
-      const [userId, organizationName, district, state, profilePicture, accountType] = userString.split(';');
+    const relevantUsers = relevantUserIds.map((userString) => {
+      const [
+        userId,
+        organizationName,
+        district,
+        state,
+        profilePicture,
+        accountType,
+      ] = userString.split(";");
       return {
         userId,
         organizationName,
         district,
         state,
         profilePicture,
-        accountType
+        accountType,
       };
     });
 
     res.status(200).json(relevantUsers);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -1180,16 +1249,22 @@ export const searchRelevantUsers = async (req, res) => {
   try {
     const promises = queryWords.map(async (keyword) => {
       const startAt = doc(db, "keywords", keyword);
-      const endAt = doc(db, "keywords", keyword + '\uffff');
+      const endAt = doc(db, "keywords", keyword + "\uffff");
 
-      const q = query(collection(db, "keywords"), where('__name__', '>=', startAt), where('__name__', '<', endAt));
+      const q = query(
+        collection(db, "keywords"),
+        where("__name__", ">=", startAt),
+        where("__name__", "<", endAt)
+      );
       const querySnapshot = await getDocs(q);
 
-      const relevantUsers = querySnapshot.docs.flatMap(doc => doc.data().relevantUsers || []);
+      const relevantUsers = querySnapshot.docs.flatMap(
+        (doc) => doc.data().relevantUsers || []
+      );
       return relevantUsers;
     });
 
-    const allRelevantUsers = (await Promise.all(promises));
+    const allRelevantUsers = await Promise.all(promises);
 
     const arrayOfArrays = Array.from(allRelevantUsers);
 
@@ -1197,23 +1272,23 @@ export const searchRelevantUsers = async (req, res) => {
       if (acc.length === 0) {
         return currentArray;
       } else {
-        return acc.filter(element => currentArray.includes(element));
+        return acc.filter((element) => currentArray.includes(element));
       }
     }, []);
 
     // console.log(relevantUserIds);
 
-    const userDataPromises = relevantUserIds.map(async userId => {
+    const userDataPromises = relevantUserIds.map(async (userId) => {
       const q = query(collection(db, "users"), where("userId", "==", userId));
       const querySnapshot = await getDocs(q);
-      const userData = querySnapshot.docs.map(doc => {
+      const userData = querySnapshot.docs.map((doc) => {
         const userData = doc.data();
         return {
           userId: userData.userId,
           organizationName: userData.organizationName,
           profilePicture: userData.profilePicture,
           accountType: userData.accountType,
-          district: userData.district
+          district: userData.district,
         };
       });
       return userData.length > 0 ? userData[0] : null;
@@ -1221,12 +1296,14 @@ export const searchRelevantUsers = async (req, res) => {
 
     const userDataResults = await Promise.all(userDataPromises);
 
-    const relevantUserData = userDataResults.filter(userData => userData !== null);
+    const relevantUserData = userDataResults.filter(
+      (userData) => userData !== null
+    );
 
     res.status(200).json({ relevantUserData });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -1248,7 +1325,7 @@ export const completeCourseApplication = async (req, res) => {
     pursuingBachelorsDegreeOrganization,
     pursuingBachelorsDegreeEndDate,
     isWorking,
-    workingOrganization
+    workingOrganization,
   } = req.body;
 
   try {
@@ -1268,7 +1345,7 @@ export const completeCourseApplication = async (req, res) => {
       pursuingBachelorsDegreeOrganization,
       pursuingBachelorsDegreeEndDate,
       isWorking,
-      workingOrganization
+      workingOrganization,
     });
 
     console.log("Document written with ID: ", docRef.id);
@@ -1285,7 +1362,6 @@ export const getUserCourses = async (req, res) => {
   const { userId } = req.params;
 
   try {
-
     const purchasedCoursesSnapshot = await getDocs(
       query(collection(db, "users"), where("userId", "==", userId))
     );
@@ -1322,7 +1398,7 @@ export const registerStudentDetails = async (req, res) => {
     course,
     rollNo,
     session,
-    address
+    address,
   } = req.body;
 
   console.log(studentPicture);
@@ -1352,11 +1428,11 @@ export const registerStudentDetails = async (req, res) => {
         course,
         rollNo,
         session,
-        address
+        address,
       };
 
       await updateDoc(docRef, {
-        students: arrayUnion(student)
+        students: arrayUnion(student),
       });
 
       console.log("Student registered successfully");
@@ -1377,7 +1453,6 @@ export const getAllStudents = async (req, res) => {
     const usersCollectionRef = collection(db, "users");
     const q = query(usersCollectionRef, where("userId", "==", userId));
     const querySnapshot = await getDocs(q);
-    
 
     if (querySnapshot.empty) {
       return res.status(404).json({ message: "User not found" });
@@ -1395,6 +1470,86 @@ export const getAllStudents = async (req, res) => {
     res.status(200).json(students);
   } catch (error) {
     console.error("Error fetching students:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const registerEmployeeDetails = async (req, res) => {
+  const { userId } = req.params;
+  const {
+    name,
+    dob,
+    gender,
+    bloodGroup,
+    position,
+    joiningYear,
+    mobileNo,
+    address,
+  } = req.body;
+
+  // console.log(studentPicture);
+
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    querySnapshot.forEach(async (document) => {
+      const docRef = document.ref;
+
+      const employee = {
+        name,
+        dob,
+        gender,
+        bloodGroup,
+        position,
+        joiningYear,
+        mobileNo,
+        address,
+      };
+
+      await updateDoc(docRef, {
+        employees: arrayUnion(employee),
+      });
+
+      console.log("Employee registered successfully");
+    });
+
+    res.status(200).json({ message: "Employee registered successfully" });
+  } catch (error) {
+    console.error("Error updating user profile:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getAllEmployees = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    let employees = [];
+
+    querySnapshot.forEach((document) => {
+      const userData = document.data();
+      if (userData.employees && userData.employees.length > 0) {
+        employees = [...employees, ...userData.employees];
+      }
+    });
+
+    res.status(200).json(employees);
+  } catch (error) {
+    console.error("Error fetching employees:", error.message);
     res.status(500).json({ message: error.message });
   }
 };

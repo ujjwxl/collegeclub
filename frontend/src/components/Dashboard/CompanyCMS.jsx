@@ -6,20 +6,15 @@ import jobsIcon from "../../assets/suitcase.png";
 import leadsIcon from "../../assets/leads-icon.png";
 import { toast } from "sonner";
 
-const CMS = () => {
+const CompanyCMS = () => {
   const [activeDiv, setActiveDiv] = useState(null);
-  const [fullName, setFullName] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [name, setName] = useState("");
+  const [dob, setDOB] = useState("");
   const [gender, setGender] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [fatherName, setFatherName] = useState("");
-  const [motherName, setMotherName] = useState("");
-  const [course, setCourse] = useState("");
-  const [rollNo, setRollNo] = useState("");
-  const [session, setSession] = useState("");
+  const [position, setPosition] = useState("");
+  const [joiningYear, setJoiningYear] = useState("");
+  const [mobileNo, setMobileNo] = useState("");
   const [address, setAddress] = useState("");
   const [students, setStudents] = useState([]);
   const [sidebarOption, setSidebarOption] = useState("");
@@ -60,7 +55,7 @@ const CMS = () => {
   const fetchAllStudents = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/auth/getallstudents/${userId}`
+        `http://localhost:5000/auth/getallemployees/${userId}`
       );
       setStudents(response.data);
       console.log(students);
@@ -69,46 +64,41 @@ const CMS = () => {
     }
   };
 
-  const handleFileUpload = (file, endpoint) => { };
+  const handleFileUpload = (file, endpoint) => {};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      let imageURL = "";
+      //   let imageURL = "";
 
-      if (selectedImage) {
-        const formData = new FormData();
-        formData.append("filename", selectedImage);
+      //   if (selectedImage) {
+      //     const formData = new FormData();
+      //     formData.append("filename", selectedImage);
 
-        const uploadResponse = await axios.post(
-          `http://localhost:5000/upload/studentprofilepicture/${userId}`,
-          formData
-        );
-        console.log("File uploaded successfully");
-        imageURL = uploadResponse.data.downloadURL;
-        console.log("imageURL:", imageURL);
-      }
+      //     const uploadResponse = await axios.post(
+      //       `http://localhost:5000/upload/studentprofilepicture/${userId}`,
+      //       formData
+      //     );
+      //     console.log("File uploaded successfully");
+      //     imageURL = uploadResponse.data.downloadURL;
+      //     console.log("imageURL:", imageURL);
+      //   }
 
       axios
-        .post(`http://localhost:5000/auth/submitstudentdetails/${userId}`, {
-          fullName,
-          dateOfBirth,
+        .post(`http://localhost:5000/auth/submitemployeedetails/${userId}`, {
+          name,
+          dob,
           gender,
-          email,
-          phoneNumber,
           bloodGroup,
-          studentPicture: imageURL,
-          fatherName,
-          motherName,
-          course,
-          rollNo,
-          session,
+          position,
+          joiningYear,
+          mobileNo,
           address,
         })
         .then((response) => {
           if (response.status == 200) {
-            toast("Student registered successfully!");
+            toast("Employee registered successfully!");
             fetchAllStudents();
           }
         })
@@ -130,10 +120,10 @@ const CMS = () => {
       if (sidebarOption === "second-option" && studentDetailsPage) {
         return (
           <div className="cms-student-details">
-            <h2>Student Details</h2>
+            <h2>Employee Details</h2>
             <div className="cms-student-details-header">
-              <h1>{selectedStudent.fullName}</h1>
-              <img src={selectedStudent.studentPicture} alt="Student" />
+              <h1>{selectedStudent.name}</h1>
+              {/* <img src={selectedStudent.studentPicture} alt="Student" /> */}
             </div>
 
             <div className="cms-student-detail">
@@ -143,31 +133,13 @@ const CMS = () => {
               <strong>Blood Group:</strong> {selectedStudent.bloodGroup}
             </div>
             <div className="cms-student-detail">
-              <strong>Course:</strong> {selectedStudent.course}
-            </div>
-            <div className="cms-student-detail">
-              <strong>Date of Birth:</strong> {selectedStudent.dateOfBirth}
-            </div>
-            <div className="cms-student-detail">
-              <strong>Email:</strong> {selectedStudent.email}
-            </div>
-            <div className="cms-student-detail">
-              <strong>Father's Name:</strong> {selectedStudent.fatherName}
+              <strong>Date of Birth:</strong> {selectedStudent.dob}
             </div>
             <div className="cms-student-detail">
               <strong>Gender:</strong> {selectedStudent.gender}
             </div>
             <div className="cms-student-detail">
-              <strong>Mother's Name:</strong> {selectedStudent.motherName}
-            </div>
-            <div className="cms-student-detail">
-              <strong>Phone Number:</strong> {selectedStudent.phoneNumber}
-            </div>
-            <div className="cms-student-detail">
-              <strong>Roll No:</strong> {selectedStudent.rollNo}
-            </div>
-            <div className="cms-student-detail">
-              <strong>Session:</strong> {selectedStudent.session}
+              <strong>Phone Number:</strong> {selectedStudent.mobileNo}
             </div>
           </div>
         );
@@ -179,63 +151,57 @@ const CMS = () => {
               <thead>
                 <tr>
                   <th>Full Name</th>
-                  <th>Email</th>
+                  <th>Mobile No.</th>
                   <th>Details</th>
                 </tr>
               </thead>
               <tbody>
                 {students.map((student, index) => (
                   <tr key={index}>
-                    <td>{student.fullName}</td>
-                    <td>{student.email}</td>
-                    <td style={{ textAlign: "center" }}><button className="form-submit-button" style={{ width: "70%" }} onClick={() => showStudentDetails(student)}>View More</button></td>
+                    <td>{student.name}</td>
+                    <td>{student.mobileNo}</td>
+                    <td style={{ textAlign: "center" }}>
+                      <button
+                        className="form-submit-button"
+                        style={{ width: "70%" }}
+                        onClick={() => showStudentDetails(student)}
+                      >
+                        View More
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-        )
-      }
-
-
-      else {
+        );
+      } else {
         return (
           <form>
             <div className="form-input-flex-two create-job-input-flex">
               <div className="form-input-group">
-                <label htmlFor="fullName">Full Name*</label>
+                <label htmlFor="name">Name*</label>
                 <input
                   type="text"
                   placeholder="Enter the full name"
-                  onChange={(e) => setFullName(e.target.value)}
-                  value={fullName}
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
                   required
                 />
               </div>
 
               <div className="form-input-group">
-                <label htmlFor="dateOfBirth">Date of Birth*</label>
+                <label htmlFor="dob">Date of Birth*</label>
                 <input
                   type="date"
-                  onChange={(e) => setDateOfBirth(e.target.value)}
-                  value={dateOfBirth}
+                  onChange={(e) => setDOB(e.target.value)}
+                  value={dob}
                   required
                 />
               </div>
             </div>
 
             <div className="form-input-flex-two create-job-input-flex">
-              <div className="form-input-group">
-                <label htmlFor="course">Course*</label>
-                <input
-                  type="text"
-                  placeholder="Enter course"
-                  onChange={(e) => setCourse(e.target.value)}
-                  value={course}
-                  required
-                />
-              </div>
-
               <div className="form-input-group form-select apply-form-select">
                 <label htmlFor="gender">Gender*</label>
                 <select
@@ -243,40 +209,13 @@ const CMS = () => {
                   onChange={(e) => setGender(e.target.value)}
                   required
                 >
-                  <option value="">Select gender*</option>
-                  {genders.map((gender) => (
-                    <option key={gender.value} value={gender.value}>
-                      {gender.label}
-                    </option>
-                  ))}
+                  <option value="">Select Gender*</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="others">Others</option>
                 </select>
               </div>
-            </div>
 
-            <div className="form-input-flex-two create-job-input-flex">
-              <div className="form-input-group">
-                <label htmlFor="email">Email*</label>
-                <input
-                  type="email"
-                  placeholder="Enter the email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  required
-                />
-              </div>
-
-              <div className="form-input-group">
-                <label htmlFor="phoneNumber">Phone Number*</label>
-                <input
-                  type="text"
-                  placeholder="Enter the phone number"
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  value={phoneNumber}
-                  required
-                />
-              </div>
-            </div>
-            <div className="form-input-flex-two create-job-input-flex">
               <div className="form-input-group">
                 <label htmlFor="bloodGroup">Blood Group*</label>
                 <input
@@ -287,13 +226,27 @@ const CMS = () => {
                   required
                 />
               </div>
+            </div>
+
+            <div className="form-input-flex-two create-job-input-flex">
+              <div className="form-input-group">
+                <label htmlFor="position">Position*</label>
+                <input
+                  type="text"
+                  placeholder="Enter position"
+                  onChange={(e) => setPosition(e.target.value)}
+                  value={position}
+                  required
+                />
+              </div>
 
               <div className="form-input-group">
-                <label htmlFor="uploadPhoto">Upload Photo*</label>
+                <label htmlFor="joiningYear">Joining Year*</label>
                 <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => setSelectedImage(e.target.files[0])}
+                  type="text"
+                  placeholder="Enter joining year"
+                  onChange={(e) => setJoiningYear(e.target.value)}
+                  value={joiningYear}
                   required
                 />
               </div>
@@ -301,62 +254,15 @@ const CMS = () => {
 
             <div className="form-input-flex-two create-job-input-flex">
               <div className="form-input-group">
-                <label htmlFor="fatherName">Father's Name*</label>
+                <label htmlFor="mobileNo">Mobile No.*</label>
                 <input
                   type="text"
-                  placeholder="Enter father's name"
-                  onChange={(e) => setFatherName(e.target.value)}
-                  value={fatherName}
+                  placeholder="Enter mobile number"
+                  onChange={(e) => setMobileNo(e.target.value)}
+                  value={mobileNo}
                   required
                 />
               </div>
-
-              <div className="form-input-group">
-                <label htmlFor="motherName">Mother's Name*</label>
-                <input
-                  type="text"
-                  placeholder="Enter mother's name"
-                  onChange={(e) => setMotherName(e.target.value)}
-                  value={motherName}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="form-input-flex-two create-job-input-flex">
-              <div className="form-input-group">
-                <label htmlFor="rollNo">Roll No.*</label>
-                <input
-                  type="text"
-                  placeholder="Enter roll number"
-                  onChange={(e) => setRollNo(e.target.value)}
-                  value={rollNo}
-                  required
-                />
-              </div>
-              <div className="form-input-group">
-                <label htmlFor="session">Session*</label>
-                <input
-                  type="text"
-                  placeholder="Enter session"
-                  onChange={(e) => setSession(e.target.value)}
-                  value={session}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="form-input-flex-two create-job-input-flex">
-              {/* <div className="form-input-group">
-              <label htmlFor="session">Session*</label>
-              <input
-                type="text"
-                placeholder="Enter session"
-                onChange={(e) => setSession(e.target.value)}
-                value={session}
-                required
-              />
-            </div> */}
 
               <div className="form-input-group">
                 <label htmlFor="address">Address*</label>
@@ -410,7 +316,7 @@ const CMS = () => {
               onClick={handleClick}
               onFocus={handleFocus}
             >
-              Student Directory
+              Employee Directory
             </h2>
           </div>
           <div
@@ -441,7 +347,7 @@ const CMS = () => {
               >
                 <img src={leadsIcon} alt="" />
                 <h3>
-                  Register <br /> Student
+                  Register <br /> Employee
                 </h3>
               </div>
 
@@ -451,7 +357,7 @@ const CMS = () => {
               >
                 <img src={jobsIcon} alt="" />
                 <h3>
-                  View all <br /> Students
+                  View all <br /> Employees
                 </h3>
               </div>
             </div>
@@ -467,4 +373,4 @@ const CMS = () => {
   );
 };
 
-export default CMS;
+export default CompanyCMS;

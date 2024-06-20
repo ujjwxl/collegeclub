@@ -28,7 +28,8 @@ const DashboardMenu = ({
   onShowApplicants,
   onShowLeads,
   onDashboardClick,
-  onProfileClick
+  onProfileClick,
+  onShowCompanyCMS
 }) => {
   const [userData, setUserData] = useState(null);
 
@@ -93,6 +94,9 @@ const DashboardMenu = ({
   const handleDashboardClick = () => {
     onDashboardClick();
   };
+  const handleApplicantsClick= () =>{
+    onShowApplicants();
+  }
 
   const handleShowProfileClick =() => {
     onProfileClick();
@@ -167,9 +171,12 @@ const DashboardMenu = ({
               <img src={cmsIcon} alt="" />
               <p>Add Job</p>
             </div>
-            <div className="dashboard-menu-middle-icon" onClick={onShowApplicants}>
+            <div
+              className="dashboard-menu-middle-icon"
+              onClick={onShowCompanyCMS}
+            >
               <img src={leadsIcon} alt="" />
-              <p>Applicants</p>
+              <p>CMS</p>
             </div>
           </>
         ) : userData && userData.accountType === "Student" ? (
@@ -220,10 +227,10 @@ const DashboardMenu = ({
           <h3>Dashboard</h3>
         </div>
         <hr />
-        <div className="dashboard-menu-bottom-options">
+        <div className="dashboard-menu-bottom-options" onClick={handleApplicantsClick}>
           <img src={applicationIcon} alt="" />
 
-          <h3>Application</h3>
+          <h3>Applicants</h3>
         </div>
         <hr />
         <div className="dashboard-menu-bottom-options">
