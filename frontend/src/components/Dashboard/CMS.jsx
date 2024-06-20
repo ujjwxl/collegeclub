@@ -24,6 +24,9 @@ const StudentOpenings = () => {
   const [students, setStudents] = useState([]);
   const [sidebarOption, setSidebarOption] = useState("");
 
+  const [studentDetailsPage, setStudentDetailsPage] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState([]);
+
   const userId = localStorage.getItem("id");
 
   const handleClick = (event) => {
@@ -33,6 +36,8 @@ const StudentOpenings = () => {
 
   const handleSidebarOptionClick = (option) => {
     setSidebarOption(option);
+    setSelectedStudent([]);
+    setStudentDetailsPage(false);
     if (option === "second-option") {
       fetchAllStudents();
     }
@@ -58,12 +63,13 @@ const StudentOpenings = () => {
         `http://localhost:5000/auth/getallstudents/${userId}`
       );
       setStudents(response.data);
+      console.log(students);
     } catch (error) {
       console.log("Error fetching students:", error);
     }
   };
 
-  const handleFileUpload = (file, endpoint) => {};
+  const handleFileUpload = (file, endpoint) => { };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -114,17 +120,67 @@ const StudentOpenings = () => {
     }
   };
 
+  const showStudentDetails = (student) => {
+    setStudentDetailsPage(true);
+    setSelectedStudent(student);
+  };
+
   const renderForm = () => {
     if (activeDiv === "Student Cell") {
-      if (sidebarOption === "second-option") {
+      if (sidebarOption === "second-option" && studentDetailsPage) {
+        return (
+          <div className="cms-student-details">
+            <h2>Student Details</h2>
+            <div className="cms-student-details-header">
+              <h1>{selectedStudent.fullName}</h1>
+              <img src={selectedStudent.studentPicture} alt="Student" />
+            </div>
+
+            <div className="cms-student-detail">
+              <strong>Address:</strong> {selectedStudent.address}
+            </div>
+            <div className="cms-student-detail">
+              <strong>Blood Group:</strong> {selectedStudent.bloodGroup}
+            </div>
+            <div className="cms-student-detail">
+              <strong>Course:</strong> {selectedStudent.course}
+            </div>
+            <div className="cms-student-detail">
+              <strong>Date of Birth:</strong> {selectedStudent.dateOfBirth}
+            </div>
+            <div className="cms-student-detail">
+              <strong>Email:</strong> {selectedStudent.email}
+            </div>
+            <div className="cms-student-detail">
+              <strong>Father's Name:</strong> {selectedStudent.fatherName}
+            </div>
+            <div className="cms-student-detail">
+              <strong>Gender:</strong> {selectedStudent.gender}
+            </div>
+            <div className="cms-student-detail">
+              <strong>Mother's Name:</strong> {selectedStudent.motherName}
+            </div>
+            <div className="cms-student-detail">
+              <strong>Phone Number:</strong> {selectedStudent.phoneNumber}
+            </div>
+            <div className="cms-student-detail">
+              <strong>Roll No:</strong> {selectedStudent.rollNo}
+            </div>
+            <div className="cms-student-detail">
+              <strong>Session:</strong> {selectedStudent.session}
+            </div>
+          </div>
+        );
+      } else if (sidebarOption === "second-option" && !studentDetailsPage) {
         return (
           <div className="table-container">
-          <h2>List of Registered Students</h2>
+            <h2>List of Registered Students</h2>
             <table className="college-table">
               <thead>
                 <tr>
                   <th>Full Name</th>
                   <th>Email</th>
+                  <th>Details</th>
                 </tr>
               </thead>
               <tbody>
@@ -132,13 +188,17 @@ const StudentOpenings = () => {
                   <tr key={index}>
                     <td>{student.fullName}</td>
                     <td>{student.email}</td>
+                    <td style={{ textAlign: "center" }}><button className="form-submit-button" style={{ width: "70%" }} onClick={() => showStudentDetails(student)}>View More</button></td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-        );
-      } else {
+        )
+      }
+
+
+      else {
         return (
           <form>
             <div className="form-input-flex-two create-job-input-flex">

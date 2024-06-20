@@ -84,3 +84,38 @@
   width: 90%;
   margin-top: 20px;
 }
+
+.cms-student-details {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Comfortaa', sans-serif;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cms-student-details-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cms-student-details-header img {
+  width: 150px;
+}
+
+
+.cms-student-details h1 {
+  color: cyan;
+}
+
+.cms-student-detail {
+  margin-bottom: 10px;
+}
+
+.cms-student-detail strong {
+  margin-right: 10px;
+  font-weight: bold;
+  color: orange;
+}
