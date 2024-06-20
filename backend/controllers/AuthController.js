@@ -1485,6 +1485,7 @@ export const registerEmployeeDetails = async (req, res) => {
     joiningYear,
     mobileNo,
     address,
+    employeePicture
   } = req.body;
 
   // console.log(studentPicture);
@@ -1510,6 +1511,7 @@ export const registerEmployeeDetails = async (req, res) => {
         joiningYear,
         mobileNo,
         address,
+        employeePicture
       };
 
       await updateDoc(docRef, {

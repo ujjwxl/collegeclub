@@ -12,13 +12,13 @@ const CompanyCMS = () => {
   const [dob, setDOB] = useState("");
   const [gender, setGender] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
   const [position, setPosition] = useState("");
   const [joiningYear, setJoiningYear] = useState("");
   const [mobileNo, setMobileNo] = useState("");
   const [address, setAddress] = useState("");
   const [students, setStudents] = useState([]);
   const [sidebarOption, setSidebarOption] = useState("");
-
   const [studentDetailsPage, setStudentDetailsPage] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState([]);
 
@@ -70,20 +70,20 @@ const CompanyCMS = () => {
     e.preventDefault();
 
     try {
-      //   let imageURL = "";
+        let imageURL = "";
 
-      //   if (selectedImage) {
-      //     const formData = new FormData();
-      //     formData.append("filename", selectedImage);
+        if (selectedImage) {
+          const formData = new FormData();
+          formData.append("filename", selectedImage);
 
-      //     const uploadResponse = await axios.post(
-      //       `http://localhost:5000/upload/studentprofilepicture/${userId}`,
-      //       formData
-      //     );
-      //     console.log("File uploaded successfully");
-      //     imageURL = uploadResponse.data.downloadURL;
-      //     console.log("imageURL:", imageURL);
-      //   }
+          const uploadResponse = await axios.post(
+            `http://localhost:5000/upload/employeeprofilepicture/${userId}`,
+            formData
+          );
+          console.log("File uploaded successfully");
+          imageURL = uploadResponse.data.downloadURL;
+          console.log("imageURL:", imageURL);
+        }
 
       axios
         .post(`http://localhost:5000/auth/submitemployeedetails/${userId}`, {
@@ -95,6 +95,7 @@ const CompanyCMS = () => {
           joiningYear,
           mobileNo,
           address,
+          employeePicture: imageURL,
         })
         .then((response) => {
           if (response.status == 200) {
@@ -123,7 +124,7 @@ const CompanyCMS = () => {
             <h2>Employee Details</h2>
             <div className="cms-student-details-header">
               <h1>{selectedStudent.name}</h1>
-              {/* <img src={selectedStudent.studentPicture} alt="Student" /> */}
+              <img src={selectedStudent.employeePicture} alt="Student" />
             </div>
 
             <div className="cms-student-detail">
@@ -202,12 +203,13 @@ const CompanyCMS = () => {
             </div>
 
             <div className="form-input-flex-two create-job-input-flex">
-              <div className="form-input-group form-select apply-form-select">
+              <div className="form-input-group ">
                 <label htmlFor="gender">Gender*</label>
                 <select
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
                   required
+                  className="gender"
                 >
                   <option value="">Select Gender*</option>
                   <option value="male">Male</option>
@@ -271,6 +273,17 @@ const CompanyCMS = () => {
                   placeholder="Enter address"
                   onChange={(e) => setAddress(e.target.value)}
                   value={address}
+                  required
+                />
+              </div>
+            </div>
+            <div className="form-input-flex-two create-job-input-flex">
+            <div className="form-input-group">
+                <label htmlFor="uploadPhoto">Upload Photo*</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setSelectedImage(e.target.files[0])}
                   required
                 />
               </div>

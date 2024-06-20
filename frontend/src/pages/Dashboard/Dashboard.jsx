@@ -40,6 +40,8 @@ const Dashboard = () => {
     setShowAddJob(false);
     setShowJobApplicants(false);
     setShowLeads(false);
+    setShowCompanyCMS(false);
+
   };
 
   const handleAddJob = () => {
@@ -49,6 +51,8 @@ const Dashboard = () => {
     setShowCreateJob(false);
     setShowJobApplicants(false);
     setShowLeads(false);
+    setShowCompanyCMS(false);
+
   }
 
   const handleShowApplicants = () => {
@@ -58,6 +62,8 @@ const Dashboard = () => {
     setShowAddJob(false);
     setShowProfile(false);
     setShowLeads(false);
+    setShowCompanyCMS(false);
+
   }
 
   const handleShowLeads = () => {
@@ -68,6 +74,8 @@ const Dashboard = () => {
     setShowAddJob(false);
     setShowJobApplicants(false);
     setShowCMS(false);
+    setShowCompanyCMS(false);
+
   };
 
   const handleDashboardClick = () => {
@@ -81,6 +89,8 @@ const Dashboard = () => {
     setShowStudentOpenings(false);
     setShowStudentCertificates(false);
     setShowJobApplicants(false);
+    setShowCompanyCMS(false);
+
   };
 
   const handleShowAdmissionForm = () => {
@@ -173,6 +183,8 @@ const Dashboard = () => {
     setShowStudentCertificates(false);
     setShowCMS(false);
     setShowProfile(true);
+    setShowCompanyCMS(false);
+
   }
 
   return (

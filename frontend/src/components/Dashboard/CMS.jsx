@@ -236,12 +236,13 @@ const CMS = () => {
                 />
               </div>
 
-              <div className="form-input-group form-select apply-form-select">
+              <div className="form-input-group">
                 <label htmlFor="gender">Gender*</label>
                 <select
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
                   required
+                  className="gender"
                 >
                   <option value="">Select gender*</option>
                   {genders.map((gender) => (
