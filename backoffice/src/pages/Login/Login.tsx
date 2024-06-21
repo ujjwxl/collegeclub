@@ -1,14 +1,35 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import collegeClubLogo from "../../assets/collegeclub-logo.png";
+import axios, { AxiosError, AxiosResponse } from "axios";
+
+interface LoginResponse {
+    userData: {
+      password: string;
+      email: string; 
+      userId: string;
+    };
+  }
 
 const Login: React.FC = () => {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
+    axios.post('http://localhost:5000/admin/login', { email, password })
+    .then((response: AxiosResponse<LoginResponse>) => {
+        const userId = response.data.userData.userId;
+        localStorage.setItem('id', userId);
+        navigate('/home');
+    })
+    .catch((error: AxiosError) => {
+        console.log('An error occured', error);
+    })
   }
 
   return (
@@ -17,8 +38,9 @@ const Login: React.FC = () => {
         <div className="mb-6">
           <img src={collegeClubLogo} alt="Login" className="w-1/3 ml-auto mr-auto center" />
         </div>
+        <h2 className="text-2xl font-semibold mb-4 text-center">Back Office</h2>
         <h2 className="text-2xl font-semibold mb-4 text-center">Login</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
               htmlFor="email"
