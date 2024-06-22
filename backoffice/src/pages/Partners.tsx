@@ -1,7 +1,8 @@
 import { useState } from "react";
-import Navbar from "../../components/Navbar";
-import Sidebar from "../../components/Sidebar";
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import axios, { AxiosError, AxiosResponse } from "axios";
+
 
 const Partners = () => {
   const [partners, setPartners] = useState<any[]>([]);

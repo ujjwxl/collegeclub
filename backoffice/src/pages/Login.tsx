@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import collegeClubLogo from "../../assets/collegeclub-logo.png";
+import collegeClubLogo from "../assets/collegeclub-logo.png";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 interface LoginResponse {

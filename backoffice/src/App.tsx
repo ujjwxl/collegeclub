@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "../src/pages/Login/Login";
+import Login from "./pages/Login";
 import "./App.css";
-import Home from "./pages/Home/Home";
+import Home from "./pages/Home";
 import Slots from "./pages/Slots";
-import Partners from "./pages/Partners/Partners";
+import Partners from "./pages/Partners";
 
 function App() {
   return (

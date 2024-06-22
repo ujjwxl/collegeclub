@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import partners from "../../assets/partners.png";
-import onboarding from "../../assets/onboarding.png";
-import envelope from "../../assets/envelope.png";
-import book from "../../assets/book.png";
-import agreement from "../../assets/agreement.png";
-import chat from "../../assets/chat.png";
-import event from "../../assets/event.png";
-import Navbar from "../../components/Navbar";
-import Sidebar from "../../components/Sidebar";
+import partners from "../assets/partners.png";
+import onboarding from "../assets/onboarding.png";
+import envelope from "../assets/envelope.png";
+import book from "../assets/book.png";
+import agreement from "../assets/agreement.png";
+import chat from "../assets/chat.png";
+import event from "../assets/event.png";
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 
 const Home: React.FC = () => {
 
