@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import Slots from "./pages/Slots";
 import Partners from "./pages/Partners";
+import Users from "./pages/Users";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/partners" element={<Partners/>} />
           <Route path="/slots" element={<Slots />} />
+          <Route path="/users" element={<Users />} />
         </Routes>
       </Router>
     </>

@@ -1,52 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
-interface SlotBooking {
-  name: string;
+interface User {
+  userId: string; 
+  organizationName: string;
+  email: string;
   contactNumber: string;
-  queryType: string;
-  selectedDate: string;
-  selectedSlot: string;
+  accountType: string;
 }
 
-const Slots: React.FC = () => {
-  const [slotBookingData, setSlotBookingData] = useState<SlotBooking[]>([]);
+function Users(): JSX.Element {
+  const [users, setUsers] = useState<User[]>([]); 
 
   useEffect(() => {
-    fetchSlotBookingDetails();
+    getUsers();
   }, []);
 
-  const fetchSlotBookingDetails = async () => {
+  const getUsers = async () => {
     try {
-      const response = await fetch('http://localhost:5000/admin/slotbookings');
-      if (!response.ok) {
-        throw new Error('Failed to fetch slot booking details');
-      }
-      const data: SlotBooking[] = await response.json();
-      const sortedData = data.sort((a, b) => {
-        const dateComparison = a.selectedDate.localeCompare(b.selectedDate);
-        if (dateComparison !== 0) {
-          return dateComparison;
-        }
-        return a.selectedSlot.localeCompare(b.selectedSlot);
-      });
-      setSlotBookingData(sortedData);
-    } catch (error) {
-      console.error('Error fetching slot booking details:', (error as Error).message);
+      const response: AxiosResponse<User[]> = await axios.get('http://localhost:5000/admin/getAllUsers');
+      setUsers(response.data);
+    } catch (error: any) {
+      alert('Could not fetch users');
+      console.error(error);
     }
   };
 
   return (
-    <>
+    <div>
       <Navbar />
       <div className="flex h-screen">
         <Sidebar />
-        <div className="w-screen p-6">
-          <h2 className='font-bold text-3xl'>Slot Booking Details</h2>
-          {slotBookingData && slotBookingData.length > 0 ? (
-            <div className="m-4 mt-8">
-              <table className="min-w-full divide-y divide-gray-200 college-table">
+        
+        <div className="w-5/6">
+        <h1 className='font-semibold text-4xl m-4 mb-8'>Users</h1>
+          {users && users.length > 0 ? (
+            <div className="m-4">
+              <table className="min-w-full divide-y divide-gray-200 users-table">
                 <thead className="bg-gray-400">
                   <tr>
                     <th
@@ -65,31 +57,31 @@ const Slots: React.FC = () => {
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                     >
-                      Contact Number
+                      Email
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                     >
-                      Query Type
+                      Phone
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                     >
-                      Selected Date
+                      Role
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                     >
-                      Selected Slot
+                      Details
                     </th>
                   </tr>
                 </thead>
                 <tbody className="bg-gray-100 divide-y divide-gray-200">
-                  {slotBookingData.map((booking, index) => (
-                    <tr key={index}>
+                  {users.map((user: User, index: number) => (
+                    <tr key={user.userId}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900">
                           {index + 1}
@@ -97,28 +89,28 @@ const Slots: React.FC = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900">
-                          {booking.name}
+                          {user.organizationName}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">
-                          {booking.contactNumber}
+                          {user.email}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">
-                          {booking.queryType}
+                          {user.contactNumber}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">
-                          {booking.selectedDate}
+                          {user.accountType}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">
-                          {booking.selectedSlot}
-                        </div>
+                        <button className="bg-gray-500 px-2 py-1 text-sm rounded-lg text-white">
+                          View more
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -126,12 +118,12 @@ const Slots: React.FC = () => {
               </table>
             </div>
           ) : (
-            <p>No bookings available</p>
+            <p>No users available</p>
           )}
         </div>
       </div>
-    </>
+    </div>
   );
-};
+}
 
-export default Slots;
+export default Users;

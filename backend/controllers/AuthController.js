@@ -1447,7 +1447,6 @@ export const registerStudentDetails = async (req, res) => {
 
 export const getAllStudents = async (req, res) => {
   const { userId } = req.params;
-  console.log("YAHOO");
 
   try {
     const usersCollectionRef = collection(db, "users");
