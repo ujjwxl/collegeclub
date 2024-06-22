@@ -16,9 +16,9 @@ const Home: React.FC = () => {
     const navigate = useNavigate();
 
     const handleClick = (menuItem: string) => {
-        if(menuItem === "partners") {
+        if (menuItem === "partners") {
             navigate('/partners');
-        } else if(menuItem === "slots") {
+        } else if (menuItem === "slots") {
             navigate('/slots');
         }
     };
@@ -26,44 +26,42 @@ const Home: React.FC = () => {
 
     return (
         <>
-            <Navbar/>
+            <Navbar />
             <div className="flex h-screen ">
-                <Sidebar/>
+                <Sidebar />
                 <div className="w-5/6">
-                    <div className=" w-full flex justify-center mt-16">
-                        <div className="bg-slate-500 rounded-lg flex px-3 py-7 mx-3 w-64 items-center" onClick={() => handleClick('partners')}>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 m-4">
+                        <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform  hover:shadow-xl" onClick={() => handleClick('partners')}>
                             <img src={partners} className="h-8 object-contain"></img>
-                            <p className="ml-3 font-semibold">Partners</p>
+                            <p className="mt-3 font-semibold text-center text-white">Partners</p>
                         </div>
-                        <div className="bg-slate-500 rounded-lg flex px-3 py-7 mx-3 w-64 items-center">
+                        <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform  hover:shadow-md" onClick={() => handleClick('onboarding')}>
                             <img src={onboarding} className="h-8 object-contain"></img>
-                            <p className="ml-3  font-semibold">New Onboarding</p>
+                            <p className="mt-3 font-semibold text-center text-white">New Onboarding</p>
                         </div>
-                        <div className="bg-slate-500 rounded-lg flex px-3 py-7 mx-3 w-64 items-center">
+                        <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform  hover:shadow-md" onClick={() => handleClick('leads')}>
                             <img src={partners} className="h-8 object-contain"></img>
-                            <p className="ml-3 font-semibold">Total Leads</p>
+                            <p className="mt-3 font-semibold text-center text-white">Total Leads</p>
                         </div>
-                        <div className="bg-slate-500 rounded-lg flex px-3 py-7 mx-3 w-64 items-center">
+                        <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform  hover:shadow-md" onClick={() => handleClick('work-request')}>
                             <img src={envelope} className="h-8 object-contain"></img>
-                            <p className="ml-3 font-semibold ">Work Request</p>
+                            <p className="mt-3 font-semibold text-center text-white">Work Request</p>
                         </div>
-                    </div>
-                    <div className=" w-full flex justify-center mt-10">
-                        <div className="bg-slate-500 rounded-lg flex px-3 py-7 mx-3 w-64 items-center">
+                        <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform  hover:shadow-md" onClick={() => handleClick('course-enrollment')}>
                             <img src={book} className="h-8 object-contain"></img>
-                            <p className="ml-3 font-semibold ">Course Enrollment</p>
+                            <p className="mt-3 font-semibold text-center text-white">Course Enrollment</p>
                         </div>
-                        <div className="bg-slate-500 rounded-lg flex px-3 py-7 mx-3 w-64 items-center">
+                        <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform hover:shadow-md" onClick={() => handleClick('new-admission')}>
                             <img src={agreement} className="h-8 object-contain"></img>
-                            <p className="ml-3 font-semibold ">New Admission</p>
+                            <p className="mt-3 font-semibold text-center text-white">New Admission</p>
                         </div>
-                        <div className="bg-slate-500 rounded-lg flex px-3 py-7 mx-3 w-64 items-center" onClick={() => handleClick('slots')}>
+                        <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform  hover:shadow-md" onClick={() => handleClick('call-request')}>
                             <img src={chat} className="h-8 object-contain"></img>
-                            <p className="ml-3  font-semibold ">Call Request</p>
+                            <p className="mt-3 font-semibold text-center text-white">Call Request</p>
                         </div>
-                        <div className="bg-slate-500 rounded-lg flex px-3 py-7 mx-3 w-64 items-center">
+                        <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform  hover:shadow-md" onClick={() => handleClick('events')}>
                             <img src={event} className="h-8 object-contain"></img>
-                            <p className="ml-3 font-semibold  ">Events</p>
+                            <p className="mt-3 font-semibold text-center text-white">Events</p>
                         </div>
                     </div>
                 </div>
