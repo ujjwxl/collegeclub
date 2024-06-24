@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { cloneElement, useEffect, useState } from "react";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import { College } from "../types/College";
 
 const CollegeDetails: React.FC = () => {
@@ -11,6 +17,16 @@ const CollegeDetails: React.FC = () => {
   const [collegeData, setCollegeData] = useState<College>();
 
   const [showMoreDetails, setShowMoreDetails] = useState<boolean>(false);
+
+  const [verifyModalOpen, setVerifyModalOpen] = useState<boolean>(false);
+
+  const handleClickOpen = () => {
+    setVerifyModalOpen(true);
+  };
+
+  const handleClose = () => {
+    setVerifyModalOpen(false);
+  };
 
   useEffect(() => {
     axios
@@ -23,6 +39,21 @@ const CollegeDetails: React.FC = () => {
         console.log(error);
       });
   });
+
+  const handleVerifyCollege = (collegeId: string) => {
+    axios
+      .put(`http://localhost:5000/admin/verifycollege/${collegeId}`)
+      .then((response: AxiosResponse) => {
+        if (response.status === 200) {
+          setVerifyModalOpen(false);
+          alert("College verified and listed on the platform");
+        }
+      })
+      .catch((error: AxiosError) => {
+        alert("College could not be verified");
+        console.log(error);
+      });
+  };
 
   const getBackgroundColor = (status: string) => {
     switch (status) {
@@ -305,13 +336,44 @@ const CollegeDetails: React.FC = () => {
                   <p className="text-gray-700">Email: {collegeData.email}</p>
                   <div>
                     <h2 className="font-bold mt-8">Actions</h2>
-                    <button className="bg-orange-500 text-white p-2 rounded-lg">
+                    <button
+                      className="bg-orange-500 text-white p-2 rounded-lg"
+                      onClick={handleClickOpen}
+                    >
                       {collegeData.isVerified ? "Verified" : "Verify College  "}
                     </button>
-                    <button className="bg-orange-500 text-white p-2 rounded-lg ml-2">
+                    {/* <button className="bg-orange-500 text-white p-2 rounded-lg ml-2">
                       Activation
-                    </button>
+                    </button> */}
                   </div>
+
+                  <Dialog
+                    open={verifyModalOpen}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
+                    <DialogTitle id="alert-dialog-title">
+                      {"Are you sure you want to verify this college?"}
+                    </DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-description">
+                        Verifying college will make list this college on the
+                        CollegeClub platform. Make sure you have verified all
+                        the college details.
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose}>Disagree</Button>
+                      <Button
+                        onClick={() => handleVerifyCollege(collegeData?.userId)}
+                        autoFocus
+                      >
+                        Agree
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+
                 </div>
 
                 {/* Right Column */}
@@ -329,7 +391,6 @@ const CollegeDetails: React.FC = () => {
                   </div>
 
                   <div className="mt-4 border-solid border-2">
-
                     <div className="flex p-2 justify-between items-center">
                       <img
                         src={collegeData.profilePicture}
@@ -370,7 +431,6 @@ const CollegeDetails: React.FC = () => {
                     </div>
                     <hr />
 
-
                     <div className="flex p-2 justify-between items-center mt-2 mb-4">
                       <h2 className="text-lg font-semibold mr-2 text-gray-700">
                         Onboarding Status:
@@ -387,7 +447,9 @@ const CollegeDetails: React.FC = () => {
                     </div>
                     <hr />
 
-                    <div className={`flex p-2 justify-between items-center mt-2 mb-4`}>
+                    <div
+                      className={`flex p-2 justify-between items-center mt-2 mb-4`}
+                    >
                       <h2 className="text-lg font-semibold mr-2 text-gray-700">
                         Payment Status:
                       </h2>

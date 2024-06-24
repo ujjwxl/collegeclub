@@ -127,3 +127,32 @@ export const getAllUsers = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const verifyCollege = async (req, res) => {
+  const { collegeId } = req.params;
+
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("userId", "==", collegeId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    querySnapshot.forEach(async (document) => {
+      const docRef = document.ref;
+
+      await updateDoc(docRef, {
+        isVerified: true
+      });
+
+    });
+
+    res.status(200).json({ message: "College verified successfully" });
+    
+  } catch (error) {
+    console.error("Error getting user details:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
