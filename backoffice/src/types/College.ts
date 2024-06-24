@@ -1,0 +1,81 @@
+export interface College {
+  organizationName: string;
+  isVerified: boolean,
+  onboardingStatus: string,
+  scholarship: string;
+  paymentId: string;
+  approvedBy: string;
+  galleryImages: string[];
+  selectedCourses: string[];
+  country: string;
+  selectedFacilities: string[];
+  alternateContact: string;
+  news: {
+    refLink: string;
+    newsTitle: string;
+  }[];
+  orderId: string;
+  accountType: string;
+  paymentStatus: boolean;
+  profileFormFilled: boolean;
+  rankingReference: string;
+  district: string;
+  authorizationLetter: string;
+  fullAddress: string;
+  foundedYear: string;
+  aboutCollege: string;
+  userId: string;
+  referralCode: string;
+  instituteType: string;
+  profilePicture: string;
+  students: {
+    phoneNumber: string;
+    bloodGroup: string;
+    fullName: string;
+    dateOfBirth: string;
+    studentPicture: string;
+    email: string;
+    session: string;
+    address: string;
+    motherName: string;
+    gender: string;
+    fatherName: string;
+    rollNo: string;
+    course: string;
+  }[];
+  pinCode: string;
+  detailsFormFilled: boolean;
+  departments: {
+    placementPercentage: string;
+    departmentName: string;
+    description: string;
+  }[];
+  alternateNumber: string;
+  applicationFormCompleted: boolean;
+  studyMode: string;
+  contactNumber: string;
+  admissionProcess: string;
+  fullName: string;
+  universityShortName: string;
+  overallPlacement: string;
+  email: string;
+  courses: {
+    fee: string;
+    distance: string;
+    courseName: string;
+    courseType: string;
+    duration: string;
+    minQualification: string;
+  }[];
+  rankedBy: string;
+  subDomain: string;
+  userName: string;
+  rankings: {
+    year: string;
+    rank: string;
+    agencyName: string;
+  }[];
+  state: string;
+  website: string;
+  promo: string;
+}

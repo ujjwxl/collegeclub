@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
-
 const Partners = () => {
   const [partners, setPartners] = useState<any[]>([]);
+
+  const navigate = useNavigate();
 
   const getPartners = async (partnerType: string) => {
     await axios
@@ -18,6 +20,12 @@ const Partners = () => {
         alert("Could not get partners");
         console.log(error);
       });
+  };
+
+  const handleShowDetails = (partnerType: string, userId: string) => {
+    if (partnerType === "College") {
+      navigate(`/college/${userId}`);
+    }
   };
 
   return (
@@ -117,11 +125,21 @@ const Partners = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">
-                          {partner.paymentStatus ? "Completed" : "Not Completed"}
+                          {partner.paymentStatus
+                            ? "Completed"
+                            : "Not Completed"}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <button className="bg-gray-500 px-2 py-1 text-sm rounded-lg text-white">
+                        <button
+                          className="bg-gray-500 px-2 py-1 text-sm rounded-lg text-white"
+                          onClick={() =>
+                            handleShowDetails(
+                              partner.accountType,
+                              partner.userId
+                            )
+                          }
+                        >
                           View more
                         </button>
                       </td>
