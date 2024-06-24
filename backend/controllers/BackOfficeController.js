@@ -156,3 +156,62 @@ export const verifyCollege = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getFeedbackByType = async (req, res) => {
+  const { feedbackType } = req.params; 
+
+  try {
+    const feedbacksRef = collection(db, 'feedbacks');
+    const q = query(feedbacksRef, where('type', '==', feedbackType));
+    
+    const querySnapshot = await getDocs(q);
+    const feedbacks = [];
+    
+    querySnapshot.forEach((doc) => {
+      feedbacks.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
+
+    if (feedbacks.length === 0) {
+      return res.status(404).json({ message: 'No feedbacks found' });
+    }
+
+    res.status(200).json(feedbacks);
+  } catch (error) {
+    console.error('Error getting feedback documents:', error.message);
+    res.status(500).json({ message: 'Error retrieving feedbacks' });
+  }
+};
+
+
+export const updateFeedbackStatus = async (req, res) => {
+  const { feedbackId } = req.params; 
+  const { status } = req.body; 
+
+  try {
+    const feedbacksCollectionRef = collection(db, 'feedbacks');
+    const q = query(feedbacksCollectionRef, where("feedbackId", "==", feedbackId));
+    const querySnapshot = await getDocs(q); 
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "Feedback not found" });
+    }
+
+    querySnapshot.forEach(async (doc) => {
+      try {
+        await updateDoc(doc.ref, {
+          status: status || doc.data().status,
+        });
+      } catch (updateError) {
+        throw updateError;
+      }
+    });
+
+    res.status(200).json({ message: 'Feedback status updated successfully' });
+  } catch (error) {
+    console.error('Error updating feedback status:', error.message);
+    res.status(500).json({ message: 'Failed to update feedback status' });
+  }
+};

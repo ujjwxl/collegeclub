@@ -6,6 +6,7 @@ import Slots from "./pages/Slots";
 import Partners from "./pages/Partners";
 import Users from "./pages/Users";
 import CollegeDetails from "./pages/CollegeDetails";
+import Message from "./pages/Message";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/slots" element={<Slots />} />
           <Route path="/college/:collegeId" element={<CollegeDetails/>} />
           <Route path="/users" element={<Users />} />
+          <Route path="/message" element={<Message />} />
         </Routes>
       </Router>
     </>

@@ -18,6 +18,7 @@ import {
 import { auth, db } from "../firebase.js";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { query, where, getDocs } from "firebase/firestore";
+import { v4 as uuidv4 } from 'uuid';
 
 export const resetPassword = async (req, res) => {
   const { email } = req.body;
@@ -610,21 +611,30 @@ export const saveFeedback = async (req, res) => {
   const { name, mobileNumber, email, type, message } = req.body;
 
   try {
-    const docRef = await addDoc(collection(db, "feedbacks"), {
+    let dataToSave = {
       name,
       mobileNumber,
       email,
       type,
       message,
-    });
+    };
+
+    // Generate a unique feedbackId using uuidv4()
+    const feedbackId = uuidv4();
+    dataToSave.feedbackId = feedbackId;
+
+    if (type === "complain") {
+      dataToSave.status = "Open";
+    }
+
+    const docRef = await addDoc(collection(db, "feedbacks"), dataToSave);
 
     console.log("Document written with ID: ", docRef.id);
-    res.status(200).json(docRef);
+    res.status(200).json({ feedbackId }); // Respond with the generated feedbackId
   } catch (error) {
-    const errorCode = error.code;
     const errorMessage = error.message;
-    console.log(errorMessage);
-    res.status(500).json({ message: error.message });
+    console.error(errorMessage);
+    res.status(500).json({ message: errorMessage });
   }
 };
 
