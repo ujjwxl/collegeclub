@@ -28,6 +28,47 @@ const CollegeDetails: React.FC = () => {
     setVerifyModalOpen(false);
   };
 
+  const [message, setMessage] = useState<string>("");
+  const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(event.target.value);
+  };
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [status, setStatus] = useState<string>("");
+
+  const handleActionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setStatus(event.target.value);
+  };
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const saveStatus = async () => {
+
+    console.log(status)
+    console.log(message)
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/admin/updateonboardingstatus/${collegeData?.userId}`,
+        {
+          status,
+          message
+        }
+      );
+      alert("Status updated");
+      console.log("Onboarding status updated:", response.data.message);
+      closeModal();
+    } catch (error: any) {
+      console.error("Error updating feedback status:", error.message);
+      alert("Failed to update feedback status");
+    }
+  };
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/auth/user/${collegeId}`)
@@ -57,11 +98,11 @@ const CollegeDetails: React.FC = () => {
 
   const getBackgroundColor = (status: string) => {
     switch (status) {
-      case "Under-Review":
+      case "UNDER_REVIEW":
         return "bg-yellow-400";
-      case "Pending":
+      case "PENDING":
         return "bg-red-500";
-      case "Completed":
+      case "COMPLETED":
         return "bg-green-400";
       default:
         return "";
@@ -342,6 +383,14 @@ const CollegeDetails: React.FC = () => {
                     >
                       {collegeData.isVerified ? "Verified" : "Verify College  "}
                     </button>
+
+                    <button
+                      className="bg-orange-500 ml-2 text-white p-2 rounded-lg"
+                      onClick={openModal}
+                    >
+                      Activation
+                    </button>
+
                     {/* <button className="bg-orange-500 text-white p-2 rounded-lg ml-2">
                       Activation
                     </button> */}
@@ -373,7 +422,6 @@ const CollegeDetails: React.FC = () => {
                       </Button>
                     </DialogActions>
                   </Dialog>
-
                 </div>
 
                 {/* Right Column */}
@@ -508,6 +556,79 @@ const CollegeDetails: React.FC = () => {
             </>
           ) : (
             <p>Loading...</p>
+          )}
+
+          {showModal && (
+            <div className="fixed inset-0 z-50 overflow-y-auto bg-gray-500 bg-opacity-75 flex items-center justify-center">
+              <div className="bg-white p-8 rounded-lg max-w-md w-full">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-lg font-medium">Onboading Status</h2>
+                  <button
+                    className="text-gray-500 hover:text-gray-800"
+                    onClick={closeModal}
+                  >
+                    <svg
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <p>
+                  <strong>Name:</strong> {collegeData?.organizationName}
+                </p>
+                <p>
+                  <strong>Email:</strong> {collegeData?.email}
+                </p>
+                <p>
+                  <strong>Mobile No:</strong> {collegeData?.contactNumber}
+                </p>
+
+                <div className="mt-4">
+                  <label className="block mb-1">Select Action:</label>
+                  <select
+                    className="px-3 py-2 border rounded"
+                    value={status}
+                    onChange={handleActionChange}
+                  >
+                    <option value="PENDING">PENDING</option>
+                    <option value="UNDER_REVIEW">UNDER_REVIEW</option>
+                    <option value="COMPLETED">COMPLETED</option>
+                  </select>
+
+                  <label className="block mb-1">Message:</label>
+                  <input
+                    type="text"
+                    value={message}
+                    onChange={handleMessageChange}
+                    required
+                    className="w-5/6 px-3 py-2 border rounded"
+                  />
+                </div>
+                <div className="mt-6 flex justify-end">
+                  <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mr-2"
+                    onClick={saveStatus}
+                  >
+                    Save
+                  </button>
+                  <button
+                    className="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300"
+                    onClick={closeModal}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
           )}
         </div>
       </div>

@@ -215,3 +215,37 @@ export const updateFeedbackStatus = async (req, res) => {
     res.status(500).json({ message: 'Failed to update feedback status' });
   }
 };
+
+export const updateOnboardingStatus = async (req, res) => {
+  const { collegeId } = req.params; 
+  const { 
+    status,
+    message
+   } = req.body; 
+
+  try {
+    const feedbacksCollectionRef = collection(db, 'users');
+    const q = query(feedbacksCollectionRef, where("userId", "==", collegeId));
+    const querySnapshot = await getDocs(q); 
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "Feedback not found" });
+    }
+
+    querySnapshot.forEach(async (doc) => {
+      try {
+        await updateDoc(doc.ref, {
+          onboardingStatus: status || doc.data().status,
+          notifications: arrayUnion(message),
+        });
+      } catch (updateError) {
+        throw updateError;
+      }
+    });
+
+    res.status(200).json({ message: 'Feedback status updated successfully' });
+  } catch (error) {
+    console.error('Error updating feedback status:', error.message);
+    res.status(500).json({ message: 'Failed to update feedback status' });
+  }
+};
