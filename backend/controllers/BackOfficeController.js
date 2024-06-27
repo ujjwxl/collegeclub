@@ -352,3 +352,23 @@ export const createCourse = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const fetchApplicants = async (req, res) => {
+  try {
+    const applicantsRef = collection(db, 'applications');
+    const snapshot = await getDocs(applicantsRef);
+    const applicantsList = [];
+    
+    snapshot.forEach(doc => {
+      applicantsList.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
+    
+    res.status(200).json(applicantsList);
+  } catch (error) {
+    console.error('Error fetching applicants: ', error);
+    res.status(500).json({ error: 'Failed to fetch applicants' });
+  }
+};

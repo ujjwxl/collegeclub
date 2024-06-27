@@ -19,6 +19,54 @@ const HR = () => {
     const [selectedTeamMember, setSelectedTeamMember] = useState(null);
     const [openings, setOpenings] = useState([]);
     const [selectedOpeningOption, setSelectedOpeningOption] = useState('all');
+    const [applicants, setApplicants] = useState([]); // State for applicants
+    const [selectedApplicant, setSelectedApplicant] = useState(null);
+
+    interface TeamMember {
+        name: string;
+        dob: string;
+        gender: string;
+        bloodGroup: string;
+        position: string;
+        joiningYear: number;
+        mobileNo: string;
+        address: string;
+        photo: string;
+        // Add other properties as needed
+    }
+
+    interface Applicant {
+        name: string;
+        phoneNumber: string;
+        position: string;
+        // Add other properties as needed
+    }
+
+    useEffect(() => {
+        // Function to fetch applicants data from backend
+        const fetchApplicants = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/admin/applicants/all');
+                setApplicants(response.data); // Assuming the response.data is an array of applicant objects
+            } catch (error) {
+                console.error('Error fetching applicants:', error);
+            }
+        };
+
+        if (selectedOpeningOption === 'applicants') {
+            fetchApplicants();
+        }
+    }, [selectedOpeningOption]);
+
+    // Handle view details of an applicant
+    const handleViewApplicantDetails = (applicant: Applicant) => {
+        setSelectedApplicant(applicant);
+    };
+
+    // Close applicant details modal
+    const handleCloseApplicantModal = () => {
+        setSelectedApplicant(null);
+    };
 
 
     useEffect(() => {
@@ -37,7 +85,7 @@ const HR = () => {
         }
     }, [selectedDropdownOption]);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const formData = {
@@ -73,7 +121,7 @@ const HR = () => {
         }
     };
 
-    const handleViewDetails = (teamMember) => {
+    const handleViewDetails = (teamMember: TeamMember) => {
         setSelectedTeamMember(teamMember);
     };
 
@@ -104,6 +152,27 @@ const HR = () => {
                 <p><strong>Mobile No.:</strong> {teamMember.mobileNo}</p>
                 <p><strong>Address:</strong> {teamMember.address}</p>
                 <img src={teamMember.photo} alt="Team Member" className="mt-4 rounded-lg shadow-md" />
+            </div>
+        </div>
+    );
+
+    const ApplicantDetailsModal = ({ applicant }) => (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-500">
+            <div className="bg-white w-1/2 p-8 rounded-lg shadow-lg ">
+                <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-lg font-medium">Applicant Details</h2>
+                    <button
+                        className="text-gray-500 hover:text-gray-800"
+                        onClick={handleCloseApplicantModal}
+                    >
+                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <h2 className="text-2xl font-semibold mb-4">{applicant.name}</h2>
+                <p><strong>Phone Number:</strong> {applicant.phoneNumber}</p>
+                <p><strong>Position:</strong> {applicant.position}</p>
             </div>
         </div>
     );
@@ -415,7 +484,48 @@ const HR = () => {
                                         <h1 className="text-3xl font-semibold text-gray-800">All Applicants</h1>
                                         <div className="overflow-x-auto">
                                             <table className="min-w-full divide-y divide-gray-200 shadow-md border border-gray-200 rounded-lg mt-6">
-                                                {/* Table headers and rows for applicants */}
+                                                <thead className="bg-gray-100">
+                                                    <tr>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            S.No.
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            Name
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            Phone Number
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            Position
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            Details
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody className="bg-slate-50 divide-y divide-gray-200">
+                                                    {applicants.map((applicant, index) => (
+                                                        <tr key={index} className="transition-all hover:bg-slate-100">
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                {index + 1}
+                                                            </td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                {applicant.name}
+                                                            </td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                {applicant.phoneNumber}
+                                                            </td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                {applicant.position}
+                                                            </td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                <button onClick={() => handleViewApplicantDetails(applicant)} className="bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 rounded-lg text-sm transition-colors">
+                                                                    View details
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>
