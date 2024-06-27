@@ -19,6 +19,7 @@ import "./DashboardMenu.css";
 
 const DashboardMenu = ({
   onCreateJob,
+  onShowNotificationBox,
   onAddJob,
   onShowCMS,
   onShowStudentCertificates,
@@ -95,7 +96,7 @@ const DashboardMenu = ({
     onDashboardClick();
   };
   const handleApplicantsClick= () =>{
-    onShowApplicants();
+    // onShowApplicants();
   }
 
   const handleShowProfileClick =() => {
@@ -230,10 +231,10 @@ const DashboardMenu = ({
         <div className="dashboard-menu-bottom-options" onClick={handleApplicantsClick}>
           <img src={applicationIcon} alt="" />
 
-          <h3>Applicants</h3>
+          <h3>{userData && userData.accountType === "Company" ? 'Applicants' : 'Application'}</h3>
         </div>
         <hr />
-        <div className="dashboard-menu-bottom-options">
+        <div className="dashboard-menu-bottom-options" onClick={onShowNotificationBox}> 
           <img src={notificationIcon} alt="" />
 
           <h3>Notifications</h3>

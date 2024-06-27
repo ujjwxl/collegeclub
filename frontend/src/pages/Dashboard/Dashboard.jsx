@@ -18,6 +18,7 @@ import StudentOpenings from '../../components/Dashboard/StudentOpenings';
 import StudentCertificates from '../../components/Dashboard/StudentCertificates';
 import CMS from '../../components/Dashboard/CMS';
 import CompanyCMS from '../../components/Dashboard/CompanyCMS';
+import Notifications from '../../components/Dashboard/Notifications';
 
 const Dashboard = () => {
   const [showCreateJob, setShowCreateJob] = useState(false);
@@ -31,6 +32,7 @@ const Dashboard = () => {
   const [showMyCourses, setShowMyCourses] = useState(false);
   const [showCMS, setShowCMS] = useState(false);
   const [showCompanyCMS, setShowCompanyCMS] = useState(false);
+  const [showNotificationBox, setShowNotificationBox] = useState(false);
   const [showDashboardBox, setShowDashboardBox] = useState(true);
 
   const handleCreateJob = () => {
@@ -75,7 +77,7 @@ const Dashboard = () => {
     setShowJobApplicants(false);
     setShowCMS(false);
     setShowCompanyCMS(false);
-
+    setShowNotificationBox(false);
   };
 
   const handleDashboardClick = () => {
@@ -90,7 +92,7 @@ const Dashboard = () => {
     setShowStudentCertificates(false);
     setShowJobApplicants(false);
     setShowCompanyCMS(false);
-
+    setShowNotificationBox(false);
   };
 
   const handleShowAdmissionForm = () => {
@@ -154,6 +156,7 @@ const Dashboard = () => {
     setShowProfile(false);
     setShowStudentCertificates(false);
     setShowStudentOpenings(false);
+    setShowNotificationBox(false);
     setShowCMS(true);
   }
 
@@ -171,6 +174,22 @@ const Dashboard = () => {
     setShowCompanyCMS(true);
   }
 
+  const handleShowNotification =()=>{
+    setShowDashboardBox(false);
+    setShowLeads(false);
+    setShowCreateJob(false);
+    setShowAddJob(false);
+    setShowJobApplicants(false);
+    setShowAddmissionForm(false);
+    setShowMyCourses(false);
+    setShowStudentOpenings(false);
+    setShowStudentCertificates(false);
+    setShowCMS(false);
+    setShowProfile(false);
+    setShowCompanyCMS(false);
+    setShowNotificationBox(true);
+  }
+
   const handleShowProfileClick =()=>{
     setShowDashboardBox(false);
     setShowLeads(false);
@@ -184,7 +203,7 @@ const Dashboard = () => {
     setShowCMS(false);
     setShowProfile(true);
     setShowCompanyCMS(false);
-
+    setShowNotificationBox(false);
   }
 
   return (
@@ -194,7 +213,7 @@ const Dashboard = () => {
       <img src={backgroundImage} alt="" className='home1-img' />
 
       <div className='dashboard-overlay dashboard-container'>
-        <DashboardMenu onCreateJob={handleCreateJob} onShowCMS={handleShowCMS} onShowCompanyCMS={handleShowCompanyCMS} onShowStudentCertificates={handleShowStudentCertificates} onShowStudentOpenings={handleShowStudentOpenings} onShowMyCourses={handleShowMyCourses} onShowAdmissionForm={handleShowAdmissionForm} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} onProfileClick= {handleShowProfileClick} />
+        <DashboardMenu onCreateJob={handleCreateJob} onShowNotificationBox={handleShowNotification} onShowCMS={handleShowCMS} onShowCompanyCMS={handleShowCompanyCMS} onShowStudentCertificates={handleShowStudentCertificates} onShowStudentOpenings={handleShowStudentOpenings} onShowMyCourses={handleShowMyCourses} onShowAdmissionForm={handleShowAdmissionForm} onAddJob={handleAddJob} onShowApplicants={handleShowApplicants} onShowLeads={handleShowLeads} onDashboardClick={handleDashboardClick} onProfileClick= {handleShowProfileClick} />
         {showCreateJob && <CreateJob />}
         {showAddJob && <AddJob />}
         {showJobApplicants && <JobApplicants />}
@@ -206,6 +225,7 @@ const Dashboard = () => {
         {showStudentCertificates && <StudentCertificates/>}
         {showStudentOpenings && <StudentOpenings/>}
         {showMyCourses && <MyCourses/>}
+        {showNotificationBox && <Notifications/>}
         {showProfile && <Profile />}
       </div>
 

@@ -221,7 +221,7 @@ export const updateOnboardingStatus = async (req, res) => {
   const { 
     status,
     message
-   } = req.body; 
+   } = req.body;
 
   try {
     const feedbacksCollectionRef = collection(db, 'users');
@@ -236,7 +236,7 @@ export const updateOnboardingStatus = async (req, res) => {
       try {
         await updateDoc(doc.ref, {
           onboardingStatus: status || doc.data().status,
-          notifications: arrayUnion(message),
+          notifications: arrayUnion({content: message, date: Date.now()}),
         });
       } catch (updateError) {
         throw updateError;

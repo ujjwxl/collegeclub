@@ -32,7 +32,8 @@
     "react-slick": "^0.30.2",
     "react-type-animation": "^3.2.0",
     "slick-carousel": "^1.8.1",
-    "sonner": "^1.4.41"
+    "sonner": "^1.4.41",
+    "timeago.js": "^4.0.0-beta.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",
