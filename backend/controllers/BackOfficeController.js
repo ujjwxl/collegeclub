@@ -249,3 +249,65 @@ export const updateOnboardingStatus = async (req, res) => {
     res.status(500).json({ message: 'Failed to update feedback status' });
   }
 };
+
+
+export const addTeamMember = async (req, res) => {
+  const {
+    name,
+    dob,
+    gender,
+    bloodGroup,
+    position,
+    joiningYear,
+    mobileNo,
+    address,
+    // employeePicture
+  } = req.body;
+
+  try {
+    const teamCollectionRef = collection(db, "team");
+
+    const teamData = {
+      name,
+      dob,
+      gender,
+      bloodGroup,
+      position,
+      joiningYear,
+      mobileNo,
+      address,
+      // employeePicture
+    };
+
+    const docRef = await addDoc(teamCollectionRef, teamData);
+
+    console.log("Team registered successfully with ID: ", docRef.id);
+
+    res.status(200).json({ message: "Team registered successfully" });
+  } catch (error) {
+    console.error("Error registering Team:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+export const fetchTeam = async (req, res) => {
+  try {
+    const teamCollectionRef = collection(db, "team");
+    const querySnapshot = await getDocs(teamCollectionRef);
+
+    const team = [];
+    querySnapshot.forEach((doc) => {
+      const teams = {
+        id: doc.id,
+        ...doc.data()
+      };
+      team.push(teams);
+    });
+
+    res.status(200).json(team);
+  } catch (error) {
+    console.error("Error fetching employees:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};

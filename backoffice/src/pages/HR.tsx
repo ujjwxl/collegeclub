@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import axios from 'axios';
@@ -15,6 +15,23 @@ const HR = () => {
     const [mobileNo, setMobileNo] = useState('');
     const [address, setAddress] = useState('');
     const [selectedImage, setSelectedImage] = useState(null);
+    const [teams, setTeams] = useState([]);
+
+    useEffect(() => {
+        // Function to fetch all teams data from backend
+        const fetchTeams = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/admin/team/all');
+                setTeams(response.data); // Assuming the response.data is an array of team objects
+            } catch (error) {
+                console.error('Error fetching teams:', error);
+            }
+        };
+
+        if (selectedDropdownOption === 'all') {
+            fetchTeams();
+        }
+    }, [selectedDropdownOption]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,6 +52,7 @@ const HR = () => {
 
             // Handle success (you can reset form state or navigate away)
             console.log('Form submitted successfully');
+            alert("Form submitted successfully");
             setName('');
             setDOB('');
             setGender('');
@@ -93,8 +111,38 @@ const HR = () => {
                                 </div>
 
                                 {selectedDropdownOption === 'all' && (
-                                    <h1 className="text-3xl font-semibold text-gray-800">All Teams Content Here</h1>
-                                )}
+                                    <div>
+                                    <h1 className="text-3xl font-semibold text-gray-800">All Teams</h1>
+                                    <div className="overflow-x-auto">
+                                        <table className="min-w-full divide-y divide-gray-200 shadow-md border border-gray-200 rounded-lg">
+                                            <thead className="bg-gray-100">
+                                                <tr>
+                                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                        S.No.
+                                                    </th>
+                                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                        Team Name
+                                                    </th>
+                                                    {/* Add more headers as needed */}
+                                                </tr>
+                                            </thead>
+                                            <tbody className="bg-slate-50 divide-y divide-gray-200">
+                                                {teams.map((team, index) => (
+                                                    <tr key={team.id} className="transition-all hover:bg-slate-100">
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                            {index + 1}
+                                                        </td>
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                            {team.name}
+                                                        </td>
+                                                        {/* Add more cells with team details */}
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            )}
                                 {selectedDropdownOption === 'add' && (
                                     <form className="w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
                                         <div className="mb-4">
@@ -245,7 +293,7 @@ const HR = () => {
                                                 id="uploadPhoto"
                                                 accept="image/*"
                                                 // onChange={(e) => setSelectedImage(e.target.files[0])}
-                                                required
+                                                // required
                                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                             />
                                         </div>
