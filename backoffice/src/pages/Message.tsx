@@ -38,7 +38,7 @@ const Feedbacks = () => {
     const saveFeedbackStatus = async () => {
         try {
             const response = await axios.put(`http://localhost:5000/admin/updateFeedback/${selectedFeedback.feedbackId}`, {
-                status: action 
+                status: action
             });
             const updatedFeedbacks = feedbacks.map(feedback => {
                 if (feedback.id === selectedFeedback.id) {
@@ -46,10 +46,10 @@ const Feedbacks = () => {
                 }
                 return feedback;
             });
-            
+
             setFeedbacks(updatedFeedbacks);
             console.log('Feedback status updated:', response.data.message);
-            closeModal(); 
+            closeModal();
         } catch (error: any) {
             console.error('Error updating feedback status:', error.message);
             alert('Failed to update feedback status');
@@ -172,10 +172,7 @@ const Feedbacks = () => {
                             <div className="bg-white p-8 rounded-lg max-w-md w-full">
                                 <div className="flex justify-between items-center mb-4">
                                     <h2 className="text-lg font-medium">Complain Details</h2>
-                                    <button
-                                        className="text-gray-500 hover:text-gray-800"
-                                        onClick={closeModal}
-                                    >
+                                    <button className="text-gray-500 hover:text-gray-800" onClick={closeModal}>
                                         <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                         </svg>

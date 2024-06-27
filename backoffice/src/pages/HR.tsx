@@ -16,6 +16,10 @@ const HR = () => {
     const [address, setAddress] = useState('');
     const [selectedImage, setSelectedImage] = useState(null);
     const [teams, setTeams] = useState([]);
+    const [selectedTeamMember, setSelectedTeamMember] = useState(null);
+    const [openings, setOpenings] = useState([]);
+    const [selectedOpeningOption, setSelectedOpeningOption] = useState('all');
+
 
     useEffect(() => {
         // Function to fetch all teams data from backend
@@ -69,6 +73,41 @@ const HR = () => {
         }
     };
 
+    const handleViewDetails = (teamMember) => {
+        setSelectedTeamMember(teamMember);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedTeamMember(null);
+    };
+
+    const TeamDetailsModal = ({ teamMember }) => (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-500">
+            <div className="bg-white w-1/2 p-8 rounded-lg shadow-lg ">
+                <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-lg font-medium">Employee Details</h2>
+                    <button
+                        className="text-gray-500 hover:text-gray-800"
+                        onClick={handleCloseModal}
+                    >
+                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <h2 className="text-2xl font-semibold mb-4">{teamMember.name}</h2>
+                <p><strong>Date of Birth:</strong> {teamMember.dob}</p>
+                <p><strong>Gender:</strong> {teamMember.gender}</p>
+                <p><strong>Blood Group:</strong> {teamMember.bloodGroup}</p>
+                <p><strong>Position:</strong> {teamMember.position}</p>
+                <p><strong>Joining Year:</strong> {teamMember.joiningYear}</p>
+                <p><strong>Mobile No.:</strong> {teamMember.mobileNo}</p>
+                <p><strong>Address:</strong> {teamMember.address}</p>
+                <img src={teamMember.photo} alt="Team Member" className="mt-4 rounded-lg shadow-md" />
+            </div>
+        </div>
+    );
+
 
     return (
         <>
@@ -112,37 +151,64 @@ const HR = () => {
 
                                 {selectedDropdownOption === 'all' && (
                                     <div>
-                                    <h1 className="text-3xl font-semibold text-gray-800">All Teams</h1>
-                                    <div className="overflow-x-auto">
-                                        <table className="min-w-full divide-y divide-gray-200 shadow-md border border-gray-200 rounded-lg">
-                                            <thead className="bg-gray-100">
-                                                <tr>
-                                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                                                        S.No.
-                                                    </th>
-                                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                                                        Team Name
-                                                    </th>
-                                                    {/* Add more headers as needed */}
-                                                </tr>
-                                            </thead>
-                                            <tbody className="bg-slate-50 divide-y divide-gray-200">
-                                                {teams.map((team, index) => (
-                                                    <tr key={team.id} className="transition-all hover:bg-slate-100">
-                                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                            {index + 1}
-                                                        </td>
-                                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            {team.name}
-                                                        </td>
-                                                        {/* Add more cells with team details */}
+                                        <h1 className="text-3xl font-semibold text-gray-800">All Teams</h1>
+                                        <div className="overflow-x-auto">
+                                            <table className="min-w-full divide-y divide-gray-200 shadow-md border border-gray-200 rounded-lg mt-6">
+                                                <thead className="bg-gray-100">
+                                                    <tr>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            S.No.
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            Team
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            Mobile No.
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            Gender
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            Position
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            Details
+                                                        </th>
+
                                                     </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody className="bg-slate-50 divide-y divide-gray-200">
+                                                    {teams.map((team, index) => (
+                                                        <tr key={team.id} className="transition-all hover:bg-slate-100">
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                {index + 1}
+                                                            </td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                {team.name}
+                                                            </td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                {team.mobileNo}
+                                                            </td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                {team.gender}
+                                                            </td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                {team.position}
+                                                            </td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                <button onClick={() => handleViewDetails(team)} className="bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 rounded-lg text-sm transition-colors">
+                                                                    View more
+                                                                </button>
+                                                            </td>
+
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-                            )}
+                                )}
                                 {selectedDropdownOption === 'add' && (
                                     <form className="w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
                                         <div className="mb-4">
@@ -195,9 +261,9 @@ const HR = () => {
                                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                                 >
                                                     <option value="">Select Gender*</option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
-                                                    <option value="others">Others</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Others">Others</option>
                                                 </select>
                                             </div>
 
@@ -312,11 +378,54 @@ const HR = () => {
                             </>
                         )}
                         {selectedTab === 'openings' && (
-                            <h1 className="text-3xl font-semibold text-gray-800">Openings Content Here</h1>
+                            <>
+                                <div>
+                                    <label htmlFor="openingDropdown" className="block text-gray-700 text-sm font-bold mb-2">
+                                        Select Option:
+                                    </label>
+                                    <select
+                                        id="openingDropdown"
+                                        value={selectedOpeningOption}
+                                        onChange={(e) => setSelectedOpeningOption(e.target.value)}
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    >
+                                        <option value="all">All Openings</option>
+                                        <option value="add">Add Opening</option>
+                                        <option value="applicants">All Applicants</option>
+                                    </select>
+                                </div>
+
+                                {selectedOpeningOption === 'all' && (
+                                    <div>
+                                        <h1 className="text-3xl font-semibold text-gray-800">All Openings</h1>
+                                        <div className="overflow-x-auto">
+                                            <table className="min-w-full divide-y divide-gray-200 shadow-md border border-gray-200 rounded-lg mt-6">
+                                                {/* Table headers and rows similar to teams */}
+                                            </table>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {selectedOpeningOption === 'add' && (
+                                    <form className="..."> {/* Form for adding opening details */} </form>
+                                )}
+
+                                {selectedOpeningOption === 'applicants' && (
+                                    <div>
+                                        <h1 className="text-3xl font-semibold text-gray-800">All Applicants</h1>
+                                        <div className="overflow-x-auto">
+                                            <table className="min-w-full divide-y divide-gray-200 shadow-md border border-gray-200 rounded-lg mt-6">
+                                                {/* Table headers and rows for applicants */}
+                                            </table>
+                                        </div>
+                                    </div>
+                                )}
+                            </>
                         )}
                     </div>
                 </div>
             </div>
+            {selectedTeamMember && <TeamDetailsModal teamMember={selectedTeamMember} />}
         </>
     );
 };
