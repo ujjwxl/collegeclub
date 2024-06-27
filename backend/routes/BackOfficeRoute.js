@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addTeamMember, fetchTeam, getAllUsers, getFeedbackByType, getPartnersByType, getSlotBookingDetails, loginAdmin, updateFeedbackStatus, updateOnboardingStatus, verifyCollege } from "../controllers/BackOfficeController.js";
+import { addTeamMember, createCourse, fetchTeam, getAllUsers, getFeedbackByType, getPartnersByType, getSlotBookingDetails, loginAdmin, updateFeedbackStatus, updateOnboardingStatus, verifyCollege } from "../controllers/BackOfficeController.js";
 
 const router = Router();
 
@@ -13,5 +13,6 @@ router.put('/updateFeedback/:feedbackId', updateFeedbackStatus);
 router.put('/updateonboardingstatus/:collegeId', updateOnboardingStatus);
 router.post('/team/add', addTeamMember);
 router.get('/team/all', fetchTeam);
+router.post('/addcourse', createCourse);
 
 export default router

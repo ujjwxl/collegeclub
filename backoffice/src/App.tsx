@@ -8,6 +8,7 @@ import Users from "./pages/Users";
 import CollegeDetails from "./pages/CollegeDetails";
 import Message from "./pages/Message";
 import HR from "./pages/HR";
+import Courses from "./pages/Courses";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/message" element={<Message />} />
           <Route path="/hr" element={<HR />} />
+          <Route path="/courses" element={<Courses/>} />
         </Routes>
       </Router>
     </>

@@ -311,3 +311,44 @@ export const fetchTeam = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const createCourse = async (req, res) => {
+
+  const {
+    courseName,
+    instructorName,
+    price,
+    briefDescription,
+    rating,
+    courseDuration,
+    courseLevel,
+    language,
+    detailedDescription,
+    aboutInstructor,
+    whatYouWillLearn
+  } = req.body;
+
+  try {
+    const docRef = await addDoc(collection(db, "courses"), {
+      courseName,
+      instructorName,
+      price,
+      briefDescription,
+      rating,
+      courseDuration,
+      courseLevel,
+      language,
+      detailedDescription,
+      aboutInstructor,
+      whatYouWillLearn
+    });
+
+    console.log("Document written with ID: ", docRef.id);
+    res.status(200).json(docRef);
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
+    res.status(500).json({ message: error.message });
+  }
+};

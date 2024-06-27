@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useFetcher } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import location from "../../assets/location.png";
 import Footer from "../../components/Home/Footer";
@@ -30,6 +30,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import "./Skills.css";
+import { selectClasses } from "@mui/material";
 
 const Skills = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -42,7 +43,8 @@ const Skills = () => {
   //   id: 2,
   // });
 
-  const [selectedCourse, setSelectedCourse] = useState("");
+  const [courses, setCourses] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [examDetails, setExamDetails] = useState({});
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
@@ -50,7 +52,19 @@ const Skills = () => {
 
   const navigate = useNavigate();
 
-  const courses = [
+  useEffect(() => {
+    axios.get('http://localhost:5000/auth/getcccourses')
+      .then((response) => {
+        setCourses(response.data);
+        console.log(courses)
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('Could not fetch courses')
+      })
+  }, []);
+
+  const coursesOld = [
     {
       courseImage: backgroundImage,
       category: "Programming",
@@ -143,31 +157,12 @@ const Skills = () => {
     }
   }, [selectedCourse]);
 
-  // const handleClickOutsideModal = (e) => {
-  //   if (
-  //     (isFilterModalOpen && !e.target.closest(".filter-modal") && !e.target.closest(".colleges-filter-btn")) ||
-  //     (selectedCourse && !e.target.closest(".modal-content-skills"))
-  //   ) {
-  //     setIsFilterModalOpen(false);
-  //     setSelectedCourse(null);
-  //     document.body.classList.remove("modal-open");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   document.body.addEventListener("click", handleClickOutsideModal);
-
-  //   return () => {
-  //     document.body.removeEventListener("click", handleClickOutsideModal);
-  //   };
-  // }, [isFilterModalOpen, selectedCourse]);
-
   const handleStudentOnboarding = () => {
     localStorage.setItem('isStudentOnboarding', true);
     localStorage.setItem('selectedCourse', JSON.stringify(selectedCourse)); // for displaying course card in the student dashboard after login
     navigate('/register');
   }
- 
+
   return (
     <>
       <Navbar />
@@ -275,25 +270,24 @@ const Skills = () => {
           </div>
         </div>
       </div>
-      
+
       {selectedCourse && (
         <div className="modal-skills">
           <div className="modal-content-skills">
             <div className="skills-left-modal">
               <div className="skills-desc">
-                <h1>Python for Beginners - Learn Programming</h1>
+                <h1>{selectedCourse.courseName}</h1>
                 <p>
-                  Become a Full-Stack Web Developer with just ONE course. HTML,
-                  CSS, Javascript, Node, React, PostgreSQL, Web3 and DApps
+                  {selectedCourse.briefDescription}
                 </p>
                 <div className="rating-container">
-                  <p>4.0</p>
-                  <StarRating rating={4} />
+                  <p>{selectedCourse.rating}</p>
+                  <StarRating rating={selectedCourse.rating} />
                 </div>
                 <p>
                   Created By:
                   <span className="span-skills">
-                    <a href="#instructor">Jack Nicholson</a>
+                    <a href="#instructor">{selectedCourse.instructorName}</a>
                   </span>
                 </p>
               </div>
@@ -301,8 +295,8 @@ const Skills = () => {
                 <img src={backgroundImage} className="skills-modal-img"></img>
 
                 <div className="price">
-                  <h1>₹499</h1>
-                  <h3>₹3499</h3>
+                  <h1>{selectedCourse.price}</h1>
+                  <h3>{selectedCourse.price}</h3>
                   <p>50% off</p>
                 </div>
                 <div className="skills-summary">
@@ -310,14 +304,14 @@ const Skills = () => {
                     <img src={duration}></img>
                     <p>Course Duration</p>
                   </div>
-                  <p>4 Hours</p>
+                  <p>{selectedCourse.courseDuration}</p>
                 </div>
                 <div className="skills-summary">
                   <div className="skills-summary-left">
                     <img src={level}></img>
                     <p>Course Level</p>
                   </div>
-                  <p>Medium</p>
+                  <p>{selectedCourse.courseLevel}</p>
                 </div>
                 <div className="skills-summary">
                   <div className="skills-summary-left">
@@ -337,7 +331,7 @@ const Skills = () => {
               </div>
 
               <div className="skills-details">
-                <h2>
+                {/* <h2>
                   What you will <span className="h2-span">learn?</span>
                 </h2>
                 <div className="whatlearn">
@@ -380,8 +374,40 @@ const Skills = () => {
                       <p>Build your own Javascript framework or library</p>
                     </div>
                   </div>
+                </div> */}
+
+
+                <div className="skills-details">
+                  <h2>
+                    What you will <span className="h2-span">learn?</span>
+                  </h2>
+                  <div className="whatlearn">
+                    {selectedCourse.whatYouWillLearn && (
+                      <div className="whatlearn-left">
+                        {selectedCourse.whatYouWillLearn.slice(0, Math.ceil(selectedCourse.whatYouWillLearn.length / 2)).map((item, index) => (
+                          <div className="whatlearn-content" key={index}>
+                            <img src={tick} alt="tick icon" />
+                            <p>{item}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {selectedCourse.whatYouWillLearn && (
+                      <div className="whatlearn-left">
+                        {selectedCourse.whatYouWillLearn.slice(Math.ceil(selectedCourse.whatYouWillLearn.length / 2)).map((item, index) => (
+                          <div className="whatlearn-content" key={index}>
+                            <img src={tick} alt="tick icon" />
+                            <p>{item}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div className="skills-content">
+
+
+
+                {/* <div className="skills-content">
                   <h2>
                     Course <span className="h2-span">Content</span>
                   </h2>
@@ -572,12 +598,15 @@ const Skills = () => {
                       </AccordionDetails>
                     </Accordion>
                   </div>
-                </div>
+                </div> */}
+
+
                 <div className="skills-description">
                   <h2>
                     Course <span className="h2-span">Description</span>
                   </h2>
-                  <p>
+                  <p>{selectedCourse.detailedDescription}</p>
+                  {/* <p>
                     Welcome to the 100 Days of Code - The Complete Python Pro
                     Bootcamp,<strong> the only course you need</strong> to learn
                     to code with Python. With over 500,000{" "}
@@ -663,8 +692,10 @@ const Skills = () => {
                     The course includes over <strong>65 hours</strong> of HD
                     video tutorials and builds your programming knowledge while
                     making real-world Python projects.
-                  </p>
+                  </p> */}
                 </div>
+
+
                 <div className="howtoapply">
                   <h2>
                     How to <span className="h2-span">Apply?</span>
@@ -704,6 +735,8 @@ const Skills = () => {
                     </div>
                   </div>
                 </div>
+
+
                 <div className="instructor" id="instructor">
                   <h2>
                     <span className="h2-span">Instructor</span>
@@ -712,27 +745,12 @@ const Skills = () => {
                     <div className="inst-img">
                       <img src="https://img-c.udemycdn.com/user/200_H/31334738_a13c_3.jpg"></img>
                       <div className="inst-name">
-                        <h3>Angela Yu</h3>
+                        <h3>{selectedCourse.instructorName}</h3>
                         <p>Developer and Lead Instructor</p>
                       </div>
                     </div>
                     <h3>About Me</h3>
-                    <p>
-                      I'm Angela, I'm a developer with a passion for teaching.
-                      I'm the lead instructor at the London App Brewery,
-                      London's leading Programming Bootcamp. I've helped
-                      hundreds of thousands of students learn to code and change
-                      their lives by becoming a developer. I've been invited by
-                      companies such as Twitter, Facebook and Google to teach
-                      their employees.{" "}
-                    </p>
-                    <p>
-                      My first foray into programming was when I was just 12
-                      years old, wanting to build my own Space Invader game.
-                      Since then, I've made hundred of websites, apps and games.
-                      But most importantly, I realised that my greatest passion
-                      is teaching.
-                    </p>
+                    <p>{selectedCourse.aboutInstructor}</p>
                   </div>
                 </div>
               </div>
@@ -741,8 +759,8 @@ const Skills = () => {
               <img src={backgroundImage} className="skills-modal-img"></img>
               <div className="skills-right-modal-desc">
                 <div className="price">
-                  <h1>₹499</h1>
-                  <h3>₹3499</h3>
+                  <h1>₹{selectedCourse.price}</h1>
+                  <h3>₹{selectedCourse.price}</h3>
                   <p>50% off</p>
                 </div>
 
@@ -751,21 +769,21 @@ const Skills = () => {
                     <img src={duration}></img>
                     <p>Course Duration</p>
                   </div>
-                  <p>4 Hours</p>
+                  <p>{selectedCourse.courseDuration}</p>
                 </div>
                 <div className="skills-summary">
                   <div className="skills-summary-left">
                     <img src={level}></img>
                     <p>Course Level</p>
                   </div>
-                  <p>Medium</p>
+                  <p>{selectedCourse.courseLevel}</p>
                 </div>
                 <div className="skills-summary">
                   <div className="skills-summary-left">
                     <img src={language}></img>
                     <p>Language </p>
                   </div>
-                  <p>English</p>
+                  <p>{selectedCourse.language}</p>
                 </div>
                 <div className="skills-summary">
                   <div className="skills-summary-left">

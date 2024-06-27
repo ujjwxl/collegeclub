@@ -1564,3 +1564,20 @@ export const getAllEmployees = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getCCCourses = async (req, res) => { 
+  try {
+    const q = query(collection(db, "courses"));
+    const querySnapshot = await getDocs(q);
+
+    const coursesData = [];
+    querySnapshot.forEach((doc) => {
+      coursesData.push(doc.data());
+    });
+
+    res.status(200).json(coursesData);
+  } catch (error) {
+    console.error("Error getting user details:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
