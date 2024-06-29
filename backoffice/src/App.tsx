@@ -9,6 +9,7 @@ import CollegeDetails from "./pages/CollegeDetails";
 import Message from "./pages/Message";
 import HR from "./pages/HR";
 import Courses from "./pages/Courses";
+import CompanyDetails from "./pages/CompanyDetails";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/partners" element={<Partners/>} />
           <Route path="/slots" element={<Slots />} />
           <Route path="/college/:collegeId" element={<CollegeDetails/>} />
+          <Route path="/company/:companyId" element={<CompanyDetails/>} />
           <Route path="/users" element={<Users />} />
           <Route path="/message" element={<Message />} />
           <Route path="/hr" element={<HR />} />

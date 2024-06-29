@@ -25,6 +25,8 @@ const Partners = () => {
   const handleShowDetails = (partnerType: string, userId: string) => {
     if (partnerType === "College") {
       navigate(`/college/${userId}`);
+    } else if(partnerType === "Company") {
+      navigate(`/company/${userId}`);
     }
   };
 

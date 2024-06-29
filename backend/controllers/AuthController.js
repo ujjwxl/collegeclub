@@ -71,6 +71,8 @@ export const registerUser = async (req, res) => {
       userId,
       applicationFormCompleted: false,
       paymentStatus: false,
+      onboardingStatus: "PENDING",
+      isVerified: false,
     });
 
     console.log("Document written with ID: ", docRef.id);
