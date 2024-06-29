@@ -34,6 +34,22 @@ const Courses: React.FC = () => {
     whatYouWillLearn: [""],
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState<CourseFormData | null>(
+    null
+  );
+
+  // Function to open modal and set selected course
+  const handleViewMore = (course: CourseFormData) => {
+    setSelectedCourse(course);
+    setIsModalOpen(true);
+  };
+
+  // Function to close modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const handleTabChange = (tab: "all" | "add") => {
     setSelectedTab(tab);
   };
@@ -82,7 +98,7 @@ const Courses: React.FC = () => {
       .catch((error: AxiosError) => {
         console.log(error);
       });
-  },[]);
+  }, []);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -185,7 +201,10 @@ const Courses: React.FC = () => {
                           {course.rating}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          <button className="bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 rounded-lg text-sm transition-colors">
+                          <button
+                            className="bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 rounded-lg text-sm transition-colors"
+                            onClick={() => handleViewMore(course)}
+                          >
                             View more
                           </button>
                         </td>
@@ -459,6 +478,61 @@ const Courses: React.FC = () => {
           </div>
         </div>
       </div>
+      {isModalOpen && selectedCourse && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
+          <div className="bg-white w-2/3 h-5/6 p-8 rounded-lg z-50 max-w-lg overflow-y-auto">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold mb-2">
+                {selectedCourse.courseName}
+              </h2>
+              <p className="text-gray-600 mb-2">
+                {selectedCourse.instructorName}
+              </p>
+              <p className="text-gray-600 mb-2">
+                Rating: {selectedCourse.rating}
+              </p>
+              <p className="text-gray-600 mb-2">
+                Price: {selectedCourse.price}
+              </p>
+            </div>
+            <div className="mb-6">
+              <h3 className="text-xl font-bold mb-2">About this course</h3>
+              <p className="text-gray-800 mb-2">
+                {selectedCourse.briefDescription}
+              </p>
+            </div>
+            <div className="mb-6">
+              <h3 className="text-xl font-bold mb-2">Detailed Description</h3>
+              <p className="text-gray-800 mb-2">
+                {selectedCourse.detailedDescription}
+              </p>
+            </div>
+            <div className="mb-6">
+              <h3 className="text-xl font-bold mb-2">About the Instructor</h3>
+              <p className="text-gray-800 mb-2">
+                {selectedCourse.aboutInstructor}
+              </p>
+            </div>
+            <div className="mb-6">
+              <h3 className="text-xl font-bold mb-2">What You Will Learn</h3>
+              <ul className="list-disc list-inside text-gray-800">
+                {selectedCourse.whatYouWillLearn.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex justify-end">
+              <button
+                className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg"
+                onClick={closeModal}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

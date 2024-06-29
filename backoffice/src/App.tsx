@@ -10,6 +10,7 @@ import Message from "./pages/Message";
 import HR from "./pages/HR";
 import Courses from "./pages/Courses";
 import CompanyDetails from "./pages/CompanyDetails";
+import Events from "./pages/Events";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/message" element={<Message />} />
           <Route path="/hr" element={<HR />} />
           <Route path="/courses" element={<Courses/>} />
+          <Route path="/events" element={<Events/>} />
         </Routes>
       </Router>
     </>

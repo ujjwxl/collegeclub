@@ -58,7 +58,6 @@ export const loginAdmin = async (req, res) => {
   }
 };
 
-
 // this function is used to show partners by different categories - college, company, student, cc - ambassador
 export const getPartnersByType = async (req, res) => {
   const { partnerType } = req.params; // use it as /admin/getpartners/${partnerType}
@@ -87,9 +86,8 @@ export const getPartnersByType = async (req, res) => {
   }
 };
 
-
 // this is used to display all the slot booking details
-export const getSlotBookingDetails = async (req, res) => { 
+export const getSlotBookingDetails = async (req, res) => {
   try {
     const q = query(collection(db, "slots"));
     const querySnapshot = await getDocs(q);
@@ -105,7 +103,6 @@ export const getSlotBookingDetails = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -144,13 +141,11 @@ export const verifyCollege = async (req, res) => {
       const docRef = document.ref;
 
       await updateDoc(docRef, {
-        isVerified: true
+        isVerified: true,
       });
-
     });
 
     res.status(200).json({ message: "College verified successfully" });
-    
   } catch (error) {
     console.error("Error getting user details:", error.message);
     res.status(500).json({ message: error.message });
@@ -158,42 +153,44 @@ export const verifyCollege = async (req, res) => {
 };
 
 export const getFeedbackByType = async (req, res) => {
-  const { feedbackType } = req.params; 
+  const { feedbackType } = req.params;
 
   try {
-    const feedbacksRef = collection(db, 'feedbacks');
-    const q = query(feedbacksRef, where('type', '==', feedbackType));
-    
+    const feedbacksRef = collection(db, "feedbacks");
+    const q = query(feedbacksRef, where("type", "==", feedbackType));
+
     const querySnapshot = await getDocs(q);
     const feedbacks = [];
-    
+
     querySnapshot.forEach((doc) => {
       feedbacks.push({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
       });
     });
 
     if (feedbacks.length === 0) {
-      return res.status(404).json({ message: 'No feedbacks found' });
+      return res.status(404).json({ message: "No feedbacks found" });
     }
 
     res.status(200).json(feedbacks);
   } catch (error) {
-    console.error('Error getting feedback documents:', error.message);
-    res.status(500).json({ message: 'Error retrieving feedbacks' });
+    console.error("Error getting feedback documents:", error.message);
+    res.status(500).json({ message: "Error retrieving feedbacks" });
   }
 };
 
-
 export const updateFeedbackStatus = async (req, res) => {
-  const { feedbackId } = req.params; 
-  const { status } = req.body; 
+  const { feedbackId } = req.params;
+  const { status } = req.body;
 
   try {
-    const feedbacksCollectionRef = collection(db, 'feedbacks');
-    const q = query(feedbacksCollectionRef, where("feedbackId", "==", feedbackId));
-    const querySnapshot = await getDocs(q); 
+    const feedbacksCollectionRef = collection(db, "feedbacks");
+    const q = query(
+      feedbacksCollectionRef,
+      where("feedbackId", "==", feedbackId)
+    );
+    const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {
       return res.status(404).json({ message: "Feedback not found" });
@@ -209,24 +206,21 @@ export const updateFeedbackStatus = async (req, res) => {
       }
     });
 
-    res.status(200).json({ message: 'Feedback status updated successfully' });
+    res.status(200).json({ message: "Feedback status updated successfully" });
   } catch (error) {
-    console.error('Error updating feedback status:', error.message);
-    res.status(500).json({ message: 'Failed to update feedback status' });
+    console.error("Error updating feedback status:", error.message);
+    res.status(500).json({ message: "Failed to update feedback status" });
   }
 };
 
 export const updateOnboardingStatus = async (req, res) => {
-  const { collegeId } = req.params; 
-  const { 
-    status,
-    message
-   } = req.body;
+  const { collegeId } = req.params;
+  const { status, message } = req.body;
 
   try {
-    const feedbacksCollectionRef = collection(db, 'users');
+    const feedbacksCollectionRef = collection(db, "users");
     const q = query(feedbacksCollectionRef, where("userId", "==", collegeId));
-    const querySnapshot = await getDocs(q); 
+    const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {
       return res.status(404).json({ message: "Feedback not found" });
@@ -236,20 +230,19 @@ export const updateOnboardingStatus = async (req, res) => {
       try {
         await updateDoc(doc.ref, {
           onboardingStatus: status || doc.data().status,
-          notifications: arrayUnion({content: message, date: Date.now()}),
+          notifications: arrayUnion({ content: message, date: Date.now() }),
         });
       } catch (updateError) {
         throw updateError;
       }
     });
 
-    res.status(200).json({ message: 'Feedback status updated successfully' });
+    res.status(200).json({ message: "Feedback status updated successfully" });
   } catch (error) {
-    console.error('Error updating feedback status:', error.message);
-    res.status(500).json({ message: 'Failed to update feedback status' });
+    console.error("Error updating feedback status:", error.message);
+    res.status(500).json({ message: "Failed to update feedback status" });
   }
 };
-
 
 export const addTeamMember = async (req, res) => {
   const {
@@ -290,7 +283,6 @@ export const addTeamMember = async (req, res) => {
   }
 };
 
-
 export const fetchTeam = async (req, res) => {
   try {
     const teamCollectionRef = collection(db, "team");
@@ -300,7 +292,7 @@ export const fetchTeam = async (req, res) => {
     querySnapshot.forEach((doc) => {
       const teams = {
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
       };
       team.push(teams);
     });
@@ -313,7 +305,6 @@ export const fetchTeam = async (req, res) => {
 };
 
 export const createCourse = async (req, res) => {
-
   const {
     courseName,
     instructorName,
@@ -325,7 +316,7 @@ export const createCourse = async (req, res) => {
     language,
     detailedDescription,
     aboutInstructor,
-    whatYouWillLearn
+    whatYouWillLearn,
   } = req.body;
 
   try {
@@ -340,7 +331,7 @@ export const createCourse = async (req, res) => {
       language,
       detailedDescription,
       aboutInstructor,
-      whatYouWillLearn
+      whatYouWillLearn,
     });
 
     console.log("Document written with ID: ", docRef.id);
@@ -355,21 +346,21 @@ export const createCourse = async (req, res) => {
 
 export const fetchApplicants = async (req, res) => {
   try {
-    const applicantsRef = collection(db, 'applications');
+    const applicantsRef = collection(db, "applications");
     const snapshot = await getDocs(applicantsRef);
     const applicantsList = [];
-    
-    snapshot.forEach(doc => {
+
+    snapshot.forEach((doc) => {
       applicantsList.push({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
       });
     });
-    
+
     res.status(200).json(applicantsList);
   } catch (error) {
-    console.error('Error fetching applicants: ', error);
-    res.status(500).json({ error: 'Failed to fetch applicants' });
+    console.error("Error fetching applicants: ", error);
+    res.status(500).json({ error: "Failed to fetch applicants" });
   }
 };
 
@@ -387,7 +378,7 @@ export const addJobOpening = async (req, res) => {
   } = req.body;
 
   try {
-    const jobCollectionRef = collection(db, 'jobs'); // Assuming 'jobs' is your Firestore collection for job openings
+    const jobCollectionRef = collection(db, "jobs"); // Assuming 'jobs' is your Firestore collection for job openings
 
     const jobData = {
       jobTitle,
@@ -403,38 +394,136 @@ export const addJobOpening = async (req, res) => {
 
     const docRef = await addDoc(jobCollectionRef, jobData);
 
-    console.log('Job opening added successfully with ID: ', docRef.id);
+    console.log("Job opening added successfully with ID: ", docRef.id);
 
-    res.status(200).json({ message: 'Job opening added successfully' });
+    res.status(200).json({ message: "Job opening added successfully" });
   } catch (error) {
-    console.error('Error adding job opening:', error.message);
+    console.error("Error adding job opening:", error.message);
     res.status(500).json({ message: error.message });
   }
 };
 
 export const getJobOpenings = async (req, res) => {
   try {
-    const jobCollectionRef = collection(db, 'jobs');
+    const jobCollectionRef = collection(db, "jobs");
 
-    const snapshot = await getDocs(jobCollectionRef); 
+    const snapshot = await getDocs(jobCollectionRef);
 
     if (snapshot.empty) {
-      console.log('No job openings found.');
-      return res.status(404).json({ message: 'No job openings found' });
+      console.log("No job openings found.");
+      return res.status(404).json({ message: "No job openings found" });
     }
 
-    const jobOpenings = []; 
+    const jobOpenings = [];
 
     snapshot.forEach((doc) => {
       jobOpenings.push({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
       });
     });
 
-    res.status(200).json(jobOpenings); 
+    res.status(200).json(jobOpenings);
   } catch (error) {
-    console.error('Error fetching job openings:', error.message);
-    res.status(500).json({ message: 'Error fetching job openings', error: error.message });
+    console.error("Error fetching job openings:", error.message);
+    res
+      .status(500)
+      .json({ message: "Error fetching job openings", error: error.message });
+  }
+};
+
+// export const createEvent = async (req, res) => {
+
+//   const { message, date, targets } = req.body;
+
+//   try {
+//     const feedbacksCollectionRef = collection(db, 'users');
+//     const q = query(feedbacksCollectionRef, where("accountType", "==", type));
+//     const querySnapshot = await getDocs(q);
+
+//     if (querySnapshot.empty) {
+//       return res.status(404).json({ message: "Feedback not found" });
+//     }
+
+//     querySnapshot.forEach(async (doc) => {
+//       try {
+//         await updateDoc(doc.ref, {
+//           events: arrayUnion({message, date, createdAt: Date.now()})
+//         });
+//       } catch (updateError) {
+//         throw updateError;
+//       }
+//     });
+
+//     res.status(200).json({ message: 'Event created successfully' });
+//   } catch (error) {
+//     console.error('Error creating event:', error.message);
+//     res.status(500).json({ message: 'Failed to create event' });
+//   }
+// };
+
+export const createEvent = async (req, res) => {
+  const { message, date, targets } = req.body;
+
+  try {
+
+    const docRef = await addDoc(collection(db, "events"), {
+      message, 
+      date, 
+      targets,
+      createdAt: Date.now()
+    });
+
+    console.log("Document written with ID: ", docRef.id);
+
+    for (let target of targets) {
+      const feedbacksCollectionRef = collection(db, "users");
+      const q = query(
+        feedbacksCollectionRef,
+        where("accountType", "==", target)
+      );
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        console.log(`No users found with accountType: ${target}`);
+        continue;
+      }
+
+      querySnapshot.forEach(async (doc) => {
+        try {
+          await updateDoc(doc.ref, {
+            events: arrayUnion({ message, date, createdAt: Date.now() }),
+          });
+          console.log(`Event added for user with accountType ${target}`);
+        } catch (updateError) {
+          console.error(`Error updating user document: ${updateError.message}`);
+        }
+      });
+    }
+
+    res.status(200).json({ message: "Event created successfully" });
+  } catch (error) {
+    console.error("Error creating event:", error.message);
+    res.status(500).json({ message: "Failed to create event" });
+  }
+};
+
+export const getAllEvents = async (req, res) => {
+  try {
+    const eventsRef = collection(db, "events");
+    const snapshot = await getDocs(eventsRef);
+    const eventsList = [];
+
+    snapshot.forEach((doc) => {
+      eventsList.push({
+        id: doc.id,
+        ...doc.data(),
+      });
+    });
+
+    res.status(200).json(eventsList);
+  } catch (error) {
+    console.error("Error fetching events: ", error);
+    res.status(500).json({ error: "Failed to fetch events" });
   }
 };
