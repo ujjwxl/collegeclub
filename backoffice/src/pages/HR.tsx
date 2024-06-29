@@ -21,6 +21,19 @@ const HR = () => {
     const [selectedOpeningOption, setSelectedOpeningOption] = useState('all');
     const [applicants, setApplicants] = useState([]); // State for applicants
     const [selectedApplicant, setSelectedApplicant] = useState(null);
+    const [jobTitle, setJobTitle] = useState('');
+    const [jobDescription, setJobDescription] = useState('');
+    const [jobResponsibilities, setJobResponsibilities] = useState(['']);
+    const [jobSkills, setJobSkills] = useState(['']);
+    const [jobLocation, setJobLocation] = useState('');
+    const [jobEducation, setJobEducation] = useState('');
+    const [jobExperience, setJobExperience] = useState('');
+    const [jobDesignation, setJobDesignation] = useState('');
+    const [jobOpenPositions, setJobOpenPositions] = useState('');
+    const [jobOpenings, setJobOpenings] = useState(['']);
+    const [selectedJob, setSelectedJob] = useState(null);
+
+
 
     interface TeamMember {
         name: string;
@@ -58,14 +71,37 @@ const HR = () => {
         }
     }, [selectedOpeningOption]);
 
+    useEffect(() => {
+        const fetchJobOpenings = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/admin/job/all');
+                setJobOpenings(response.data);
+            } catch (error) {
+                console.error('Error fetching job openings:', error);
+            }
+        };
+
+        if (selectedOpeningOption === 'all') {
+            fetchJobOpenings();
+        }
+    }, [selectedOpeningOption]);
+
     // Handle view details of an applicant
     const handleViewApplicantDetails = (applicant: Applicant) => {
         setSelectedApplicant(applicant);
     };
 
+    const handleViewJobDetails = (job) => {
+        setSelectedJob(job);
+    };
+
+
     // Close applicant details modal
     const handleCloseApplicantModal = () => {
         setSelectedApplicant(null);
+    };
+    const handleCloseJobModal = () => {
+        setSelectedJob(null);
     };
 
 
@@ -97,7 +133,7 @@ const HR = () => {
                 joiningYear,
                 mobileNo,
                 address,
-                photo: selectedImage, // Assuming selectedImage is already a File object or blob
+                photo: selectedImage,
             };
 
             const response = await axios.post('http://localhost:5000/admin/team/add', formData);
@@ -158,7 +194,7 @@ const HR = () => {
 
     const ApplicantDetailsModal = ({ applicant }) => (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-500">
-            <div className="bg-white w-1/2 p-8 rounded-lg shadow-lg ">
+            <div className="bg-white w-1/2 p-8 rounded-lg shadow-lg">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-lg font-medium">Applicant Details</h2>
                     <button
@@ -173,10 +209,123 @@ const HR = () => {
                 <h2 className="text-2xl font-semibold mb-4">{applicant.name}</h2>
                 <p><strong>Phone Number:</strong> {applicant.phoneNumber}</p>
                 <p><strong>Position:</strong> {applicant.position}</p>
+                <p><strong>Email:</strong> {applicant.email}</p>
+                <p><strong>City:</strong> {applicant.city}</p>
+                <p><strong>State:</strong> {applicant.state}</p>
+                <p>
+                    <strong>Resume Link:</strong>{" "}
+                    <a href={applicant.resumeLink} target="_blank" rel="noopener noreferrer" className='text-blue-700 underline'>
+                        View Resume
+                    </a>
+                </p>
+            </div>
+        </div>
+
+    );
+
+    const JobDetailsModal = ({ job }) => (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-50 bg-gray-900 ">
+            <div className="bg-white w-full md:w-3/4 lg:w-1/2 p-6 rounded-lg shadow-lg max-h-full overflow-y-auto">
+                <div className="border-b border-gray-200 py-2 mb-4">
+                    <div className="flex justify-between items-center">
+                        <h2 className="text-xl md:text-2xl font-semibold">Job Details</h2>
+                        <button
+                            className="text-gray-500 hover:text-gray-800"
+                            onClick={handleCloseJobModal}
+                        >
+                            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2">{job.jobTitle}</h3>
+                    <p className="text-sm text-gray-700 mb-2"><strong>Location:</strong> {job.jobLocation}</p>
+                    <p className="text-sm text-gray-700 mb-2"><strong>Open Positions:</strong> {job.jobOpenPositions}</p>
+                </div>
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2">Job Description</h3>
+                    <p className="text-sm text-gray-700">{job.jobDescription}</p>
+                </div>
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2">Responsibilities</h3>
+                    <p className="text-sm text-gray-700">{job.jobResponsibilities}</p>
+                </div>
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2">Skills Required</h3>
+                    <p className="text-sm text-gray-700">{job.jobSkills}</p>
+                </div>
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2">Education Required</h3>
+                    <p className="text-sm text-gray-700">{job.jobEducation}</p>
+                </div>
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2">Experience</h3>
+                    <p className="text-sm text-gray-700">{job.jobExperience}</p>
+                </div>
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2">Designation</h3>
+                    <p className="text-sm text-gray-700">{job.jobDesignation}</p>
+                </div>
             </div>
         </div>
     );
+    
+    
 
+    const addMoreResponsibility = () => {
+        setJobResponsibilities([...jobResponsibilities, '']);
+    };
+    const handleResponsibilityChange = (index, value) => {
+        const updatedResponsibilities = [...jobResponsibilities];
+        updatedResponsibilities[index] = value;
+        setJobResponsibilities(updatedResponsibilities);
+    };
+
+    const handleSkillsChange = (index, value) => {
+        const updatedSkills = [...jobSkills];
+        updatedSkills[index] = value;
+        setJobSkills(updatedSkills);
+    };
+
+    const addMoreSkills = () => {
+        setJobSkills([...jobSkills, ""]);
+    };
+    const handleOpeningsSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const formData = {
+                jobTitle,
+                jobDescription,
+                jobResponsibilities,
+                jobSkills,
+                jobLocation,
+                jobEducation,
+                jobExperience,
+                jobDesignation,
+                jobOpenPositions,
+            };
+
+            const response = await axios.post('http://localhost:5000/admin/job/add', formData);
+
+            // Handle success (you can reset form state or navigate away)
+            console.log('Job opening form submitted successfully');
+            alert('Job opening form submitted successfully');
+            setJobTitle('');
+            setJobDescription('');
+            setJobResponsibilities(['']);
+            setJobSkills(['']);
+            setJobLocation('');
+            setJobEducation('');
+            setJobExperience('');
+            setJobDesignation('');
+            setJobOpenPositions('');
+        } catch (error) {
+            console.error('Error submitting job opening form:', error);
+            alert('Failed to submit job opening form. Please try again.');
+        }
+    };
 
     return (
         <>
@@ -469,14 +618,222 @@ const HR = () => {
                                         <h1 className="text-3xl font-semibold text-gray-800">All Openings</h1>
                                         <div className="overflow-x-auto">
                                             <table className="min-w-full divide-y divide-gray-200 shadow-md border border-gray-200 rounded-lg mt-6">
-                                                {/* Table headers and rows similar to teams */}
+                                                <thead className="bg-gray-100">
+                                                    <tr>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            S.No.
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            Job Title
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            Job Designation
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            Details
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody className="bg-white divide-y divide-gray-200">
+                                                    {jobOpenings.map((job, index) => (
+                                                        <tr key={index} className="transition-all hover:bg-gray-50">
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                {index + 1}
+                                                            </td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                {job.jobTitle}
+                                                            </td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                {job.jobDesignation}
+                                                            </td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                <button onClick={() => handleViewJobDetails(job)} className="bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 rounded-lg text-sm transition-colors">
+                                                                    View More
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
                                             </table>
                                         </div>
+
                                     </div>
                                 )}
 
+
                                 {selectedOpeningOption === 'add' && (
-                                    <form className="..."> {/* Form for adding opening details */} </form>
+                                    <form onSubmit={handleOpeningsSubmit} className="w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                                        <div className="mb-4">
+                                            <h2 className="text-2xl font-bold mb-4">Add Job Opening</h2>
+                                        </div>
+
+                                        {/* Job Title and Job Description in one row */}
+                                        <div className="flex mb-4">
+                                            <div className="w-1/2 pr-2">
+                                                <label htmlFor="jobTitle" className="block text-gray-700 text-sm font-bold mb-2">
+                                                    Job Title
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    id="jobTitle"
+                                                    placeholder="Enter job title"
+                                                    value={jobTitle}
+                                                    onChange={(e) => setJobTitle(e.target.value)}
+                                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                />
+                                            </div>
+                                            <div className="w-1/2 pl-2">
+                                                <label htmlFor="jobDescription" className="block text-gray-700 text-sm font-bold mb-2">
+                                                    Job Description
+                                                </label>
+                                                <textarea
+                                                    id="jobDescription"
+                                                    placeholder="Enter job description"
+                                                    value={jobDescription}
+                                                    onChange={(e) => setJobDescription(e.target.value)}
+                                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Job Responsibilities and Skills Required in one row */}
+                                        <div className="flex mb-4">
+                                            <div className="w-1/2 pr-2">
+                                                <label htmlFor="jobResponsibilities" className="block text-gray-700 text-sm font-bold mb-2">
+                                                    Job Responsibilities
+                                                </label>
+                                                {jobResponsibilities.map((responsibility, index) => (
+                                                    <div key={index} className="mb-2">
+                                                        <input
+                                                            type="text"
+                                                            placeholder={`Responsibility ${index + 1}`}
+                                                            value={responsibility}
+                                                            onChange={(e) => handleResponsibilityChange(index, e.target.value)}
+                                                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                            required
+                                                        />
+                                                    </div>
+                                                ))}
+                                                <button
+                                                    type="button"
+                                                    onClick={addMoreResponsibility}
+                                                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                >
+                                                    Add More
+                                                </button>
+                                            </div>
+                                            <div className="w-1/2 pl-2">
+                                                <label htmlFor="jobSkills" className="block text-gray-700 text-sm font-bold mb-2">
+                                                    Skills Required
+                                                </label>
+                                                {jobSkills.map((skill, index) => (
+                                                    <div key={index} className="mb-2">
+                                                        <input
+                                                            type="text"
+                                                            placeholder={`Skill ${index + 1}`}
+                                                            value={skill}
+                                                            onChange={(e) => handleSkillsChange(index, e.target.value)}
+                                                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                            required
+                                                        />
+                                                    </div>
+                                                ))}
+                                                <button
+                                                    type="button"
+                                                    onClick={addMoreSkills}
+                                                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                >
+                                                    Add More
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        {/* Location and Education/Qualification in one row */}
+                                        <div className="flex mb-4">
+                                            <div className="w-1/2 pr-2">
+                                                <label htmlFor="jobLocation" className="block text-gray-700 text-sm font-bold mb-2">
+                                                    Location
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    id="jobLocation"
+                                                    placeholder="Enter job location"
+                                                    value={jobLocation}
+                                                    onChange={(e) => setJobLocation(e.target.value)}
+                                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                />
+                                            </div>
+                                            <div className="w-1/2 pl-2">
+                                                <label htmlFor="jobEducation" className="block text-gray-700 text-sm font-bold mb-2">
+                                                    Education/Qualification
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    id="jobEducation"
+                                                    placeholder="Enter education requirements"
+                                                    value={jobEducation}
+                                                    onChange={(e) => setJobEducation(e.target.value)}
+                                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Year of Experience and Designation in one row */}
+                                        <div className="flex mb-4">
+                                            <div className="w-1/2 pr-2">
+                                                <label htmlFor="jobExperience" className="block text-gray-700 text-sm font-bold mb-2">
+                                                    Year of Experience
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    id="jobExperience"
+                                                    placeholder="Enter required experience"
+                                                    value={jobExperience}
+                                                    onChange={(e) => setJobExperience(e.target.value)}
+                                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                />
+                                            </div>
+                                            <div className="w-1/2 pl-2">
+                                                <label htmlFor="jobDesignation" className="block text-gray-700 text-sm font-bold mb-2">
+                                                    Designation
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    id="jobDesignation"
+                                                    placeholder="Enter job designation"
+                                                    value={jobDesignation}
+                                                    onChange={(e) => setJobDesignation(e.target.value)}
+                                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Open Positions */}
+                                        <div className="mb-4">
+                                            <label htmlFor="jobOpenPositions" className="block text-gray-700 text-sm font-bold mb-2">
+                                                Open Positions
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="jobOpenPositions"
+                                                placeholder="Enter number of open positions"
+                                                value={jobOpenPositions}
+                                                onChange={(e) => setJobOpenPositions(e.target.value)}
+                                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            />
+                                        </div>
+
+                                        {/* Submit Button */}
+                                        <div className="mb-6">
+                                            <button
+                                                type="submit"
+                                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                            >
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </form>
+
                                 )}
 
                                 {selectedOpeningOption === 'applicants' && (
@@ -536,6 +893,8 @@ const HR = () => {
                 </div>
             </div>
             {selectedTeamMember && <TeamDetailsModal teamMember={selectedTeamMember} />}
+            {selectedApplicant && <ApplicantDetailsModal applicant={selectedApplicant} />}
+            {selectedJob && <JobDetailsModal job={selectedJob} />}
         </>
     );
 };

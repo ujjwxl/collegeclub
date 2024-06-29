@@ -372,3 +372,69 @@ export const fetchApplicants = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch applicants' });
   }
 };
+
+export const addJobOpening = async (req, res) => {
+  const {
+    jobTitle,
+    jobDescription,
+    jobResponsibilities,
+    jobSkills,
+    jobLocation,
+    jobEducation,
+    jobExperience,
+    jobDesignation,
+    jobOpenPositions,
+  } = req.body;
+
+  try {
+    const jobCollectionRef = collection(db, 'jobs'); // Assuming 'jobs' is your Firestore collection for job openings
+
+    const jobData = {
+      jobTitle,
+      jobDescription,
+      jobResponsibilities,
+      jobSkills,
+      jobLocation,
+      jobEducation,
+      jobExperience,
+      jobDesignation,
+      jobOpenPositions,
+    };
+
+    const docRef = await addDoc(jobCollectionRef, jobData);
+
+    console.log('Job opening added successfully with ID: ', docRef.id);
+
+    res.status(200).json({ message: 'Job opening added successfully' });
+  } catch (error) {
+    console.error('Error adding job opening:', error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getJobOpenings = async (req, res) => {
+  try {
+    const jobCollectionRef = collection(db, 'jobs');
+
+    const snapshot = await getDocs(jobCollectionRef); 
+
+    if (snapshot.empty) {
+      console.log('No job openings found.');
+      return res.status(404).json({ message: 'No job openings found' });
+    }
+
+    const jobOpenings = []; 
+
+    snapshot.forEach((doc) => {
+      jobOpenings.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
+
+    res.status(200).json(jobOpenings); 
+  } catch (error) {
+    console.error('Error fetching job openings:', error.message);
+    res.status(500).json({ message: 'Error fetching job openings', error: error.message });
+  }
+};
