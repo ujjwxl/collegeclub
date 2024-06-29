@@ -249,7 +249,8 @@ const Skills = () => {
                 {row.map((course, index) => (
                   <div className="skills-course-card" key={index}>
                     <img
-                      src={course.courseImage}
+                      // src={course.courseImage}
+                      src={backgroundImage}
                       alt=""
                       className="skills-course-card-img"
                     />
