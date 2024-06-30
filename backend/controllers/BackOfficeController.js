@@ -320,10 +320,13 @@ export const createCourse = async (req, res) => {
     whatYouWillLearn,
   } = req.body;
 
+  const courseId = uuidv4();
+
   try {
     const docRef = await addDoc(collection(db, "courses"), {
       courseName,
       instructorName,
+      courseId,
       price,
       briefDescription,
       rating,
@@ -526,6 +529,26 @@ export const getAllEvents = async (req, res) => {
     });
 
     res.status(200).json(eventsList);
+  } catch (error) {
+    console.error("Error fetching events: ", error);
+    res.status(500).json({ error: "Failed to fetch events" });
+  }
+};
+
+export const getAllCourseApplications = async (req, res) => {
+  try {
+    const courseApplicationsRef = collection(db, "courseapplications");
+    const snapshot = await getDocs(courseApplicationsRef);
+    const courseApplicationsList = [];
+
+    snapshot.forEach((doc) => {
+      courseApplicationsList.push({
+        id: doc.id,
+        ...doc.data(),
+      });
+    });
+
+    res.status(200).json(courseApplicationsList);
   } catch (error) {
     console.error("Error fetching events: ", error);
     res.status(500).json({ error: "Failed to fetch events" });

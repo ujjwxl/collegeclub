@@ -24,6 +24,8 @@ const Home: React.FC = () => {
             navigate('/events');
         } else if(menuItem === "new-onboarding") {
             navigate('/new-onboarding');
+        } else if(menuItem === "course-applications") {
+            navigate('/course-applications');
         }
     };
 
@@ -51,9 +53,9 @@ const Home: React.FC = () => {
                             <img src={envelope} className="h-8 object-contain"></img>
                             <p className="mt-3 font-semibold text-center text-white">Work Request</p>
                         </div>
-                        <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform  hover:shadow-md" onClick={() => handleClick('course-enrollment')}>
+                        <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform  hover:shadow-md" onClick={() => handleClick('course-applications')}>
                             <img src={book} className="h-8 object-contain"></img>
-                            <p className="mt-3 font-semibold text-center text-white">Course Enrollment</p>
+                            <p className="mt-3 font-semibold text-center text-white">Course Application</p>
                         </div>
                         <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform hover:shadow-md" onClick={() => handleClick('new-admission')}>
                             <img src={agreement} className="h-8 object-contain"></img>

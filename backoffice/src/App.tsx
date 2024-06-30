@@ -12,6 +12,7 @@ import Courses from "./pages/Courses";
 import CompanyDetails from "./pages/CompanyDetails";
 import Events from "./pages/Events";
 import NewOnboarding from "./pages/NewOnboarding";
+import CourseApplications from "./pages/CourseApplications";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/courses" element={<Courses/>} />
           <Route path="/events" element={<Events/>} />
           <Route path="/new-onboarding" element={<NewOnboarding/>} />
+          <Route path="/course-applications" element={<CourseApplications/>} />
         </Routes>
       </Router>
     </>

@@ -97,6 +97,9 @@ const StudentAdmission = () => {
     ];
 
     const handleSubmit = async (e) => {
+
+        console.log(selectedCourse);
+
         e.preventDefault();
 
         if (!isConfirmed) {
@@ -113,7 +116,7 @@ const StudentAdmission = () => {
                 gender,
                 email,
                 phoneNumber,
-                courseId: selectedCourse.id,
+                courseId: selectedCourse.courseId,
                 courseName: selectedCourse.courseName,
                 organizationName,
                 hasBachelorsDegree,
