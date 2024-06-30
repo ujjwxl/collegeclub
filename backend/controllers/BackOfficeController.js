@@ -18,6 +18,7 @@ import {
   getDocs,
   documentId,
 } from "firebase/firestore";
+import { v4 as uuidv4 } from 'uuid';
 
 export const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
@@ -467,7 +468,10 @@ export const createEvent = async (req, res) => {
 
   try {
 
+    const eventId = uuidv4();
+
     const docRef = await addDoc(collection(db, "events"), {
+      id: eventId,
       message, 
       date, 
       targets,
@@ -492,7 +496,7 @@ export const createEvent = async (req, res) => {
       querySnapshot.forEach(async (doc) => {
         try {
           await updateDoc(doc.ref, {
-            events: arrayUnion({ message, date, createdAt: Date.now() }),
+            events: arrayUnion({id: eventId, message, date, createdAt: Date.now() }),
           });
           console.log(`Event added for user with accountType ${target}`);
         } catch (updateError) {

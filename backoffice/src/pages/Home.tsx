@@ -20,6 +20,10 @@ const Home: React.FC = () => {
             navigate('/partners');
         } else if (menuItem === "slots") {
             navigate('/slots');
+        } else if(menuItem === "events") {
+            navigate('/events');
+        } else if(menuItem === "new-onboarding") {
+            navigate('/new-onboarding');
         }
     };
 
@@ -35,7 +39,7 @@ const Home: React.FC = () => {
                             <img src={partners} className="h-8 object-contain"></img>
                             <p className="mt-3 font-semibold text-center text-white">Partners</p>
                         </div>
-                        <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform  hover:shadow-md" onClick={() => handleClick('onboarding')}>
+                        <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform  hover:shadow-md" onClick={() => handleClick('new-onboarding')}>
                             <img src={onboarding} className="h-8 object-contain"></img>
                             <p className="mt-3 font-semibold text-center text-white">New Onboarding</p>
                         </div>
@@ -55,7 +59,7 @@ const Home: React.FC = () => {
                             <img src={agreement} className="h-8 object-contain"></img>
                             <p className="mt-3 font-semibold text-center text-white">New Admission</p>
                         </div>
-                        <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform  hover:shadow-md" onClick={() => handleClick('call-request')}>
+                        <div className="card-item bg-slate-500 rounded-lg flex flex-col items-center justify-center px-3 py-7 cursor-pointer transition-transform duration-300 transform  hover:shadow-md" onClick={() => handleClick('slots')}>
                             <img src={chat} className="h-8 object-contain"></img>
                             <p className="mt-3 font-semibold text-center text-white">Call Request</p>
                         </div>

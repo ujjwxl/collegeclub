@@ -11,6 +11,7 @@ import HR from "./pages/HR";
 import Courses from "./pages/Courses";
 import CompanyDetails from "./pages/CompanyDetails";
 import Events from "./pages/Events";
+import NewOnboarding from "./pages/NewOnboarding";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/hr" element={<HR />} />
           <Route path="/courses" element={<Courses/>} />
           <Route path="/events" element={<Events/>} />
+          <Route path="/new-onboarding" element={<NewOnboarding/>} />
         </Routes>
       </Router>
     </>
