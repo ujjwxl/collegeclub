@@ -554,3 +554,23 @@ export const getAllCourseApplications = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch events" });
   }
 };
+
+export const getPaidCourseApplicants = async (req, res) => {
+  try {
+    const courseApplicationsRef = collection(db, "paidcourseapplicants");
+    const snapshot = await getDocs(courseApplicationsRef);
+    const courseApplicationsList = [];
+
+    snapshot.forEach((doc) => {
+      courseApplicationsList.push({
+        id: doc.id,
+        ...doc.data(),
+      });
+    });
+
+    res.status(200).json(courseApplicationsList);
+  } catch (error) {
+    console.error("Error fetching events: ", error);
+    res.status(500).json({ error: "Failed to fetch events" });
+  }
+};

@@ -13,6 +13,7 @@ import CompanyDetails from "./pages/CompanyDetails";
 import Events from "./pages/Events";
 import NewOnboarding from "./pages/NewOnboarding";
 import CourseApplications from "./pages/CourseApplications";
+import PaidCourseApplicants from "./pages/PaidCourseApplicants";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/events" element={<Events/>} />
           <Route path="/new-onboarding" element={<NewOnboarding/>} />
           <Route path="/course-applications" element={<CourseApplications/>} />
+          <Route path="/paid-applications" element={<PaidCourseApplicants/>} />
         </Routes>
       </Router>
     </>

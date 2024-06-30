@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addJobOpening, addTeamMember, createCourse, createEvent, fetchApplicants, fetchTeam, getAllCourseApplications, getAllEvents, getAllUsers, getFeedbackByType, getJobOpenings, getPartnersByType, getSlotBookingDetails, loginAdmin, updateFeedbackStatus, updateOnboardingStatus, verifyCollege } from "../controllers/BackOfficeController.js";
+import { addJobOpening, addTeamMember, createCourse, createEvent, fetchApplicants, fetchTeam, getAllCourseApplications, getAllEvents, getAllUsers, getFeedbackByType, getJobOpenings, getPaidCourseApplicants, getPartnersByType, getSlotBookingDetails, loginAdmin, updateFeedbackStatus, updateOnboardingStatus, verifyCollege } from "../controllers/BackOfficeController.js";
 
 const router = Router();
 
@@ -20,5 +20,6 @@ router.get('/job/all', getJobOpenings);
 router.post('/createevent', createEvent);
 router.get('/getevents', getAllEvents);
 router.get('/getcourseapplications', getAllCourseApplications);
+router.get('/getpaidcourseapplicants', getPaidCourseApplicants);
 
 export default router

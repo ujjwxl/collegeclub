@@ -109,6 +109,7 @@ app.post("/paymentverification",async(req,res) => {
  app.post("/coursepaymentverification",async(req,res) => {
 
     const userId = req.query.userid;
+    const userName = req.query.username;
     const selectedCourse = req.query.courseid;
     const courseName = req.query.coursename;
     const instructorName = req.query.instructorname;
@@ -126,6 +127,17 @@ app.post("/paymentverification",async(req,res) => {
 
      console.log('Payment id')
      console.log(razorpay_payment_id)
+
+    const docRef = await addDoc(collection(db, "paidcourseapplicants"), {
+      userId,
+      userName,
+      courseId: selectedCourse,
+      courseName,
+      paymentId: razorpay_payment_id,
+      orderId: razorpay_order_id,
+      instructorName,
+      purchasedAt: Date.now()
+    });
 
      const usersCollectionRef = collection(db, "users");
      const q = query(usersCollectionRef, where("userId", "==", userId));
