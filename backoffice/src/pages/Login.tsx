@@ -24,7 +24,7 @@ const Login: React.FC = () => {
     axios.post('http://localhost:5000/admin/login', { email, password })
     .then((response: AxiosResponse<LoginResponse>) => {
         const userId = response.data.userData.userId;
-        localStorage.setItem('id', userId);
+        sessionStorage.setItem('id', userId);
         navigate('/home');
     })
     .catch((error: AxiosError) => {

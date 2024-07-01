@@ -31,27 +31,18 @@ export const loginAdmin = async (req, res) => {
       password
     );
 
-    const userId = userCredential.user.uid;
-    console.log(userId);
+    const adminsCollectionRef = collection(db, "admins");
+    const q = query(adminsCollectionRef, where("email", "==", email));
+    const querySnapshot = await getDocs(q);
 
     let userData;
-    const docRef = doc(db, "admins", userId);
-    await getDoc(docRef)
-      .then((docSnapshot) => {
-        if (docSnapshot.exists) {
-          if (docSnapshot.id === userId) {
-            userData = docSnapshot.data();
-            userData["userId"] = userId;
-          } else {
-            console.error("Unauthorized access!");
-          }
-        } else {
-          console.log("Document not found!");
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching document:", error);
-      });
+    querySnapshot.forEach((doc) => {
+      userData = doc.data();
+    });
+
+    if (!userData) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
     res.status(200).json({ userData });
   } catch (error) {
@@ -88,6 +79,33 @@ export const createAdmin = async (req, res) => {
     const errorMessage = error.message;
     console.log(errorMessage);
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const getAdminRole = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    
+    const adminsCollectionRef = collection(db, "admins");
+    const q = query(adminsCollectionRef, where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+
+    let userData;
+    querySnapshot.forEach((doc) => {
+      userData = doc.data();
+    });
+
+    const role = userData.role;
+
+    if (!userData) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ role });
+  } catch (error) {
+    console.error("Login failed:", error.message);
+    res.status(400).json({ message: "Invalid email or password" });
   }
 };
 
@@ -644,7 +662,7 @@ export const saveRolePermissions = async (req, res) => {
     }
 
     const updateObject = {};
-    Object.keys(permissions).forEach(key => {
+    Object.keys(permissions).forEach((key) => {
       updateObject[key] = permissions[key];
     });
 

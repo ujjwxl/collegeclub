@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import axios, { AxiosError, AxiosResponse } from "axios";
@@ -21,6 +21,36 @@ const Settings: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [role, setRole] = useState<string>("");
+
+  const userId = sessionStorage.getItem("id");
+
+  const [userRole, setUserRole] = useState<string>("");
+  const [permissions, setPermissions] = useState<{ [key: string]: boolean }>(
+    {}
+  );
+
+  useEffect(() => {
+    const fetchRoleAndPermissions = async () => {
+      try {
+        const roleResponse = await axios.get(
+          `http://localhost:5000/admin/adminrole/${userId}`
+        );
+        const roleData = roleResponse.data.role;
+        setUserRole(roleData);
+
+        const permissionsResponse = await axios.get(
+          `http://localhost:5000/admin/getroleperms/${roleData}`
+        );
+        const permissionsData = permissionsResponse.data;
+        setPermissions(permissionsData);
+      } catch (error) {
+        alert("Could not fetch role and permissions");
+        console.error(error);
+      }
+    };
+
+    fetchRoleAndPermissions();
+  }, [userId]);
 
   const handleAddUser = () => {
     axios
@@ -112,7 +142,7 @@ const Settings: React.FC = () => {
   //   );
 
   //   console.log(permissionsToSend)
-  
+
   //   axios
   //     .post(`http://localhost:5000/admin/saveroleperms/${editingRole}`, {
   //       permissions: permissionsToSend,
@@ -129,14 +159,14 @@ const Settings: React.FC = () => {
 
   const saveRolePermissions = () => {
     const permissionsToSend: RolePermissions = {};
-    
+
     // Initialize all permissions to false
-    permissionsList.forEach(permission => {
+    permissionsList.forEach((permission) => {
       permissionsToSend[permission] = false;
     });
 
     // Set selected permissions to true
-    selectedPermissions.forEach(permission => {
+    selectedPermissions.forEach((permission) => {
       permissionsToSend[permission] = true;
     });
 
@@ -155,7 +185,6 @@ const Settings: React.FC = () => {
         alert("Failed to save role permissions");
       });
   };
-  
 
   return (
     <>
@@ -165,19 +194,23 @@ const Settings: React.FC = () => {
         <div className="w-5/6">
           <h1 className="font-bold text-3xl mx-4">Settings</h1>
           <div className="flex w-full justify-around">
-            <div
-              className="w-1/5 bg-slate-500 mt-4 p-12 text-center rounded-xl"
-              onClick={() => setRolesModal(true)}
-            >
-              <p className="text-xl text-white">Roles and Permissions</p>
-            </div>
+            {permissions["Create admin"] && (
+              <div
+                className="w-1/5 bg-slate-500 mt-4 p-12 text-center rounded-xl"
+                onClick={() => setRolesModal(true)}
+              >
+                <p className="text-xl text-white">Roles and Permissions</p>
+              </div>
+            )}
 
-            <div
-              className="w-1/5 bg-slate-500 mt-4 p-12 text-center rounded-xl"
-              onClick={() => setAddUserModal(true)}
-            >
-              <p className="text-xl text-white">Add User</p>
-            </div>
+            {permissions["Create admin"] && (
+              <div
+                className="w-1/5 bg-slate-500 mt-4 p-12 text-center rounded-xl"
+                onClick={() => setAddUserModal(true)}
+              >
+                <p className="text-xl text-white">Add User</p>
+              </div>
+            )}
 
             <div className="w-1/5 bg-slate-500 mt-4 p-12 text-center rounded-xl">
               <p className="text-xl text-white">FAQs</p>
