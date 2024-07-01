@@ -19,7 +19,7 @@ import {
   getDocs,
   documentId,
 } from "firebase/firestore";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 export const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
@@ -60,13 +60,8 @@ export const loginAdmin = async (req, res) => {
   }
 };
 
-
 export const createAdmin = async (req, res) => {
-  const {
-    email,
-    password,
-    role,
-  } = req.body;
+  const { email, password, role } = req.body;
 
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -83,7 +78,7 @@ export const createAdmin = async (req, res) => {
       email,
       password,
       role,
-      userId
+      userId,
     });
 
     console.log("Document written with ID: ", docRef.id);
@@ -507,15 +502,14 @@ export const createEvent = async (req, res) => {
   const { message, date, targets } = req.body;
 
   try {
-
     const eventId = uuidv4();
 
     const docRef = await addDoc(collection(db, "events"), {
       id: eventId,
-      message, 
-      date, 
+      message,
+      date,
       targets,
-      createdAt: Date.now()
+      createdAt: Date.now(),
     });
 
     console.log("Document written with ID: ", docRef.id);
@@ -536,7 +530,12 @@ export const createEvent = async (req, res) => {
       querySnapshot.forEach(async (doc) => {
         try {
           await updateDoc(doc.ref, {
-            events: arrayUnion({id: eventId, message, date, createdAt: Date.now() }),
+            events: arrayUnion({
+              id: eventId,
+              message,
+              date,
+              createdAt: Date.now(),
+            }),
           });
           console.log(`Event added for user with accountType ${target}`);
         } catch (updateError) {
@@ -609,5 +608,53 @@ export const getPaidCourseApplicants = async (req, res) => {
   } catch (error) {
     console.error("Error fetching events: ", error);
     res.status(500).json({ error: "Failed to fetch events" });
+  }
+};
+
+export const getRolePermissions = async (req, res) => {
+  const { role } = req.params;
+
+  try {
+    const rolesRef = doc(db, "admin-roles", role);
+    const roleDoc = await getDoc(rolesRef);
+
+    const roleData = roleDoc.data();
+
+    res.status(200).json(roleData);
+  } catch (error) {
+    console.error("Error fetching events: ", error);
+    res.status(500).json({ error: "Failed to fetch events" });
+  }
+};
+
+export const saveRolePermissions = async (req, res) => {
+  const { role } = req.params;
+  const { permissions } = req.body;
+
+  console.log(role);
+  console.log(permissions);
+
+  try {
+    const rolesRef = doc(db, "admin-roles", role);
+    const roleDoc = await getDoc(rolesRef);
+
+    if (!roleDoc.exists()) {
+      res.status(404).json({ error: "Role not found" });
+      return;
+    }
+
+    const updateObject = {};
+    Object.keys(permissions).forEach(key => {
+      updateObject[key] = permissions[key];
+    });
+
+    console.log(updateObject);
+
+    await updateDoc(rolesRef, updateObject);
+
+    res.status(200).json({ message: "Role permissions updated successfully" });
+  } catch (error) {
+    console.error("Error updating role permissions: ", error);
+    res.status(500).json({ error: "Failed to update role permissions" });
   }
 };
