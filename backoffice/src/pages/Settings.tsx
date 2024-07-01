@@ -20,6 +20,8 @@ const Settings: React.FC = () => {
   const [selectedPermissions, setSelectedPermissions] = useState<string[]>([]);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [mobileNo, setMobileNo] = useState<string>("");
   const [role, setRole] = useState<string>("");
 
   const userId = sessionStorage.getItem("id");
@@ -57,6 +59,8 @@ const Settings: React.FC = () => {
       .post("http://localhost:5000/admin/create", {
         email,
         password,
+        name,
+        mobileNo,
         role,
       })
       .then((response: AxiosResponse) => {
@@ -70,6 +74,8 @@ const Settings: React.FC = () => {
     // Reset form and close modal
     setEmail("");
     setPassword("");
+    setName("");
+    setMobileNo("");
     setRole("");
   };
 
@@ -219,9 +225,32 @@ const Settings: React.FC = () => {
 
           {addUserModal && (
             // <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+            
             <div className="bg-white m-4 p-8 rounded-lg shadow-lg">
               <h2 className="text-2xl font-bold mb-4">Add User</h2>
               <form>
+              <div className="mb-4">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    className="mt-1 block w-full border-gray-300 p-2 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="mobileNo" className="block text-sm font-medium text-gray-700">Mobile Number</label>
+                  <input
+                    type="text"
+                    id="mobileNo"
+                    className="mt-1 block w-full border-gray-300 p-2 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    value={mobileNo}
+                    onChange={(e) => setMobileNo(e.target.value)}
+                    required
+                  />
+                </div>
                 <div className="mb-4">
                   <label
                     htmlFor="email"

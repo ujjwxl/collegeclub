@@ -30,7 +30,8 @@ const DashboardMenu = ({
   onShowLeads,
   onDashboardClick,
   onProfileClick,
-  onShowCompanyCMS
+  onShowCompanyCMS,
+  onShowEvents
 }) => {
   const [userData, setUserData] = useState(null);
 
@@ -86,7 +87,7 @@ const DashboardMenu = ({
 
   const handleThirdIconClick = () => {
     if (userData && userData.accountType === "College") {
-      onShowLeads();
+      onShowEvents();
     } else if (userData && userData.accountType === "Company") {
       onShowApplicants();
     }
@@ -156,7 +157,7 @@ const DashboardMenu = ({
             </div>
             <div
               className="dashboard-menu-middle-icon"
-              onClick={handleThirdIconClick}
+              onClick={onShowEvents}
             >
               <img src={eventsIcon} alt="" />
               <p>Events</p>

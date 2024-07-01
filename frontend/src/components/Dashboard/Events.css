@@ -1,0 +1,34 @@
+.dashboard-box-events {
+  /* background-color: blue; */
+  background-color: #240655;
+  height: 90%;
+  /* width: 45%; */
+  width: 55%;
+  margin-top: 2%;
+  margin-left: 2%;
+  border-radius: 20px;
+  margin-right: auto;
+  overflow-y: auto;
+}
+
+.dashboard-box-container-events {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+}
+.events-list {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+
+.event-card {
+  background-color: #220650;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+
+}

@@ -52,7 +52,7 @@ export const loginAdmin = async (req, res) => {
 };
 
 export const createAdmin = async (req, res) => {
-  const { email, password, role } = req.body;
+  const { email, password, role, name, mobileNo } = req.body;
 
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -64,12 +64,13 @@ export const createAdmin = async (req, res) => {
     const user = userCredential.user;
     const userId = user.uid;
 
-    // Create document in Firestore
     const docRef = await addDoc(collection(db, "admins"), {
       email,
       password,
       role,
       userId,
+      name, 
+      mobileNo,
     });
 
     console.log("Document written with ID: ", docRef.id);
