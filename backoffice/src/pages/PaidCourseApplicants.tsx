@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import { format } from "date-fns";
 import axios from "axios";
 
 interface PaidCourseApplicant {
@@ -111,19 +112,43 @@ function PaidCourseApplicants(): JSX.Element {
             {selectedApplicant && (
               <div className="fixed inset-0 flex items-center justify-center z-10 bg-black bg-opacity-50">
                 <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
-                  <h2 className="text-xl font-semibold mb-4">
-                    {selectedApplicant.userName}'s Payment Details
-                  </h2>
-                  <p>User ID: {selectedApplicant.userId}</p>
-                  <p>Course ID: {selectedApplicant.courseId}</p>
-                  <p>Course Name: {selectedApplicant.courseName}</p>
-                  <p>Payment ID: {selectedApplicant.paymentId}</p>
-                  <p>Order ID: {selectedApplicant.orderId}</p>
-                  <p>Instructor: {selectedApplicant.instructorName}</p>
-                  <p>Purchased At: {selectedApplicant.purchasedAt}</p>
-
+                  <div className="flex justify-between items-center mb-6">
+                    <h2 className="text-xl font-semibold">
+                      {selectedApplicant.userName}'s Payment Details
+                    </h2>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="col-span-2">
+                      <p className="text-sm text-gray-600 font-bold">User ID:</p>
+                      <p>{selectedApplicant.userId}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600 font-bold">Course ID:</p>
+                      <p>{selectedApplicant.courseId}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600 font-bold">Course Name:</p>
+                      <p>{selectedApplicant.courseName}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600 font-bold">Payment ID:</p>
+                      <p>{selectedApplicant.paymentId}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600 font-bold">Order ID:</p>
+                      <p>{selectedApplicant.orderId}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600 font-bold">Instructor:</p>
+                      <p>{selectedApplicant.instructorName}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600 font-bold">Purchased At:</p>
+                      <p> {format(new Date(selectedApplicant.purchasedAt), 'dd/MM/yyyy hh:mm aa')}</p>
+                    </div>
+                  </div>
                   <button
-                    className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg mt-4"
+                    className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg mt-6 w-full"
                     onClick={closeModal}
                   >
                     Close
