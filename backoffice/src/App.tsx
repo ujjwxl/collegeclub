@@ -14,6 +14,7 @@ import Events from "./pages/Events";
 import NewOnboarding from "./pages/NewOnboarding";
 import CourseApplications from "./pages/CourseApplications";
 import PaidCourseApplicants from "./pages/PaidCourseApplicants";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/new-onboarding" element={<NewOnboarding/>} />
           <Route path="/course-applications" element={<CourseApplications/>} />
           <Route path="/paid-applications" element={<PaidCourseApplicants/>} />
+          <Route path="/settings" element={<Settings/>} />
         </Routes>
       </Router>
     </>

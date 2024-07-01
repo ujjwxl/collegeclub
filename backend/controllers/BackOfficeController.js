@@ -1,5 +1,6 @@
 import {
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   getAuth,
   updatePassword,
 } from "firebase/auth";
@@ -56,6 +57,42 @@ export const loginAdmin = async (req, res) => {
   } catch (error) {
     console.error("Login failed:", error.message);
     res.status(400).json({ message: "Invalid email or password" });
+  }
+};
+
+
+export const createAdmin = async (req, res) => {
+  const {
+    email,
+    password,
+    role,
+  } = req.body;
+
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    const user = userCredential.user;
+    const userId = user.uid;
+
+    // Create document in Firestore
+    const docRef = await addDoc(collection(db, "admins"), {
+      email,
+      password,
+      role,
+      userId
+    });
+
+    console.log("Document written with ID: ", docRef.id);
+    res.status(200).json(docRef);
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
+    res.status(500).json({ message: error.message });
   }
 };
 
