@@ -21,6 +21,8 @@ const CompanyCMS = () => {
   const [sidebarOption, setSidebarOption] = useState("");
   const [studentDetailsPage, setStudentDetailsPage] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState([]);
+  const [events, setEvents] = useState([]);
+  const [target, setTarget] = useState("");
 
   const userId = localStorage.getItem("id");
 
@@ -63,6 +65,31 @@ const CompanyCMS = () => {
       console.log("Error fetching students:", error);
     }
   };
+
+  useEffect(() => {
+    const fetchEventsByTarget = async () => {
+      try {
+        const storedTarget = localStorage.getItem("type");
+        if (!storedTarget) {
+          throw new Error("Target type not found in local storage");
+        }
+        setTarget(storedTarget);
+
+        const response = await fetch(
+          `http://localhost:5000/auth/getEvents/${storedTarget}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch events");
+        }
+        const data = await response.json();
+        setEvents(data);
+      } catch (error) {
+        console.error("Error fetching events:", error.message);
+      }
+    };
+
+    fetchEventsByTarget();
+  }, []);
 
   const handleFileUpload = (file, endpoint) => {};
 
@@ -295,15 +322,27 @@ const CompanyCMS = () => {
           </form>
         );
       }
-    } else if (activeDiv === "T&P Cell") {
+    } else if (activeDiv === "Events") {
       return (
-        <form>
-          <div className="form-input-group">
-            <label htmlFor="jobTitle">Job Title*</label>
-            <input type="text" placeholder="Enter the job title" required />
-          </div>
-          <button className="form-submit-button">Continue</button>
-        </form>
+        <>
+        <h2>Events</h2>
+        <div className="events-list">
+          {events.length > 0 ? (
+            <div className="event-cards">
+              {events.map((event) => (
+                <div key={event.id} className="event-card">
+                  <div className="event-card-content">
+                    <h3>{event.message}</h3>
+                    <p>Date: {new Date(event.date).toLocaleDateString()}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="no-events-msg">No events found</p>
+          )}
+        </div>
+        </>
       );
     }
     return null;
@@ -333,20 +372,20 @@ const CompanyCMS = () => {
             </h2>
           </div>
           <div
-            className={activeDiv === "T&P Cell" ? "active" : ""}
+            className={activeDiv === "Events" ? "active" : ""}
             onClick={handleClick}
             onFocus={handleFocus}
             tabIndex="0"
-            data-key="T&P Cell"
+            data-key="Events"
           >
             <img className="leadimg" src={jobsIcon} alt="jobs icon"></img>
             <h2
               tabIndex="-1"
-              className={activeDiv === "T&P Cell" ? "active" : ""}
+              className={activeDiv === "Events" ? "active" : ""}
               onClick={handleClick}
               onFocus={handleFocus}
             >
-              T&P Cell
+              Events
             </h2>
           </div>
         </div>
@@ -379,7 +418,7 @@ const CompanyCMS = () => {
           </div>
         )}
 
-        {activeDiv === "T&P Cell" && <div>{renderForm()}</div>}
+        {activeDiv === "Events" && <div>{renderForm()}</div>}
         <div className="college-cms-bottom-navigation"></div>
       </div>
     </div>

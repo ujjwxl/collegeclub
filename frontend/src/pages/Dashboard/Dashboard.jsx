@@ -46,6 +46,7 @@ const Dashboard = () => {
     setShowLeads(false);
     setShowCompanyCMS(false);
     setShowEvents(false);
+    setShowNotificationBox(false);
 
   };
 
@@ -58,6 +59,7 @@ const Dashboard = () => {
     setShowLeads(false);
     setShowCompanyCMS(false);
     setShowEvents(false);
+    setShowNotificationBox(false);
 
   }
 
@@ -70,6 +72,7 @@ const Dashboard = () => {
     setShowLeads(false);
     setShowCompanyCMS(false);
     setShowEvents(false);
+    setShowNotificationBox(false);
 
   }
 
@@ -96,6 +99,7 @@ const Dashboard = () => {
     setShowCMS(false);
     setShowCompanyCMS(false);
     setShowNotificationBox(false);
+    setShowMyCourses(false);
     setShowEvents(true);
   };
 
@@ -126,6 +130,7 @@ const Dashboard = () => {
     setShowMyCourses(false);
     setShowLeads(false);
     setShowEvents(false);
+    setShowNotificationBox(false);
 
   }
 
@@ -141,7 +146,8 @@ const Dashboard = () => {
     setShowStudentCertificates(false);
     setShowLeads(false);
     setShowEvents(false);
-
+    setShowNotificationBox(false);
+    
   }
 
   const handleShowStudentOpenings = () => {
@@ -156,6 +162,7 @@ const Dashboard = () => {
     setShowStudentCertificates(false);
     setShowStudentOpenings(true);
     setShowEvents(false);
+    setShowNotificationBox(false);
 
   }
 
@@ -171,6 +178,7 @@ const Dashboard = () => {
     setShowStudentOpenings(false);
     setShowStudentCertificates(true);
     setShowEvents(false);
+    setShowNotificationBox(false);
 
   }
 
@@ -203,6 +211,7 @@ const Dashboard = () => {
     setShowStudentOpenings(false);
     setShowCompanyCMS(true);
     setShowEvents(false);
+    setShowNotificationBox(false);
 
   }
 
@@ -221,7 +230,6 @@ const Dashboard = () => {
     setShowCompanyCMS(false);
     setShowNotificationBox(true);
     setShowEvents(false);
-
   }
 
   const handleShowProfileClick =()=>{

@@ -41,7 +41,7 @@ const Users = () => {
     };
     fetchEvents();
 
-  }, []); 
+  }, []);
 
   const handleCheckboxChange = (target: string) => {
     const currentTargets = [...formData.targets];
@@ -99,23 +99,37 @@ const Users = () => {
         <Sidebar />
         <div className="w-5/6 p-4">
           <div className="p-4">
-            <div className="flex justify-around mb-4">
+            {/* <div className="flex justify-around mb-4">
               <button
-                className={`bg-blue-500 text-white px-4 py-2 rounded-lg focus:outline-none focus:shadow-outline ${
-                  view === "all" ? "bg-blue-700" : ""
-                }`}
+                className={`bg-blue-500 text-white px-4 py-2 rounded-lg focus:outline-none focus:shadow-outline ${view === "all" ? "bg-blue-700" : ""
+                  }`}
                 onClick={() => setView("all")}
               >
                 All Events
               </button>
               <button
-                className={`bg-blue-500 text-white px-4 py-2 rounded-lg focus:outline-none focus:shadow-outline ${
-                  view === "add" ? "bg-blue-700" : ""
-                }`}
+                className={`bg-blue-500 text-white px-4 py-2 rounded-lg focus:outline-none focus:shadow-outline ${view === "add" ? "bg-blue-700" : ""
+                  }`}
                 onClick={() => setView("add")}
               >
                 Add an Event
               </button>
+            </div> */}
+
+            <div className="flex justify-around mb-8">
+              <div
+                className={`w-1/3 bg-slate-500 mt-4 p-4 text-center rounded-xl cursor-pointer transition-colors duration-300 ${view === 'all' ? 'bg-blue-500 text-white' : 'bg-slate-500 text-gray-200 hover:bg-gray-700'}`}
+                onClick={() => setView("all")}
+              >
+                <p className="text-xl">All Events</p>
+              </div>
+
+              <div
+                className={`w-1/3 bg-slate-500 mt-4 p-4 text-center rounded-xl cursor-pointer transition-colors duration-300 ${view === 'add' ? 'bg-blue-500 text-white' : 'bg-slate-500 text-gray-200 hover:bg-gray-700'}`}
+                onClick={() => setView("add")}
+              >
+                <p className="text-xl">Add Events</p>
+              </div>
             </div>
 
             {view === "all" && (

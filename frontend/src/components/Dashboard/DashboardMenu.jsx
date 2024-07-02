@@ -15,6 +15,14 @@ import applicationIcon from "../../assets/edit.png";
 import notificationIcon from "../../assets/notification.png";
 import helpIcon from "../../assets/help.png";
 import logoutIcon from "../../assets/close.png";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 import "./DashboardMenu.css";
 
 const DashboardMenu = ({
@@ -34,7 +42,7 @@ const DashboardMenu = ({
   onShowEvents
 }) => {
   const [userData, setUserData] = useState(null);
-
+  const [openLogoutDialog, setOpenLogoutDialog] = useState(false);
   const userId = localStorage.getItem("id");
 
   const navigate = useNavigate();
@@ -63,10 +71,16 @@ const DashboardMenu = ({
   console.log(userData);
 
   const handleSignOut = () => {
+    setOpenLogoutDialog(true);
+  };
+  const handleLogoutConfirm = () => {
     localStorage.removeItem("id");
     localStorage.removeItem("token");
     localStorage.clear();
     navigate("/");
+  };
+  const handleLogoutCancel = () => {
+    setOpenLogoutDialog(false);
   };
 
   const handleFirstIconClick = () => {
@@ -187,9 +201,9 @@ const DashboardMenu = ({
               <img src={eventsIcon} alt="" />
               <p>My Courses</p>
             </div>
-            <div className="dashboard-menu-middle-icon" onClick={onShowStudentCertificates}>
+            <div className="dashboard-menu-middle-icon" onClick={onShowEvents}>
               <img src={certificatesIcon} alt="" />
-              <p>Certificates</p>
+              <p>Events</p>
             </div>
             <div className="dashboard-menu-middle-icon" onClick={onShowStudentOpenings}>
               <img src={jobsIcon} alt="" />
@@ -204,10 +218,10 @@ const DashboardMenu = ({
             </div>
             <div
               className="dashboard-menu-middle-icon"
-              onClick={onShowLeads}
+              onClick={onShowEvents}
             >
-              <img src={leadsIcon} alt="" />
-              <p>Admissions</p>
+              <img src={eventsIcon} alt="" />
+              <p>Events</p>
             </div>
             <div className="dashboard-menu-middle-icon" onClick={onShowLeads}>
               <img src={eventsIcon} alt="" />
@@ -256,6 +270,27 @@ const DashboardMenu = ({
         <img src={logoutIcon} alt="" />
         <h3>Logout</h3>
       </div>
+      <Dialog
+        open={openLogoutDialog}
+        onClose={handleLogoutCancel}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Logout Confirmation</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to logout?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleLogoutCancel} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleLogoutConfirm} color="primary" autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

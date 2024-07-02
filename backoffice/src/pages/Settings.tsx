@@ -71,7 +71,6 @@ const Settings: React.FC = () => {
         alert("Could not create admin");
       });
 
-    // Reset form and close modal
     setEmail("");
     setPassword("");
     setName("");
@@ -102,19 +101,6 @@ const Settings: React.FC = () => {
     "Create admin",
   ];
 
-  // const openRoleEditModal = (role: string) => {
-  //   console.log(role)
-
-  //   axios.get(`http://localhost:5000/admin/getroleperms/${role}`)
-  //   .then((response: AxiosResponse) => {
-
-  //   })
-
-  //   setEditingRole(role);
-  //   setSelectedPermissions([]);
-  //   setRolesChangeModal(true);
-  // };
-
   const openRoleEditModal = (role: string) => {
     setEditingRole(role);
 
@@ -133,45 +119,12 @@ const Settings: React.FC = () => {
       });
   };
 
-  // const saveRolePermissions = () => {
-  //   // Implement save logic here
-  //   setRolesChangeModal(false);
-  // };
-
-  // const saveRolePermissions = () => {
-  //   const permissionsToSend: RolePermissions = selectedPermissions.reduce(
-  //     (acc, permission) => {
-  //       acc[permission] = true;
-  //       return acc;
-  //     },
-  //     {} as RolePermissions
-  //   );
-
-  //   console.log(permissionsToSend)
-
-  //   axios
-  //     .post(`http://localhost:5000/admin/saveroleperms/${editingRole}`, {
-  //       permissions: permissionsToSend,
-  //     })
-  //     .then((response) => {
-  //       alert("Role permissions saved successfully!");
-  //       setRolesChangeModal(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error saving role permissions: ", error);
-  //       alert("Failed to save role permissions");
-  //     });
-  // };
-
   const saveRolePermissions = () => {
     const permissionsToSend: RolePermissions = {};
-
-    // Initialize all permissions to false
     permissionsList.forEach((permission) => {
       permissionsToSend[permission] = false;
     });
 
-    // Set selected permissions to true
     selectedPermissions.forEach((permission) => {
       permissionsToSend[permission] = true;
     });
@@ -191,6 +144,16 @@ const Settings: React.FC = () => {
         alert("Failed to save role permissions");
       });
   };
+  const openAddUserModal = () => {
+    setAddUserModal(true);
+    setRolesModal(false);
+    // setRolesChangeModal(false);
+  };
+  const openRolesModal = () => {
+    setRolesModal(true);
+    setAddUserModal(false);
+    // setRolesChangeModal(false);
+  };
 
   return (
     <>
@@ -203,7 +166,7 @@ const Settings: React.FC = () => {
             {permissions["Create admin"] && (
               <div
                 className="w-1/5 bg-slate-500 mt-4 p-12 text-center rounded-xl"
-                onClick={() => setRolesModal(true)}
+                onClick={openRolesModal}
               >
                 <p className="text-xl text-white">Roles and Permissions</p>
               </div>
@@ -212,7 +175,7 @@ const Settings: React.FC = () => {
             {permissions["Create admin"] && (
               <div
                 className="w-1/5 bg-slate-500 mt-4 p-12 text-center rounded-xl"
-                onClick={() => setAddUserModal(true)}
+                onClick={openAddUserModal}
               >
                 <p className="text-xl text-white">Add User</p>
               </div>
@@ -224,8 +187,6 @@ const Settings: React.FC = () => {
           </div>
 
           {addUserModal && (
-            // <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
-            
             <div className="bg-white m-4 p-8 rounded-lg shadow-lg">
               <h2 className="text-2xl font-bold mb-4">Add User</h2>
               <form>
@@ -350,7 +311,6 @@ const Settings: React.FC = () => {
                 </div>
               </form>
             </div>
-            // </div>
           )}
 
           {rolesModal && (
@@ -398,7 +358,6 @@ const Settings: React.FC = () => {
             </div>
           )}
 
-          {/* Roles Change Modal */}
           {rolesChangeModal && (
             <div className="fixed inset-0 z-50 overflow-auto bg-gray-900 bg-opacity-50 flex items-center justify-center">
               <div className="bg-white p-8 rounded-lg shadow-lg w-1/2">

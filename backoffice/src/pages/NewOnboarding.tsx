@@ -58,7 +58,7 @@ function NewOnboarding(): JSX.Element {
                                                 Role
                                             </th>
                                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                                                Details
+                                                UserID
                                             </th>
                                         </tr>
                                     </thead>
@@ -81,9 +81,7 @@ function NewOnboarding(): JSX.Element {
                                                     {user.accountType}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    <button className="bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 rounded-lg text-sm transition-colors">
-                                                        View more
-                                                    </button>
+                                                    {user.userId}
                                                 </td>
                                             </tr>
                                         ))}
