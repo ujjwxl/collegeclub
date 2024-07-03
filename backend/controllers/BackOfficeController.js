@@ -677,3 +677,20 @@ export const saveRolePermissions = async (req, res) => {
     res.status(500).json({ error: "Failed to update role permissions" });
   }
 };
+
+export const fetchLeads =async(req, res)=>{
+  try {
+    const leadsCollectionRef = collection(db, "leads");
+    const querySnapshot = await getDocs(leadsCollectionRef);
+
+    const leadsData = [];
+    querySnapshot.forEach((doc) => {
+      leadsData.push(doc.data());
+    });
+
+    res.status(200).json({ leads: leadsData });
+  } catch (error) {
+    console.error("Error fetching leads data:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};

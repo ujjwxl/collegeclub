@@ -1,0 +1,32 @@
+.dashboard-box-leads {
+    /* background-color: blue; */
+    background-color: #240655;
+    height: 90%;
+    /* width: 45%; */
+    width: 55%;
+    margin-top: 2%;
+    margin-left: 2%;
+    border-radius: 20px;
+    margin-right: auto;
+    overflow-y: auto;
+  }
+  
+  .dashboard-box-container-leads {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    padding: 30px 20px;
+  }
+  .dashboard-box-container-leads hr{
+    width: 100%;
+    margin-top: 4%;
+}
+.dashboard-box-container-leads .form-file-input-group{
+    height: 45px;
+}
+.dashboard-box-container-leads .form-file-input-group input{
+    height: 18px;
+}
+.dashboard-box-container-leads .form-file-input-group button{
+    height: 39px;
+}

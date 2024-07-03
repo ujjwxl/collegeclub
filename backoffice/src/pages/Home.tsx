@@ -60,6 +60,8 @@ const Home: React.FC = () => {
       navigate("/course-applications");
     } else if (menuItem === "paid-course-applications") {
       navigate("/paid-applications");
+    }else if (menuItem === "leads") {
+      navigate("/leads");
     }
   };
 

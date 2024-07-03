@@ -15,6 +15,7 @@ import NewOnboarding from "./pages/NewOnboarding";
 import CourseApplications from "./pages/CourseApplications";
 import PaidCourseApplicants from "./pages/PaidCourseApplicants";
 import Settings from "./pages/Settings";
+import Leads from "./pages/Leads";
 
 function App() {
   return (
@@ -23,19 +24,20 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/partners" element={<Partners/>} />
+          <Route path="/partners" element={<Partners />} />
           <Route path="/slots" element={<Slots />} />
-          <Route path="/college/:collegeId" element={<CollegeDetails/>} />
-          <Route path="/company/:companyId" element={<CompanyDetails/>} />
+          <Route path="/college/:collegeId" element={<CollegeDetails />} />
+          <Route path="/company/:companyId" element={<CompanyDetails />} />
           <Route path="/users" element={<Users />} />
           <Route path="/message" element={<Message />} />
           <Route path="/hr" element={<HR />} />
-          <Route path="/courses" element={<Courses/>} />
-          <Route path="/events" element={<Events/>} />
-          <Route path="/new-onboarding" element={<NewOnboarding/>} />
-          <Route path="/course-applications" element={<CourseApplications/>} />
-          <Route path="/paid-applications" element={<PaidCourseApplicants/>} />
-          <Route path="/settings" element={<Settings/>} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/new-onboarding" element={<NewOnboarding />} />
+          <Route path="/course-applications" element={<CourseApplications />} />
+          <Route path="/paid-applications" element={<PaidCourseApplicants />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/leads" element={<Leads />} />
         </Routes>
       </Router>
     </>

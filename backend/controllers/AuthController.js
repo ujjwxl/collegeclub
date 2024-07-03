@@ -1639,3 +1639,83 @@ export const fetchEventsByTarget = async (req, res) => {
     res.status(500).json({ message: `Failed to fetch events for target ${target}`, error: error.message });
   }
 };
+
+export const submitLeadsData = async (req, res) => {
+  const userId=req.params;
+  
+  const {
+    name,
+    email,
+    mobile,
+    gender,
+    address,
+    bloodGroup,
+    fatherName,
+    motherName,
+    schoolNameX,
+    boardX,
+    yearOfPassingX,
+    marksInPercentageX,
+    authLetterX,
+    schoolNameXII,
+    boardXII,
+    yearOfPassingXII,
+    marksInPercentageXII,
+    authLetterXII,
+    schoolNameGrad,
+    boardGrad,
+    yearOfPassingGrad,
+    marksInPercentageGrad,
+    authLetterGrad,
+    preferredColleges,
+    preferredBranches,
+    authLetterGradFile,
+    authLetterSignatureFile,
+    authLetterIDFile,
+  } = req.body;
+
+  try {
+    const leadsCollectionRef = collection(db, "leads");
+
+    const leadsData = {
+      name,
+      email,
+      mobile,
+      gender,
+      address,
+      bloodGroup,
+      fatherName,
+      motherName,
+      schoolNameX,
+      boardX,
+      yearOfPassingX,
+      marksInPercentageX,
+      authLetterX,
+      schoolNameXII,
+      boardXII,
+      yearOfPassingXII,
+      marksInPercentageXII,
+      authLetterXII,
+      schoolNameGrad,
+      boardGrad,
+      yearOfPassingGrad,
+      marksInPercentageGrad,
+      authLetterGrad,
+      preferredColleges,
+      preferredBranches,
+      authLetterGradFile,
+      authLetterSignatureFile,
+      authLetterIDFile,
+      userId,
+    };
+
+    const docRef = await addDoc(leadsCollectionRef, leadsData);
+
+    console.log("Leads data submitted successfully with ID: ", docRef.id);
+
+    res.status(200).json({ message: "Leads data submitted successfully" });
+  } catch (error) {
+    console.error("Error submitting leads data:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
