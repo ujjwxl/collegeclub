@@ -19,6 +19,7 @@ import { auth, db } from "../firebase.js";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { query, where, getDocs } from "firebase/firestore";
 import { v4 as uuidv4 } from 'uuid';
+import generateUniqueId from "generate-unique-id";
 
 export const resetPassword = async (req, res) => {
   const { email } = req.body;
@@ -1642,6 +1643,13 @@ export const fetchEventsByTarget = async (req, res) => {
 
 export const submitLeadsData = async (req, res) => {
   const userId=req.params;
+
+  const applicationNumber = generateUniqueId({
+    length: 12,
+    useLetters: false
+  });
+
+  const createdAt = Date.now();
   
   const {
     name,
@@ -1678,8 +1686,10 @@ export const submitLeadsData = async (req, res) => {
     const leadsCollectionRef = collection(db, "leads");
 
     const leadsData = {
+      applicationNumber,
       name,
       email,
+      createdAt,
       mobile,
       gender,
       address,

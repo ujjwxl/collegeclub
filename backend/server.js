@@ -615,6 +615,35 @@ app.post("/upload/images/:userId", upload.array("images", 5), async (req, res) =
     }
 });
 
+app.post("/upload/leadsform", upload.single("filename"), async (req, res) => {
+
+    try {
+        const dateTime = giveCurrentDateTime();
+
+        const storageRef = ref(storage, `files/${req.file.originalname + "       " + dateTime}`);
+
+        const metadata = {
+            contentType: req.file.mimetype,
+        };
+
+        const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
+
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        console.log('Resume successfully uploaded.');
+
+        return res.send({
+            message: 'Resume uploaded to Firebase storage',
+            name: req.file.originalname,
+            type: req.file.mimetype,
+            downloadURL: downloadURL
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send(error.message)
+    }
+});
+
 
 const giveCurrentDateTime = () => {
     const today = new Date();

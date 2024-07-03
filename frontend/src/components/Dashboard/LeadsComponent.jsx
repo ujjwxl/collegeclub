@@ -14,26 +14,26 @@ const LeadsComponent = () => {
   const [fatherName, setFatherName] = useState("");
   const [motherName, setMotherName] = useState("");
   const [schoolName, setSchoolName] = useState("");
-  const [board, setBoard] = useState("");
-  const [yearOfPassing, setYearOfPassing] = useState("");
-  const [marksInPercentage, setMarksInPercentage] = useState("");
+  // const [board, setBoard] = useState("");
+  // const [yearOfPassing, setYearOfPassing] = useState("");
+  // const [marksInPercentage, setMarksInPercentage] = useState("");
   const [schoolNameX, setSchoolNameX] = useState("");
   const [boardX, setBoardX] = useState("");
   const [yearOfPassingX, setYearOfPassingX] = useState("");
   const [marksInPercentageX, setMarksInPercentageX] = useState("");
-  const [authLetterX, setAuthLetterX] = useState("");
+  const [authLetterX, setAuthLetterX] = useState(null);
 
   const [schoolNameXII, setSchoolNameXII] = useState("");
   const [boardXII, setBoardXII] = useState("");
   const [yearOfPassingXII, setYearOfPassingXII] = useState("");
   const [marksInPercentageXII, setMarksInPercentageXII] = useState("");
-  const [authLetterXII, setAuthLetterXII] = useState("");
+  const [authLetterXII, setAuthLetterXII] = useState(null);
 
   const [schoolNameGrad, setSchoolNameGrad] = useState("");
   const [boardGrad, setBoardGrad] = useState("");
   const [yearOfPassingGrad, setYearOfPassingGrad] = useState("");
   const [marksInPercentageGrad, setMarksInPercentageGrad] = useState("");
-  const [authLetterGrad, setAuthLetterGrad] = useState("");
+  const [authLetterGrad, setAuthLetterGrad] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
   const [showForm1, setShowForm1] = useState(true);
   const [showForm2, setShowForm2] = useState(false);
@@ -118,6 +118,13 @@ const LeadsComponent = () => {
       return;
     }
 
+    const letterX =  localStorage.getItem('authLetterX');
+    const letterXII = localStorage.getItem('authLetterXII');
+    const letterGrad = localStorage.getItem('authLetterGrad');
+    const letterImage = localStorage.getItem('authLetterImage');
+    const letterSignature = localStorage.getItem('authLetterSignature');
+    const letterId = localStorage.getItem('authLetterId');
+
     try {
       const response = await axios.post(`http://localhost:5000/auth/leads/${userId}`, {
         name,
@@ -132,22 +139,22 @@ const LeadsComponent = () => {
         boardX,
         yearOfPassingX,
         marksInPercentageX,
-        authLetterX,
+        authLetterX: letterX,
         schoolNameXII,
         boardXII,
         yearOfPassingXII,
         marksInPercentageXII,
-        authLetterXII,
+        authLetterXII: letterXII,
         schoolNameGrad,
         boardGrad,
         yearOfPassingGrad,
         marksInPercentageGrad,
-        authLetterGrad,
+        authLetterGrad: letterGrad,
         preferredColleges,
         preferredBranches,
-        authLetterGradFile,
-        authLetterSignatureFile,
-        authLetterIDFile,
+        authLetterGradFile: letterImage,
+        authLetterSignatureFile: letterSignature,
+        authLetterIDFile: letterId,
       });
 
       if (response.status === 200) {
@@ -176,6 +183,53 @@ const LeadsComponent = () => {
     updatedBranches[index] = value;
     setPreferredBranches(updatedBranches);
   };
+
+  const handleAuthLetterXChange = (event) => {
+    setAuthLetterX(event.target.files[0]);
+  };
+
+  const handleAuthLetterXIIChange = (event) => {
+    setAuthLetterXII(event.target.files[0]);
+  };
+
+  const handleAuthLetterGradChange = (event) => {
+    setAuthLetterGrad(event.target.files[0]);
+  };
+
+  const handleFileUpload = (file, endpoint) => {
+    const formData = new FormData();
+    formData.append("filename", file);
+
+    // axios.post(`http://localhost:5000/upload/${endpoint}`, formData)
+    axios.post(`http://localhost:5000/upload/leadsform`, formData)
+        .then((response) => {
+            toast('File uploaded successfully!');
+            console.log('File uploaded successfully');
+
+            if(endpoint === "auth-letter-x"){
+                localStorage.setItem('authLetterX', response.data.downloadURL);
+            } 
+            else if(endpoint === "auth-letter-xii"){
+              localStorage.setItem('authLetterXII', response.data.downloadURL);
+            } 
+            else if(endpoint === "auth-letter-grad"){
+              localStorage.setItem('authLetterGrad', response.data.downloadURL);
+            } 
+            else if(endpoint === "auth-letter-image"){
+              localStorage.setItem('authLetterImage', response.data.downloadURL);
+            } 
+            else if(endpoint === "auth-letter-signature"){
+              localStorage.setItem('authLetterSignature', response.data.downloadURL);
+            } 
+            else if(endpoint === "auth-letter-id"){
+              localStorage.setItem('authLetterId', response.data.downloadURL);
+            }
+        })
+        .catch((error) => {
+            toast('File could not be uploaded!')
+            console.error('Error uploading file:', error);
+        });
+};
 
   return (
     <div className="dashboard-box-leads">
@@ -328,8 +382,8 @@ const LeadsComponent = () => {
               <div className="form-input-group">
                 <label htmlFor="authLetterX">Authorization Letter*</label>
                 <div className="form-file-input-group">
-                  <input type="file" id="authLetterX" />
-                  <button type="button">Upload</button>
+                  <input type="file" id="authLetterX" onChange={handleAuthLetterXChange} />
+                  <button type="button" onClick={() => handleFileUpload(authLetterX, "auth-letter-x")}>Upload</button>
                 </div>
               </div>
             </div>
@@ -379,8 +433,8 @@ const LeadsComponent = () => {
               <div className="form-input-group">
                 <label htmlFor="authLetterXII">Authorization Letter*</label>
                 <div className="form-file-input-group">
-                  <input type="file" id="authLetterXII" />
-                  <button type="button">Upload</button>
+                  <input type="file" id="authLetterXII" onChange={handleAuthLetterXIIChange} />
+                  <button type="button" onClick={() => handleFileUpload(authLetterXII, "auth-letter-xii")}>Upload</button>
                 </div>
               </div>
             </div>
@@ -430,8 +484,8 @@ const LeadsComponent = () => {
               <div className="form-input-group">
                 <label htmlFor="authLetterGrad">Authorization Letter*</label>
                 <div className="form-file-input-group">
-                  <input type="file" id="authLetterGrad" />
-                  <button type="button">Upload</button>
+                  <input type="file" id="authLetterGrad" onChange={handleAuthLetterGradChange} />
+                  <button type="button" onClick={() => handleFileUpload(authLetterGrad, "auth-letter-grad")}>Upload</button>
                 </div>
               </div>
             </div>
@@ -459,7 +513,7 @@ const LeadsComponent = () => {
                     id="authLetterGrad"
                     onChange={(e) => setAuthLetterGradFile(e.target.files[0])}
                   />
-                  <button type="button">Upload</button>
+                  <button type="button" onClick={() => handleFileUpload(authLetterGradFile, "auth-letter-image")}>Upload</button>
                 </div>
               </div>
               <div className="form-input-group">
@@ -470,7 +524,7 @@ const LeadsComponent = () => {
                     id="authLetterSignature"
                     onChange={(e) => setAuthLetterSignatureFile(e.target.files[0])}
                   />
-                  <button type="button">Upload</button>
+                  <button type="button" onClick={() => handleFileUpload(authLetterSignatureFile, "auth-letter-signature")}>Upload</button>
                 </div>
               </div>
             </div>
@@ -483,7 +537,7 @@ const LeadsComponent = () => {
                     id="authLetterID"
                     onChange={(e) => setAuthLetterIDFile(e.target.files[0])}
                   />
-                  <button type="button">Upload</button>
+                  <button type="button" onClick={() => handleFileUpload(authLetterIDFile, "auth-letter-id")}>Upload</button>
                 </div>
               </div>
             </div>
