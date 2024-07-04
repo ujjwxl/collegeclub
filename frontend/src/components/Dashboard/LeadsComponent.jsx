@@ -246,7 +246,7 @@ const LeadsComponent = () => {
 
   const checkoutHandler = async (amount) => {
 
-    const leadApplicationNumber = localStorage.get('leadApplicationNumber');
+    const leadApplicationNumber = localStorage.getItem('leadApplicationNumber');
 
     const { data: { key } } = await axios.get("http://localhost:5000/api/getkey")
     const { data: { order } } = await axios.post("http://localhost:5000/leadscheckout")
@@ -255,17 +255,17 @@ const LeadsComponent = () => {
 
     const options = {
       key,
-      amount: 5000,
+      amount: 151,
       currency: "INR",
-      name: userData.fullname,
-      description: "Course Fees",
+      name: fname,
+      description: "Leads Processing Fees",
       image: "https://media.licdn.com/dms/image/D4D0BAQHiy2Ug9laZOA/company-logo_200_200/0/1691938402527?e=2147483647&v=beta&t=Pbz6CO3ccliuj0uAJgDr81gG7IPPn_7lkKTrn7njOds",
       order_id: order.id,
-      callback_url: `http://localhost:5000/leadspaymentverification?userid=${userId}&username=${userData.fullName}&courseid=${selectedCourse.courseId}&coursename=${selectedCourse.courseName}&instructorname=${selectedCourse.instructorName}`,
+      callback_url: `http://localhost:5000/leadspaymentverification?userid=${userId}&username=${fname}&applicationnumber=${leadApplicationNumber}`,
       prefill: {
-        name: userData.fullname,
-        email: userData.email,
-        contact: userData.contactNumber
+        name: fname,
+        // email: userData.email,
+        // contact: userData.contactNumber
       },
       notes: {
         "address": "razorapy official"

@@ -1715,7 +1715,8 @@ export const submitLeadsData = async (req, res) => {
       authLetterIDFile,
       userId,
       ccName,
-      status: "Pending"
+      status: "Pending",
+      paymentStatus: false
     };
 
     const docRef = await addDoc(leadsCollectionRef, leadsData);

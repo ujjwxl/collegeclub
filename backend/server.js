@@ -188,11 +188,7 @@ app.post("/paymentverification",async(req,res) => {
 
     const userId = req.query.userid;
     const userName = req.query.username;
-    const selectedCourse = req.query.courseid;
-    const courseName = req.query.coursename;
-    const instructorName = req.query.instructorname;
-
-    console.log("Selected course : ", selectedCourse);
+    const leadApplicationNumber = req.query.applicationnumber;
 
     const { razorpay_order_id,razorpay_payment_id,razorpay_signature } = req.body;
     const body = razorpay_order_id + "|" +razorpay_payment_id;
@@ -206,40 +202,24 @@ app.post("/paymentverification",async(req,res) => {
      console.log('Payment id')
      console.log(razorpay_payment_id)
 
-    const docRef = await addDoc(collection(db, "paidcourseapplicants"), {
-      userId,
-      userName,
-      courseId: selectedCourse,
-      courseName,
-      paymentId: razorpay_payment_id,
-      orderId: razorpay_order_id,
-      instructorName,
-      purchasedAt: Date.now()
-    });
-
-     const usersCollectionRef = collection(db, "users");
-     const q = query(usersCollectionRef, where("userId", "==", userId));
+     const leadsRef = collection(db, "leads");
+     const q = query(leadsRef, where("applicationNumber", "==", leadApplicationNumber));
      const querySnapshot = await getDocs(q);
+ 
+     if (querySnapshot.empty) {
+       return res.status(404).json({ message: "Lead not found" });
+     } 
 
-     querySnapshot.forEach(async (doc) => {
-        const docRef = doc.ref;
 
-        const courseDetails = {
-            paymentStatus: "partial",
-            paymentId: razorpay_payment_id,
-            orderId: razorpay_order_id,
-            courseId: selectedCourse,
-            courseName,
-            instructorName,
-            paid: 3000
-        }
+     querySnapshot.forEach(async (document) => {
+        const docRef = document.ref;
 
-        await updateDoc(docRef, { 
-            purchasedCourses: arrayUnion(courseDetails),
-        });
-        
-        console.log('Payment status updated successfully');
-    });
+        await updateDoc(docRef, {
+            paymentStatus: true,
+            order_id: razorpay_order_id,
+            payment_id: razorpay_payment_id
+        })
+     })
 
      res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`)
     }
