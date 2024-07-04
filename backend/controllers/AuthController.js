@@ -1642,16 +1642,12 @@ export const fetchEventsByTarget = async (req, res) => {
 };
 
 export const submitLeadsData = async (req, res) => {
-  const userId=req.params;
-
-  const applicationNumber = generateUniqueId({
-    length: 12,
-    useLetters: false
-  });
+  const { userId } = req.params;
 
   const createdAt = Date.now();
   
   const {
+    applicationNumber,
     name,
     email,
     mobile,
@@ -1680,6 +1676,7 @@ export const submitLeadsData = async (req, res) => {
     authLetterGradFile,
     authLetterSignatureFile,
     authLetterIDFile,
+    ccName,
   } = req.body;
 
   try {
@@ -1717,6 +1714,8 @@ export const submitLeadsData = async (req, res) => {
       authLetterSignatureFile,
       authLetterIDFile,
       userId,
+      ccName,
+      status: "Pending"
     };
 
     const docRef = await addDoc(leadsCollectionRef, leadsData);

@@ -61,6 +61,20 @@ app.post('/coursecheckout', async (req,res) => {
     })
 })
 
+app.post('/leadscheckout', async (req,res) => {
+    
+    const options = {
+        amount: 15100,
+        currency: "INR",
+    };
+
+    const order = await instance.orders.create(options);
+    console.log(order);
+    res.status(200).json({
+        success: true, order
+    })
+})
+
 app.post("/paymentverification",async(req,res) => {
 
     const userId = req.query.userid;
@@ -107,6 +121,70 @@ app.post("/paymentverification",async(req,res) => {
 
 
  app.post("/coursepaymentverification",async(req,res) => {
+
+    const userId = req.query.userid;
+    const userName = req.query.username;
+    const selectedCourse = req.query.courseid;
+    const courseName = req.query.coursename;
+    const instructorName = req.query.instructorname;
+
+    console.log("Selected course : ", selectedCourse);
+
+    const { razorpay_order_id,razorpay_payment_id,razorpay_signature } = req.body;
+    const body = razorpay_order_id + "|" +razorpay_payment_id;
+    const expectedsgnature = crypto.createHmac('sha256',process.env.SECRET).update(body.toString()).digest('hex')
+    const isauth = expectedsgnature === razorpay_signature;
+
+    if(isauth){
+     console.log('Order id')
+     console.log(razorpay_order_id)
+
+     console.log('Payment id')
+     console.log(razorpay_payment_id)
+
+    const docRef = await addDoc(collection(db, "paidcourseapplicants"), {
+      userId,
+      userName,
+      courseId: selectedCourse,
+      courseName,
+      paymentId: razorpay_payment_id,
+      orderId: razorpay_order_id,
+      instructorName,
+      purchasedAt: Date.now()
+    });
+
+     const usersCollectionRef = collection(db, "users");
+     const q = query(usersCollectionRef, where("userId", "==", userId));
+     const querySnapshot = await getDocs(q);
+
+     querySnapshot.forEach(async (doc) => {
+        const docRef = doc.ref;
+
+        const courseDetails = {
+            paymentStatus: "partial",
+            paymentId: razorpay_payment_id,
+            orderId: razorpay_order_id,
+            courseId: selectedCourse,
+            courseName,
+            instructorName,
+            paid: 3000
+        }
+
+        await updateDoc(docRef, { 
+            purchasedCourses: arrayUnion(courseDetails),
+        });
+        
+        console.log('Payment status updated successfully');
+    });
+
+     res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`)
+    }
+    else{
+     res.status(400).json({success:false});
+    }
+ })
+
+ app.post("/leadspaymentverification",async(req,res) => {
 
     const userId = req.query.userid;
     const userName = req.query.username;

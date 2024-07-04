@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./LeadsComponent.css";
 import { toast } from 'sonner';
 import axios from "axios";
+import generateUniqueId from "generate-unique-id";
 
 
 const LeadsComponent = () => {
@@ -45,7 +46,11 @@ const LeadsComponent = () => {
   const [authLetterSignatureFile, setAuthLetterSignatureFile] = useState(null);
   const [authLetterIDFile, setAuthLetterIDFile] = useState(null);
 
+  const [showPaymentOption, setShowPaymentOption] = useState(false);
+
   const userId = localStorage.getItem('id');
+
+  const fname = localStorage.getItem('fname');
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -118,15 +123,23 @@ const LeadsComponent = () => {
       return;
     }
 
-    const letterX =  localStorage.getItem('authLetterX');
+    const letterX = localStorage.getItem('authLetterX');
     const letterXII = localStorage.getItem('authLetterXII');
     const letterGrad = localStorage.getItem('authLetterGrad');
     const letterImage = localStorage.getItem('authLetterImage');
     const letterSignature = localStorage.getItem('authLetterSignature');
     const letterId = localStorage.getItem('authLetterId');
 
+    const applicationNumber = generateUniqueId({
+      length: 12,
+      useLetters: false
+    });
+
+    localStorage.setItem('leadApplicationNumber', applicationNumber);
+
     try {
       const response = await axios.post(`http://localhost:5000/auth/leads/${userId}`, {
+        applicationNumber,
         name,
         email,
         mobile,
@@ -155,13 +168,13 @@ const LeadsComponent = () => {
         authLetterGradFile: letterImage,
         authLetterSignatureFile: letterSignature,
         authLetterIDFile: letterId,
+        ccName: fname,
       });
 
       if (response.status === 200) {
         toast("Leads data submitted successfully!");
-        // Reset form state or navigate to another page after successful submission
-        // Example: resetForm();
-        // navigate('/success'); // Example: navigate to success page
+        setShowForm4(false);
+        setShowPaymentOption(true);
       }
     } catch (error) {
       toast("Failed to submit leads data!");
@@ -202,34 +215,69 @@ const LeadsComponent = () => {
 
     // axios.post(`http://localhost:5000/upload/${endpoint}`, formData)
     axios.post(`http://localhost:5000/upload/leadsform`, formData)
-        .then((response) => {
-            toast('File uploaded successfully!');
-            console.log('File uploaded successfully');
+      .then((response) => {
+        toast('File uploaded successfully!');
+        console.log('File uploaded successfully');
 
-            if(endpoint === "auth-letter-x"){
-                localStorage.setItem('authLetterX', response.data.downloadURL);
-            } 
-            else if(endpoint === "auth-letter-xii"){
-              localStorage.setItem('authLetterXII', response.data.downloadURL);
-            } 
-            else if(endpoint === "auth-letter-grad"){
-              localStorage.setItem('authLetterGrad', response.data.downloadURL);
-            } 
-            else if(endpoint === "auth-letter-image"){
-              localStorage.setItem('authLetterImage', response.data.downloadURL);
-            } 
-            else if(endpoint === "auth-letter-signature"){
-              localStorage.setItem('authLetterSignature', response.data.downloadURL);
-            } 
-            else if(endpoint === "auth-letter-id"){
-              localStorage.setItem('authLetterId', response.data.downloadURL);
-            }
-        })
-        .catch((error) => {
-            toast('File could not be uploaded!')
-            console.error('Error uploading file:', error);
-        });
-};
+        if (endpoint === "auth-letter-x") {
+          localStorage.setItem('authLetterX', response.data.downloadURL);
+        }
+        else if (endpoint === "auth-letter-xii") {
+          localStorage.setItem('authLetterXII', response.data.downloadURL);
+        }
+        else if (endpoint === "auth-letter-grad") {
+          localStorage.setItem('authLetterGrad', response.data.downloadURL);
+        }
+        else if (endpoint === "auth-letter-image") {
+          localStorage.setItem('authLetterImage', response.data.downloadURL);
+        }
+        else if (endpoint === "auth-letter-signature") {
+          localStorage.setItem('authLetterSignature', response.data.downloadURL);
+        }
+        else if (endpoint === "auth-letter-id") {
+          localStorage.setItem('authLetterId', response.data.downloadURL);
+        }
+      })
+      .catch((error) => {
+        toast('File could not be uploaded!')
+        console.error('Error uploading file:', error);
+      });
+  };
+
+  const checkoutHandler = async (amount) => {
+
+    const leadApplicationNumber = localStorage.get('leadApplicationNumber');
+
+    const { data: { key } } = await axios.get("http://localhost:5000/api/getkey")
+    const { data: { order } } = await axios.post("http://localhost:5000/leadscheckout")
+
+    console.log(window);
+
+    const options = {
+      key,
+      amount: 5000,
+      currency: "INR",
+      name: userData.fullname,
+      description: "Course Fees",
+      image: "https://media.licdn.com/dms/image/D4D0BAQHiy2Ug9laZOA/company-logo_200_200/0/1691938402527?e=2147483647&v=beta&t=Pbz6CO3ccliuj0uAJgDr81gG7IPPn_7lkKTrn7njOds",
+      order_id: order.id,
+      callback_url: `http://localhost:5000/leadspaymentverification?userid=${userId}&username=${userData.fullName}&courseid=${selectedCourse.courseId}&coursename=${selectedCourse.courseName}&instructorname=${selectedCourse.instructorName}`,
+      prefill: {
+        name: userData.fullname,
+        email: userData.email,
+        contact: userData.contactNumber
+      },
+      notes: {
+        "address": "razorapy official"
+      },
+      theme: {
+        "color": "#3399cc"
+      }
+    };
+    const razor = new window.Razorpay(options);
+
+    razor.open();
+  };
 
   return (
     <div className="dashboard-box-leads">
@@ -618,6 +666,14 @@ const LeadsComponent = () => {
               </button>
             </div>
           </form>
+        )}
+
+        {showPaymentOption && (
+          <div className="payment-option">
+            <h2>Complete Payment</h2>
+            <h3>Please complete an application processing fee of Rs 151</h3>
+            <button className="form-submit-button" onClick={checkoutHandler}>Pay Now</button>
+          </div>
         )}
       </div>
     </div>
