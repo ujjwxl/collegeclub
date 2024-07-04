@@ -694,3 +694,33 @@ export const fetchLeads =async(req, res)=>{
     res.status(500).json({ message: error.message });
   }
 };
+
+
+
+export const getLeadByApplicationNumber = async (req, res) => {
+  const { applicationNumber } = req.params;
+
+  try {
+    const leadsRef = collection(db, 'leads');
+    const q = query(leadsRef, where('applicationNumber', '==', applicationNumber));
+
+    const querySnapshot = await getDocs(q);
+    const leads = [];
+
+    querySnapshot.forEach((doc) => {
+      leads.push({
+        id: doc.id,
+        ...doc.data(),
+      });
+    });
+
+    if (leads.length === 0) {
+      return res.status(404).json({ message: 'No leads found' });
+    }
+
+    res.status(200).json(leads[0]);
+  } catch (error) {
+    console.error('Error getting lead documents:', error.message);
+    res.status(500).json({ message: 'Error retrieving leads' });
+  }
+};

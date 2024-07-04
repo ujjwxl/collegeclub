@@ -16,6 +16,7 @@ import CourseApplications from "./pages/CourseApplications";
 import PaidCourseApplicants from "./pages/PaidCourseApplicants";
 import Settings from "./pages/Settings";
 import Leads from "./pages/Leads";
+import LeadsDetails from './pages/LeadsDetails';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/paid-applications" element={<PaidCourseApplicants />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/leads" element={<Leads />} />
+          <Route path="/leads/:applicationNumber" element={<LeadsDetails />} />
         </Routes>
       </Router>
     </>

@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
+import { format } from "date-fns";
+import { useNavigate } from 'react-router-dom';
 
-const Leads = () => {
+
+interface Lead {
+    applicationNumber: string;
+    ccName: string;
+    name: string;
+    email: string;
+    createdAt: string; 
+    status: 'Approved' | 'Pending' | 'Rejected'; 
+}
+
+const  Leads: React.FC = () => {
     const [leads, setLeads] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const navigate = useNavigate();
     useEffect(() => {
         // Fetch leads data from backend API
         const fetchLeads = async () => {
@@ -14,7 +27,7 @@ const Leads = () => {
                 const response = await axios.get('http://localhost:5000/admin/getleads'); 
                 setLeads(response.data.leads);
                 setLoading(false);
-            } catch (error) {
+            } catch (error: AxiosError) {
                 console.error('Error fetching leads:', error.message);
                 setLoading(false);
             }
@@ -22,6 +35,10 @@ const Leads = () => {
 
         fetchLeads();
     }, []);
+
+    const viewLeadDetails = (applicationNumber: string) => {
+        navigate(`/leads/${applicationNumber}`);
+    };
 
     return (
         <>
@@ -65,26 +82,40 @@ const Leads = () => {
                                         {leads.map((lead, index) => (
                                             <tr key={index} className="transition-all hover:bg-slate-100">
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {lead.applicationNo}
+                                                    {lead.applicationNumber}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {lead.ccAmbassador}
+                                                    {lead.ccName}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                    {lead.studentName}
+                                                    {lead.name}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                                     {lead.email}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {lead.date}
+                                                    {format(new Date(lead.createdAt), 'dd/MM/yyyy ')}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {lead.status}
-                                                </td>
+                                                        {lead.status === 'Approved' && (
+                                                            <p className="bg-green-600 px-3 py-1 text-sm rounded-full text-white text-center">
+                                                                {lead.status}
+                                                            </p>
+                                                        )}
+                                                        {lead.status === 'Pending' && (
+                                                            <p className="bg-yellow-500 px-3 py-1 text-sm rounded-full text-white text-center">
+                                                                {lead.status}
+                                                            </p>
+                                                        )}
+                                                        {lead.status === 'Rejected' && (
+                                                            <p className="bg-red-600 px-3 py-1 text-sm rounded-full text-white text-center">
+                                                                {lead.status}
+                                                            </p>
+                                                        )}
+                                                    </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    <button className="text-blue-600 hover:underline focus:outline-none">
-                                                        View
+                                                    <button className="bg-gray-500 px-2 py-1 text-sm rounded-lg text-white" onClick={() => viewLeadDetails(lead.applicationNumber)}>
+                                                        View More
                                                     </button>
                                                 </td>
                                             </tr>

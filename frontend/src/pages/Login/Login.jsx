@@ -34,8 +34,9 @@ const Login = () => {
         .then(res => {
           if (res.status == 200) {
             const { userData, token } = res.data;
-            const { userId, accountType, applicationFormCompleted } = userData;
+            const { userId, accountType, applicationFormCompleted, fullName } = userData;
             localStorage.setItem('id', userId);
+            localStorage.setItem('fname', fullName);
             localStorage.setItem('type', accountType);
             localStorage.setItem('applicationFormCompleted', applicationFormCompleted);
             localStorage.setItem('token', token);
