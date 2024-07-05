@@ -21,6 +21,39 @@ import {
 } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 
+// export const loginAdmin = async (req, res) => {
+//   const { email, password } = req.body;
+
+//   try {
+//     const userCredential = await signInWithEmailAndPassword(
+//       auth,
+//       email,
+//       password
+//     );
+
+//     const adminsCollectionRef = collection(db, "team");
+//     const q = query(adminsCollectionRef, where("email", "==", email));
+//     const querySnapshot = await getDocs(q);
+
+//     let userData;
+//     querySnapshot.forEach((doc) => {
+//       userData = doc.data();
+//     });
+
+//     if(userData.status === "Inactive")  res.status(400).json({ message: "Invalid email or password" }); 
+
+//     if (!userData) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+
+//     res.status(200).json({ userData });
+//   } catch (error) {
+//     console.error("Login failed:", error.message);
+//     res.status(400).json({ message: "Invalid email or password" });
+//   }
+// };
+
+
 export const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
 
@@ -31,7 +64,7 @@ export const loginAdmin = async (req, res) => {
       password
     );
 
-    const adminsCollectionRef = collection(db, "admins");
+    const adminsCollectionRef = collection(db, "team");
     const q = query(adminsCollectionRef, where("email", "==", email));
     const querySnapshot = await getDocs(q);
 
@@ -40,16 +73,26 @@ export const loginAdmin = async (req, res) => {
       userData = doc.data();
     });
 
+    // Check if userData exists
     if (!userData) {
       return res.status(404).json({ message: "User not found" });
     }
 
+    // Check user status
+    if (userData.status === "Inactive") {
+      return res.status(400).json({ message: "User is inactive. Login not allowed." });
+    }
+
+    // If user status is active, proceed with sending user data
     res.status(200).json({ userData });
+
   } catch (error) {
     console.error("Login failed:", error.message);
     res.status(400).json({ message: "Invalid email or password" });
   }
 };
+
+
 
 export const createAdmin = async (req, res) => {
   const { email, password, role, name, mobileNo } = req.body;
@@ -88,7 +131,7 @@ export const getAdminRole = async (req, res) => {
 
   try {
     
-    const adminsCollectionRef = collection(db, "admins");
+    const adminsCollectionRef = collection(db, "team");
     const q = query(adminsCollectionRef, where("userId", "==", userId));
     const querySnapshot = await getDocs(q);
 
@@ -306,12 +349,25 @@ export const addTeamMember = async (req, res) => {
     joiningYear,
     mobileNo,
     address,
+    email,
+    password,
+    role
     // employeePicture
   } = req.body;
 
   try {
+
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    const user = userCredential.user;
+    const userId = user.uid;
+    
     const teamCollectionRef = collection(db, "team");
-    const employeeID = uuidv4();
+    // const employeeID = uuidv4();
     const teamData = {
       name,
       dob,
@@ -322,7 +378,10 @@ export const addTeamMember = async (req, res) => {
       mobileNo,
       address,
       status:"Active",
-      employeeID,
+      userId,
+      email,
+      password,
+      role
       // employeePicture
     };
 
@@ -814,12 +873,12 @@ export const updateLeadStatus = async (req, res) => {
 
 
 export const updateEmployeeStatus = async (req, res) => {
-  const { employeeID } = req.params; // Assuming employeeID is passed as a parameter
+  const { userId } = req.params; // Assuming employeeID is passed as a parameter
   const { status } = req.body; // 'Active' or 'Inactive'
 
   try {
     const teamCollectionRef = collection(db, 'team');
-    const q = query(teamCollectionRef, where('employeeID', '==', employeeID));
+    const q = query(teamCollectionRef, where('userId', '==', userId));
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {

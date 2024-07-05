@@ -29,6 +29,6 @@ router.get('/getleads', fetchLeads);
 router.get('/getlead/:applicationNumber', getLeadByApplicationNumber);
 router.post('/shareleads/:applicationNumber', shareLeads);
 router.put('/leadStatus/:applicationNumber', updateLeadStatus);
-router.put('/updateTeamStatus/:employeeID', updateEmployeeStatus);
+router.put('/updateTeamStatus/:userId', updateEmployeeStatus);
 
 export default router
