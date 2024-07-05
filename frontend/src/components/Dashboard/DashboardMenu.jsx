@@ -36,6 +36,7 @@ const DashboardMenu = ({
   onShowAdmissionForm,
   onShowApplicants,
   onShowLeads,
+  onShowLeadsDetails,
   onDashboardClick,
   onProfileClick,
   onShowCompanyCMS,
@@ -164,7 +165,7 @@ const DashboardMenu = ({
             </div>
             <div
               className="dashboard-menu-middle-icon"
-              onClick={handleMiddleIconClick}
+              onClick={onShowLeadsDetails}
             >
               <img src={leadsIcon} alt="" />
               <p>Leads</p>

@@ -90,7 +90,7 @@ const LeadsDetails = () => {
 
     const handleSaveSelection = () => {
 
-        axios.post(`http://localhost:5000/admin/shareleads/${applicationNumber}`, {
+        axios.post(`http://locahost:5000/admin/shareleads/${applicationNumber}`, {
             colleges: selectedColleges,
             companies: selectedCompanies
         })
@@ -311,11 +311,83 @@ const LeadsDetails = () => {
                                             Blood Group: {leadDetails.bloodGroup}
                                         </h2>
                                         <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Father Name: {leadDetails.fatherName}
+                                            Father's Name: {leadDetails.fatherName}
                                         </h2>
                                         <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Mother Name: {leadDetails.motherName}
+                                            Mother's Name: {leadDetails.motherName}
                                         </h2>
+                                        <h1 className='font-bold text-xl underline mb-4'>Class X</h1>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            School Name: {leadDetails.schoolNameX}
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            Board: {leadDetails.boardX}
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            Year of Passing: {leadDetails.yearOfPassingX}
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            Marks in Percentage: {leadDetails.marksInPercentageX}%
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            Authorization Letter: <a href={leadDetails.authLetterX} target="_blank" rel="noopener noreferrer" className='text-blue-700 underline'>
+                                                View Letter
+                                            </a>
+                                        </h2>
+                                        <h1 className='font-bold text-xl underline mb-4'>Class XII</h1>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            School Name: {leadDetails.schoolNameXII}
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            Board: {leadDetails.boardXII}
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            Year of Passing: {leadDetails.yearOfPassingXII}
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            Marks in Percentage: {leadDetails.marksInPercentageXII}%
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            Authorization Letter: <a href={leadDetails.authLetterXII} target="_blank" rel="noopener noreferrer" className='text-blue-700 underline'>
+                                                View Letter
+                                            </a>
+                                        </h2>
+                                        <h1 className='font-bold text-xl underline mb-4'>College Details</h1>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            College Name: {leadDetails.schoolNameGrad}
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            University Name: {leadDetails.boardGrad}
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            Year of Passing: {leadDetails.yearOfPassingGrad}
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            Marks in Percentage: {leadDetails.marksInPercentageGrad}%
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            Authorization Letter: <a href={leadDetails.authLetterGrad} target="_blank" rel="noopener noreferrer" className='text-blue-700 underline'>
+                                                View Letter
+                                            </a>
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                                            Preferred Colleges:
+                                        </h2>
+                                        <ul className="list-disc pl-4 mb-4">
+                                            {leadDetails.preferredColleges.map((college, index) => (
+                                                <li key={index}>{college}</li>
+                                            ))}
+                                        </ul>
+
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                                            Preferred Branches:
+                                        </h2>
+                                        <ul className="list-disc pl-4">
+                                            {leadDetails.preferredBranches.map((branch, index) => (
+                                                <li key={index}>{branch}</li>
+                                            ))}
+                                        </ul>
+                                        {/* Add more fields as needed */}
                                     </div>
                                 </div>
                             </div>
