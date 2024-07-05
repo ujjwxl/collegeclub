@@ -18,6 +18,7 @@
 
 .leads-list {
     margin-top: 10px;
+    width: 100%;
 }
 
 .leads-ul {
@@ -29,7 +30,7 @@
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ddd;
-    background-color: blue;
+    background-color: rgb(20, 20, 114);
     border-radius: 5px;
 }
 
@@ -61,8 +62,15 @@
 
 .lead-details {
     margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
 }
 
 .lead-details p {
-    margin: 5px 0;
+    margin: 10px 0;
+}
+.lead-details-r h3{
+    text-decoration: underline;
+    margin-top: 0;
 }

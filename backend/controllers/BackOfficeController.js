@@ -778,3 +778,34 @@ export const shareLeads = async (req, res) => {
     res.status(500).json({ message: 'Error updating leads' });
   }
 };
+
+
+export const updateLeadStatus = async (req, res) => {
+  const { applicationNumber } = req.params;
+  const { status } = req.body;
+
+  try {
+    const leadsCollectionRef = collection(db, 'leads');
+    const q = query(leadsCollectionRef, where('applicationNumber', '==', applicationNumber));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: 'Lead not found' });
+    }
+
+    querySnapshot.forEach(async (doc) => {
+      try {
+        await updateDoc(doc.ref, {
+          status: status || doc.data().status,
+        });
+      } catch (updateError) {
+        throw updateError;
+      }
+    });
+
+    res.status(200).json({ message: 'Lead status updated successfully' });
+  } catch (error) {
+    console.error('Error updating lead status:', error.message);
+    res.status(500).json({ message: 'Failed to update lead status' });
+  }
+};

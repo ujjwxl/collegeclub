@@ -152,7 +152,7 @@ const Users = () => {
                   <tbody className="bg-white divide-y divide-gray-200">
                     {events.map((event) => (
                       <tr key={event.id}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-wrap text-sm text-gray-900">
                           {event.message}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">

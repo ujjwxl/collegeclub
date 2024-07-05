@@ -37,6 +37,11 @@ interface LeadDetails {
     authLetterGrad?: string;
     preferredColleges?: string[];
     preferredBranches?: string[];
+    authLetterGradFile?: string;
+    authLetterSignatureFile?: string;
+    authLetterIDFile?: string;
+
+
 }
 
 const LeadsDetails = () => {
@@ -44,14 +49,16 @@ const LeadsDetails = () => {
     const [leadDetails, setLeadDetails] = useState<LeadDetails | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    
+
     // State for modal
     const [showModal, setShowModal] = useState(false);
     const [colleges, setColleges] = useState<string[]>([]);
     const [companies, setCompanies] = useState<string[]>([]);
     const [selectedColleges, setSelectedColleges] = useState<string[]>([]);
     const [selectedCompanies, setSelectedCompanies] = useState<string[]>([]);
-    
+    const [showActionModal, setShowActionModal] = useState(false); // State for action modal
+    const [selectedStatus, setSelectedStatus] = useState<string>('');
+
     useEffect(() => {
         const fetchLeadDetails = async () => {
             try {
@@ -90,19 +97,43 @@ const LeadsDetails = () => {
 
     const handleSaveSelection = () => {
 
-        axios.post(`http://locahost:5000/admin/shareleads/${applicationNumber}`, {
+        axios.post(`http://localhost:5000/admin/shareleads/${applicationNumber}`, {
             colleges: selectedColleges,
             companies: selectedCompanies
         })
-        .then(response => {
-            console.log('Selections saved successfully:', response.data);
-            alert('Leads shared successfully!');
-            setShowModal(false);
-        })
-        .catch(error => {
-            console.log('Error saving selections:', error.message);
-            alert("Leads could not be shared");
-        });
+            .then(response => {
+                console.log('Selections saved successfully:', response.data);
+                alert('Leads shared successfully!');
+                setShowModal(false);
+            })
+            .catch(error => {
+                console.log('Error saving selections:', error.message);
+                alert("Leads could not be shared");
+            });
+    };
+    const handleSaveStatus = () => {
+        // Assuming you have an endpoint to update the status
+        axios
+            .put(`http://localhost:5000/admin/leadStatus/${applicationNumber}`, {
+                status: selectedStatus,
+            })
+            .then((response) => {
+                console.log('Status updated successfully:', response.data);
+                alert('Status updated successfully!');
+                setShowActionModal(false);
+                // Optionally, update the lead details state to reflect the new status
+                setLeadDetails((prevLead) => ({
+                    ...prevLead,
+                    status: selectedStatus,
+                }));
+            })
+            .catch((error) => {
+                console.error('Error updating status:', error.message);
+                alert('Status could not be updated');
+            });
+    };
+    const handleCancelAction = () => {
+        setShowActionModal(false);
     };
 
     if (loading) {
@@ -139,12 +170,21 @@ const LeadsDetails = () => {
                                     <h3 className="text-lg font-semibold text-gray-800 mb-4">
                                         UserId: {leadDetails.userId}
                                     </h3>
-                                    <button
-                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
-                                        onClick={() => setShowModal(true)}
-                                    >
-                                        Share
-                                    </button>
+                                    <div className='flex'>
+                                        <button
+                                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 mr-4"
+                                            onClick={() => setShowModal(true)}
+                                        >
+                                            Share
+                                        </button>
+                                        <button
+                                            className="bg-gray-600 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded mt-2 "
+                                            onClick={() => setShowActionModal(true)}
+                                        >
+                                            Action
+                                        </button>
+                                    </div>
+
                                     {/* Modal for selecting colleges and companies */}
                                     {showModal && (
                                         <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -232,6 +272,59 @@ const LeadsDetails = () => {
                                             </div>
                                         </div>
                                     )}
+                                    {showActionModal && (
+                                        <div className="fixed z-10 inset-0 overflow-y-auto">
+                                            <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                                <div className="fixed inset-0 transition-opacity">
+                                                    <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                                                </div>
+                                                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                                                &#8203;
+                                                <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                                                    <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                                        <div className="sm:flex sm:items-start">
+                                                            <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                                                <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">Change Status</h3>
+                                                                <div className="mb-4">
+                                                                    <label className="block text-sm font-medium leading-5 text-gray-700">Select Status:</label>
+                                                                    <select
+                                                                        className="form-select mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                                                        value={selectedStatus}
+                                                                        onChange={(e) => setSelectedStatus(e.target.value)}
+                                                                    >
+                                                                        <option value="">Select...</option>
+                                                                        <option value="Approved">Approved</option>
+                                                                        <option value="Pending">Pending</option>
+                                                                        <option value="Rejected">Rejected</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                                        <span className="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                                                            <button
+                                                                type="button"
+                                                                onClick={handleSaveStatus}
+                                                                className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                                                            >
+                                                                Save
+                                                            </button>
+                                                        </span>
+                                                        <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
+                                                            <button
+                                                                type="button"
+                                                                onClick={handleCancelAction}
+                                                                className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                                                            >
+                                                                Cancel
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                                 {/* Right Column */}
                                 <div className="w-1/2 p-6">
@@ -280,7 +373,21 @@ const LeadsDetails = () => {
                                             </h2>
                                             <div
                                                 className={`px-2 py-1 rounded-full `}>
-                                                <p className="text-gray-800">{leadDetails.status}</p>
+                                                {leadDetails.status === 'Approved' && (
+                                                            <p className="bg-green-600 px-3 py-1 text-sm rounded-full text-white text-center">
+                                                                {leadDetails.status}
+                                                            </p>
+                                                        )}
+                                                        {leadDetails.status === 'Pending' && (
+                                                            <p className="bg-yellow-500 px-3 py-1 text-sm rounded-full text-white text-center">
+                                                                {leadDetails.status}
+                                                            </p>
+                                                        )}
+                                                        {leadDetails.status === 'Rejected' && (
+                                                            <p className="bg-red-600 px-3 py-1 text-sm rounded-full text-white text-center">
+                                                                {leadDetails.status}
+                                                            </p>
+                                                        )}
                                             </div>
                                         </div>
                                         <hr />
@@ -316,6 +423,22 @@ const LeadsDetails = () => {
                                         <h2 className="text-xl font-semibold text-gray-800 mb-4">
                                             Mother's Name: {leadDetails.motherName}
                                         </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            Image: <a href={leadDetails.authLetterGradFile} target="_blank" rel="noopener noreferrer" className='text-blue-700 underline'>
+                                                View image
+                                            </a>
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            ID: <a href={leadDetails.authLetterIDFile} target="_blank" rel="noopener noreferrer" className='text-blue-700 underline'>
+                                                View ID
+                                            </a>
+                                        </h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                                            Signature: <a href={leadDetails.authLetterSignatureFile} target="_blank" rel="noopener noreferrer" className='text-blue-700 underline'>
+                                                View signature
+                                            </a>
+                                        </h2>
+
                                         <h1 className='font-bold text-xl underline mb-4'>Class X</h1>
                                         <h2 className="text-xl font-semibold text-gray-800 mb-4">
                                             School Name: {leadDetails.schoolNameX}

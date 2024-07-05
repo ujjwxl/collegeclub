@@ -47,12 +47,19 @@ const  Leads: React.FC = () => {
                 <Sidebar />
                 <div className="w-5/6 p-4">
                 <h1 className='font-semibold text-4xl m-4 mb-8'>Leads</h1>
+                <input
+                        type="text"
+                        // value={searchQuery}
+                        // onChange={handleSearchChange}
+                        placeholder="Search by application number, mobile no..."
+                        className="w-2/5 px-4 py-2 mb-4 ml-4 rounded-md bg-gray-200 border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                    />
                     {loading ? (
                         <p className="m-4">Loading...</p>
                     ) : leads.length > 0 ? (
                         <div className="m-4">
                             <div className="overflow-x-auto">
-                                <table className="min-w-full divide-y divide-gray-200 shadow-md border border-gray-200 rounded-lg">
+                                <table className="min-w-full divide-y divide-gray-200 shadow-md border border-gray-200 rounded-lg mb-8">
                                     <thead className="bg-gray-100">
                                         <tr>
                                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">

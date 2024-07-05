@@ -131,7 +131,7 @@ const LeadsComponent = () => {
     const letterId = localStorage.getItem('authLetterId');
 
     const applicationNumber = generateUniqueId({
-      length: 12,
+      length: 10,
       useLetters: false
     });
 

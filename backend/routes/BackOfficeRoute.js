@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addJobOpening, addTeamMember, createAdmin, createCourse, createEvent, fetchApplicants, fetchLeads, fetchTeam, getAdminRole, getAllCourseApplications, getAllEvents, getAllUsers, getFeedbackByType, getJobOpenings, getLeadByApplicationNumber, getPaidCourseApplicants, getPartnersByType, getRolePermissions, getSlotBookingDetails, loginAdmin, saveRolePermissions, shareLeads, updateFeedbackStatus, updateOnboardingStatus, verifyCollege } from "../controllers/BackOfficeController.js";
+import { addJobOpening, addTeamMember, createAdmin, createCourse, createEvent, fetchApplicants, fetchLeads, fetchTeam, getAdminRole, getAllCourseApplications, getAllEvents, getAllUsers, getFeedbackByType, getJobOpenings, getLeadByApplicationNumber, getPaidCourseApplicants, getPartnersByType, getRolePermissions, getSlotBookingDetails, loginAdmin, saveRolePermissions, shareLeads, updateFeedbackStatus, updateLeadStatus, updateOnboardingStatus, verifyCollege } from "../controllers/BackOfficeController.js";
 
 const router = Router();
 
@@ -28,5 +28,6 @@ router.get('/adminrole/:userId', getAdminRole);
 router.get('/getleads', fetchLeads);
 router.get('/getlead/:applicationNumber', getLeadByApplicationNumber);
 router.post('/shareleads/:applicationNumber', shareLeads);
+router.put('/leadStatus/:applicationNumber', updateLeadStatus);
 
 export default router
