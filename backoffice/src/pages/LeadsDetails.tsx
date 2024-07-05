@@ -43,6 +43,21 @@ interface LeadDetails {
 
 
 }
+interface TableRowProps {
+    title: string;
+    content: string | number;
+}
+
+interface TableRowLinkProps {
+    title: string;
+    link: string;
+}
+
+interface TableRowListProps {
+    title: string;
+    items: string[];
+}
+
 
 const LeadsDetails = () => {
     const { applicationNumber } = useParams();
@@ -143,6 +158,55 @@ const LeadsDetails = () => {
     if (error) {
         return <p>Error: {error}</p>;
     }
+    const TableRow: React.FC<TableRowProps> = ({ title, content }) => (
+        <tr>
+            <td className="px-6 py-4 whitespace-nowrap">
+                <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+                <span className="text-xl font-semibold text-gray-800">{content}</span>
+            </td>
+        </tr>
+    );
+    
+    // Component for table row with link content
+    const TableRowLink: React.FC<TableRowLinkProps> = ({ title, link }) => (
+        <tr>
+            <td className="px-6 py-4 whitespace-nowrap">
+                <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+                <a href={link} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">
+                    View {title.toLowerCase()}
+                </a>
+            </td>
+        </tr>
+    );
+    
+    // Component for section headers in the table
+    const TableSectionHeader: React.FC<{ title: string }> = ({ title }) => (
+        <tr>
+            <td colSpan="2" className="px-6 py-4 bg-gray-100">
+                <h1 className="font-bold text-xl underline">{title}</h1>
+            </td>
+        </tr>
+    );
+    
+    // Component for table row with list content
+    const TableRowList: React.FC<TableRowListProps> = ({ title, items }) => (
+        <tr>
+            <td className="px-6 py-4 whitespace-nowrap">
+                <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+            </td>
+            <td className="px-6 py-4">
+                <ul className="list-disc pl-4">
+                    {items.map((item, index) => (
+                        <li key={index} className="text-gray-800">{item}</li>
+                    ))}
+                </ul>
+            </td>
+        </tr>
+    );
 
     return (
         <>
@@ -374,20 +438,20 @@ const LeadsDetails = () => {
                                             <div
                                                 className={`px-2 py-1 rounded-full `}>
                                                 {leadDetails.status === 'Approved' && (
-                                                            <p className="bg-green-600 px-3 py-1 text-sm rounded-full text-white text-center">
-                                                                {leadDetails.status}
-                                                            </p>
-                                                        )}
-                                                        {leadDetails.status === 'Pending' && (
-                                                            <p className="bg-yellow-500 px-3 py-1 text-sm rounded-full text-white text-center">
-                                                                {leadDetails.status}
-                                                            </p>
-                                                        )}
-                                                        {leadDetails.status === 'Rejected' && (
-                                                            <p className="bg-red-600 px-3 py-1 text-sm rounded-full text-white text-center">
-                                                                {leadDetails.status}
-                                                            </p>
-                                                        )}
+                                                    <p className="bg-green-600 px-3 py-1 text-sm rounded-full text-white text-center">
+                                                        {leadDetails.status}
+                                                    </p>
+                                                )}
+                                                {leadDetails.status === 'Pending' && (
+                                                    <p className="bg-yellow-500 px-3 py-1 text-sm rounded-full text-white text-center">
+                                                        {leadDetails.status}
+                                                    </p>
+                                                )}
+                                                {leadDetails.status === 'Rejected' && (
+                                                    <p className="bg-red-600 px-3 py-1 text-sm rounded-full text-white text-center">
+                                                        {leadDetails.status}
+                                                    </p>
+                                                )}
                                             </div>
                                         </div>
                                         <hr />
@@ -409,108 +473,44 @@ const LeadsDetails = () => {
 
                             {/* Additional Details Section */}
                             <div className="mt-8 p-2">
-                                <h1 className="font-bold text-2xl">
-                                    Additional Details
-                                </h1>
+                                <h1 className="font-bold text-2xl mb-4">Additional Details</h1>
+
                                 <div className="bg-white shadow-lg rounded-lg overflow-hidden m-4">
                                     <div className="p-6">
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Blood Group: {leadDetails.bloodGroup}
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Father's Name: {leadDetails.fatherName}
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Mother's Name: {leadDetails.motherName}
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Image: <a href={leadDetails.authLetterGradFile} target="_blank" rel="noopener noreferrer" className='text-blue-700 underline'>
-                                                View image
-                                            </a>
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            ID: <a href={leadDetails.authLetterIDFile} target="_blank" rel="noopener noreferrer" className='text-blue-700 underline'>
-                                                View ID
-                                            </a>
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Signature: <a href={leadDetails.authLetterSignatureFile} target="_blank" rel="noopener noreferrer" className='text-blue-700 underline'>
-                                                View signature
-                                            </a>
-                                        </h2>
+                                        <table className="min-w-full divide-y divide-gray-200">
+                                            <tbody className="divide-y divide-gray-200">
+                                                <TableRow title="Blood Group" content={leadDetails.bloodGroup} />
+                                                <TableRow title="Father's Name" content={leadDetails.fatherName} />
+                                                <TableRow title="Mother's Name" content={leadDetails.motherName} />
+                                                <TableRowLink title="Image" link={leadDetails.authLetterGradFile} />
+                                                <TableRowLink title="ID" link={leadDetails.authLetterIDFile} />
+                                                <TableRowLink title="Signature" link={leadDetails.authLetterSignatureFile} />
 
-                                        <h1 className='font-bold text-xl underline mb-4'>Class X</h1>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            School Name: {leadDetails.schoolNameX}
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Board: {leadDetails.boardX}
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Year of Passing: {leadDetails.yearOfPassingX}
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Marks in Percentage: {leadDetails.marksInPercentageX}%
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Authorization Letter: <a href={leadDetails.authLetterX} target="_blank" rel="noopener noreferrer" className='text-blue-700 underline'>
-                                                View Letter
-                                            </a>
-                                        </h2>
-                                        <h1 className='font-bold text-xl underline mb-4'>Class XII</h1>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            School Name: {leadDetails.schoolNameXII}
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Board: {leadDetails.boardXII}
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Year of Passing: {leadDetails.yearOfPassingXII}
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Marks in Percentage: {leadDetails.marksInPercentageXII}%
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Authorization Letter: <a href={leadDetails.authLetterXII} target="_blank" rel="noopener noreferrer" className='text-blue-700 underline'>
-                                                View Letter
-                                            </a>
-                                        </h2>
-                                        <h1 className='font-bold text-xl underline mb-4'>College Details</h1>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            College Name: {leadDetails.schoolNameGrad}
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            University Name: {leadDetails.boardGrad}
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Year of Passing: {leadDetails.yearOfPassingGrad}
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Marks in Percentage: {leadDetails.marksInPercentageGrad}%
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                                            Authorization Letter: <a href={leadDetails.authLetterGrad} target="_blank" rel="noopener noreferrer" className='text-blue-700 underline'>
-                                                View Letter
-                                            </a>
-                                        </h2>
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                                            Preferred Colleges:
-                                        </h2>
-                                        <ul className="list-disc pl-4 mb-4">
-                                            {leadDetails.preferredColleges.map((college, index) => (
-                                                <li key={index}>{college}</li>
-                                            ))}
-                                        </ul>
+                                                <TableSectionHeader title="Class X" />
+                                                <TableRow title="School Name" content={leadDetails.schoolNameX} />
+                                                <TableRow title="Board" content={leadDetails.boardX} />
+                                                <TableRow title="Year of Passing" content={leadDetails.yearOfPassingX} />
+                                                <TableRow title="Marks in Percentage" content={`${leadDetails.marksInPercentageX}%`} />
+                                                <TableRowLink title="Authorization Letter" link={leadDetails.authLetterX} />
 
-                                        <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                                            Preferred Branches:
-                                        </h2>
-                                        <ul className="list-disc pl-4">
-                                            {leadDetails.preferredBranches.map((branch, index) => (
-                                                <li key={index}>{branch}</li>
-                                            ))}
-                                        </ul>
-                                        {/* Add more fields as needed */}
+                                                <TableSectionHeader title="Class XII" />
+                                                <TableRow title="School Name" content={leadDetails.schoolNameXII} />
+                                                <TableRow title="Board" content={leadDetails.boardXII} />
+                                                <TableRow title="Year of Passing" content={leadDetails.yearOfPassingXII} />
+                                                <TableRow title="Marks in Percentage" content={`${leadDetails.marksInPercentageXII}%`} />
+                                                <TableRowLink title="Authorization Letter" link={leadDetails.authLetterXII} />
+
+                                                <TableSectionHeader title="College Details" />
+                                                <TableRow title="College Name" content={leadDetails.schoolNameGrad} />
+                                                <TableRow title="University Name" content={leadDetails.boardGrad} />
+                                                <TableRow title="Year of Passing" content={leadDetails.yearOfPassingGrad} />
+                                                <TableRow title="Marks in Percentage" content={`${leadDetails.marksInPercentageGrad}%`} />
+                                                <TableRowLink title="Authorization Letter" link={leadDetails.authLetterGrad} />
+
+                                                <TableRowList title="Preferred Colleges" items={leadDetails.preferredColleges} />
+                                                <TableRowList title="Preferred Branches" items={leadDetails.preferredBranches} />
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
