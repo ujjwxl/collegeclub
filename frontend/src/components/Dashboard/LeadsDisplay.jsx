@@ -74,7 +74,8 @@ const LeadsDisplay = () => {
                             {leads.map((lead, index) => (
                                 <li key={index} className="lead-item">
                                     <div className="lead-header">
-                                        <p className="lead-title">Lead {index + 1}:  {lead.applicationNumber}</p>
+                                        <p className="lead-title">Application No:  {lead.applicationNumber}</p>
+                                        {/* <p className="lead-title">Lead {index + 1}:  {lead.applicationNumber}</p> */}
                                         <button className="expand-button" onClick={() => toggleExpanded(index)}>
                                             {expandedLead === index ? 'View Less' : 'View More'}
                                         </button>

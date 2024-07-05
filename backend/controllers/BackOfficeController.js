@@ -311,7 +311,7 @@ export const addTeamMember = async (req, res) => {
 
   try {
     const teamCollectionRef = collection(db, "team");
-
+    const employeeID = uuidv4();
     const teamData = {
       name,
       dob,
@@ -321,6 +321,8 @@ export const addTeamMember = async (req, res) => {
       joiningYear,
       mobileNo,
       address,
+      status:"Active",
+      employeeID,
       // employeePicture
     };
 
@@ -807,5 +809,36 @@ export const updateLeadStatus = async (req, res) => {
   } catch (error) {
     console.error('Error updating lead status:', error.message);
     res.status(500).json({ message: 'Failed to update lead status' });
+  }
+};
+
+
+export const updateEmployeeStatus = async (req, res) => {
+  const { employeeID } = req.params; // Assuming employeeID is passed as a parameter
+  const { status } = req.body; // 'Active' or 'Inactive'
+
+  try {
+    const teamCollectionRef = collection(db, 'team');
+    const q = query(teamCollectionRef, where('employeeID', '==', employeeID));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: 'Team member not found' });
+    }
+
+    querySnapshot.forEach(async (doc) => {
+      try {
+        await updateDoc(doc.ref, {
+          status: status || doc.data().status, // Update status if provided, else keep current status
+        });
+      } catch (updateError) {
+        throw updateError;
+      }
+    });
+
+    res.status(200).json({ message: 'Team member status updated successfully' });
+  } catch (error) {
+    console.error('Error updating team member status:', error.message);
+    res.status(500).json({ message: 'Failed to update team member status' });
   }
 };

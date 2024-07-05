@@ -39,6 +39,7 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-wrap: wrap;
 }
 .dashboard-menu-top-right h2 span {
   -webkit-text-fill-color: #00b8d4;

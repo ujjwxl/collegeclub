@@ -32,6 +32,7 @@ const HR = () => {
     const [jobOpenPositions, setJobOpenPositions] = useState('');
     const [jobOpenings, setJobOpenings] = useState(['']);
     const [selectedJob, setSelectedJob] = useState(null);
+    const [action, setAction] = useState<string>('');
 
 
 
@@ -103,7 +104,9 @@ const HR = () => {
     const handleCloseJobModal = () => {
         setSelectedJob(null);
     };
-
+    const handleActionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setAction(event.target.value);
+    };
 
     useEffect(() => {
         // Function to fetch all teams data from backend
@@ -187,10 +190,56 @@ const HR = () => {
                 <p><strong>Joining Year:</strong> {teamMember.joiningYear}</p>
                 <p><strong>Mobile No.:</strong> {teamMember.mobileNo}</p>
                 <p><strong>Address:</strong> {teamMember.address}</p>
-                <img src={teamMember.photo} alt="Team Member" className="mt-4 rounded-lg shadow-md" />
+                <div className="mt-4">
+                    <label className="block mb-1">Select Action:</label>
+                    <select
+                        className="px-3 py-2 border rounded"
+                        value={action}
+                        onChange={handleActionChange}
+                    >
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+                {/* <img src={teamMember.photo} alt="Team Member" className="mt-4 rounded-lg shadow-md" /> */}
+                <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mr-2 mt-4"
+                    onClick={saveEmployeeStatus}
+                >
+                    Save
+                </button>
             </div>
         </div>
     );
+
+    const saveEmployeeStatus = async () => {
+        try {
+            const id = selectedTeamMember.employeeID;
+            const status = action; 
+    
+            if (!id) {
+                throw new Error('Employee ID is missing');
+            }
+    
+            const response = await axios.put(`http://localhost:5000/admin/updateTeamStatus/${id}`, { status });
+    
+            console.log('Employee status updated successfully');
+            alert('Employee status updated successfully');
+            handleCloseModal();
+            const updatedTeams = teams.map(team => {
+                if (team.employeeID === selectedTeamMember.employeeID) {
+                    return { ...team, status: action };
+                }
+                return team;
+            });
+
+            setTeams(updatedTeams);
+    
+        } catch (error) {
+            console.error('Error updating employee status:', error);
+        }
+    };
+    
 
     const ApplicantDetailsModal = ({ applicant }) => (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-500">
@@ -271,8 +320,8 @@ const HR = () => {
             </div>
         </div>
     );
-    
-    
+
+
 
     const addMoreResponsibility = () => {
         setJobResponsibilities([...jobResponsibilities, '']);
@@ -390,6 +439,9 @@ const HR = () => {
                                                             Position
                                                         </th>
                                                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
+                                                            Status
+                                                        </th>
+                                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
                                                             Details
                                                         </th>
 
@@ -412,6 +464,18 @@ const HR = () => {
                                                             </td>
                                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                                                 {team.position}
+                                                            </td>
+                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                {team.status === 'Active' && (
+                                                                    <p className="bg-green-600 px-3 py-1 text-sm rounded-full text-white text-center">
+                                                                        {team.status}
+                                                                    </p>
+                                                                )}
+                                                                {team.status === 'Inactive' && (
+                                                                    <p className="bg-red-500 px-3 py-1 text-sm rounded-full text-white text-center">
+                                                                        {team.status}
+                                                                    </p>
+                                                                )}
                                                             </td>
                                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                                                 <button onClick={() => handleViewDetails(team)} className="bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 rounded-lg text-sm transition-colors">

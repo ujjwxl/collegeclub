@@ -50,6 +50,7 @@ const Feedbacks = () => {
             setFeedbacks(updatedFeedbacks);
             console.log('Feedback status updated:', response.data.message);
             closeModal();
+            window.location.reload();
         } catch (error: any) {
             console.error('Error updating feedback status:', error.message);
             alert('Failed to update feedback status');

@@ -117,6 +117,8 @@ const Dashboard = () => {
     setShowNotificationBox(false);
     setShowMyCourses(false);
     setShowEvents(true);
+    setShowLeadsDetails(false);
+
   };
 
   const handleDashboardClick = () => {
@@ -134,6 +136,8 @@ const Dashboard = () => {
     setShowNotificationBox(false);
     setShowEvents(false);
     setShowCMS(false);
+    setShowLeadsDetails(false);
+
   };
 
   const handleShowAdmissionForm = () => {
@@ -212,6 +216,8 @@ const Dashboard = () => {
     setShowNotificationBox(false);
     setShowCMS(true);
     setShowEvents(false);
+    setShowLeadsDetails(false);
+
   }
 
   const handleShowCompanyCMS = () => {
