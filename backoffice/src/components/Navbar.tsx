@@ -13,7 +13,7 @@ function Navbar() {
                     <span className="m-0 ml-3">CLUB</span>
                 </h2>
             </Link>
-            <div className="relative ml-auto mr-10">
+            {/* <div className="relative ml-auto mr-10">
                 <input
                     placeholder="Student, department, events etc..."
                     className="h-auto w-96 border-none outline-none p-1 pl-3 pr-10 rounded-sm bg-white text-gray-800 shadow-sm"
@@ -24,7 +24,7 @@ function Navbar() {
                     className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-3 pointer-events-none"
                     style={{ width: "20px", height: "20px" }}
                 />
-            </div>
+            </div> */}
         </div>
     )
 }
