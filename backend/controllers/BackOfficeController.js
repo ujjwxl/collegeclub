@@ -724,3 +724,57 @@ export const getLeadByApplicationNumber = async (req, res) => {
     res.status(500).json({ message: 'Error retrieving leads' });
   }
 };
+
+export const shareLeads = async (req, res) => {
+  const { applicationNumber } = req.params;
+  const { colleges, companies } = req.body;
+
+  try {
+    for (const college of colleges) {
+      const usersCollectionRef = collection(db, 'users');
+      const q = query(usersCollectionRef, where('userId', '==', college.userId));
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        console.log(`User with userId ${college.userId} not found`);
+        continue;
+      }
+
+      querySnapshot.forEach(async (doc) => {
+        const docRef = doc.ref;
+
+        await updateDoc(docRef, {
+          leads: arrayUnion(applicationNumber),
+        });
+
+        console.log(`Leads updated for college with userId ${college.userId}`);
+      });
+    }
+
+    for (const company of companies) {
+      const usersCollectionRef = collection(db, 'users');
+      const q = query(usersCollectionRef, where('userId', '==', company.userId));
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        console.log(`User with userId ${company.userId} not found`);
+        continue;
+      }
+
+      querySnapshot.forEach(async (doc) => {
+        const docRef = doc.ref;
+
+        await updateDoc(docRef, {
+          leads: arrayUnion(applicationNumber),
+        });
+
+        console.log(`Leads updated for company with userId ${company.userId}`);
+      });
+    }
+
+    res.status(200).json({ message: 'Leads updated successfully' });
+  } catch (error) {
+    console.error('Error updating leads:', error.message);
+    res.status(500).json({ message: 'Error updating leads' });
+  }
+};
