@@ -901,3 +901,51 @@ export const updateEmployeeStatus = async (req, res) => {
     res.status(500).json({ message: 'Failed to update team member status' });
   }
 };
+
+export const addFAQ = async (req, res) => {
+
+  const { question, answer } = req.body;
+
+  const faqID = uuidv4();
+
+  try {
+    const faqsCollectionRef = collection(db, "faqs");
+
+    const faqData = {
+      faqID,
+      question,
+      answer,
+      isOpen: true
+    };
+
+    const docRef = await addDoc(faqsCollectionRef, faqData);
+
+    console.log("FAQ added successfully with ID: ", docRef.id);
+
+    res.status(200).json({ message: "FAQ added successfully", faqData });
+  } catch (error) {
+    console.error("Error adding FAQ:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getAllFAQs = async (req, res) => {
+  try {
+    const faqsCollectionRef = collection(db, "faqs");
+    const querySnapshot = await getDocs(faqsCollectionRef);
+
+    const faqsData = [];
+    querySnapshot.forEach((doc) => {
+      faqsData.push(doc.data());
+    });
+
+    if (faqsData.length === 0) {
+      return res.status(404).json({ message: "No faqs found" });
+    }
+
+    res.status(200).json(faqsData);
+  } catch (error) {
+    console.error("Error getting faqs:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};

@@ -12,6 +12,13 @@ interface RolePermissions {
   [key: string]: boolean;
 }
 
+interface FAQ {
+  faqID: string;
+  question: string;
+  answer: string;
+  isOpen: boolean;
+}
+
 const Settings: React.FC = () => {
   const [addUserModal, setAddUserModal] = useState<boolean>(false);
   const [rolesModal, setRolesModal] = useState<boolean>(false);
@@ -30,6 +37,53 @@ const Settings: React.FC = () => {
   const [permissions, setPermissions] = useState<{ [key: string]: boolean }>(
     {}
   );
+
+  const [faqs, setFaqs] = useState<FAQ[]>([]);
+  const [questionInput, setQuestionInput] = useState("");
+  const [answerInput, setAnswerInput] = useState("");
+
+  const [faqsModal, setFaqsModal] = useState<boolean>(false);
+
+  const openFAQsModal = () => {
+    setFaqsModal(true);
+    setRolesModal(false);
+    setAddUserModal(false);
+  };
+
+  // Ensure to close the modal when not needed
+  const closeFAQsModal = () => {
+    setFaqsModal(false);
+  };
+
+  useEffect(() => {
+    const fetchFAQs = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/admin/getfaqs");
+        setFaqs(response.data);
+      } catch (error) {
+        console.error("Error fetching FAQs:", error);
+        alert("Failed to fetch FAQs");
+      }
+    };
+
+    fetchFAQs();
+  }, []);
+
+  const addFAQ = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/admin/addfaq", {
+        question: questionInput,
+        answer: answerInput,
+      });
+      setFaqs([...faqs, response.data.faqData]);
+      setQuestionInput("");
+      setAnswerInput("");
+      alert("FAQ added successfully!");
+    } catch (error) {
+      console.error("Error adding FAQ:", error);
+      alert("Failed to add FAQ");
+    }
+  };
 
   useEffect(() => {
     const fetchRoleAndPermissions = async () => {
@@ -54,29 +108,29 @@ const Settings: React.FC = () => {
     fetchRoleAndPermissions();
   }, [userId]);
 
-  const handleAddUser = () => {
-    axios
-      .post("http://localhost:5000/admin/create", {
-        email,
-        password,
-        name,
-        mobileNo,
-        role,
-      })
-      .then((response: AxiosResponse) => {
-        alert("Admin created successfully!");
-      })
-      .catch((error: AxiosError) => {
-        console.log(error);
-        alert("Could not create admin");
-      });
+  // const handleAddUser = () => {
+  //   axios
+  //     .post("http://localhost:5000/admin/create", {
+  //       email,
+  //       password,
+  //       name,
+  //       mobileNo,
+  //       role,
+  //     })
+  //     .then((response: AxiosResponse) => {
+  //       alert("Admin created successfully!");
+  //     })
+  //     .catch((error: AxiosError) => {
+  //       console.log(error);
+  //       alert("Could not create admin");
+  //     });
 
-    setEmail("");
-    setPassword("");
-    setName("");
-    setMobileNo("");
-    setRole("");
-  };
+  //   setEmail("");
+  //   setPassword("");
+  //   setName("");
+  //   setMobileNo("");
+  //   setRole("");
+  // };
 
   const data: TableData[] = [
     { role: "Super Admin", description: "All perms." },
@@ -144,14 +198,15 @@ const Settings: React.FC = () => {
         alert("Failed to save role permissions");
       });
   };
-  const openAddUserModal = () => {
-    setAddUserModal(true);
-    setRolesModal(false);
-    // setRolesChangeModal(false);
-  };
+  // const openAddUserModal = () => {
+  //   setAddUserModal(true);
+  //   setRolesModal(false);
+  //   // setRolesChangeModal(false);
+  // };
   const openRolesModal = () => {
     setRolesModal(true);
     setAddUserModal(false);
+    setFaqsModal(false);
     // setRolesChangeModal(false);
   };
 
@@ -172,21 +227,84 @@ const Settings: React.FC = () => {
               </div>
             )}
 
-            {permissions["Create admin"] && (
+            {/* {permissions["Create admin"] && (
               <div
                 className="w-1/5 bg-slate-500 mt-4 p-12 text-center rounded-xl"
                 onClick={openAddUserModal}
               >
                 <p className="text-xl text-white">Add User</p>
               </div>
-            )}
+            )} */}
 
-            <div className="w-1/5 bg-slate-500 mt-4 p-12 text-center rounded-xl">
+            <div
+              className="w-1/5 bg-slate-500 mt-4 p-12 text-center rounded-xl"
+              onClick={openFAQsModal}
+            >
               <p className="text-xl text-white">FAQs</p>
             </div>
           </div>
 
-          {addUserModal && (
+          {faqsModal && (
+            <div className="p-4">
+              <h2 className="text-2xl font-bold mb-4">FAQs</h2>
+              <div className="mb-4">
+                <label
+                  htmlFor="question"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Question
+                </label>
+                <input
+                  type="text"
+                  id="question"
+                  className="mt-1 block w-full border p-2 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  value={questionInput}
+                  onChange={(e) => setQuestionInput(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="answer"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Answer
+                </label>
+                <input
+                  type="text"
+                  id="answer"
+                  className="mt-1 block w-full border p-2 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  value={answerInput}
+                  onChange={(e) => setAnswerInput(e.target.value)}
+                  required
+                />
+              </div>
+              <div>
+                <button
+                  type="button"
+                  onClick={addFAQ}
+                  className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                >
+                  Save
+                </button>
+              </div>
+              <hr className="my-4" />
+              <div>
+                <h3 className="text-2xl font-bold mb-4">All FAQs</h3>
+                {faqs.map((faq) => (
+                  <div
+                    key={faq.faqID}
+                    className="bg-white shadow-md rounded-md p-4 mb-4"
+                  >
+                    <p className="text-lg font-semibold mb-2">{faq.question}</p>
+                    <p className="text-gray-700">{faq.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* {addUserModal && (
             <div className="bg-white m-4 p-8 rounded-lg shadow-lg">
               <h2 className="text-2xl font-bold mb-4">Add User</h2>
               <form>
@@ -311,7 +429,7 @@ const Settings: React.FC = () => {
                 </div>
               </form>
             </div>
-          )}
+          )} */}
 
           {rolesModal && (
             <div className="overflow-x-auto m-4">

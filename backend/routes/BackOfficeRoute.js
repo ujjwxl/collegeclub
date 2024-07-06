@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addJobOpening, addTeamMember, createAdmin, createCourse, createEvent, fetchApplicants, fetchLeads, fetchTeam, getAdminRole, getAllCourseApplications, getAllEvents, getAllUsers, getFeedbackByType, getJobOpenings, getLeadByApplicationNumber, getPaidCourseApplicants, getPartnersByType, getRolePermissions, getSlotBookingDetails, loginAdmin, saveRolePermissions, shareLeads, updateEmployeeStatus, updateFeedbackStatus, updateLeadStatus, updateOnboardingStatus, verifyCollege } from "../controllers/BackOfficeController.js";
+import { addFAQ, addJobOpening, addTeamMember, createAdmin, createCourse, createEvent, fetchApplicants, fetchLeads, fetchTeam, getAdminRole, getAllCourseApplications, getAllEvents, getAllFAQs, getAllUsers, getFeedbackByType, getJobOpenings, getLeadByApplicationNumber, getPaidCourseApplicants, getPartnersByType, getRolePermissions, getSlotBookingDetails, loginAdmin, saveRolePermissions, shareLeads, updateEmployeeStatus, updateFeedbackStatus, updateLeadStatus, updateOnboardingStatus, verifyCollege } from "../controllers/BackOfficeController.js";
 
 const router = Router();
 
@@ -30,5 +30,7 @@ router.get('/getlead/:applicationNumber', getLeadByApplicationNumber);
 router.post('/shareleads/:applicationNumber', shareLeads);
 router.put('/leadStatus/:applicationNumber', updateLeadStatus);
 router.put('/updateTeamStatus/:userId', updateEmployeeStatus);
+router.post('/addfaq', addFAQ);
+router.get('/getfaqs', getAllFAQs);
 
 export default router
