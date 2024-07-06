@@ -48,45 +48,45 @@ const DashboardMenu = ({
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     if (!userId) {
-  //       return;
-  //     }
-
-  //     // http://localhost:5000/auth/user?userId=${userId}
-
-  //     try {
-  //       const response = await axios.get(
-  //         `http://localhost:5000/auth/user/${userId}`
-  //       );
-  //       setUserData(response.data);
-  //     } catch (error) {
-  //       console.error("Failed to fetch user data:", error);
-  //     }
-  //   };
-
-  //   fetchUserData();
-  // }, [userId]);
-
   useEffect(() => {
-    const fetchUserData = () => {
-      const storedUserData = localStorage.getItem('userData');
-      if (!storedUserData) {
-        console.log('No user data found in localStorage.');
+    const fetchUserData = async () => {
+      if (!userId) {
         return;
       }
 
+      // http://localhost:5000/auth/user?userId=${userId}
+
       try {
-        const userDataObject = JSON.parse(storedUserData);
-        setUserData(userDataObject);
+        const response = await axios.get(
+          `http://localhost:5000/auth/user/${userId}`
+        );
+        setUserData(response.data);
       } catch (error) {
-        console.error('Failed to parse user data from localStorage:', error);
+        console.error("Failed to fetch user data:", error);
       }
     };
 
     fetchUserData();
   }, [userId]);
+
+  // useEffect(() => {
+  //   const fetchUserData = () => {
+  //     const storedUserData = localStorage.getItem('userData');
+  //     if (!storedUserData) {
+  //       console.log('No user data found in localStorage.');
+  //       return;
+  //     }
+
+  //     try {
+  //       const userDataObject = JSON.parse(storedUserData);
+  //       setUserData(userDataObject);
+  //     } catch (error) {
+  //       console.error('Failed to parse user data from localStorage:', error);
+  //     }
+  //   };
+
+  //   fetchUserData();
+  // }, [userId]);
 
   const handleSignOut = () => {
     setOpenLogoutDialog(true);

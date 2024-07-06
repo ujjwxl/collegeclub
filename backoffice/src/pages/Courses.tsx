@@ -9,6 +9,7 @@ interface CourseFormData {
   price: string;
   briefDescription: string;
   rating: string;
+  category: string;
   courseDuration: string;
   courseLevel: string;
   language: string;
@@ -26,6 +27,7 @@ const Courses: React.FC = () => {
     price: "",
     briefDescription: "",
     rating: "",
+    category: "",
     courseDuration: "",
     courseLevel: "",
     language: "",
@@ -103,6 +105,8 @@ const Courses: React.FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    console.log(formData.category);
+
     axios
       .post("http://localhost:5000/admin/addcourse", formData)
       .then((response) => {
@@ -113,6 +117,7 @@ const Courses: React.FC = () => {
           price: "",
           briefDescription: "",
           rating: "",
+          category: "",
           courseDuration: "",
           courseLevel: "",
           language: "",
@@ -284,6 +289,27 @@ const Courses: React.FC = () => {
                       required
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
+                  </div>
+
+                  <div className="mb-4">
+                    <label
+                      htmlFor="category"
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                    >
+                      Category*
+                    </label>
+                    <select
+                      id="category"
+                      name="category"
+                      value={formData.category}
+                      onChange={handleInputChange}
+                      required
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    >
+                      <option value="">Select a category</option>
+                      <option value="Programming">Programming</option>
+                      <option value="Soft Skills">Soft Skills</option>
+                    </select>
                   </div>
 
                   <div className="mb-4">

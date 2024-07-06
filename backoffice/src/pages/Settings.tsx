@@ -25,11 +25,11 @@ const Settings: React.FC = () => {
   const [rolesChangeModal, setRolesChangeModal] = useState<boolean>(false);
   const [editingRole, setEditingRole] = useState<string>(""); // State to track which role is being edited
   const [selectedPermissions, setSelectedPermissions] = useState<string[]>([]);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [mobileNo, setMobileNo] = useState<string>("");
-  const [role, setRole] = useState<string>("");
+  // const [email, setEmail] = useState<string>("");
+  // const [password, setPassword] = useState<string>("");
+  // const [name, setName] = useState<string>("");
+  // const [mobileNo, setMobileNo] = useState<string>("");
+  // const [role, setRole] = useState<string>("");
 
   const userId = sessionStorage.getItem("id");
 

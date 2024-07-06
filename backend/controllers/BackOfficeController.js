@@ -424,6 +424,7 @@ export const createCourse = async (req, res) => {
     price,
     briefDescription,
     rating,
+    category,
     courseDuration,
     courseLevel,
     language,
@@ -431,6 +432,9 @@ export const createCourse = async (req, res) => {
     aboutInstructor,
     whatYouWillLearn,
   } = req.body;
+
+  console.log(category);
+  
 
   const courseId = uuidv4();
 
@@ -442,6 +446,7 @@ export const createCourse = async (req, res) => {
       price,
       briefDescription,
       rating,
+      category,
       courseDuration,
       courseLevel,
       language,
