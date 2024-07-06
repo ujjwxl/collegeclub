@@ -71,44 +71,15 @@ const CollegeDetails: React.FC = () => {
 
   useEffect(() => {
     axios
-        .get(`http://localhost:5000/auth/user/${collegeId}`)
-        .then((response: AxiosResponse<College>) => {
-            const data = response.data;
-            setUniversityFullName(data.universityFullName);
-            setUniversityShortName(data.universityShortName);
-            setFoundedYear(data.foundedYear);
-            setApprovedBy(data.approvedBy);
-            setRankedBy(data.rankedBy);
-            setContactNumber(data.contactNumber);
-            setEmail(data.email);
-            setWebsite(data.website);
-            setFullAddress(data.fullAddress);
-            setPinCode(data.pinCode);
-            setCountry(data.country);
-            setState(data.state);
-            setDistrict(data.district);
-            setAlternateContact(data.alternateContact);
-            setAlternateNumber(data.alternateNumber);
-            setReferralCode(data.referralCode);
-            setAboutCollege(data.aboutCollege);
-            setAdmissionProcess(data.admissionProcess);
-            setCourses(data.courses || []);
-            setDepartments(data.departments || []);
-            setNews(data.news || []);
-            setRankings(data.rankings || []);
-            setFacilities(data.facilities || []);
-            setOverallPlacement(data.overallPlacement);
-            setPromo(data.promo);
-            setScholarship(data.scholarship);
-            setSelectedInstituteType(data.selectedInstituteType);
-            setStudyMode(data.studyMode);
-            setCollegeData(data);
-        })
-        .catch((error: AxiosError) => {
-            alert("Could not get college details!");
-            console.log(error);
-        });
-}, [collegeId]);
+      .get(`http://localhost:5000/auth/user/${collegeId}`)
+      .then((response: AxiosResponse) => {
+        setCollegeData(response.data);
+      })
+      .catch((error: AxiosError) => {
+        alert("Could not get user details!");
+        console.log(error);
+      });
+  },[]);
 
   console.log(collegeData);
 
