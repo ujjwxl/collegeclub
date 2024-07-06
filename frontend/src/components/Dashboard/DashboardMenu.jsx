@@ -48,28 +48,45 @@ const DashboardMenu = ({
 
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     if (!userId) {
+  //       return;
+  //     }
+
+  //     // http://localhost:5000/auth/user?userId=${userId}
+
+  //     try {
+  //       const response = await axios.get(
+  //         `http://localhost:5000/auth/user/${userId}`
+  //       );
+  //       setUserData(response.data);
+  //     } catch (error) {
+  //       console.error("Failed to fetch user data:", error);
+  //     }
+  //   };
+
+  //   fetchUserData();
+  // }, [userId]);
+
   useEffect(() => {
-    const fetchUserData = async () => {
-      if (!userId) {
+    const fetchUserData = () => {
+      const storedUserData = localStorage.getItem('userData');
+      if (!storedUserData) {
+        console.log('No user data found in localStorage.');
         return;
       }
 
-      // http://localhost:5000/auth/user?userId=${userId}
-
       try {
-        const response = await axios.get(
-          `http://localhost:5000/auth/user/${userId}`
-        );
-        setUserData(response.data);
+        const userDataObject = JSON.parse(storedUserData);
+        setUserData(userDataObject);
       } catch (error) {
-        console.error("Failed to fetch user data:", error);
+        console.error('Failed to parse user data from localStorage:', error);
       }
     };
 
     fetchUserData();
   }, [userId]);
-
-  console.log(userData);
 
   const handleSignOut = () => {
     setOpenLogoutDialog(true);

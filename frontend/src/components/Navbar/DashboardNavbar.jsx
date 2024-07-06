@@ -28,19 +28,38 @@ const DashboardNavbar = ({ onCreateJob, onAddJob, onShowLeads, onShowApplicants,
   const isLoggedIn = userId != null;
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     if (!userId) {
+  //       return;
+  //     }
+
+  //     try {
+  //       const response = await axios.get(
+  //         `http://localhost:5000/auth/user/${userId}`
+  //       );
+  //       setUserData(response.data);
+  //     } catch (error) {
+  //       console.error("Failed to fetch user data:", error);
+  //     }
+  //   };
+
+  //   fetchUserData();
+  // }, [isLoggedIn]);
+
   useEffect(() => {
-    const fetchUserData = async () => {
-      if (!userId) {
+    const fetchUserData = () => {
+      const storedUserData = localStorage.getItem('userData');
+      if (!storedUserData) {
+        console.log('No user data found in localStorage.');
         return;
       }
 
       try {
-        const response = await axios.get(
-          `http://localhost:5000/auth/user/${userId}`
-        );
-        setUserData(response.data);
+        const userDataObject = JSON.parse(storedUserData);
+        setUserData(userDataObject);
       } catch (error) {
-        console.error("Failed to fetch user data:", error);
+        console.error('Failed to parse user data from localStorage:', error);
       }
     };
 

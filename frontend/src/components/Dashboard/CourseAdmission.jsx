@@ -60,23 +60,42 @@ const StudentAdmission = () => {
 
     const [userData, setUserData] = useState(null);
 
+    // useEffect(() => {
+    //     const fetchUserData = async () => {
+    //         if (!userId) {
+    //             return;
+    //         }
+
+    //         try {
+    //             const response = await axios.get(`http://localhost:5000/auth/user/${userId}`);
+    //             setUserData(response.data);
+    //         } catch (error) {
+    //             console.error("Failed to fetch user data:", error);
+    //         }
+    //     };
+
+    //     fetchUserData();
+    // }, [userId]);
+
     useEffect(() => {
-        const fetchUserData = async () => {
-          if (!userId) {
-            return;
-          }
-    
-          try {
-            const response = await axios.get(`http://localhost:5000/auth/user/${userId}`);
-            setUserData(response.data);
-          } catch (error) {
-            console.error("Failed to fetch user data:", error);
-          }
+        const fetchUserData = () => {
+            const storedUserData = localStorage.getItem('userData');
+            if (!storedUserData) {
+                console.log('No user data found in localStorage.');
+                return;
+            }
+
+            try {
+                const userDataObject = JSON.parse(storedUserData);
+                setUserData(userDataObject);
+            } catch (error) {
+                console.error('Failed to parse user data from localStorage:', error);
+            }
         };
-    
+
         fetchUserData();
-      }, [userId]);
-    
+    }, [userId]);
+
 
     let selectedCourse = localStorage.getItem('selectedCourse');
     selectedCourse = JSON.parse(selectedCourse);
@@ -149,29 +168,29 @@ const StudentAdmission = () => {
     const checkoutHandler = async (amount) => {
         const { data: { key } } = await axios.get("http://localhost:5000/api/getkey")
         const { data: { order } } = await axios.post("http://localhost:5000/coursecheckout")
-    
+
         console.log(window);
 
         const options = {
-          key,
-          amount: 5000,
-          currency: "INR",
-          name: userData.fullname,
-          description: "Course Fees",
-          image: "https://media.licdn.com/dms/image/D4D0BAQHiy2Ug9laZOA/company-logo_200_200/0/1691938402527?e=2147483647&v=beta&t=Pbz6CO3ccliuj0uAJgDr81gG7IPPn_7lkKTrn7njOds",
-          order_id: order.id,
-          callback_url: `http://localhost:5000/coursepaymentverification?userid=${userId}&username=${userData.fullName}&courseid=${selectedCourse.courseId}&coursename=${selectedCourse.courseName}&instructorname=${selectedCourse.instructorName}`,
-          prefill: {
+            key,
+            amount: 5000,
+            currency: "INR",
             name: userData.fullname,
-            email: userData.email,
-            contact: userData.contactNumber
-          },
-          notes: {
-            "address": "razorapy official"
-          },
-          theme: {
-            "color": "#3399cc"
-          }
+            description: "Course Fees",
+            image: "https://media.licdn.com/dms/image/D4D0BAQHiy2Ug9laZOA/company-logo_200_200/0/1691938402527?e=2147483647&v=beta&t=Pbz6CO3ccliuj0uAJgDr81gG7IPPn_7lkKTrn7njOds",
+            order_id: order.id,
+            callback_url: `http://localhost:5000/coursepaymentverification?userid=${userId}&username=${userData.fullName}&courseid=${selectedCourse.courseId}&coursename=${selectedCourse.courseName}&instructorname=${selectedCourse.instructorName}`,
+            prefill: {
+                name: userData.fullname,
+                email: userData.email,
+                contact: userData.contactNumber
+            },
+            notes: {
+                "address": "razorapy official"
+            },
+            theme: {
+                "color": "#3399cc"
+            }
         };
         const razor = new window.Razorpay(options);
 

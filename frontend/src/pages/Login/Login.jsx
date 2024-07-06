@@ -40,6 +40,7 @@ const Login = () => {
             localStorage.setItem('type', accountType);
             localStorage.setItem('applicationFormCompleted', applicationFormCompleted);
             localStorage.setItem('token', token);
+            localStorage.setItem('userData', JSON.stringify(userData));
             navigate('/dashboard');
           }
         })

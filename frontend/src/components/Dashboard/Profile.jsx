@@ -9,20 +9,41 @@ const Profile = () => {
   const [editedNumber, setEditedNumber] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     const userId = localStorage.getItem("id");
+  //     if (!userId) return;
+
+  //     try {
+  //       const response = await axios.get(
+  //         `http://localhost:5000/auth/user/${userId}`
+  //       );
+  //       setUserData(response.data);
+  //       setEditedName(response.data.fullName);
+  //       setEditedNumber(response.data.contactNumber);
+  //     } catch (error) {
+  //       console.error("Failed to fetch user data:", error);
+  //     }
+  //   };
+
+  //   fetchUserData();
+  // }, []);
+
   useEffect(() => {
-    const fetchUserData = async () => {
-      const userId = localStorage.getItem("id");
-      if (!userId) return;
+    const fetchUserData = () => {
+      const storedUserData = localStorage.getItem('userData');
+      if (!storedUserData) {
+        console.log('No user data found in localStorage.');
+        return;
+      }
 
       try {
-        const response = await axios.get(
-          `http://localhost:5000/auth/user/${userId}`
-        );
-        setUserData(response.data);
-        setEditedName(response.data.fullName);
-        setEditedNumber(response.data.contactNumber);
+        const userDataObject = JSON.parse(storedUserData);
+        setUserData(userDataObject);
+        setEditedName(userDataObject.fullName);
+        setEditedNumber(userDataObject.contactNumber);
       } catch (error) {
-        console.error("Failed to fetch user data:", error);
+        console.error('Failed to parse user data from localStorage:', error);
       }
     };
 

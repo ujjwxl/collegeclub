@@ -50,13 +50,13 @@ const LeadsDisplay = () => {
         }
     };
 
-    if (loading) {
-        return <div className="loader">Loading...</div>;
-    }
+    // if (loading) {
+    //     return <div className="loader">Loading...</div>;
+    // }
 
-    if (error) {
-        return <div className="error">Error: {error}</div>;
-    }
+    // if (error) {
+    //     return <div className="error">Error: {error}</div>;
+    // }
 
     return (
         <div className="dashboard-box create-job-box">

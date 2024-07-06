@@ -252,6 +252,7 @@ const Dashboard = () => {
     setShowCompanyCMS(false);
     setShowNotificationBox(true);
     setShowEvents(false);
+    setShowLeadsDetails(false);
   }
 
   const handleShowProfileClick =()=>{
@@ -269,7 +270,7 @@ const Dashboard = () => {
     setShowCompanyCMS(false);
     setShowNotificationBox(false);
     setShowEvents(false);
-
+    setShowLeadsDetails(false);
   }
 
   return (
