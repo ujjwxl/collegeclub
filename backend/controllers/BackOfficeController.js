@@ -434,7 +434,7 @@ export const createCourse = async (req, res) => {
   } = req.body;
 
   console.log(category);
-  
+
 
   const courseId = uuidv4();
 
@@ -951,6 +951,92 @@ export const getAllFAQs = async (req, res) => {
     res.status(200).json(faqsData);
   } catch (error) {
     console.error("Error getting faqs:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const editCollegeData = async (req, res) => {
+  const { collegeId } = req.params;
+  const {
+      universityFullName,
+      universityShortName,
+      foundedYear,
+      approvedBy,
+      rankedBy,
+      contactNumber,
+      email,
+      website,
+      fullAddress,
+      pinCode,
+      country,
+      state,
+      district,
+      alternateContact,
+      alternateNumber,
+      referralCode,
+      aboutCollege,
+      admissionProcess,
+      courses,
+      departments,
+      news,
+      rankings,
+      facilities,
+      overallPlacement,
+      promo,
+      scholarship,
+      selectedInstituteType,
+      studyMode,
+  } = req.body;
+
+  try {
+    const usersCollectionRef = collection(db, "users");
+    const q = query(usersCollectionRef, where("userId", "==", collegeId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    querySnapshot.forEach(async (document) => {
+      const docRef = document.ref;
+
+      await updateDoc(docRef, {
+        organizationName: universityFullName,
+        universityShortName,
+        foundedYear,
+        approvedBy,
+        rankedBy,
+        contactNumber,
+        email,
+        website,
+        fullAddress,
+        pinCode,
+        country,
+        state,
+        district,
+        alternateContact,
+        alternateNumber,
+        referralCode,
+        aboutCollege,
+        admissionProcess,
+        courses,
+        departments,
+        news,
+        rankings,
+        facilities,
+        overallPlacement,
+        promo,
+        scholarship,
+        selectedInstituteType,
+        studyMode,
+      });
+
+      console.log("Profile form updated successfully");
+    });
+
+    res.status(200).json({ message: "Profile form updated successfully" });
+  } catch (error) {
+    console.error("Error updating user profile:", error.message);
     res.status(500).json({ message: error.message });
   }
 };
