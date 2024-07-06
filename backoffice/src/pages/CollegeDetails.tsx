@@ -1,6 +1,6 @@
 import React, { cloneElement, useEffect, useState } from "react";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Button from "@mui/material/Button";
@@ -79,7 +79,8 @@ const CollegeDetails: React.FC = () => {
         alert("Could not get user details!");
         console.log(error);
       });
-  });
+  },[]);
+  console.log(collegeData);
 
   const handleVerifyCollege = (collegeId: string) => {
     axios
@@ -390,6 +391,11 @@ const CollegeDetails: React.FC = () => {
                     >
                       Activation
                     </button>
+                    <Link to={`/college/edit/${collegeId}`}>
+                      <button className="bg-orange-500 ml-2 text-white p-2 rounded-lg">
+                        Edit
+                      </button>
+                    </Link>
 
                     {/* <button className="bg-orange-500 text-white p-2 rounded-lg ml-2">
                       Activation
@@ -502,11 +508,10 @@ const CollegeDetails: React.FC = () => {
                         Payment Status:
                       </h2>
                       <div
-                        className={`px-2 py-1 rounded-full ${
-                          collegeData.paymentStatus
+                        className={`px-2 py-1 rounded-full ${collegeData.paymentStatus
                             ? "bg-green-400"
                             : "bg-red-500"
-                        }`}
+                          }`}
                       >
                         <p className="text-gray-800">
                           {collegeData.paymentStatus === true
