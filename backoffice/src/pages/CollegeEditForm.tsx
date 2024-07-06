@@ -43,15 +43,43 @@ const CollegeEditForm = () => {
     useEffect(() => {
         axios
             .get(`http://localhost:5000/auth/user/${collegeId}`)
-            .then((response: AxiosResponse) => {
-                setCollegeData(response.data);
+            .then((response: AxiosResponse<College>) => {
+                const data = response.data;
+                setUniversityFullName(data.organizationName);
+                setUniversityShortName(data.universityShortName);
+                setFoundedYear(data.foundedYear);
+                setApprovedBy(data.approvedBy);
+                setRankedBy(data.rankedBy);
+                setContactNumber(data.contactNumber);
+                setEmail(data.email);
+                setWebsite(data.website);
+                setFullAddress(data.fullAddress);
+                setPinCode(data.pinCode);
+                setCountry(data.country);
+                setState(data.state);
+                setDistrict(data.district);
+                setAlternateContact(data.alternateContact);
+                setAlternateNumber(data.alternateNumber);
+                setReferralCode(data.referralCode);
+                setAboutCollege(data.aboutCollege);
+                setAdmissionProcess(data.admissionProcess);
+                setCourses(data.courses || []);
+                setDepartments(data.departments || []);
+                setNews(data.news || []);
+                setRankings(data.rankings || []);
+                setFacilities(data.facilities || []);
+                setOverallPlacement(data.overallPlacement);
+                setPromo(data.promo);
+                setScholarship(data.scholarship);
+                setSelectedInstituteType(data.selectedInstituteType);
+                setStudyMode(data.studyMode);
+                setCollegeData(data);
             })
             .catch((error: AxiosError) => {
-                alert("Could not get user details!");
+                alert("Could not get college details!");
                 console.log(error);
             });
-    },[]);
-    console.log(collegeData);
+    }, [collegeId]);
 
     const handleCourseSelect = (course) => {
         setSelectedCourses([...selectedCourses, course]);
@@ -115,6 +143,7 @@ const CollegeEditForm = () => {
         "Private",
         "Autonomous",
     ];
+    const coursesType = ['Science and Technology', 'Medical', 'Business and Management', 'Fashion and Design', 'Agriculture', 'Environmental Science', 'Law and Legal', 'Hospitality', 'Journalism', 'Teaching', 'Lifestyle', 'Sports'];
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -499,7 +528,9 @@ const CollegeEditForm = () => {
                                             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                         >
                                             <option value="">Select Course Type</option>
-                                            {/* Replace with your options */}
+                                            {coursesType.map((course, index) => (
+                                                <option key={index} value={course}>{course}</option>
+                                            ))}
                                         </select>
                                     </div>
 
