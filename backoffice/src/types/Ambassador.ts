@@ -1,0 +1,39 @@
+export interface Ambassador {
+    fullName: string;
+    isVerified: boolean;
+    onboardingStatus: string;
+    contactNumber: string;
+    email: string;
+    gender: string;
+    dob: string;
+    state: string;
+    district: string;
+    country: string;
+    profilePicture: string;
+    linkedin?: string;
+    events: {
+      id: string;
+      message: string;
+      date: string;
+    }[];
+    profileFormFilled: boolean;
+    paymentId: string;
+    collegeName: string;
+    userName: string;
+    collegePincode: string;
+    galleryImages: string[];
+    collegeState: string;
+    accountType: string;
+    orderId: string;
+    addressProof: string;
+    collegeDistrict: string;
+    collegeCountry: string;
+    userId: string;
+    paymentStatus: boolean;
+    pinCode: string;
+    organizationName: string;
+    subDomain: string;
+    applicationFormCompleted: boolean;
+    panCard: string;
+    fullAddress: string;
+}

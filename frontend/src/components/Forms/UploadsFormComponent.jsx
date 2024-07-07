@@ -57,7 +57,7 @@ const UploadsFormComponent = () => {
                 toast('File uploaded successfully!');
                 console.log('File uploaded successfully');
 
-                if(endpoint === "profile"){
+                if (endpoint === "profile") {
                     localStorage.setItem('keywordProfilePicture', response.data.downloadURL);
                 }
             })
@@ -99,29 +99,33 @@ const UploadsFormComponent = () => {
         const profilePicture = localStorage.getItem('keywordProfilePicture');
         const accountType = localStorage.getItem('type');
 
-        if(profilePicture === null){
+        if (profilePicture === null) {
             toast('Please upload a profile picture');
             return;
         }
 
-        axios.post(`http://localhost:5000/auth/createkeywords/${userId}`, {
-            organizationName,
-            shortName,
-            district,
-            state,
-            country,
-            selectedCourses,
-            courses,
-            instituteType,
-            profilePicture,
-            accountType
-        })
-            .then((response) => {
-                console.log('Keywords created!');
+        if (accountType === "College" || accountType === "Company") {
+            axios.post(`http://localhost:5000/auth/createkeywords/${userId}`, {
+                organizationName,
+                shortName,
+                district,
+                state,
+                country,
+                selectedCourses,
+                courses,
+                instituteType,
+                profilePicture,
+                accountType
             })
-            .catch((error) => {
-                console.log(error);
-            })
+                .then((response) => {
+                    console.log('Keywords created!');
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
+
+
     }
 
     return (
@@ -174,7 +178,7 @@ const UploadsFormComponent = () => {
                             </div>
                         </div>
                     )}
-                    
+
                     {type === 'College' && (
                         <div className="form-input-group">
                             <label htmlFor="rankingRef">Ranking reference document*</label>

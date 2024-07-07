@@ -41,6 +41,8 @@ const Partners = () => {
       navigate(`/college/${userId}`);
     } else if (partnerType === 'Company') {
       navigate(`/company/${userId}`);
+    } else if (partnerType === 'CC-Ambassador') {
+      navigate(`/ambassador/${userId}`);
     }
   };
 
