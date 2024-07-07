@@ -80,7 +80,7 @@ const CollegeDetails: React.FC = () => {
         console.log(error);
       });
   },[]);
-
+  
   console.log(collegeData);
 
   const handleVerifyCollege = (collegeId: string) => {

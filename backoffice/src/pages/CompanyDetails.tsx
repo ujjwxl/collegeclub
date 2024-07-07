@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Button from "@mui/material/Button";
@@ -195,6 +195,11 @@ const CompanyDetails: React.FC = () => {
                     >
                       Activation
                     </button>
+                    <Link to={`/company/edit/${companyId}`}>
+                      <button className="bg-orange-500 ml-2 text-white p-2 rounded-lg">
+                        Edit
+                      </button>
+                    </Link>
                   </div>
 
                   <Dialog

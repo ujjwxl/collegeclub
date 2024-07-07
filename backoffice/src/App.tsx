@@ -18,6 +18,7 @@ import Settings from "./pages/Settings";
 import Leads from "./pages/Leads";
 import LeadsDetails from './pages/LeadsDetails';
 import CollegeEditForm from "./pages/CollegeEditForm";
+import CompanyEditForm from "./pages/CompanyEditForm";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route path="/leads" element={<Leads />} />
           <Route path="/leads/:applicationNumber" element={<LeadsDetails />} />
           <Route path="/college/edit/:collegeId" element={<CollegeEditForm />} />
+          <Route path="/company/edit/:companyId" element={<CompanyEditForm />} />
         </Routes>
       </Router>
     </>
