@@ -1040,3 +1040,75 @@ export const editCollegeData = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const editCompanyData = async (req, res) => {
+  const { companyId } = req.params;
+  const {
+    companyName,
+    foundedYear,
+    headquarter,
+    contactNumber,
+    email,
+    website,
+    fullAddress,
+    pinCode,
+    country,
+    state,
+    district,
+    alternateContact,
+    alternateNumber,
+    referralCode,
+    aboutCompany,
+    companyMission,
+    services,
+    news,
+    registrationNumber,
+    promo,
+    industryType,
+  } = req.body;
+
+  try {
+    const usersCollectionRef = collection(db, "users"); // Replace 'companies' with your Firestore collection name
+    const q = query(usersCollectionRef, where("userId", "==", companyId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: 'Company not found' });
+    }
+
+    querySnapshot.forEach(async (document) => {
+      const docRef = document.ref;
+
+      await updateDoc(docRef, {
+        organizationName: companyName,
+        foundedYear,
+        headquarter,
+        contactNumber,
+        email,
+        website,
+        fullAddress,
+        pinCode,
+        country,
+        state,
+        district,
+        alternateContact,
+        alternateNumber,
+        referralCode,
+        aboutCompany,
+        companyMission,
+        services,
+        news,
+        registrationNumber,
+        promo,
+        industryType,
+      });
+
+      console.log('Company data updated successfully');
+    });
+
+    res.status(200).json({ message: 'Company data updated successfully' });
+  } catch (error) {
+    console.error('Error updating company data:', error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
