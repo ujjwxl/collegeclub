@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { useParams } from "react-router-dom";
 import { College } from "../types/College";
 
@@ -25,12 +25,12 @@ const CollegeEditForm = () => {
   // State variables for form inputs
   const [aboutCollege, setAboutCollege] = React.useState("");
   const [admissionProcess, setAdmissionProcess] = React.useState("");
-  const [courses, setCourses] = React.useState([]);
-  const [selectedCourses, setSelectedCourses] = React.useState([]);
-  const [departments, setDepartments] = React.useState([]);
-  const [news, setNews] = React.useState([]);
-  const [rankings, setRankings] = React.useState([]);
-  const [facilities, setFacilities] = React.useState([]);
+  const [courses, setCourses] = React.useState<any>([]);
+  const [selectedCourses, setSelectedCourses] = React.useState<any>([]);
+  const [departments, setDepartments] = React.useState<any>([]);
+  const [news, setNews] = React.useState<any>([]);
+  const [rankings, setRankings] = React.useState<any>([]);
+  const [facilities, setFacilities] = React.useState<any>([]);
   const [overallPlacement, setOverallPlacement] = React.useState("");
   const [promo, setPromo] = React.useState("");
   const [scholarship, setScholarship] = React.useState("");
@@ -70,7 +70,7 @@ const CollegeEditForm = () => {
         setOverallPlacement(data.overallPlacement);
         setPromo(data.promo);
         setScholarship(data.scholarship);
-        setSelectedInstituteType(data.selectedInstituteType);
+        setSelectedInstituteType(data.instituteType);
         setStudyMode(data.studyMode);
         setCollegeData(data);
       })
@@ -80,13 +80,13 @@ const CollegeEditForm = () => {
       });
   }, [collegeId]);
 
-  const handleCourseSelect = (course) => {
-    setSelectedCourses([...selectedCourses, course]);
-  };
+  // const handleCourseSelect = (course: any) => {
+  //   setSelectedCourses([...selectedCourses, course]);
+  // };
 
-  const handleCourseRemove = (course) => {
-    setSelectedCourses(selectedCourses.filter((c) => c !== course));
-  };
+  // const handleCourseRemove = (course: any) => {
+  //   setSelectedCourses(selectedCourses.filter((c: any) => c !== course));
+  // };
 
   const handleAddCourse = () => {
     setCourses([
@@ -102,7 +102,7 @@ const CollegeEditForm = () => {
     ]);
   };
 
-  const handleRemoveCourse = (index) => {
+  const handleRemoveCourse = (index: any) => {
     const updatedCourses = [...courses];
     updatedCourses.splice(index, 1);
     setCourses(updatedCourses);
@@ -115,7 +115,7 @@ const CollegeEditForm = () => {
     ]);
   };
 
-  const handleRemoveDepartment = (index) => {
+  const handleRemoveDepartment = (index: any) => {
     const updatedDepartments = [...departments];
     updatedDepartments.splice(index, 1);
     setDepartments(updatedDepartments);
@@ -125,7 +125,7 @@ const CollegeEditForm = () => {
     setNews([...news, { newsTitle: "", refLink: "" }]);
   };
 
-  const handleRemoveNews = (index) => {
+  const handleRemoveNews = (index: any) => {
     const updatedNews = [...news];
     updatedNews.splice(index, 1);
     setNews(updatedNews);
@@ -135,15 +135,15 @@ const CollegeEditForm = () => {
     setRankings([...rankings, { agencyName: "", rank: "", year: "" }]);
   };
 
-  const handleRemoveRanking = (index) => {
+  const handleRemoveRanking = (index: any) => {
     const updatedRankings = [...rankings];
     updatedRankings.splice(index, 1);
     setRankings(updatedRankings);
   };
 
-  const handleFacilityChange = (facility) => {
+  const handleFacilityChange = (facility: any) => {
     if (facilities.includes(facility)) {
-      setFacilities(facilities.filter((f) => f !== facility));
+      setFacilities(facilities.filter((f: any) => f !== facility));
     } else {
       setFacilities([...facilities, facility]);
     }
@@ -170,7 +170,7 @@ const CollegeEditForm = () => {
     "Sports",
   ];
 
-  const handleSubmit = (e: React.FormEvent<SubmitEvent>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = {
@@ -539,8 +539,8 @@ const CollegeEditForm = () => {
                 value={aboutCollege}
                 name="aboutCollege"
                 id="aboutCollege"
-                cols="30"
-                rows="10"
+                cols={30}
+                rows={10}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               ></textarea>
@@ -552,15 +552,15 @@ const CollegeEditForm = () => {
                 value={admissionProcess}
                 name="admissionProcess"
                 id="admissionProcess"
-                cols="30"
-                rows="10"
+                cols={30}
+                rows={10}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               ></textarea>
               <hr />
 
               <h3 className="text-lg font-semibold mb-4">Courses</h3>
-              {courses.map((course, index) => (
+              {courses.map((course: any, index: any) => (
                 <div className="form-input-flex-two" key={index}>
                   <div className="form-input-group">
                     <label htmlFor={`courseName${index}`}>Course Name*</label>
@@ -608,7 +608,7 @@ const CollegeEditForm = () => {
                         updatedCourses[index].courseType = e.target.value;
                         setCourses(updatedCourses);
                       }}
-                      className="college-details-form-course-type-select"
+                      // className="college-details-form-course-type-select"
                       required
                       className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     >
@@ -691,7 +691,7 @@ const CollegeEditForm = () => {
               <hr />
 
               <h3 className="text-lg font-semibold mb-4">Departments</h3>
-              {departments.map((department, index) => (
+              {departments.map((department: any, index: any) => (
                 <div className="form-input-flex-two" key={index}>
                   <div className="form-input-group">
                     <label htmlFor={`departmentName${index}`}>
@@ -769,7 +769,7 @@ const CollegeEditForm = () => {
               <hr />
 
               <h3 className="text-lg font-semibold mb-4">News</h3>
-              {news.map((item, index) => (
+              {news.map((item: any, index: any) => (
                 <div className="form-input-flex-two" key={index}>
                   <div className="form-input-group">
                     <label htmlFor={`newsTitle${index}`}>News Title*</label>
@@ -824,7 +824,7 @@ const CollegeEditForm = () => {
               <hr />
 
               <h3 className="text-lg font-semibold mb-4">Ranking</h3>
-              {rankings.map((ranking, index) => (
+              {rankings.map((ranking: any, index: any) => (
                 <div className="form-input-flex-two" key={index}>
                   <div className="form-input-group">
                     <label htmlFor={`agencyName${index}`}>Agency Name*</label>
@@ -987,8 +987,6 @@ const CollegeEditForm = () => {
                 value={overallPlacement}
                 name="overallPlacement"
                 id="overallPlacement"
-                cols="30"
-                rows="10"
                 required
                 placeholder="Overall placement"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -1001,8 +999,6 @@ const CollegeEditForm = () => {
                 value={promo}
                 name="promo"
                 id="promo"
-                cols="30"
-                rows="10"
                 placeholder="Promo"
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -1015,8 +1011,6 @@ const CollegeEditForm = () => {
                 value={scholarship}
                 name="scholarship"
                 id="scholarship"
-                cols="30"
-                rows="10"
                 required
                 placeholder="Scholarship"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -1027,7 +1021,7 @@ const CollegeEditForm = () => {
               <select
                 value={selectedInstituteType}
                 onChange={(e) => setSelectedInstituteType(e.target.value)}
-                className="college-details-form-course-type-select"
+                // className="college-details-form-course-type-select"
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               >
@@ -1044,7 +1038,7 @@ const CollegeEditForm = () => {
               <input
                 value={studyMode}
                 onChange={(e) => setStudyMode(e.target.value)}
-                className="college-details-form-course-type-select"
+                // className="college-details-form-course-type-select"
                 placeholder="Regular/Distance"
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"

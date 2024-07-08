@@ -44,18 +44,18 @@ interface LeadDetails {
 
 }
 interface TableRowProps {
-    title: string;
-    content: string | number;
+    title: any;
+    content: any;
 }
 
 interface TableRowLinkProps {
-    title: string;
-    link: string;
+    title: any;
+    link: any;
 }
 
 interface TableRowListProps {
-    title: string;
-    items: string[];
+    title: any;
+    items: string[] | undefined;
 }
 
 
@@ -67,12 +67,14 @@ const LeadsDetails = () => {
 
     // State for modal
     const [showModal, setShowModal] = useState(false);
-    const [colleges, setColleges] = useState<string[]>([]);
-    const [companies, setCompanies] = useState<string[]>([]);
+    const [colleges, setColleges] = useState<any[]>([]);
+    const [companies, setCompanies] = useState<any[]>([]);
     const [selectedColleges, setSelectedColleges] = useState<string[]>([]);
     const [selectedCompanies, setSelectedCompanies] = useState<string[]>([]);
     const [showActionModal, setShowActionModal] = useState(false); // State for action modal
     const [selectedStatus, setSelectedStatus] = useState<string>('');
+
+    
 
     useEffect(() => {
         const fetchLeadDetails = async () => {
@@ -80,7 +82,7 @@ const LeadsDetails = () => {
                 const response = await axios.get(`http://localhost:5000/admin/getlead/${applicationNumber}`);
                 setLeadDetails(response.data);
                 setLoading(false);
-            } catch (error) {
+            } catch (error: any) {
                 console.error('Error fetching lead details:', error.message);
                 setError('Failed to fetch lead details. Please try again.');
                 setLoading(false);
@@ -91,7 +93,7 @@ const LeadsDetails = () => {
             try {
                 const response = await axios.get('http://localhost:5000/auth/college');
                 setColleges(response.data);
-            } catch (error) {
+            } catch (error: any) {
                 console.error('Error fetching colleges:', error.message);
             }
         };
@@ -100,7 +102,7 @@ const LeadsDetails = () => {
             try {
                 const response = await axios.get('http://localhost:5000/auth/company');
                 setCompanies(response.data);
-            } catch (error) {
+            } catch (error: any) {
                 console.error('Error fetching companies:', error.message);
             }
         };
@@ -186,7 +188,7 @@ const LeadsDetails = () => {
     // Component for section headers in the table
     const TableSectionHeader: React.FC<{ title: string }> = ({ title }) => (
         <tr>
-            <td colSpan="2" className="px-6 py-4 bg-gray-100">
+            <td colSpan={2} className="px-6 py-4 bg-gray-100">
                 <h1 className="font-bold text-xl underline">{title}</h1>
             </td>
         </tr>
@@ -200,13 +202,17 @@ const LeadsDetails = () => {
             </td>
             <td className="px-6 py-4">
                 <ul className="list-disc pl-4">
-                    {items.map((item, index) => (
+                    {items && items.map((item, index) => (
                         <li key={index} className="text-gray-800">{item}</li>
                     ))}
                 </ul>
             </td>
         </tr>
     );
+
+    const createdAt = leadDetails?.createdAt ? new Date(leadDetails.createdAt) : null;
+
+    const createdAtFormatted = createdAt ? format(createdAt, 'dd/MM/yyyy') : 'N/A';
 
     return (
         <>
@@ -229,7 +235,7 @@ const LeadsDetails = () => {
                                         CC Ambassador: {leadDetails.ccName}
                                     </h2>
                                     <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                        Created At: {format(new Date(leadDetails.createdAt), 'dd/MM/yyyy ')}
+                                        Created At: {createdAtFormatted}
                                     </h3>
                                     <h3 className="text-lg font-semibold text-gray-800 mb-4">
                                         UserId: {leadDetails.userId}

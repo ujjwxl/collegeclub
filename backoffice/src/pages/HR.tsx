@@ -3,6 +3,18 @@ import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import axios from "axios";
 
+interface ApplicantProps {
+  applicant: any;
+}
+
+interface TeamDetailsProps {
+  teamMember: any;
+}
+
+interface JobDetailsProps {
+  job: any;
+}
+
 const HR = () => {
   const [selectedTab, setSelectedTab] = useState("teams");
   const [selectedDropdownOption, setSelectedDropdownOption] = useState("all");
@@ -15,12 +27,12 @@ const HR = () => {
   const [mobileNo, setMobileNo] = useState("");
   const [address, setAddress] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
-  const [teams, setTeams] = useState([]);
-  const [selectedTeamMember, setSelectedTeamMember] = useState(null);
+  const [teams, setTeams] = useState<any>([]);
+  const [selectedTeamMember, setSelectedTeamMember] = useState<any>(null);
   const [openings, setOpenings] = useState([]);
   const [selectedOpeningOption, setSelectedOpeningOption] = useState("all");
   const [applicants, setApplicants] = useState([]); // State for applicants
-  const [selectedApplicant, setSelectedApplicant] = useState(null);
+  const [selectedApplicant, setSelectedApplicant] = useState<any>(null);
   const [jobTitle, setJobTitle] = useState("");
   const [jobDescription, setJobDescription] = useState("");
   const [jobResponsibilities, setJobResponsibilities] = useState([""]);
@@ -96,7 +108,7 @@ const HR = () => {
     setSelectedApplicant(applicant);
   };
 
-  const handleViewJobDetails = (job) => {
+  const handleViewJobDetails = (job: any) => {
     setSelectedJob(job);
   };
 
@@ -179,7 +191,7 @@ const HR = () => {
     setSelectedTeamMember(null);
   };
 
-  const TeamDetailsModal = ({ teamMember }) => (
+  const TeamDetailsModal: React.FC<TeamDetailsProps> = ({ teamMember }) => (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-500">
       <div className="bg-white w-1/2 p-8 rounded-lg shadow-lg ">
         <div className="flex justify-between items-center mb-4">
@@ -266,7 +278,7 @@ const HR = () => {
       console.log("Employee status updated successfully");
       alert("Employee status updated successfully");
       handleCloseModal();
-      const updatedTeams = teams.map((team) => {
+      const updatedTeams = teams.map((team: any) => {
         if (team.userId === selectedTeamMember.userId) {
           return { ...team, status: action };
         }
@@ -279,7 +291,7 @@ const HR = () => {
     }
   };
 
-  const ApplicantDetailsModal = ({ applicant }) => (
+  const ApplicantDetailsModal: React.FC<ApplicantProps> = ({ applicant }) => (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-75 bg-gray-500">
       <div className="bg-white w-1/2 p-8 rounded-lg shadow-lg">
         <div className="flex justify-between items-center mb-4">
@@ -334,7 +346,7 @@ const HR = () => {
     </div>
   );
 
-  const JobDetailsModal = ({ job }) => (
+  const JobDetailsModal: React.FC<JobDetailsProps> = ({ job }) => (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-50 bg-gray-900 ">
       <div className="bg-white w-full md:w-3/4 lg:w-1/2 p-6 rounded-lg shadow-lg max-h-full overflow-y-auto">
         <div className="border-b border-gray-200 py-2 mb-4">
@@ -400,13 +412,13 @@ const HR = () => {
   const addMoreResponsibility = () => {
     setJobResponsibilities([...jobResponsibilities, ""]);
   };
-  const handleResponsibilityChange = (index, value) => {
+  const handleResponsibilityChange = (index: any, value: any) => {
     const updatedResponsibilities = [...jobResponsibilities];
     updatedResponsibilities[index] = value;
     setJobResponsibilities(updatedResponsibilities);
   };
 
-  const handleSkillsChange = (index, value) => {
+  const handleSkillsChange = (index: any, value: any) => {
     const updatedSkills = [...jobSkills];
     updatedSkills[index] = value;
     setJobSkills(updatedSkills);
@@ -415,7 +427,7 @@ const HR = () => {
   const addMoreSkills = () => {
     setJobSkills([...jobSkills, ""]);
   };
-  const handleOpeningsSubmit = async (e) => {
+  const handleOpeningsSubmit = async (e: any) => {
     e.preventDefault();
     try {
       const formData = {
@@ -537,7 +549,7 @@ const HR = () => {
                           </tr>
                         </thead>
                         <tbody className="bg-slate-50 divide-y divide-gray-200">
-                          {teams.map((team, index) => (
+                          {teams.map((team: any, index: any) => (
                             <tr
                               key={team.id}
                               className="transition-all hover:bg-slate-100"
@@ -914,7 +926,7 @@ const HR = () => {
                           </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                          {jobOpenings.map((job, index) => (
+                          {jobOpenings.map((job: any, index) => (
                             <tr
                               key={index}
                               className="transition-all hover:bg-gray-50"
@@ -1184,7 +1196,7 @@ const HR = () => {
                           </tr>
                         </thead>
                         <tbody className="bg-slate-50 divide-y divide-gray-200">
-                          {applicants.map((applicant, index) => (
+                          {applicants.map((applicant: any, index) => (
                             <tr
                               key={index}
                               className="transition-all hover:bg-slate-100"

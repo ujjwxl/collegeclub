@@ -28,7 +28,7 @@ const Leads: React.FC = () => {
                 const response = await axios.get('http://localhost:5000/admin/getleads'); 
                 setLeads(response.data.leads);
                 setLoading(false);
-            } catch (error: AxiosError) {
+            } catch (error: any) {
                 console.error('Error fetching leads:', error.message);
                 setLoading(false);
             }

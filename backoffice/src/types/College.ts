@@ -77,5 +77,6 @@ export interface College {
   }[];
   state: string;
   website: string;
+  facilities: any;
   promo: string;
 }

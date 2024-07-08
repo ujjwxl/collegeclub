@@ -25,8 +25,8 @@ const CompanyEditForm = () => {
     const [registrationNumber, setRegistrationNumber] = useState('');
     const [promo, setPromo] = useState('');
     const [industryType, setIndustryType] = useState('');
-    const [services, setServices] = useState([{ serviceName: '' }]);
-    const [news, setNews] = useState([{ newsTitle: '', refLink: '' }]);
+    const [services, setServices] = useState<any>([{ serviceName: '' }]);
+    const [news, setNews] = useState<any>([{ newsTitle: '', refLink: '' }]);
     const [companyData, setCompanyData] = useState<Company>();
 
 
@@ -128,14 +128,14 @@ const CompanyEditForm = () => {
         "Others"
     ];
 
-    const handleServiceChange = (index, e) => {
+    const handleServiceChange = (index: any, e: any) => {
         const { name, value } = e.target;
         const updatedServices = [...services];
         updatedServices[index][name] = value;
         setServices(updatedServices);
     };
 
-    const handleNewsChange = (index, e) => {
+    const handleNewsChange = (index: any, e: any) => {
         const { name, value } = e.target;
         const updatedNews = [...news];
         updatedNews[index][name] = value;
@@ -146,7 +146,7 @@ const CompanyEditForm = () => {
         setServices([...services, { serviceName: '' }]);
     };
 
-    const removeService = (index) => {
+    const removeService = (index: any) => {
         const updatedServices = [...services];
         updatedServices.splice(index, 1);
         setServices(updatedServices);
@@ -156,7 +156,7 @@ const CompanyEditForm = () => {
         setNews([...news, { newsTitle: '', refLink: '' }]);
     };
 
-    const removeNews = (index) => {
+    const removeNews = (index: any) => {
         const updatedNews = [...news];
         updatedNews.splice(index, 1);
         setNews(updatedNews);
@@ -362,7 +362,7 @@ const CompanyEditForm = () => {
                                     onChange={(e) => setAboutCompany(e.target.value)}
                                     placeholder="About Company"
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    rows="4"
+                                    rows={4}
                                 ></textarea>
                             </div>
 
@@ -375,7 +375,7 @@ const CompanyEditForm = () => {
                                     onChange={(e) => setCompanyMission(e.target.value)}
                                     placeholder="Company Mission"
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                    rows="4"
+                                    rows={4}
                                 ></textarea>
                             </div>
 
@@ -419,7 +419,7 @@ const CompanyEditForm = () => {
                             {/* Services Section */}
                             <div className="mb-4">
                                 <h3 className="text-lg font-medium mt-6 mb-3">Services</h3>
-                                {services.map((service, index) => (
+                                {services.map((service: any, index: any) => (
                                     <div key={index} className="grid grid-cols-2 gap-4 mb-2">
                                         <input
                                             type="text"
@@ -450,7 +450,7 @@ const CompanyEditForm = () => {
                             {/* News Section */}
                             <div className="mb-4">
                                 <h3 className="text-lg font-medium mt-6 mb-3">News</h3>
-                                {news.map((item, index) => (
+                                {news.map((item: any, index: any) => (
                                     <div key={index} className="grid grid-cols-2 gap-4 mb-2">
                                         <input
                                             type="text"
