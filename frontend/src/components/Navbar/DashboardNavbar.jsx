@@ -268,7 +268,7 @@ const DashboardNavbar = ({ onCreateJob, onAddJob, onShowLeads, onShowApplicants,
           <Link to="/exams">Exams</Link>
           <Link to="/skills">Skills</Link>
           <Link to="/career">Career</Link>
-          <Link to="/openings">Openings</Link>
+          <Link to="/openings">Opportunity</Link>
           {/* <Link to="">Help?</Link> */}
         </div>
 

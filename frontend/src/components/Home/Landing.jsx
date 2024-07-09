@@ -23,7 +23,7 @@ const Landing = () => {
   const sliderText = [
     { text: 'Colleges', class: 'college-text' },
     { text: 'Courses', class: 'courses-text' },
-    { text: 'Opportunity', class: 'opportunity-text' },
+    { text: 'Opportunities', class: 'opportunity-text' },
     { text: 'Exams', class: 'exams-text' },
     { text: 'Skills', class: 'skills-text' },
   ];
