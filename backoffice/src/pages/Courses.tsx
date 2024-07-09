@@ -131,6 +131,24 @@ const Courses: React.FC = () => {
       });
   };
 
+  const courseCategories = [
+    "Programming",
+    "Programming",
+    "UI/UX Design",
+    "Business",
+    "Marketing",
+    "Finance",
+    "Fitness",
+    "Art",
+    "Photography",
+    "Music",
+    "Language",
+    "Personal Development",
+    "Cooking",
+    "Gardening",
+    "Writing",
+  ];
+
   return (
     <>
       <Navbar />
@@ -307,8 +325,11 @@ const Courses: React.FC = () => {
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     >
                       <option value="">Select a category</option>
-                      <option value="Programming">Programming</option>
-                      <option value="Soft Skills">Soft Skills</option>
+                      {courseCategories.map((category, index) => (
+                        <option key={index} value={category}>
+                          {category}
+                        </option>
+                      ))}
                     </select>
                   </div>
 

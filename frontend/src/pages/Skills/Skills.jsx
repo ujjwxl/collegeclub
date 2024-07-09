@@ -48,7 +48,23 @@ const Skills = () => {
   const [examDetails, setExamDetails] = useState({});
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
-  const categories = ["Programming", "Soft Skills"];
+  const categories = [
+    "Programming",
+    "Programming",
+    "UI/UX Design",
+    "Business",
+    "Marketing",
+    "Finance",
+    "Fitness",
+    "Art",
+    "Photography",
+    "Music",
+    "Language",
+    "Personal Development",
+    "Cooking",
+    "Gardening",
+    "Writing",
+  ];
 
   const navigate = useNavigate();
 
