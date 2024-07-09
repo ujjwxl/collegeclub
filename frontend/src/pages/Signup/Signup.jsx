@@ -17,13 +17,14 @@ const Signup = () => {
   const [organizationName, setOrganizationName] = useState("");
   const [fullName, setFullName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
-  const [subDomain, setSubDomain] = useState("");
-  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [phoneNumberModal, setPhoneNumberModal] = useState(true);
+
+  const [isConfirmed, setIsConfirmed] = useState(false);
+
   const [user, setUser] = useState(null);
   const [otp, setOtp] = useState("");
 
@@ -59,6 +60,11 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!isConfirmed) {
+      toast('Please agree to the terms by checking the checkbox.');
+      return;
+    }
+
     if (password != confirmPassword) toast("The passwords do not match!");
 
     try {
@@ -68,8 +74,6 @@ const Signup = () => {
           organizationName,
           fullName,
           contactNumber,
-          subDomain,
-          userName,
           email,
           password,
         })
@@ -152,18 +156,14 @@ const Signup = () => {
                     <option value="" disabled selected>
                       Select account type
                     </option>
-                    {isStudentOnboarding !== "true" && (
-                      <>
-                        <option value="College">College</option>
-                        <option value="Company">Company</option>
-                        <option value="CC-Ambassador">CC Ambassador</option>
-                      </>
-                    )}
+                    <option value="College">College</option>
+                    <option value="Company">Company</option>
+                    <option value="CC-Ambassador">CC Ambassador</option>
                     <option value="Student">Student</option>
                   </select>{" "}
                   <br />
                   <input
-                    type="text" 
+                    type="text"
                     name="organization"
                     placeholder={isStudentOnboarding !== "true" ? "Enter organization name" : "Enter college or company name"}
                     onChange={(e) => setOrganizationName(e.target.value)}
@@ -185,26 +185,13 @@ const Signup = () => {
                     disabled
                   />
                   <br />
-                  <input
-                    type="text"
-                    name="subdomain"
-                    placeholder="Select subdomain"
-                    onChange={(e) => setSubDomain(e.target.value)}
-                  />
                 </div>
 
                 <div className="signup-form-right">
                   <input
-                    type="text"
-                    name="username"
-                    placeholder="Choose a username"
-                    onChange={(e) => setUserName(e.target.value)}
-                  />{" "}
-                  <br />
-                  <input
                     type="email"
                     name="email"
-                    placeholder="Email Address"
+                    placeholder="Email Address" j
                     onChange={(e) => setEmail(e.target.value)}
                   />{" "}
                   <br />
@@ -222,7 +209,7 @@ const Signup = () => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                   <label className="checkbox-label">
-                    <input type="checkbox" name="agreeToTerms" />
+                    <input type="checkbox" name="agreeToTerms" value={isConfirmed} onChange={() => setIsConfirmed((prev) => !prev)} />
                     <p>
                       By registering I agree to Terms & Privacy policy of <br />{" "}
                       the website.
@@ -231,7 +218,7 @@ const Signup = () => {
                   <br />
                   <button type="submit">Create Account</button>
                   <p className="already-have-account">
-                    Already have an account?<br></br> <Link to={"/login"}>Login</Link>{" "}
+                    Already have an account?<Link to={"/login"} style={{ 'color': 'orange', 'marginLeft': '4px', 'textDecoration': 'none' }}>Login</Link>{" "}
                     from here
                   </p>
                 </div>
