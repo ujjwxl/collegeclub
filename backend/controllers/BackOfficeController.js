@@ -1112,3 +1112,68 @@ export const editCompanyData = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const editAmbassadorData = async (req, res) => {
+  const { ambassadorId } = req.params;
+
+  const {
+    name,
+    gender,
+    dob,
+    contactNumber,
+    linkedin,
+    email,
+    fullAddress,
+    pinCode,
+    country,
+    state,
+    district,
+    collegeName,
+    collegePincode,
+    collegeCountry,
+    collegeState,
+    collegeDistrict,
+    whyJoinUs,
+  } = req.body;
+
+  try {
+    const usersCollectionRef = collection(db, "users"); 
+    const q = query(usersCollectionRef, where("userId", "==", ambassadorId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: 'Ambassador not found' });
+    }
+
+    querySnapshot.forEach(async (document) => {
+      const docRef = document.ref;
+
+      await updateDoc(docRef, {
+        organizationName: name,
+        gender,
+        dob,
+        contactNumber,
+        linkedin,
+        email,
+        fullAddress,
+        pinCode,
+        country,
+        state,
+        district,
+        collegeName,
+        collegePincode,
+        collegeCountry,
+        collegeState,
+        collegeDistrict,
+        whyJoinUs,
+      });
+
+      console.log('Ambassador data updated successfully');
+    });
+
+    res.status(200).json({ message: 'Ambassador data updated successfully' });
+  } catch (error) {
+    console.error('Error updating ambassador data:', error.message);
+    res.status(500).json({ message: error.message });
+  }
+};

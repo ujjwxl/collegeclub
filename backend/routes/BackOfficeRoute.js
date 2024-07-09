@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addFAQ, addJobOpening, addTeamMember,editCompanyData, createAdmin, createCourse, createEvent, editCollegeData, fetchApplicants, fetchLeads, fetchTeam, getAdminRole, getAllCourseApplications, getAllEvents, getAllFAQs, getAllUsers, getFeedbackByType, getJobOpenings, getLeadByApplicationNumber, getPaidCourseApplicants, getPartnersByType, getRolePermissions, getSlotBookingDetails, loginAdmin, saveRolePermissions, shareLeads, updateEmployeeStatus, updateFeedbackStatus, updateLeadStatus, updateOnboardingStatus, verifyCollege } from "../controllers/BackOfficeController.js";
+import { addFAQ, addJobOpening, addTeamMember,editCompanyData, createAdmin, createCourse, createEvent, editCollegeData, fetchApplicants, fetchLeads, fetchTeam, getAdminRole, getAllCourseApplications, getAllEvents, getAllFAQs, getAllUsers, getFeedbackByType, getJobOpenings, getLeadByApplicationNumber, getPaidCourseApplicants, getPartnersByType, getRolePermissions, getSlotBookingDetails, loginAdmin, saveRolePermissions, shareLeads, updateEmployeeStatus, updateFeedbackStatus, updateLeadStatus, updateOnboardingStatus, verifyCollege, editAmbassadorData } from "../controllers/BackOfficeController.js";
 
 const router = Router();
 
@@ -34,5 +34,6 @@ router.post('/addfaq', addFAQ);
 router.get('/getfaqs', getAllFAQs);
 router.post('/updatecollege/:collegeId', editCollegeData);
 router.post('/updatecompany/:companyId', editCompanyData);
+router.post('/updateAmbassador/:ambassadorId', editAmbassadorData);
 
 export default router

@@ -19,6 +19,8 @@ import Leads from "./pages/Leads";
 import LeadsDetails from './pages/LeadsDetails';
 import CollegeEditForm from "./pages/CollegeEditForm";
 import CompanyEditForm from "./pages/CompanyEditForm";
+import AmbassadorDetails from "./pages/AmbassadorDetails";
+import AmbassadorEditForm from "./pages/AmbassadorEditForm";
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
           <Route path="/slots" element={<Slots />} />
           <Route path="/college/:collegeId" element={<CollegeDetails />} />
           <Route path="/company/:companyId" element={<CompanyDetails />} />
+          <Route path="/ambassador/:ambassadorId" element={<AmbassadorDetails />} />
           <Route path="/users" element={<Users />} />
           <Route path="/message" element={<Message />} />
           <Route path="/hr" element={<HR />} />
@@ -44,6 +47,7 @@ function App() {
           <Route path="/leads/:applicationNumber" element={<LeadsDetails />} />
           <Route path="/college/edit/:collegeId" element={<CollegeEditForm />} />
           <Route path="/company/edit/:companyId" element={<CompanyEditForm />} />
+          <Route path="/ambassador/edit/:ambassadorId" element={<AmbassadorEditForm />} />
         </Routes>
       </Router>
     </>
