@@ -193,6 +193,7 @@ const Signup = () => {
                     name="email"
                     placeholder="Email Address" j
                     onChange={(e) => setEmail(e.target.value)}
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|io|in|ac\.in)"
                   />{" "}
                   <br />
                   <input
