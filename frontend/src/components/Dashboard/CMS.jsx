@@ -5,6 +5,7 @@ import "./CMS.css";
 import jobsIcon from "../../assets/suitcase.png";
 import leadsIcon from "../../assets/leads-icon.png";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const CMS = () => {
   const [activeDiv, setActiveDiv] = useState(null);
@@ -28,6 +29,8 @@ const CMS = () => {
   const [selectedStudent, setSelectedStudent] = useState([]);
 
   const userId = localStorage.getItem("id");
+
+  const navigate= useNavigate();
 
   const handleClick = (event) => {
     const key = event.currentTarget.getAttribute("data-key");
@@ -110,6 +113,20 @@ const CMS = () => {
           if (response.status == 200) {
             toast("Student registered successfully!");
             fetchAllStudents();
+            setFullName("");
+            setAddress("");
+            setBloodGroup("");
+            setCourse("");
+            setDateOfBirth("");
+            setEmail("");
+            setFatherName("");
+            setGender("");
+            setMotherName("");
+            setPhoneNumber("");
+            setRollNo("");
+            setSession("");
+            setSelectedImage(null);
+            setStudentPicture(null);
           }
         })
         .catch((error) => {

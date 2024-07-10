@@ -3,7 +3,7 @@ import backgroundImage from "../../assets/home-1.jpg";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Home/Footer";
 import "./Signup.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import axios from "axios";
 import PhoneInput from "react-phone-number-input";
@@ -27,6 +27,8 @@ const Signup = () => {
 
   const [user, setUser] = useState(null);
   const [otp, setOtp] = useState("");
+
+  const navigate= useNavigate();
 
   const sendOTP = async () => {
     try {
@@ -80,6 +82,7 @@ const Signup = () => {
         .then((res) => {
           if (res.status == 200) {
             toast("Account created successfully!");
+            navigate('/login');
           }
         })
         .catch((e) => {
@@ -152,6 +155,7 @@ const Signup = () => {
                     name="type"
                     value={accountType}
                     onChange={handleTypeChange}
+                    required
                   >
                     <option value="" disabled selected>
                       Select account type
@@ -167,6 +171,7 @@ const Signup = () => {
                     name="organization"
                     placeholder={isStudentOnboarding !== "true" ? "Enter organization name" : "Enter college or company name"}
                     onChange={(e) => setOrganizationName(e.target.value)}
+                    required
                   />{" "}
                   <br />
                   <input
@@ -174,6 +179,7 @@ const Signup = () => {
                     name="fullname"
                     placeholder="Your Full Name"
                     onChange={(e) => setFullName(e.target.value)}
+                    required
                   />{" "}
                   <br />
                   <PhoneInput
@@ -182,6 +188,7 @@ const Signup = () => {
                     defaultCountry="IN"
                     value={contactNumber}
                     onChange={setContactNumber}
+                    required
                     disabled
                   />
                   <br />
@@ -194,6 +201,7 @@ const Signup = () => {
                     placeholder="Email Address" j
                     onChange={(e) => setEmail(e.target.value)}
                     pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|io|in|ac\.in)"
+                    required
                   />{" "}
                   <br />
                   <input
@@ -201,6 +209,7 @@ const Signup = () => {
                     name="password"
                     placeholder="Enter password"
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                   />{" "}
                   <br />
                   <input
@@ -208,9 +217,10 @@ const Signup = () => {
                     name="cpassword"
                     placeholder="Confirm password"
                     onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
                   />
                   <label className="checkbox-label">
-                    <input type="checkbox" name="agreeToTerms" value={isConfirmed} onChange={() => setIsConfirmed((prev) => !prev)} />
+                    <input type="checkbox" name="agreeToTerms" value={isConfirmed} onChange={() => setIsConfirmed((prev) => !prev)} required/>
                     <p>
                       By registering I agree to Terms & Privacy policy of <br />{" "}
                       the website.

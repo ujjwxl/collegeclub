@@ -162,15 +162,6 @@
 .college-button {
   position: absolute;
   right: 0;
-  /* background: linear-gradient(45deg, #84ffff, #00b8d4);
-  border-radius: 10px;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease; */
   background-image: linear-gradient(to right, #eb3349 0, #f45c43 51%, #eb3349 100%);
   text-align: center;
   color: #fff;
@@ -180,24 +171,24 @@
   cursor: pointer;
   border-radius: 8px;
   font-family: "Comfortaa", sans-serif;
+  transition: background-color 0.3s ease; /* Add a smooth transition */
 }
-/* .college-button:hover {
-  background: linear-gradient(45deg, #6f00ed, #00b8d4);
-} */
+
+.college-button:hover {
+  background-image: linear-gradient(to right, #f45c43 0, #eb3349 51%, #f45c43 100%);
+}
+
+
 .colleges-display-box-list {
-  /* margin-right: auto; */
   width: 80%;
-  /* background-color: blue; */
   overflow-y: auto;
   overflow-x: hidden;
 }
 
 .colleges-display-box-item {
-  /* background-color: green; */
   display: flex;
   margin: 1% 20px;
   margin-bottom: 1%;
-  /* background-color: #7d3c98; */
   background-color: #4527a0;
   padding: 0 20px;
   border-radius: 20px;
