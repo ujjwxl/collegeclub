@@ -8,6 +8,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import "./SlotBooking.css";
+import { useNavigate } from "react-router-dom";
 
 function SlotBooking() {
 
@@ -21,6 +22,7 @@ function SlotBooking() {
   const currentDate = new Date().getDate();
   const selectedDay = selectedDate ? selectedDate.getDate() : currentDate;
 
+  const navigate= useNavigate();
   const slotOptions = [];
 
   if (selectedDate && selectedDay === currentDate) {
@@ -49,6 +51,7 @@ function SlotBooking() {
         .then(res => {
           if (res.status == 200) {
             toast("Slot booked successfully!");
+            navigate('/');
           }
         })
         .catch(e => {
