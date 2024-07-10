@@ -35,5 +35,6 @@ export interface Ambassador {
     subDomain: string;
     applicationFormCompleted: boolean;
     panCard: string;
+    whyJoinUs: string;
     fullAddress: string;
 }

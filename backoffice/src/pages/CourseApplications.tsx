@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios from "axios";
 
 interface CourseApplication {
   applicantId: string;
@@ -74,7 +74,7 @@ function Users(): JSX.Element {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {applications.map((app, index) => (
+                  {applications.map((app) => (
                     <tr key={app.applicantId}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {app.courseId}

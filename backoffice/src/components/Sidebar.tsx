@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import home from "../assets/home.png";
 import team from "../assets/team.png";
@@ -8,7 +8,7 @@ import directory from "../assets/directory.png";
 import employee from "../assets/employee.png";
 import settings from "../assets/settings.png";
 import help from "../assets/help.png";
-import application from "../../assets/application.png";
+// import application from "../../assets/application.png";
 import axios from "axios";
 
 function Sidebar() {
@@ -20,6 +20,8 @@ function Sidebar() {
   const [permissions, setPermissions] = useState<{ [key: string]: boolean }>(
     {}
   );
+
+  console.log(role);
 
   useEffect(() => {
     const fetchRoleAndPermissions = async () => {

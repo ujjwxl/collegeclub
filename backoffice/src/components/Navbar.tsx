@@ -1,7 +1,7 @@
-import React from 'react'
+// import React from 'react'
 import { Link } from 'react-router-dom';
 import collegeClubLogo from "../assets/collegeclub-logo.png";
-import searchIcon from "../assets/search-icon.png";
+// import searchIcon from "../assets/search-icon.png";
 
 function Navbar() {
     return (

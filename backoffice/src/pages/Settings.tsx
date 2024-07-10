@@ -50,10 +50,13 @@ const Settings: React.FC = () => {
     setAddUserModal(false);
   };
 
+  console.log(addUserModal);
+  console.log(userRole);
+
   // Ensure to close the modal when not needed
-  const closeFAQsModal = () => {
-    setFaqsModal(false);
-  };
+  // const closeFAQsModal = () => {
+  //   setFaqsModal(false);
+  // };
 
   useEffect(() => {
     const fetchFAQs = async () => {
@@ -191,6 +194,7 @@ const Settings: React.FC = () => {
       })
       .then((response) => {
         alert("Role permissions saved successfully!");
+        console.log(response);
         setRolesChangeModal(false);
       })
       .catch((error) => {

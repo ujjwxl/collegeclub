@@ -1,7 +1,7 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 interface User {
     userId: string;

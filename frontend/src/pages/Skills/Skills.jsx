@@ -50,7 +50,6 @@ const Skills = () => {
 
   const categories = [
     "Programming",
-    "Programming",
     "UI/UX Design",
     "Business",
     "Marketing",

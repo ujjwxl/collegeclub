@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { format } from "date-fns";
@@ -77,7 +77,7 @@ function PaidCourseApplicants(): JSX.Element {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {applicants.map((applicant, index) => (
+                  {applicants.map((applicant) => (
                     <tr key={applicant.userId}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {applicant.userId}

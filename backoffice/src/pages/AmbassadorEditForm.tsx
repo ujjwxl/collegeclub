@@ -13,7 +13,7 @@ const AmbassadorEditForm: React.FC = () => {
   const [gender, setGender] = useState<string>('');
   const [dob, setDob] = useState<Date | null>(null);
   const [contactNumber, setContactNumber] = useState<string>('');
-  const [linkedin, setLinkedIn] = useState<string>('');
+  const [linkedin, setLinkedIn] = useState<any>('');
   const [email, setEmail] = useState<string>('');
   const [fullAddress, setFullAddress] = useState<string>('');
   const [pinCode, setPinCode] = useState<string>('');
@@ -25,8 +25,10 @@ const AmbassadorEditForm: React.FC = () => {
   const [collegeCountry, setCollegeCountry] = useState<string>('');
   const [collegeState, setCollegeState] = useState<string>('');
   const [collegeDistrict, setCollegeDistrict] = useState<string>('');
-  const [whyJoinUs, setWhyJoinUs] = useState<string>('');
+  const [whyJoinUs, setWhyJoinUs] = useState<any>('');
   const [ambassadorData, setAmbassadorData] = useState<Ambassador>();
+
+  console.log(ambassadorData);
 
   const { ambassadorId } = useParams<{ ambassadorId: string }>();
 

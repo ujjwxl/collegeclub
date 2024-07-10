@@ -29,6 +29,8 @@ const CompanyEditForm = () => {
     const [news, setNews] = useState<any>([{ newsTitle: '', refLink: '' }]);
     const [companyData, setCompanyData] = useState<Company>();
 
+    console.log(companyData);
+
 
     const { companyId } = useParams<{ companyId: string }>();
 

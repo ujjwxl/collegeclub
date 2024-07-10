@@ -26,7 +26,7 @@ const CollegeEditForm = () => {
   const [aboutCollege, setAboutCollege] = React.useState("");
   const [admissionProcess, setAdmissionProcess] = React.useState("");
   const [courses, setCourses] = React.useState<any>([]);
-  const [selectedCourses, setSelectedCourses] = React.useState<any>([]);
+  // const [selectedCourses, setSelectedCourses] = React.useState<any>([]);
   const [departments, setDepartments] = React.useState<any>([]);
   const [news, setNews] = React.useState<any>([]);
   const [rankings, setRankings] = React.useState<any>([]);
@@ -37,6 +37,8 @@ const CollegeEditForm = () => {
   const [selectedInstituteType, setSelectedInstituteType] = useState("");
   const [studyMode, setStudyMode] = useState("");
   const [collegeData, setCollegeData] = useState<College>();
+
+  console.log(collegeData);
 
   const { collegeId } = useParams();
   useEffect(() => {

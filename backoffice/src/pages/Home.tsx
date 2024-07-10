@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios from "axios";
 import partners from "../assets/partners.png";
 import onboarding from "../assets/onboarding.png";
 import envelope from "../assets/envelope.png";
