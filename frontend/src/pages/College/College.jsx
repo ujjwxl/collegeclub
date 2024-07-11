@@ -423,7 +423,7 @@
               {collegeData &&
                 filteredColleges.map(
                   (college, index) =>
-                    college.applicationFormCompleted && (
+                    college.isVerified && (
                       <div
                         className="colleges-display-box-item"
                         key={index}

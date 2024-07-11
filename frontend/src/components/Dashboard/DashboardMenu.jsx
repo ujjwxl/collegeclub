@@ -274,7 +274,7 @@ const DashboardMenu = ({
         </div>
         <hr />
 
-        <Link to={"/faqs"}>
+        <Link to={"/contact"}>
           <div className="dashboard-menu-bottom-options">
             <img src={helpIcon} alt="" />
 

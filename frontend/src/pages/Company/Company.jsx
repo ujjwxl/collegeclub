@@ -268,7 +268,7 @@ const Company = () => {
                             {companyData &&
                                 filteredCompanies.map(
                                     (company, index) =>
-                                        company.applicationFormCompleted && (
+                                        company.isVerified && (
                                             <div
                                                 className="colleges-display-box-item"
                                                 key={index}
