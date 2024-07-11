@@ -17,11 +17,11 @@ const CollegePartner = () => {
                 <div className="circle-logos-container">
                     <svg width="400" height="400" className='circle-rotating-svg'>
                         {/* Outer circle */}
-                        <circle cx="200" cy="200" r="150" fill="none" stroke="black" strokeWidth="2" />
+                        <circle cx="200" cy="200" r="150" fill="none" stroke="#240655" strokeWidth="2" />
                         {/* Inner circle */}
-                        <circle cx="200" cy="200" r="60" fill="none" stroke="black" strokeWidth="2" />
+                        <circle cx="200" cy="200" r="60" fill="none" stroke="#240655" strokeWidth="2" />
 
-                        <image href={collegeClubLogo} x="180" y="182" width="40" height="40" />
+                        {/* <image href={collegeClubLogo} x="180" y="182" width="40" height="40" /> */}
 
                         <g transform="rotate(-45 200 200)">
                             <image href="https://upload.wikimedia.org/wikipedia/en/d/d2/Birla_Institute_of_Technology_Mesra.png" x="260" y="50" width="50" height="50" />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import backgroundImage from "../../assets/home-1.jpg";
 import location from "../../assets/location.png";
@@ -64,7 +64,7 @@ const CollegeDetails = () => {
   return (
     <div>
       <Navbar />
-      <BottomBar/>
+      <BottomBar />
       <img
         src={backgroundImage}
         alt=""
@@ -122,7 +122,7 @@ const CollegeDetails = () => {
 
           <h3>Courses Offered</h3>
           {collegeData &&
-            collegeData.selectedCourses.map((course, index) => (
+            collegeData.selectedCourses?.map((course, index) => (
               <div key={index}>
                 <li>{course}</li>
               </div>
@@ -139,7 +139,7 @@ const CollegeDetails = () => {
 
           <div id="college-courses">
             <h3>Courses</h3>
-            {collegeData && collegeData.courses.length > 0 ? (
+            {collegeData && collegeData.courses?.length > 0 ? (
               <div className="table-container">
                 <table className="college-table">
                   <thead>
@@ -152,7 +152,7 @@ const CollegeDetails = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {collegeData.courses.map((course, index) => (
+                    {collegeData.courses?.map((course, index) => (
                       <tr key={index}>
                         <td>{course.courseName}</td>
                         <td>{course.duration} years</td>
@@ -174,7 +174,7 @@ const CollegeDetails = () => {
 
           <div id="college-departments">
             <h3>Departments</h3>
-            {collegeData && collegeData.departments.length > 0 ? (
+            {collegeData && collegeData.departments?.length > 0 ? (
               <div className="table-container">
                 <table className="college-table">
                   <thead>
@@ -185,7 +185,7 @@ const CollegeDetails = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {collegeData.departments.map((department, index) => (
+                    {collegeData.departments?.map((department, index) => (
                       <tr key={index}>
                         <td>{department.departmentName}</td>
                         <td>{department.description}</td>
@@ -204,7 +204,7 @@ const CollegeDetails = () => {
 
           <div id="college-ranking">
             <h3>Rankings</h3>
-            {collegeData && collegeData.rankings.length > 0 ? (
+            {collegeData && collegeData.rankings?.length > 0 ? (
               <div className="table-container">
                 <table className="college-table">
                   <thead>
@@ -215,7 +215,7 @@ const CollegeDetails = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {collegeData.rankings.map((ranking, index) => (
+                    {collegeData.rankings?.map((ranking, index) => (
                       <tr key={index}>
                         <td>{ranking.agencyName}</td>
                         <td>{ranking.rank}</td>
@@ -239,7 +239,7 @@ const CollegeDetails = () => {
 
           <div id="college-news">
             <h3>News</h3>
-            {collegeData && collegeData.news.length > 0 ? (
+            {collegeData && collegeData.news?.length > 0 ? (
               <div className="table-container">
                 <table className="college-table">
                   <thead>
@@ -249,7 +249,7 @@ const CollegeDetails = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {collegeData.news.map((news, index) => (
+                    {collegeData.news?.map((news, index) => (
                       <tr key={index}>
                         <td>{news.newsTitle}</td>
                         <td>
@@ -272,8 +272,8 @@ const CollegeDetails = () => {
           <div id="facilities">
             <h3>Facilities</h3>
             <div className="facilities-flex-container">
-              {collegeData && collegeData.selectedFacilities.length > 0 ? (
-                collegeData.selectedFacilities.map((facility, index) => (
+              {collegeData && collegeData.selectedFacilities?.length > 0 ? (
+                collegeData.selectedFacilities?.map((facility, index) => (
                   <div key={index} className="facility-item">
                     {facilityImages[facility] && (
                       <img src={facilityImages[facility]} alt={facility} />
@@ -291,7 +291,7 @@ const CollegeDetails = () => {
           <div id="college-gallery" className="college-details-page-gallery">
             <h3>Gallery</h3>
             {collegeData &&
-              collegeData.galleryImages.map((image, index) => (
+              collegeData.galleryImages?.map((image, index) => (
                 <img
                   key={index}
                   src={image}
@@ -300,6 +300,14 @@ const CollegeDetails = () => {
                 />
               ))}
           </div>
+          <hr />
+
+          <Link to="/slot">
+            <button className="form-submit-button" style={{'marginLeft': '20px', 'marginTop': '20px', 'marginBottom': '20px'}}>
+              Enquire Now
+            </button>
+          </Link>
+
         </div>
       </div>
       <Footer />

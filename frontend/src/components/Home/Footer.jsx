@@ -52,7 +52,7 @@ const Footer = () => {
             </div>
             <div className="footer-column">
                 <h4>Contact Us</h4>
-                <p>CIMP-BIF Building,</p>
+                <p>CIMP-BIIF Building,</p>
                 <p>Mithapur Farm Area,</p>
                 <p>Mithapur, Patna,</p>
                 <p>Bihar 800001 India</p>
