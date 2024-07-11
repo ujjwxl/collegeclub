@@ -34,6 +34,8 @@ const StudentAdmission = () => {
     ]);
     const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
     const [isTimerRunning, setIsTimerRunning] = useState(false);
+    const [ageValidationError, setAgeValidationError] = useState('');
+
 
     useEffect(() => {
         let timer;
@@ -96,6 +98,26 @@ const StudentAdmission = () => {
         fetchUserData();
     }, [userId]);
 
+    const calculateAge = (birthDate) => {
+        const today = new Date();
+        const dob = new Date(birthDate);
+        let age = today.getFullYear() - dob.getFullYear();
+        const monthDiff = today.getMonth() - dob.getMonth();
+        
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        
+        return age;
+    };
+    
+    const isValidAge = (birthDate) => {
+        const minimumAge = 16;
+        const age = calculateAge(birthDate);
+        return age >= minimumAge;
+    };
+    
+
 
     let selectedCourse = localStorage.getItem('selectedCourse');
     selectedCourse = JSON.parse(selectedCourse);
@@ -124,7 +146,13 @@ const StudentAdmission = () => {
         if (!isConfirmed) {
             toast('Please agree to the terms by checking the checkbox.');
             return;
+
         }
+        if (!isValidAge(dateOfBirth)) {
+            setAgeValidationError('You must be at least 16 years old to apply.');
+            return;
+        }
+        setAgeValidationError('');
 
         setIsLoading(true);
 
@@ -212,6 +240,7 @@ const StudentAdmission = () => {
                             <div className="form-input-group">
                                 <label htmlFor="dateOfBirth">Date of Birth*</label>
                                 <input type="date" onChange={(e) => setDateOfBirth(e.target.value)} value={dateOfBirth} required />
+                                {ageValidationError && <p className="error-message">{ageValidationError}</p>}
                             </div>
                         </div>
 

@@ -91,11 +91,29 @@ const LeadsComponent = () => {
     }
     return true;
   };
+  const validateForm2 = () => {
+    if (!schoolNameX || !boardX || !yearOfPassingX || !marksInPercentageX || !authLetterX ||
+        !schoolNameXII || !boardXII || !yearOfPassingXII || !marksInPercentageXII || !authLetterXII ||
+        !schoolNameGrad || !boardGrad || !yearOfPassingGrad || !marksInPercentageGrad || !authLetterGrad) {
+      toast("Please fill in all required fields.");
+      return false;
+    }
+    return true;
+  };
+  const validateForm3 = () => {
+    // Example validation, check if required files are uploaded
+    if (!authLetterGradFile || !authLetterSignatureFile || !authLetterIDFile) {
+      toast("Please upload all required files.");
+      return false;
+    }
+    return true;
+  };
+  
   const handleSaveChanges1 = (e) => {
     e.preventDefault();
-    // if (!validateForm1()) {
-    //   return;
-    // }
+    if (!validateForm1()) {
+      return;
+    }
     setShowForm1(false);
     setShowForm2(true);
     setShowForm3(false);
@@ -103,6 +121,9 @@ const LeadsComponent = () => {
   };
   const handleSaveChanges2 = (e) => {
     e.preventDefault();
+    if (!validateForm2()) {
+      return;
+    }
     setShowForm1(false);
     setShowForm2(false);
     setShowForm3(true);
@@ -110,6 +131,9 @@ const LeadsComponent = () => {
   };
   const handleSaveChanges3 = (e) => {
     e.preventDefault();
+    if (!validateForm3()) {
+      return;
+    }
     setShowForm1(false);
     setShowForm2(false);
     setShowForm3(false);

@@ -40,7 +40,8 @@ const DashboardMenu = ({
   onDashboardClick,
   onProfileClick,
   onShowCompanyCMS,
-  onShowEvents
+  onShowEvents,
+  onShowJobs
 }) => {
   const [userData, setUserData] = useState(null);
   const [openLogoutDialog, setOpenLogoutDialog] = useState(false);
@@ -241,7 +242,7 @@ const DashboardMenu = ({
               <img src={eventsIcon} alt="" />
               <p>Events</p>
             </div>
-            <div className="dashboard-menu-middle-icon" onClick={onShowLeads}>
+            <div className="dashboard-menu-middle-icon" onClick={onShowJobs}>
               <img src={eventsIcon} alt="" />
               <p>Jobs</p>
             </div>

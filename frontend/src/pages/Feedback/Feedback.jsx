@@ -85,7 +85,7 @@ const Feedback = () => {
                                 />
                             </div>
 
-                            <div className="form-input-group form-select">
+                            <div className="form-input-group  select-type">
                                 <label htmlFor="collegename">Institute Type</label>
                                 <select value={type} onChange={(e) => setType(e.target.value)}>
                                     <option value="">Select Type</option>
