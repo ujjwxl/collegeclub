@@ -21,6 +21,7 @@ import CollegeEditForm from "./pages/CollegeEditForm";
 import CompanyEditForm from "./pages/CompanyEditForm";
 import AmbassadorDetails from "./pages/AmbassadorDetails";
 import AmbassadorEditForm from "./pages/AmbassadorEditForm";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/paid-applications" element={<PaidCourseApplicants />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/leads" element={<Leads />} />
+          <Route path="/reset" element={<ForgotPassword />} />
           <Route path="/leads/:applicationNumber" element={<LeadsDetails />} />
           <Route path="/college/edit/:collegeId" element={<CollegeEditForm />} />
           <Route path="/company/edit/:companyId" element={<CompanyEditForm />} />

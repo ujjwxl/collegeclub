@@ -1,6 +1,7 @@
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   getAuth,
   updatePassword,
 } from "firebase/auth";
@@ -92,6 +93,19 @@ export const loginAdmin = async (req, res) => {
   }
 };
 
+export const resetPassword = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    res.status(200).json({ message: "Password reset email sent successfully" });
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
+    res.status(500).json({ message: errorMessage });
+  }
+};
 
 
 export const createAdmin = async (req, res) => {
